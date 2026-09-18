@@ -1,0 +1,43 @@
+﻿{
+    "schemaVersion": 1,
+    "id": "velocity-render",
+    "version": "${version}",
+    "name": "Velocity Render",
+    "description": "Velocity-biased anisotropic chunk meshing and predictive forward chunk generation for fast travelers.",
+    "authors": [
+        "Dasik (Rifaditya)"
+    ],
+    "contact": {
+        "homepage": "https://github.com/Rifaditya/Vanilla-Outsider-Velocity-Render",
+        "sources": "https://github.com/Rifaditya/Vanilla-Outsider-Velocity-Render",
+        "issues": "https://github.com/Rifaditya/Vanilla-Outsider-Velocity-Render/issues"
+    },
+    "license": "GPL-3.0-only",
+    "icon": "assets/velocity-render/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "net.vanillaoutsider.velocityrender.VelocityRenderMod"
+        ],
+        "client": [
+            "net.vanillaoutsider.velocityrender.client.VelocityRenderClient"
+        ]
+    },
+    "mixins": [
+        "velocity-render.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.18.4",
+        "minecraft": ">=26.3-",
+        "fabric-api": "*",
+        "dasik-library": ">=1.8.0"
+    },
+    "custom": {
+        "modmenu": {
+            "links": {
+                "modmenu.donate": "https://ko-fi.com/dasikigaijin",
+                "modmenu.kofi": "https://ko-fi.com/dasikigaijin"
+            }
+        }
+    }
+}

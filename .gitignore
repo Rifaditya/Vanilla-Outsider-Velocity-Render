@@ -1,0 +1,27 @@
+﻿# Gradle & Build Artifacts
+.gradle/
+build/
+bin/
+out/
+
+# Fabric Loom & Minecraft Cache
+.fabric/
+.cache/
+run/
+
+# IDE & Editor Files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.sublime-*
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# Git Security & Secret Exclusions
+*platform_tokens.json
+Doc/Marketing/
+*hype_*

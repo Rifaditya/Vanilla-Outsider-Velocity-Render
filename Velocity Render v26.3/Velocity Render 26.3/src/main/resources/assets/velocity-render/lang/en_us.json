@@ -1,0 +1,26 @@
+﻿{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Velocity-biased anisotropic chunk meshing and predictive forward chunk generation for fast travelers.",
+
+  "velocityrender.gamerule.enabled": "Velocity Render Master Toggle",
+  "velocityrender.gamerule.enabled.description": "Master switch to enable velocity-biased chunk meshing on client and predictive generation on server.",
+
+  "velocityrender.gamerule.lead_multiplier": "Forward Lead Multiplier",
+  "velocityrender.gamerule.lead_multiplier.description": "Scales how far ahead along travel vector chunk loading tickets are requested (0% to 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Adaptive Budget Conservation",
+  "velocityrender.gamerule.budget_conservation.description": "Dynamically trims lateral/rear non-simulation tickets during high speeds to protect server TPS.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Minimum Speed Threshold",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Minimum velocity in hundredths of a block/tick required before activating forward bias (e.g. 20 = 0.20 b/t).",
+
+  "velocityrender.gamerule.debug_mode": "Developer Debug Diagnostics",
+  "velocityrender.gamerule.debug_mode.description": "Logs real-time vector diagnostics, ticket counts, and MSPT adjustments to server console.",
+
+  "velocityrender.command.status.header": "=== Velocity Render Status ===",
+  "velocityrender.command.status.speed": "Speed: %s b/t (%s m/s)",
+  "velocityrender.command.status.reach": "Dynamic Reach: %s chunks (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "Active Trajectory Tickets: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Configuration and GameRules reloaded successfully.",
+  "velocityrender.command.reset.success": "[Velocity Render] All settings restored to vanilla defaults."
+}
