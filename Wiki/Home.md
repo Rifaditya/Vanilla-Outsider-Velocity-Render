@@ -1,10 +1,26 @@
 # 🚀 Vanilla Outsider: Velocity Render — Official Wiki
 
-
-
-
-
 > 📌 **Repository Source Disclaimer**: The documentation in this Wiki reflects the **current source code state in the repository**, which may include recent unreleased commits or developmental features ahead of public release builds on CurseForge and Modrinth.
+
+---
+
+## 🌐 Global Language Switchboard
+
+Choose your language below to view translated documentation:
+
+| Language | Home Page | Technical Overview |
+| :--- | :--- | :--- |
+| **English** | [[English Home|Home]] | [[Overview (26.3)|26.3-Home]] |
+| 🇨🇳 **简体中文 (Simplified Chinese)** | [[主页|zh_cn-Home]] | [[技术概览|zh_cn-Overview]] |
+| 🇭🇰 **繁體中文 (Traditional Chinese)** | [[主頁|zh_tw-Home]] | [[技術概覽|zh_tw-Overview]] |
+| 🇷🇺 **Русский (Russian)** | [[Главная страница|ru_ru-Home]] | [[Технический обзор|ru_ru-Overview]] |
+| 🇪🇸 **Español (Spanish)** | [[Inicio|es_es-Home]] | [[Descripción general|es_es-Overview]] |
+| 🇩🇪 **Deutsch (German)** | [[Startseite|de_de-Home]] | [[Technische Übersicht|de_de-Overview]] |
+| 🇫🇷 **Français (French)** | [[Accueil|fr_fr-Home]] | [[Vue d'ensemble|fr_fr-Overview]] |
+| 🇧🇷 **Português (Portuguese)** | [[Início|pt_br-Home]] | [[Visão Geral|pt_br-Overview]] |
+| 🇯🇵 **日本語 (Japanese)** | [[ホーム|ja_jp-Home]] | [[技術概要|ja_jp-Overview]] |
+| 🇮🇩 **Bahasa Indonesia (Indonesian)** | [[Beranda|id_id-Home]] | [[Ikhtisar Teknis|id_id-Overview]] |
+| 🇰🇷 **한국어 (Korean)** | [[홈|ko_kr-Home]] | [[기술 개요|ko_kr-Overview]] |
 
 ---
 
