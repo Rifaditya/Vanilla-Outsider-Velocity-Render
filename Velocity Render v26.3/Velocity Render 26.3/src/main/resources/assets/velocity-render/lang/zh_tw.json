@@ -1,0 +1,29 @@
+{
+  "modmenu.nameTranslation.velocity-render": "速度渲染 (Velocity Render)",
+  "modmenu.descriptionTranslation.velocity-render": "為高速旅行者提供基於移動速度的各向異性區塊網格構建與前瞻性預測區塊生成。",
+
+  "velocityrender.gamerule.enabled": "速度渲染主開關",
+  "velocityrender.gamerule.enabled.description": "控制客戶端速度導向區塊網格構建與伺服器端前瞻預測生成的主開關。",
+
+  "velocityrender.gamerule.lead_multiplier": "前向預測乘數",
+  "velocityrender.gamerule.lead_multiplier.description": "沿移動方向請求區塊加載票券的前瞻距離縮放比例（0% 至 300%）。",
+
+  "velocityrender.gamerule.budget_conservation": "自適應資源節約",
+  "velocityrender.gamerule.budget_conservation.description": "在高速飛行時動態修剪側方及後方非模擬票券，以保護伺服器 TPS。",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "最小激活速度閾值",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "激活前向偏置所需的最小速度百分比（例如 20 = 0.20 格/刻）。",
+
+  "velocityrender.gamerule.debug_mode": "開發者除錯診斷",
+  "velocityrender.gamerule.debug_mode.description": "將即時移動向量診斷、票券數量及 MSPT 調整資訊輸出至伺服器控制台。",
+
+  "velocityrender.gamerule.turn_widening": "轉向走廊動態加寬",
+  "velocityrender.gamerule.turn_widening.description": "在急轉彎時動態拓寬區塊生成走廊，防止外側彎道出現虛空與區塊未載入盲區。",
+
+  "velocityrender.command.status.header": "=== 速度渲染 (Velocity Render) 狀態 ===",
+  "velocityrender.command.status.speed": "當前速度: %s 格/刻 (%s 米/秒)",
+  "velocityrender.command.status.reach": "動態前瞻範圍: %s 區塊 (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "活動軌跡票券: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] 設定與遊戲規則已成功重新載入。",
+  "velocityrender.command.reset.success": "[Velocity Render] 所有設定已恢復至原版預設值。"
+}
