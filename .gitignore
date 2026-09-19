@@ -1,8 +1,10 @@
-﻿# Gradle & Build Artifacts
+# Gradle & Build Artifacts
 .gradle/
 build/
 bin/
 out/
+logs/
+
 
 # Fabric Loom & Minecraft Cache
 .fabric/

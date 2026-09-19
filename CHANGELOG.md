@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.2+26.3] - Server Predictive Arc Corridor Integration
+- **Predictive Turn-Arc Corridor (`BL-VR-001 Step 3`)**: Integrated `TurnRateCalculator` into `VelocityTicketManager`, expanding high-speed travel lines into asymmetric directional curve fan-outs during banked turns.
+- **Early Apex Generation**: Lookahead corridor activates lateral chunk loading from lookahead step >= 2 onwards, eliminating void stalls at turn apexes.
+- **Adaptive MSPT Guard**: Integrated with MSPT watchdog to clamp turn fan-out under heavy server tick load (> 25ms).
+- **Diagnostic Metrics**: Added `getPlayerTurnRate` and `getPlayerTurnSign` metrics for real-time monitoring.
+
+---
+
 ## [1.1.1+26.3] - Dynamic Turn GameRule & Localization Parity Update
 
 - **Dynamic GameRule (`BL-VR-001 Step 2`)**: Registered `velocityrender:turn_widening` (default: `true`) under `VelocityRenderGameRules`.

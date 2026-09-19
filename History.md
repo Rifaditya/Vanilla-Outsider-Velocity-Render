@@ -1,5 +1,10 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.1.2+26.3] - Server Predictive Arc Corridor Integration (BL-VR-001 Step 3)
+- Bound `TurnRateCalculator` to `VelocityTicketManager` via `PLAYER_TURN_RATES` hash map.
+- Implemented dynamic perpendicular lateral offset calculation along the turn radius.
+- Linked with `velocityrender:turn_widening` GameRule and MSPT watchdog throttling.
+
 ## [1.1.1+26.3] - Dynamic Turn GameRule & Localization Parity (BL-VR-001 Step 2)
 - Added `TURN_WIDENING` (`velocityrender:turn_widening`) boolean GameRule via `DynamicGameRuleManager`.
 - Configured default to `true` with translatable display title and description.

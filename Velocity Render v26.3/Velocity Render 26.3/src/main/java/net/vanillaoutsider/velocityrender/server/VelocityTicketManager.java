@@ -13,6 +13,7 @@ import net.minecraft.server.level.TicketType;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.vanillaoutsider.velocityrender.math.TurnRateCalculator;
 import net.vanillaoutsider.velocityrender.math.VelocityCalculator;
 import net.vanillaoutsider.velocityrender.registry.VelocityRenderGameRules;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ public final class VelocityTicketManager {
 
     // Reusable per-player data holders (Zero-allocation in hot loops)
     private static final Map<UUID, VelocityCalculator> PLAYER_VELOCITY = new Object2ObjectOpenHashMap<>();
+    private static final Map<UUID, TurnRateCalculator> PLAYER_TURN_RATES = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, LongOpenHashSet> ACTIVE_TICKETS = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, LongOpenHashSet> SCRATCH_TICKETS = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, ResourceKey<Level>> PLAYER_DIMENSION = new Object2ObjectOpenHashMap<>();
@@ -63,6 +65,12 @@ public final class VelocityTicketManager {
                 player.getDeltaMovement().x, player.getDeltaMovement().y, player.getDeltaMovement().z
         );
 
+        float currentYaw = player.getYRot();
+        int currentTick = player.tickCount;
+
+        TurnRateCalculator turnCalculator = PLAYER_TURN_RATES.computeIfAbsent(uuid, k -> new TurnRateCalculator());
+        turnCalculator.update(currentYaw, currentTick);
+
         double speed = calculator.getSpeedBlocksPerTick();
         double minSpeed = VelocityRenderGameRules.getMinSpeedThreshold(level);
 
@@ -80,9 +88,6 @@ public final class VelocityTicketManager {
         Long lastChunkObj = LAST_PLAYER_CHUNK.get(uuid);
         Float lastYawObj = LAST_PLAYER_YAW.get(uuid);
         Integer lastTickObj = LAST_PLAYER_TICK.get(uuid);
-
-        float currentYaw = player.getYRot();
-        int currentTick = player.tickCount;
 
         boolean shouldRecalculate = (lastChunkObj == null)
                 || (lastChunkObj != currentChunkPacked)
@@ -136,7 +141,15 @@ public final class VelocityTicketManager {
         LongOpenHashSet targetChunks = SCRATCH_TICKETS.computeIfAbsent(uuid, k -> new LongOpenHashSet());
         targetChunks.clear();
 
-        boolean enableFanOut = speed >= 0.75; // Banked flight fan-out
+        boolean turnWideningEnabled = VelocityRenderGameRules.isTurnWideningEnabled(level);
+        boolean isTurning = turnWideningEnabled && turnCalculator.isTurningActive(speed);
+        int turnSign = turnCalculator.getTurnSign(); // -1 = Left (CCW), +1 = Right (CW)
+        int innerWidth = turnCalculator.getInnerFanOutWidth(speed);
+        int outerWidth = turnCalculator.getOuterFanOutWidth(speed);
+        if (mspt > 25.0f) {
+            innerWidth = Math.min(innerWidth, 1);
+            outerWidth = 0;
+        }
 
         // Continuous corridor ray march (every chunk along the trajectory line)
         for (int step = 1; step <= maxReachChunks; step++) {
@@ -144,15 +157,19 @@ public final class VelocityTicketManager {
             int targetZ = playerChunkZ + (int) Math.round(normHzZ * step);
             targetChunks.add(ChunkPos.pack(targetX, targetZ));
 
-            // Lateral corridor fan-out for banked turning at high speeds (from step 4 onward)
-            if (enableFanOut && step >= 4) {
-                int leftX = targetX + (int) Math.round(-normHzZ);
-                int leftZ = targetZ + (int) Math.round(normHzX);
-                int rightX = targetX + (int) Math.round(normHzZ);
-                int rightZ = targetZ + (int) Math.round(-normHzX);
-
-                targetChunks.add(ChunkPos.pack(leftX, leftZ));
-                targetChunks.add(ChunkPos.pack(rightX, rightZ));
+            if (isTurning && step >= 2) {
+                double perpX = (turnSign > 0) ? normHzZ : -normHzZ;
+                double perpZ = (turnSign > 0) ? -normHzX : normHzX;
+                for (int offset = 1; offset <= innerWidth; offset++) {
+                    int ix = targetX + (int) Math.round(perpX * offset);
+                    int iz = targetZ + (int) Math.round(perpZ * offset);
+                    targetChunks.add(ChunkPos.pack(ix, iz));
+                }
+                for (int offset = 1; offset <= outerWidth; offset++) {
+                    int ox = targetX - (int) Math.round(perpX * offset);
+                    int oz = targetZ - (int) Math.round(perpZ * offset);
+                    targetChunks.add(ChunkPos.pack(ox, oz));
+                }
             }
         }
 
@@ -197,6 +214,7 @@ public final class VelocityTicketManager {
 
     private static void clearPlayer(UUID uuid, ServerLevel level) {
         PLAYER_VELOCITY.remove(uuid);
+        PLAYER_TURN_RATES.remove(uuid);
         PLAYER_DIMENSION.remove(uuid);
         LAST_PLAYER_CHUNK.remove(uuid);
         LAST_PLAYER_YAW.remove(uuid);
@@ -229,6 +247,16 @@ public final class VelocityTicketManager {
     public static double getPlayerSpeed(UUID uuid) {
         VelocityCalculator calc = PLAYER_VELOCITY.get(uuid);
         return calc != null ? calc.getSpeedBlocksPerTick() : 0.0;
+    }
+
+    public static float getPlayerTurnRate(UUID uuid) {
+        TurnRateCalculator c = PLAYER_TURN_RATES.get(uuid);
+        return c != null ? c.getAngularRate() : 0.0f;
+    }
+
+    public static int getPlayerTurnSign(UUID uuid) {
+        TurnRateCalculator c = PLAYER_TURN_RATES.get(uuid);
+        return c != null ? c.getTurnSign() : 0;
     }
 
     public static int getLastDynamicReach() {
