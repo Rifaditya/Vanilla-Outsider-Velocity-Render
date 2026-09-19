@@ -1,0 +1,29 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "高速移動プレイヤー向けの移動速度に基づいた異方性チャンクメッシュ構築および前方予測チャンク生成。",
+
+  "velocityrender.gamerule.enabled": "Velocity Render マスター切り替え",
+  "velocityrender.gamerule.enabled.description": "クライアント側での速度偏向チャンクメッシュ構築とサーバー側での前方予測生成を有効化するマスター切り替え。",
+
+  "velocityrender.gamerule.lead_multiplier": "前方予測倍率",
+  "velocityrender.gamerule.lead_multiplier.description": "移動ベクトルに沿ってチャンク読み込みチケットを要求する前方距離の倍率（0%〜300%）。",
+
+  "velocityrender.gamerule.budget_conservation": "適応型リソース節約",
+  "velocityrender.gamerule.budget_conservation.description": "高速移動時に側面および後方の非シミュレーションチケットを動的に削減し、サーバーのTPSを保護します。",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "最小有効速度しきい値",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "前方バイアスを有効化するために必要な1ブロック/tickあたりの最小速度（例：20 = 0.20 b/t）。",
+
+  "velocityrender.gamerule.debug_mode": "開発者デバッグ診断",
+  "velocityrender.gamerule.debug_mode.description": "リアルタイムのベクトル診断、チケット数、MSPT調整値をサーバーコンソールに出力します。",
+
+  "velocityrender.gamerule.turn_widening": "旋回時の動的生成回廊拡大",
+  "velocityrender.gamerule.turn_widening.description": "急旋回時にチャンク生成回廊を動的に拡大し、外側カーブでの虚空の未生成を防止します。",
+
+  "velocityrender.command.status.header": "=== Velocity Render ステータス ===",
+  "velocityrender.command.status.speed": "速度: %s b/t (%s m/s)",
+  "velocityrender.command.status.reach": "動的リーチ: %s チャンク (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "有効な軌跡チケット: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] 設定とゲームルールが正常に再読み込みされました。",
+  "velocityrender.command.reset.success": "[Velocity Render] すべての設定がバニラのデフォルトに復元されました。"
+}
