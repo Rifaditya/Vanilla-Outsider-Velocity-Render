@@ -1,7 +1,15 @@
-﻿# 📜 Changelog: Velocity Render
+# 📜 Changelog: Velocity Render
 
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
+
+---
+
+## [1.1.0+26.3] - The Banked Turn-Arc Engine Update
+
+- **Turn-Arc Math Engine (`BL-VR-001`)**: Implemented standalone `TurnRateCalculator` with Exponential Moving Average (EMA, $\alpha = 0.60$) angular yaw rate tracking.
+- **Directional Arc Fan-Out**: Added 2-tier lateral step scaling algorithms for moderate and sharp turn detection.
+- **Headless Unit Verification**: Added comprehensive test suite covering wrap-around boundary crossings, direction signs, and threshold gates.
 
 ---
 
