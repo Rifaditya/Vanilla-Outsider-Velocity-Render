@@ -1,0 +1,29 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Malhagem anisotrópica de chunks orientada pela velocidade e geração preditiva de chunks para viajantes rápidos.",
+
+  "velocityrender.gamerule.enabled": "Interruptor principal do Velocity Render",
+  "velocityrender.gamerule.enabled.description": "Interruptor mestre para ativar a malhagem orientada por velocidade no cliente e geração preditiva no servidor.",
+
+  "velocityrender.gamerule.lead_multiplier": "Multiplicador de alcance frontal",
+  "velocityrender.gamerule.lead_multiplier.description": "Escala a distância de solicitação de tickets de chunks ao longo do vetor de movimento (0% a 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Conservação adaptativa de orçamento",
+  "velocityrender.gamerule.budget_conservation.description": "Apara dinamicamente tickets laterais e traseiros em alta velocidade para proteger o TPS do servidor.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Limite de velocidade mínima",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Velocidade mínima em centésimos de bloco/tick para ativar a priorização frontal (ex. 20 = 0.20 b/t).",
+
+  "velocityrender.gamerule.debug_mode": "Diagnósticos do desenvolvedor",
+  "velocityrender.gamerule.debug_mode.description": "Registra diagnósticos de vetores, contagem de tickets e ajustes de MSPT no console do servidor.",
+
+  "velocityrender.gamerule.turn_widening": "Alargamento em curvas inclinadas",
+  "velocityrender.gamerule.turn_widening.description": "Alarga dinamicamente o corredor de geração durante curvas fechadas para evitar o vazio na curva externa.",
+
+  "velocityrender.command.status.header": "=== Status do Velocity Render ===",
+  "velocityrender.command.status.speed": "Velocidade: %s b/t (%s m/s)",
+  "velocityrender.command.status.reach": "Alcance dinâmico: %s chunks (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "Tickets de trajetória ativos: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Configurações e regras do jogo recarregadas com sucesso.",
+  "velocityrender.command.reset.success": "[Velocity Render] Todas as configurações foram restauradas para os padrões vanilla."
+}
