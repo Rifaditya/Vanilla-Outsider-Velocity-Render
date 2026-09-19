@@ -1,0 +1,29 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Geschwindigkeitsorientierte anisotrope Chunk-Mesh-Erstellung und vorausschauende Chunk-Generierung für schnelle Reisende.",
+
+  "velocityrender.gamerule.enabled": "Velocity Render Hauptschalter",
+  "velocityrender.gamerule.enabled.description": "Hauptschalter zur Aktivierung der geschwindigkeitsorientierten Mesh-Erstellung auf dem Client und vorausschauenden Generierung auf dem Server.",
+
+  "velocityrender.gamerule.lead_multiplier": "Vorausschau-Multiplikator",
+  "velocityrender.gamerule.lead_multiplier.description": "Skaliert, wie weit im Voraus entlang des Bewegungsvektors Chunk-Ladetickets angefordert werden (0% bis 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Adaptive Ressourcenschonung",
+  "velocityrender.gamerule.budget_conservation.description": "Kürzt bei hohen Geschwindigkeiten dynamisch seitliche und hintere Tickets, um die Server-TPS zu schützen.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Mindestgeschwindigkeits-Schwellenwert",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Erforderliche Mindestgeschwindigkeit in Hundertstel Blöcken/Tick zur Aktivierung der Vorwärtsorientierung (z.B. 20 = 0.20 B/T).",
+
+  "velocityrender.gamerule.debug_mode": "Entwickler-Fehlerdiagnose",
+  "velocityrender.gamerule.debug_mode.description": "Gibt Echtzeit-Vektordiagnosen, Ticket-Zähler und MSPT-Anpassungen in der Serverkonsole aus.",
+
+  "velocityrender.gamerule.turn_widening": "Dynamische Kurvenverbreiterung",
+  "velocityrender.gamerule.turn_widening.description": "Verbreitert den Chunk-Generierungskorridor bei scharfen Kurven dynamisch, um Ladeleeren an Außenkurven zu verhindern.",
+
+  "velocityrender.command.status.header": "=== Velocity Render Status ===",
+  "velocityrender.command.status.speed": "Geschwindigkeit: %s B/T (%s m/s)",
+  "velocityrender.command.status.reach": "Dynamische Reichweite: %s Chunks (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "Aktive Trajektorien-Tickets: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Konfiguration und Spielregeln erfolgreich neu geladen.",
+  "velocityrender.command.reset.success": "[Velocity Render] Alle Einstellungen auf Vanilla-Standardwerte zurückgesetzt."
+}
