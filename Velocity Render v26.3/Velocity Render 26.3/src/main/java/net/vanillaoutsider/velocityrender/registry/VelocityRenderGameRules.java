@@ -20,6 +20,7 @@ public final class VelocityRenderGameRules {
     public static GameRule<Integer> LEAD_MULTIPLIER;
     public static GameRule<Boolean> BUDGET_CONSERVATION;
     public static GameRule<Integer> MIN_SPEED_THRESHOLD_PCT;
+    public static GameRule<Boolean> TURN_WIDENING;
     public static GameRule<Boolean> DEBUG_MODE;
 
     private VelocityRenderGameRules() {
@@ -50,6 +51,11 @@ public final class VelocityRenderGameRules {
                 .description("Minimum speed percentage required to activate forward prioritization (20 = 0.20 b/t)")
                 .register();
 
+        TURN_WIDENING = DynamicGameRuleManager.booleanRule("velocityrender:turn_widening", CATEGORY, true)
+                .name("Banked Turn Widening")
+                .description("Dynamically widens chunk generation corridor during sharp turns to prevent outer-curve void pop-in")
+                .register();
+
         DEBUG_MODE = DynamicGameRuleManager.booleanRule("velocityrender:debug_mode", CATEGORY, false)
                 .name("Debug Diagnostics")
                 .description("Print real-time speed and trajectory diagnostics to logs")
@@ -70,6 +76,10 @@ public final class VelocityRenderGameRules {
 
     public static double getMinSpeedThreshold(Level level) {
         return DynamicGameRuleManager.getPct(level, MIN_SPEED_THRESHOLD_PCT);
+    }
+
+    public static boolean isTurnWideningEnabled(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, TURN_WIDENING);
     }
 
     public static boolean isDebugMode(Level level) {
