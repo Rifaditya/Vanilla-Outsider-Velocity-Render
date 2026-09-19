@@ -1,0 +1,29 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Mallado de chunks anisotrópico según la velocidad y generación predictiva de chunks para viajeros rápidos.",
+
+  "velocityrender.gamerule.enabled": "Interruptor maestro de Velocity Render",
+  "velocityrender.gamerule.enabled.description": "Interruptor maestro para activar el mallado orientado por velocidad en cliente y la generación predictiva en servidor.",
+
+  "velocityrender.gamerule.lead_multiplier": "Multiplicador de alcance frontal",
+  "velocityrender.gamerule.lead_multiplier.description": "Escala qué tan adelante en el vector de movimiento se solicitan tickets de carga de chunks (0% a 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Conservación adaptativa de presupuesto",
+  "velocityrender.gamerule.budget_conservation.description": "Recorta dinámicamente tickets laterales y traseros a alta velocidad para proteger el TPS del servidor.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Umbral de velocidad mínima",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Velocidad mínima en centésimas de bloque/tick requerida para activar la orientación frontal (ej. 20 = 0.20 b/t).",
+
+  "velocityrender.gamerule.debug_mode": "Diagnósticos de depuración",
+  "velocityrender.gamerule.debug_mode.description": "Registra diagnósticos de vectores, recuento de tickets y ajustes de MSPT en la consola del servidor.",
+
+  "velocityrender.gamerule.turn_widening": "Ensanchamiento en curvas inclinadas",
+  "velocityrender.gamerule.turn_widening.description": "Ensancha dinámicamente el corredor de generación durante giros bruscos para evitar vacíos en la curva exterior.",
+
+  "velocityrender.command.status.header": "=== Estado de Velocity Render ===",
+  "velocityrender.command.status.speed": "Velocidad: %s b/t (%s m/s)",
+  "velocityrender.command.status.reach": "Alcance dinámico: %s chunks (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "Tickets de trayectoria activos: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Configuración y reglas de juego recargadas con éxito.",
+  "velocityrender.command.reset.success": "[Velocity Render] Todos los ajustes restaurados a los valores predeterminados de vanilla."
+}
