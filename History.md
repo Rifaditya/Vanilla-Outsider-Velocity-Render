@@ -1,5 +1,10 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.1.3+26.3] - Brigadier Command Suite & Diagnostics (BL-VR-001 Step 4)
+- Exposed live `getPlayerTurnRate` and `getPlayerTurnSign` metrics in `/vr status`.
+- Added `turn_widening` and `turn` arguments to Brigadier `/vr get` and `/vr set`.
+- Validated trajectory transition and decay curves in `TurnRateCalculatorTest`.
+
 ## [1.1.2+26.3] - Server Predictive Arc Corridor Integration (BL-VR-001 Step 3)
 - Bound `TurnRateCalculator` to `VelocityTicketManager` via `PLAYER_TURN_RATES` hash map.
 - Implemented dynamic perpendicular lateral offset calculation along the turn radius.

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.3+26.3] - Brigadier Command Suite & Diagnostics Update
+- **Telemetry Expansion (`BL-VR-001 Step 4`)**: Exposed real-time banked turn widening toggle state, angular turn rate (deg/tick), and directional sign (`LEFT`, `RIGHT`, `STRAIGHT`) in `/velocityrender status` (`/vr status`).
+- **Dynamic Command Configuration**: Added `turn_widening` and alias `turn` to `/vr get` and `/vr set` with full tab suggestions.
+- **Reset Hygiene**: Included `velocityrender:turn_widening` in `/vr reset` defaults.
+- **Regression Verification**: Added trajectory transition test verifying turn state decay and dynamic recovery.
+
+---
+
 ## [1.1.2+26.3] - Server Predictive Arc Corridor Integration
 - **Predictive Turn-Arc Corridor (`BL-VR-001 Step 3`)**: Integrated `TurnRateCalculator` into `VelocityTicketManager`, expanding high-speed travel lines into asymmetric directional curve fan-outs during banked turns.
 - **Early Apex Generation**: Lookahead corridor activates lateral chunk loading from lookahead step >= 2 onwards, eliminating void stalls at turn apexes.

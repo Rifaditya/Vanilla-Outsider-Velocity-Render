@@ -111,4 +111,45 @@ class TurnRateCalculatorTest {
         Assertions.assertEquals(0, calculator.getTurnSign());
         Assertions.assertFalse(calculator.isTurningActive(1.0));
     }
+
+    @Test
+    @DisplayName("Transitioning from straight flight -> banked right turn -> straight recovery decays properly and updates isTurningActive")
+    void testTrajectoryTransition() {
+        // Phase 1: Straight flight (0 deg/tick)
+        calculator.update(0.0f, 1);
+        calculator.update(0.0f, 2);
+        calculator.update(0.0f, 3);
+
+        Assertions.assertEquals(0.0f, calculator.getAngularRate(), 0.001f);
+        Assertions.assertEquals(0, calculator.getTurnSign());
+        Assertions.assertFalse(calculator.isTurningActive(1.0));
+
+        // Phase 2: Banked right turn (10 deg/tick)
+        for (int t = 4; t <= 8; t++) {
+            calculator.update((t - 3) * 10.0f, t);
+        }
+
+        Assertions.assertTrue(calculator.getAngularRate() >= 8.0f, "Angular rate should reach sharp turn threshold");
+        Assertions.assertEquals(1, calculator.getTurnSign(), "Turn sign must be right (+1)");
+        Assertions.assertTrue(calculator.isTurningActive(1.0), "Turning should be active during banked turn");
+        Assertions.assertEquals(2, calculator.getInnerFanOutWidth(1.0));
+        Assertions.assertEquals(1, calculator.getOuterFanOutWidth(1.0));
+
+        // Phase 3: Straight flight recovery (0 deg/tick)
+        float currentYaw = 50.0f; // yaw at t=8: (8-3)*10 = 50.0f
+        calculator.update(currentYaw, 9);
+
+        // Immediate transition checks
+        Assertions.assertEquals(0, calculator.getTurnSign(), "Turn sign should reset to straight (0)");
+        Assertions.assertFalse(calculator.isTurningActive(1.0), "Turning should deactivate once angular rate drops below threshold");
+
+        // Decay continuation
+        for (int t = 10; t <= 15; t++) {
+            calculator.update(currentYaw, t);
+        }
+
+        Assertions.assertTrue(calculator.getAngularRate() < 0.1f, "Angular rate must decay close to 0");
+        Assertions.assertEquals(0, calculator.getInnerFanOutWidth(1.0));
+        Assertions.assertEquals(0, calculator.getOuterFanOutWidth(1.0));
+    }
 }
