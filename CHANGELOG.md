@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.1+26.3] - Dynamic Turn GameRule & Localization Parity Update
+
+- **Dynamic GameRule (`BL-VR-001 Step 2`)**: Registered `velocityrender:turn_widening` (default: `true`) under `VelocityRenderGameRules`.
+- **11-Language Localization**: Added complete translated keys (`velocityrender.gamerule.turn_widening` and description) across English, Simplified Chinese, Traditional Chinese, Russian, Spanish, German, French, Brazilian Portuguese, Japanese, Indonesian, and Korean.
+- **Dynamic Access Helper**: Added `VelocityRenderGameRules.isTurnWideningEnabled(Level)` for safe dynamic lookup.
+
 ---
 
 ## [1.1.0+26.3] - The Banked Turn-Arc Engine Update
