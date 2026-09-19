@@ -1,0 +1,29 @@
+{
+  "modmenu.nameTranslation.velocity-render": "速度渲染 (Velocity Render)",
+  "modmenu.descriptionTranslation.velocity-render": "为高速旅行者提供基于移动速度的各向异性区块网格构建与前瞻性预测区块生成。",
+
+  "velocityrender.gamerule.enabled": "速度渲染主开关",
+  "velocityrender.gamerule.enabled.description": "控制客户端速度导向区块网格构建与服务端前瞻预测生成的主开关。",
+
+  "velocityrender.gamerule.lead_multiplier": "前向预测乘数",
+  "velocityrender.gamerule.lead_multiplier.description": "沿移动方向请求区块加载加载券的前瞻距离缩放比例（0% 至 300%）。",
+
+  "velocityrender.gamerule.budget_conservation": "自适应资源节约",
+  "velocityrender.gamerule.budget_conservation.description": "在高速飞行时动态修剪侧方及后方非模拟加载券，以保护服务器 TPS。",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "最小激活速度阈值",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "激活前向偏置所需的最小速度百分比（例如 20 = 0.20 格/刻）。",
+
+  "velocityrender.gamerule.debug_mode": "开发者调试诊断",
+  "velocityrender.gamerule.debug_mode.description": "将实时移动向量诊断、加载券数量及 MSPT 调整信息输出至服务器控制台。",
+
+  "velocityrender.gamerule.turn_widening": "转向走廊动态加宽",
+  "velocityrender.gamerule.turn_widening.description": "在急转弯时动态拓宽区块生成走廊，防止外侧弯道出现虚空与区块未加载盲区。",
+
+  "velocityrender.command.status.header": "=== 速度渲染 (Velocity Render) 状态 ===",
+  "velocityrender.command.status.speed": "当前速度: %s 格/刻 (%s 米/秒)",
+  "velocityrender.command.status.reach": "动态前瞻范围: %s 区块 (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "活动轨迹加载券: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] 配置与游戏规则已成功重新加载。",
+  "velocityrender.command.reset.success": "[Velocity Render] 所有设置已恢复至原版默认值。"
+}
