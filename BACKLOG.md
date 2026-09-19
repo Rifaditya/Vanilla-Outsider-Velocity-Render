@@ -8,7 +8,7 @@ This file tracks planned features, technical refinements, performance optimizati
 
 | ID | Category | Title | Priority | Target Version | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `[BL-VR-001]` | `[FEATURE]` | Dynamic Corridor Turn-Widening on Banked Turns | `[HIGH]` | `26.3+` | `📌 DEFERRED` |
+| `[BL-VR-001]` | `[FEATURE]` | Dynamic Corridor Turn-Widening on Banked Turns | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-002]` | `[FEATURE]` | 3D Pitch-Aware Vertical Lookahead (Dives & Ascents) | `[HIGH]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-003]` | `[PERF]` | Server-Wide Ticket Budget & Fair Multi-Player Allocation | `[HIGH]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-004]` | `[REFINEMENT]` | Right-Side F3 Engine Diagnostic Metric Line | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
@@ -30,9 +30,10 @@ This file tracks planned features, technical refinements, performance optimizati
 ### [BL-VR-001] Dynamic Corridor Turn-Widening on Banked Turns
 - **Category**: `[FEATURE]`
 - **Priority**: `[HIGH]`
-- **Status**: `📌 DEFERRED`
-- **Target Component(s)**: `ForwardTicketManager.java`, `VelocityRenderMod.java`
+- **Status**: `✅ RESOLVED`
+- **Target Component(s)**: `VelocityTicketManager.java`, `TurnRateCalculator.java`, `VelocityRenderGameRules.java`, `VelocityRenderCommand.java`
 - **Date Added**: 2026-09-18
+- **Date Resolved**: 2026-09-19 (v1.1.0 – v1.1.3+26.3)
 
 #### ❓ Problem / Context
 Currently, high-speed travel produces a linear corridor along the blended velocity and look vector. When a player banks sharply during an Elytra dive or ice-boat drift, high angular yaw velocity ($\Delta \text{yaw}$) causes the player to turn faster than the forward ray corridor can reorient, occasionally causing the outer curve of the turn to lag behind.
