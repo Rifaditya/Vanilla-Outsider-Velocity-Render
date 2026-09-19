@@ -1,4 +1,4 @@
-﻿{
+{
     "schemaVersion": 1,
     "id": "velocity-render",
     "version": "${version}",
@@ -38,6 +38,10 @@
                 "modmenu.donate": "https://ko-fi.com/dasikigaijin",
                 "modmenu.kofi": "https://ko-fi.com/dasikigaijin"
             }
+        },
+        "modrinth": {
+            "projectId": "bfvgClpI",
+            "slug": "velocity-render"
         }
     }
 }
