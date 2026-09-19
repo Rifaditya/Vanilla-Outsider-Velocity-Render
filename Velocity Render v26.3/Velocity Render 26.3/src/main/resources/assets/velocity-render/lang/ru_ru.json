@@ -1,0 +1,29 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Анизотропное построение сетки чанков по вектору скорости и упреждающая генерация чанков для быстрых путешественников.",
+
+  "velocityrender.gamerule.enabled": "Главный переключатель Velocity Render",
+  "velocityrender.gamerule.enabled.description": "Главный переключатель приоритета построения сетки чанков на клиенте и упреждающей генерации на сервере.",
+
+  "velocityrender.gamerule.lead_multiplier": "Множитель упреждения хода",
+  "velocityrender.gamerule.lead_multiplier.description": "Масштабирует дистанцию запроса тикетов загрузки чанков вдоль вектора движения (от 0% до 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Адаптивная экономия ресурсов",
+  "velocityrender.gamerule.budget_conservation.description": "Динамически отсекает боковые и задние тикеты на высокой скорости для защиты TPS сервера.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Минимальный порог скорости",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Минимальная скорость в сотых блока за такт для активации упреждения (например, 20 = 0.20 б/т).",
+
+  "velocityrender.gamerule.debug_mode": "Диагностика для разработчиков",
+  "velocityrender.gamerule.debug_mode.description": "Выводит диагностику векторов, счетчики тикетов и коррекцию MSPT в консоль сервера.",
+
+  "velocityrender.gamerule.turn_widening": "Расширение коридора на виражах",
+  "velocityrender.gamerule.turn_widening.description": "Динамически расширяет коридор генерации чанков при резких поворотах для предотвращения пустот по внешней дуге.",
+
+  "velocityrender.command.status.header": "=== Статус Velocity Render ===",
+  "velocityrender.command.status.speed": "Скорость: %s б/т (%s м/с)",
+  "velocityrender.command.status.reach": "Динамический охват: %s чанков (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "Активные тикеты траектории: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Конфигурация и игровые правила успешно перезагружены.",
+  "velocityrender.command.reset.success": "[Velocity Render] Все параметры сброшены до стандартных значений."
+}
