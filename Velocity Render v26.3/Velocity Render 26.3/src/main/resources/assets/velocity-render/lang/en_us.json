@@ -1,4 +1,4 @@
-﻿{
+{
   "modmenu.nameTranslation.velocity-render": "Velocity Render",
   "modmenu.descriptionTranslation.velocity-render": "Velocity-biased anisotropic chunk meshing and predictive forward chunk generation for fast travelers.",
 
@@ -16,6 +16,9 @@
 
   "velocityrender.gamerule.debug_mode": "Developer Debug Diagnostics",
   "velocityrender.gamerule.debug_mode.description": "Logs real-time vector diagnostics, ticket counts, and MSPT adjustments to server console.",
+
+  "velocityrender.gamerule.turn_widening": "Banked Turn Widening",
+  "velocityrender.gamerule.turn_widening.description": "Dynamically widens chunk generation corridor during sharp turns to prevent outer-curve void pop-in.",
 
   "velocityrender.command.status.header": "=== Velocity Render Status ===",
   "velocityrender.command.status.speed": "Speed: %s b/t (%s m/s)",
