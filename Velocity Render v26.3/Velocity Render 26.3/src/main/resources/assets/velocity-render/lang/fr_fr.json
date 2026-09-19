@@ -1,0 +1,29 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Maillage anisotrope des tronçons orienté par la vitesse et génération prédictive des tronçons pour les voyageurs rapides.",
+
+  "velocityrender.gamerule.enabled": "Interrupteur général Velocity Render",
+  "velocityrender.gamerule.enabled.description": "Interrupteur principal pour activer le maillage orienté par la vitesse côté client et la génération prédictive côté serveur.",
+
+  "velocityrender.gamerule.lead_multiplier": "Multiplicateur d'anticipation avant",
+  "velocityrender.gamerule.lead_multiplier.description": "Ajuste la distance d'anticipation des tickets de chargement de tronçons le long du vecteur de déplacement (0% à 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Conservation adaptative du budget",
+  "velocityrender.gamerule.budget_conservation.description": "Réduit dynamiquement les tickets latéraux et arrière à haute vitesse afin de préserver les TPS du serveur.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Seuil de vitesse minimale",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Vitesse minimale en centièmes de bloc/tick requise pour activer l'orientation avant (ex. 20 = 0.20 b/t).",
+
+  "velocityrender.gamerule.debug_mode": "Diagnostics de débogage",
+  "velocityrender.gamerule.debug_mode.description": "Enregistre les diagnostics de vecteurs, le nombre de tickets et les ajustements MSPT dans la console du serveur.",
+
+  "velocityrender.gamerule.turn_widening": "Élargissement en virage incliné",
+  "velocityrender.gamerule.turn_widening.description": "Élargit dynamiquement le couloir de génération lors des virages serrés pour éviter les vides sur la courbe extérieure.",
+
+  "velocityrender.command.status.header": "=== État de Velocity Render ===",
+  "velocityrender.command.status.speed": "Vitesse : %s b/t (%s m/s)",
+  "velocityrender.command.status.reach": "Portée dynamique : %s tronçons (MSPT : %sms)",
+  "velocityrender.command.status.tickets": "Tickets de trajectoire actifs : %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Configuration et règles de jeu rechargées avec succès.",
+  "velocityrender.command.reset.success": "[Velocity Render] Tous les paramètres ont été réinitialisés aux valeurs par défaut."
+}
