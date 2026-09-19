@@ -1,0 +1,29 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Pembuatan jala chunk anisotropik berbasis kecepatan dan pembangkitan chunk prediktif ke depan untuk penjelajah cepat.",
+
+  "velocityrender.gamerule.enabled": "Sakelar Utama Velocity Render",
+  "velocityrender.gamerule.enabled.description": "Sakelar utama untuk mengaktifkan pemrioritasan pembuatan jala di klien dan pemuatan prediktif di server.",
+
+  "velocityrender.gamerule.lead_multiplier": "Pengali Jangkauan Depan",
+  "velocityrender.gamerule.lead_multiplier.description": "Skala seberapa jauh tiket pemuatan chunk diminta di sepanjang vektor pergerakan (0% hingga 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Penghematan Anggaran Adaptif",
+  "velocityrender.gamerule.budget_conservation.description": "Secara dinamis memangkas tiket non-simulasi lateral dan belakang pada kecepatan tinggi untuk menjaga TPS server.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Ambang Kecepatan Minimum",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Kecepatan minimum dalam seperseratus blok/tick yang dibutuhkan untuk mengaktifkan bias ke depan (mis. 20 = 0.20 b/t).",
+
+  "velocityrender.gamerule.debug_mode": "Diagnostik Debug Pengembang",
+  "velocityrender.gamerule.debug_mode.description": "Mencatat diagnostik vektor, jumlah tiket, dan penyesuaian MSPT secara langsung ke konsol server.",
+
+  "velocityrender.gamerule.turn_widening": "Pelebaran Koridor Belokan",
+  "velocityrender.gamerule.turn_widening.description": "Memperlebar koridor pembentukan chunk secara dinamis saat berbelok tajam untuk mencegah kekosongan di lengkungan luar.",
+
+  "velocityrender.command.status.header": "=== Status Velocity Render ===",
+  "velocityrender.command.status.speed": "Kecepatan: %s b/t (%s m/s)",
+  "velocityrender.command.status.reach": "Jangkauan Dinamis: %s chunk (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "Tiket Lintasan Aktif: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Konfigurasi dan GameRule berhasil dimuat ulang.",
+  "velocityrender.command.reset.success": "[Velocity Render] Semua pengaturan dikembalikan ke bawaan vanilla."
+}
