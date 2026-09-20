@@ -1,5 +1,11 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.4.2+26.3] - DebugScreenOverlay & DebugScreenEntries Mixin Integration (BL-VR-004 Step 3)
+- Registered `VelocityRenderDebugEntry` into `DebugScreenEntries` via `DebugScreenEntriesMixin`.
+- Ensured default `IN_OVERLAY` status in `DebugScreenEntryListMixin.rebuildCurrentList`.
+- Injected telemetry line at index 0 of `rightLines` in `DebugScreenOverlayMixin.extractLines`.
+- Made `VelocityRenderDebugEntry.display(...)` a no-op to prevent double-line rendering.
+
 ## [1.4.1+26.3] - 10-Tick Telemetry Caching, F3+F6 DebugScreenEntry & GameRule (BL-VR-004 Step 2)
 - Created `VelocityRenderDebugEntry` (`velocity-render:engine_metrics`) under `DebugEntryCategory.SCREEN_TEXT`.
 - Integrated 10-tick throttled telemetry computation in `ClientVelocityTracker`.

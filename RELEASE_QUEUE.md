@@ -15,3 +15,4 @@
 - [ ] **1.3.3+26.3** — Step 4: Diagnostic Command Suite & Multi-Player Telemetry (BL-VR-003 Finale).
 - [ ] **1.4.0+26.3** — Step 1: Diagnostic Formatter Math & State Engine (BL-VR-004).
 - [ ] **1.4.1+26.3** — Step 2: 10-Tick Telemetry Caching, F3+F6 DebugScreenEntry & GameRule (BL-VR-004).
+- [ ] **1.4.2+26.3** - F3 Debug Screen Overlay & F3+F6 Debug Options Integration

@@ -24,14 +24,7 @@ public class VelocityRenderDebugEntry implements DebugScreenEntry {
             @Nullable LevelChunk clientChunk,
             @Nullable LevelChunk serverChunk
     ) {
-        if (!ClientVelocityTracker.isF3DebugEnabled()) {
-            return;
-        }
-
-        String cachedLine = ClientVelocityTracker.getCachedF3Line();
-        if (cachedLine != null) {
-            displayer.addPriorityLine(cachedLine);
-        }
+        // No-op: Line rendering is exclusively handled by DebugScreenOverlayMixin at index 0 of rightLines
     }
 
     @Override
