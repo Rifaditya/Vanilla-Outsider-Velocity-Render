@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.2.3+26.3] - Telemetry Diagnostics & Command Suite (BL-VR-002 Finale)
+- **3D Trajectory Telemetry (`BL-VR-002 Step 4`)**: Added real-time pitch angle readout, vertical delta speed ($v_y$ b/t), and color-coded flight state indicators (`[DIVE]`, `[CLIMB]`, `[LEVEL]`) to `/velocityrender status` (`/vr status`).
+- **Brigadier Command Controls**: Added `vertical_lookahead` and `vertical` command parameters to `/vr get` and `/vr set` with full tab completions.
+- **Reset Hygiene**: Included `velocityrender:vertical_lookahead` in `/vr reset` defaults.
+- **45-Degree Angled Dive Verification**: Expanded `VelocityVectorHelperTest` with diagonal 3D trajectory prioritization tests.
+- **Milestone Complete**: Formally resolved and validated `[BL-VR-002]` across all 4 release cycles.
+
+---
+
 ## [1.2.2+26.3] - Server Altitude Trigger & Vertical Gating
 - **Vertical Altitude Recalculation Trigger (`BL-VR-002 Step 3`)**: Enabled rapid corridor recalculation when altitude changes by 8+ blocks ($|\Delta Y| \ge 8.0$), preventing chunk pop-in during steep Elytra dives from build height.
 - **Dynamic GameRule Gating**: Bound vertical recalculation directly to `velocityrender:vertical_lookahead`.

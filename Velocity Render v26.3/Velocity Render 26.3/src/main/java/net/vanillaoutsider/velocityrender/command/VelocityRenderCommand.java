@@ -45,6 +45,8 @@ public final class VelocityRenderCommand {
                                     builder.suggest("min_speed");
                                     builder.suggest("turn_widening");
                                     builder.suggest("turn");
+                                    builder.suggest("vertical_lookahead");
+                                    builder.suggest("vertical");
                                     builder.suggest("debug_mode");
                                     return builder.buildFuture();
                                 })
@@ -69,6 +71,12 @@ public final class VelocityRenderCommand {
                         .then(Commands.literal("turn")
                                 .then(Commands.argument("value", BoolArgumentType.bool())
                                         .executes(ctx -> executeSetBool(ctx, "turn_widening", BoolArgumentType.getBool(ctx, "value")))))
+                        .then(Commands.literal("vertical_lookahead")
+                                .then(Commands.argument("value", BoolArgumentType.bool())
+                                        .executes(ctx -> executeSetBool(ctx, "vertical_lookahead", BoolArgumentType.getBool(ctx, "value")))))
+                        .then(Commands.literal("vertical")
+                                .then(Commands.argument("value", BoolArgumentType.bool())
+                                        .executes(ctx -> executeSetBool(ctx, "vertical_lookahead", BoolArgumentType.getBool(ctx, "value")))))
                         .then(Commands.literal("debug_mode")
                                 .then(Commands.argument("value", BoolArgumentType.bool())
                                         .executes(ctx -> executeSetBool(ctx, "debug_mode", BoolArgumentType.getBool(ctx, "value"))))))
@@ -103,19 +111,28 @@ public final class VelocityRenderCommand {
         double minSpeed = VelocityRenderGameRules.getMinSpeedThreshold(level);
         boolean budget = VelocityRenderGameRules.isBudgetConservation(level);
         boolean turnWidening = VelocityRenderGameRules.isTurnWideningEnabled(level);
+        boolean verticalLookahead = VelocityRenderGameRules.isVerticalLookaheadEnabled(level);
         boolean debug = VelocityRenderGameRules.isDebugMode(level);
 
         int activeTickets = 0;
         double currentSpeed = 0.0;
         float turnRate = 0.0f;
         String direction = "N/A";
+        float currentPitch = 0.0f;
+        double currentVDelta = 0.0;
         if (source.getEntity() instanceof ServerPlayer player) {
             activeTickets = VelocityTicketManager.getActiveTicketCount(player.getUUID());
             currentSpeed = VelocityTicketManager.getPlayerSpeed(player.getUUID());
             turnRate = VelocityTicketManager.getPlayerTurnRate(player.getUUID());
             int turnSign = VelocityTicketManager.getPlayerTurnSign(player.getUUID());
             direction = turnSign > 0 ? "RIGHT" : (turnSign < 0 ? "LEFT" : "STRAIGHT");
+            currentPitch = VelocityTicketManager.getPlayerPitch(player.getUUID());
+            currentVDelta = VelocityTicketManager.getPlayerVerticalDelta(player.getUUID());
         }
+
+        final float pitch = currentPitch;
+        final double verticalDelta = currentVDelta;
+        final String pitchState = pitch < -10.0f ? "§c[DIVE]§r" : (pitch > 10.0f ? "§b[CLIMB]§r" : "§7[LEVEL]§r");
 
         float serverMspt = (float) source.getServer().getAverageTickTimeNanos() / (float) TimeUtil.NANOSECONDS_PER_MILLISECOND;
         float approxTps = Math.min(20.0f, 1000.0f / Math.max(1.0f, serverMspt));
@@ -145,6 +162,8 @@ public final class VelocityRenderCommand {
                 " §7• §fBudget Conservation: " + (budget ? "§aON" : "§7OFF") + "§r\n" +
                 " §7• §fBanked Turn Widening: " + (widening ? "§aON" : "§7OFF") + "§r\n" +
                 " §7• §fYour Angular Turn Rate: §b" + String.format("%.2f", rate) + " deg/tick §7(" + dir + ")§r\n" +
+                " §7• §fVertical Lookahead: " + (verticalLookahead ? "§aON" : "§7OFF") + "§r\n" +
+                " §7• §fPitch & Trajectory: §b" + String.format("%.1f", pitch) + "° §7" + pitchState + " (" + String.format("%+.2f", verticalDelta) + " b/t)§r\n" +
                 " §7• §fDebug Diagnostics: " + (debug ? "§aON" : "§7OFF")
         ), false);
         return 1;
@@ -161,6 +180,7 @@ public final class VelocityRenderCommand {
             case "budget_conservation" -> source.sendSuccess(() -> Component.literal("§6velocityrender:budget_conservation = §e" + VelocityRenderGameRules.isBudgetConservation(level)), false);
             case "min_speed" -> source.sendSuccess(() -> Component.literal("§6velocityrender:min_speed = §e" + VelocityRenderGameRules.getMinSpeedThreshold(level) + " b/t"), false);
             case "turn_widening", "turn" -> source.sendSuccess(() -> Component.literal("§6velocityrender:turn_widening = §e" + VelocityRenderGameRules.isTurnWideningEnabled(level)), false);
+            case "vertical_lookahead", "vertical" -> source.sendSuccess(() -> Component.literal("§6velocityrender:vertical_lookahead = §e" + VelocityRenderGameRules.isVerticalLookaheadEnabled(level)), false);
             case "debug_mode" -> source.sendSuccess(() -> Component.literal("§6velocityrender:debug_mode = §e" + VelocityRenderGameRules.isDebugMode(level)), false);
             default -> source.sendFailure(Component.literal("§cUnknown setting: " + rule));
         }
@@ -175,6 +195,7 @@ public final class VelocityRenderCommand {
             case "enabled" -> level.getGameRules().set(VelocityRenderGameRules.ENABLED, value, source.getServer());
             case "budget_conservation" -> level.getGameRules().set(VelocityRenderGameRules.BUDGET_CONSERVATION, value, source.getServer());
             case "turn_widening" -> level.getGameRules().set(VelocityRenderGameRules.TURN_WIDENING, value, source.getServer());
+            case "vertical_lookahead" -> level.getGameRules().set(VelocityRenderGameRules.VERTICAL_LOOKAHEAD, value, source.getServer());
             case "debug_mode" -> level.getGameRules().set(VelocityRenderGameRules.DEBUG_MODE, value, source.getServer());
         }
 
@@ -204,6 +225,7 @@ public final class VelocityRenderCommand {
         level.getGameRules().set(VelocityRenderGameRules.BUDGET_CONSERVATION, true, source.getServer());
         level.getGameRules().set(VelocityRenderGameRules.MIN_SPEED_THRESHOLD_PCT, 20, source.getServer());
         level.getGameRules().set(VelocityRenderGameRules.TURN_WIDENING, true, source.getServer());
+        level.getGameRules().set(VelocityRenderGameRules.VERTICAL_LOOKAHEAD, true, source.getServer());
         level.getGameRules().set(VelocityRenderGameRules.DEBUG_MODE, false, source.getServer());
 
         source.sendSuccess(() -> Component.literal("§aReset all Velocity Render settings to defaults."), true);

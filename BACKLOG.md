@@ -9,7 +9,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | ID | Category | Title | Priority | Target Version | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `[BL-VR-001]` | `[FEATURE]` | Dynamic Corridor Turn-Widening on Banked Turns | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
-| `[BL-VR-002]` | `[FEATURE]` | 3D Pitch-Aware Vertical Lookahead (Dives & Ascents) | `[HIGH]` | `26.3+` | `📌 DEFERRED` |
+| `[BL-VR-002]` | `[FEATURE]` | 3D Pitch-Aware Vertical Lookahead (Dives & Ascents) | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-003]` | `[PERF]` | Server-Wide Ticket Budget & Fair Multi-Player Allocation | `[HIGH]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-004]` | `[REFINEMENT]` | Right-Side F3 Engine Diagnostic Metric Line | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
@@ -50,9 +50,10 @@ Calculate the player's instantaneous angular yaw rate $\omega = |\Delta \text{ya
 ### [BL-VR-002] 3D Pitch-Aware Vertical Lookahead (Dives & Ascents)
 - **Category**: `[FEATURE]`
 - **Priority**: `[HIGH]`
-- **Status**: `📌 DEFERRED`
+- **Status**: `✅ RESOLVED`
 - **Target Component(s)**: `ForwardTicketManager.java`, `AnisotropicDistanceHelper.java`
 - **Date Added**: 2026-09-18
+- **Date Resolved**: 2026-09-20 (v1.2.0 – v1.2.3+26.3)
 
 #### ❓ Problem / Context
 Ticket requests and mesh prioritization currently focus heavily on horizontal XZ plane velocity. Steep vertical Elytra dives, rocket climbs, or bubble elevator ascents traverse vertical sub-chunk sections faster than vanilla's vertical builder priority.
@@ -63,8 +64,8 @@ Incorporate normalized vertical pitch velocity component ($v_y$) into both:
 2. `ForwardTicketManager`: Forward tickets already cover entire chunk columns, but ticket generation trigger should fire upon high vertical delta-Y movement ($|v_y| \ge 0.50$ b/t).
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] Steep vertical nose-dives from build height ($Y=320$) to bedrock mesh terrain continuously with 0B/frame heap allocations.
-- [ ] Rocket ascents prioritize chunk sections directly above.
+- [x] Steep vertical nose-dives from build height ($Y=320$) to bedrock mesh terrain continuously with 0B/frame heap allocations.
+- [x] Rocket ascents prioritize chunk sections directly above.
 
 ---
 

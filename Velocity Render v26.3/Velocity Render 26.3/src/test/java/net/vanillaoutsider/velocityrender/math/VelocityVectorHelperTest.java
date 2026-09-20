@@ -148,4 +148,32 @@ class VelocityVectorHelperTest {
 
         Assertions.assertEquals(upperDist, lowerDist, 0.001, "Vertical distance must remain symmetrical during horizontal travel");
     }
+
+    @Test
+    @DisplayName("Should prioritize forward and lower sections during angled 45-degree dive")
+    void testAngled45DegreeDivePrioritization() {
+        double camX = 0.0, camY = 128.0, camZ = 0.0;
+        double dirX = 0.0, dirY = -0.7071, dirZ = 0.7071; // 45-degree dive South
+        double speed = 1.5;
+        double leadMultiplier = 1.0;
+        double minSpeed = 0.20;
+
+        // Target quadrant: ahead and down (+Z, -Y)
+        double frontDownBiased = VelocityVectorHelper.computeRawPitchBiasedDistanceSqr(
+                0.0, 64.0, 64.0,
+                camX, camY, camZ,
+                dirX, dirY, dirZ,
+                speed, leadMultiplier, minSpeed
+        );
+
+        // Opposing quadrant: behind and up (-Z, +Y)
+        double rearUpBiased = VelocityVectorHelper.computeRawPitchBiasedDistanceSqr(
+                0.0, 192.0, -64.0,
+                camX, camY, camZ,
+                dirX, dirY, dirZ,
+                speed, leadMultiplier, minSpeed
+        );
+
+        Assertions.assertTrue(frontDownBiased < rearUpBiased, "45-degree dive must prioritize forward-down quadrant over opposing quadrant");
+    }
 }

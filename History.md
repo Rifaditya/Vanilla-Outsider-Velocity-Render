@@ -1,5 +1,10 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.2.3+26.3] - Telemetry Diagnostics & Command Suite (BL-VR-002 Step 4)
+- Added `vertical_lookahead` and `vertical` commands in `VelocityRenderCommand`.
+- Integrated colored trajectory indicators into `/vr status`.
+- Added 45-degree angled dive unit tests.
+
 ## [1.2.2+26.3] - Server Altitude Trigger & Vertical Gating (BL-VR-002 Step 3)
 - Added `LAST_PLAYER_Y` cache and altitude delta recalculation trigger.
 - Implemented `getPlayerVerticalDelta` and `getPlayerPitch` metrics.
