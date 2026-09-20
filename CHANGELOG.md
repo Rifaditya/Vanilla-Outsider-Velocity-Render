@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.2.0+26.3] - Symmetrical 3D Pitch-Aware Lookahead
+- **3D Vertical Section Bias (`BL-VR-002 Step 1`)**: Incorporated vertical pitch velocity ($v_y$) into sub-chunk compile priority sorting, ensuring steep Elytra nose-dives prioritize bedrock terrain sections and rocket ascents prioritize sky sections.
+- **Symmetrical 3D Vector Math**: Balanced lookahead biasing uniformly across positive and negative pitch vectors with zero heap allocation.
+- **Automated 3D Regression Suite**: Added comprehensive vertical dive, rocket ascent, and horizontal symmetry assertions to `VelocityVectorHelperTest`.
+
+---
+
 ## [1.1.3+26.3] - Brigadier Command Suite & Diagnostics Update
 - **Telemetry Expansion (`BL-VR-001 Step 4`)**: Exposed real-time banked turn widening toggle state, angular turn rate (deg/tick), and directional sign (`LEFT`, `RIGHT`, `STRAIGHT`) in `/velocityrender status` (`/vr status`).
 - **Dynamic Command Configuration**: Added `turn_widening` and alias `turn` to `/vr get` and `/vr set` with full tab suggestions.

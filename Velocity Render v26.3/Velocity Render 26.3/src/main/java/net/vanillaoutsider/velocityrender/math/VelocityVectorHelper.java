@@ -7,6 +7,7 @@ import net.vanillaoutsider.velocityrender.client.ClientVelocityTracker;
 
 public final class VelocityVectorHelper {
     private static final double MAX_LEAD_OFFSET = 256.0;
+    public static final double MAX_VERTICAL_LEAD_OFFSET = 128.0;
 
     private VelocityVectorHelper() {
     }
@@ -63,5 +64,17 @@ public final class VelocityVectorHelper {
         double leadOffset = Math.min(MAX_LEAD_OFFSET, speed * 16.0 * leadMultiplier);
         double biasedDistSqr = euclideanDistSqr - 2.0 * dotProduct * leadOffset;
         return Math.max(0.0, biasedDistSqr);
+    }
+
+    /**
+     * Pitch-biased distance calculation helper for 3D verification and testing.
+     */
+    public static double computeRawPitchBiasedDistanceSqr(
+            double originX, double originY, double originZ,
+            double camX, double camY, double camZ,
+            double dirX, double dirY, double dirZ,
+            double speed, double leadMultiplier, double minSpeed
+    ) {
+        return computeRawBiasedDistanceSqr(originX, originY, originZ, camX, camY, camZ, dirX, dirY, dirZ, speed, leadMultiplier, minSpeed);
     }
 }

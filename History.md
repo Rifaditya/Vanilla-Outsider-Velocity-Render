@@ -1,5 +1,9 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.2.0+26.3] - Symmetrical 3D Pitch-Aware Lookahead (BL-VR-002 Step 1)
+- Expanded `VelocityVectorHelper` with pitch bias verification methods.
+- Verified symmetrical section prioritization for vertical dives and rocket climbs.
+
 ## [1.1.3+26.3] - Brigadier Command Suite & Diagnostics (BL-VR-001 Step 4)
 - Exposed live `getPlayerTurnRate` and `getPlayerTurnSign` metrics in `/vr status`.
 - Added `turn_widening` and `turn` arguments to Brigadier `/vr get` and `/vr set`.
