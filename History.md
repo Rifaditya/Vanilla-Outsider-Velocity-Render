@@ -1,5 +1,9 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.2.2+26.3] - Server Altitude Trigger & Vertical Gating (BL-VR-002 Step 3)
+- Added `LAST_PLAYER_Y` cache and altitude delta recalculation trigger.
+- Implemented `getPlayerVerticalDelta` and `getPlayerPitch` metrics.
+
 ## [1.2.1+26.3] - Dynamic Vertical Lookahead GameRule & Localization (BL-VR-002 Step 2)
 - Added `VERTICAL_LOOKAHEAD` GameRule definition.
 - Synchronized 11-language localization dictionary.

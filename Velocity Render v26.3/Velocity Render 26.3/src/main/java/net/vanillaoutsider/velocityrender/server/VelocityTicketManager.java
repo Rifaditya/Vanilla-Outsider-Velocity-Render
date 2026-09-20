@@ -33,6 +33,7 @@ public final class VelocityTicketManager {
     private static final Map<UUID, Long> LAST_PLAYER_CHUNK = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, Float> LAST_PLAYER_YAW = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, Integer> LAST_PLAYER_TICK = new Object2ObjectOpenHashMap<>();
+    private static final Map<UUID, Double> LAST_PLAYER_Y = new Object2ObjectOpenHashMap<>();
 
     // Telemetry metrics
     private static volatile int lastDynamicReach = 16;
@@ -88,10 +89,13 @@ public final class VelocityTicketManager {
         Long lastChunkObj = LAST_PLAYER_CHUNK.get(uuid);
         Float lastYawObj = LAST_PLAYER_YAW.get(uuid);
         Integer lastTickObj = LAST_PLAYER_TICK.get(uuid);
+        Double lastYObj = LAST_PLAYER_Y.get(uuid);
 
+        boolean verticalLookahead = VelocityRenderGameRules.isVerticalLookaheadEnabled(level);
         boolean shouldRecalculate = (lastChunkObj == null)
                 || (lastChunkObj != currentChunkPacked)
                 || (lastYawObj != null && Math.abs(currentYaw - lastYawObj) > 6.0f)
+                || (verticalLookahead && lastYObj != null && Math.abs(player.getY() - lastYObj) >= 8.0)
                 || (lastTickObj == null || (currentTick - lastTickObj) >= 8);
 
         if (!shouldRecalculate) {
@@ -101,6 +105,7 @@ public final class VelocityTicketManager {
         LAST_PLAYER_CHUNK.put(uuid, currentChunkPacked);
         LAST_PLAYER_YAW.put(uuid, currentYaw);
         LAST_PLAYER_TICK.put(uuid, currentTick);
+        LAST_PLAYER_Y.put(uuid, player.getY());
 
         // Continuous MSPT Watchdog: Dynamically taper reach under server load to guarantee 20 TPS
         float mspt = (float) level.getServer().getAverageTickTimeNanos() / (float) TimeUtil.NANOSECONDS_PER_MILLISECOND;
@@ -219,6 +224,7 @@ public final class VelocityTicketManager {
         LAST_PLAYER_CHUNK.remove(uuid);
         LAST_PLAYER_YAW.remove(uuid);
         LAST_PLAYER_TICK.remove(uuid);
+        LAST_PLAYER_Y.remove(uuid);
         SCRATCH_TICKETS.remove(uuid);
         LongOpenHashSet tickets = ACTIVE_TICKETS.remove(uuid);
         if (tickets != null && level != null) {
@@ -257,6 +263,17 @@ public final class VelocityTicketManager {
     public static int getPlayerTurnSign(UUID uuid) {
         TurnRateCalculator c = PLAYER_TURN_RATES.get(uuid);
         return c != null ? c.getTurnSign() : 0;
+    }
+
+    public static double getPlayerVerticalDelta(UUID uuid) {
+        VelocityCalculator c = PLAYER_VELOCITY.get(uuid);
+        return c != null ? c.getNormDy() * c.getSpeedBlocksPerTick() : 0.0;
+    }
+
+    public static float getPlayerPitch(UUID uuid) {
+        VelocityCalculator c = PLAYER_VELOCITY.get(uuid);
+        if (c == null || c.getSpeedBlocksPerTick() < 0.05) return 0.0f;
+        return (float) Math.toDegrees(Math.asin(Math.max(-1.0, Math.min(1.0, c.getNormDy()))));
     }
 
     public static int getLastDynamicReach() {

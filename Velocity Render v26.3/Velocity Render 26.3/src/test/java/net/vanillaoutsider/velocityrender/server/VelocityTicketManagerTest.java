@@ -17,5 +17,7 @@ class VelocityTicketManagerTest {
         Assertions.assertEquals(0, VelocityTicketManager.getPlayerTurnSign(randomUuid));
         Assertions.assertEquals(0, VelocityTicketManager.getActiveTicketCount(randomUuid));
         Assertions.assertEquals(0.0, VelocityTicketManager.getPlayerSpeed(randomUuid), 0.001);
+        Assertions.assertEquals(0.0, VelocityTicketManager.getPlayerVerticalDelta(randomUuid), 0.001);
+        Assertions.assertEquals(0.0f, VelocityTicketManager.getPlayerPitch(randomUuid), 0.001f);
     }
 }
