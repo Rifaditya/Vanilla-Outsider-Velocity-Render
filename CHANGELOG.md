@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.4.0+26.3] - Diagnostic Formatter Math & State Engine (BL-VR-004 Step 1)
+- **Diagnostic Formatter Utility (`BL-VR-004 Step 1`)**: Introduced pure stateless formatting engine `DebugMetricsFormatter` to assemble standardized F3 diagnostic telemetry strings.
+- **Dual-Context Formats**: Supports `formatIntegrated` for singleplayer/integrated server (`[VelocityRender] Active Tickets: %d | Shed: %.1f%% | Cone: %d° | Pool: %d/%d`) and `formatClientOnly` for multiplayer dedicated servers (`[VelocityRender] Bias: %s | Lead: %.1fm | Cone: %d°`).
+- **Precision & Clamping Protection**: Uses 1-decimal float precision for watchdog shedding, clamping tickets, cone angle ($[0, 180^\circ]$), budget ($\ge 1$), and lead offset ($[0.0, 512.0\text{m}]$).
+- **Zero-Dependency High-Speed Assembly**: Built with lightweight `StringBuilder(64)` assembly for deterministic zero-garbage execution.
+- **Automated Regression Test Suite**: Added `DebugMetricsFormatterTest` validating standard rendering, decimal shed formatting, boundary clamping, and negative input recovery.
+
+---
+
 ## [1.3.3+26.3] - Diagnostic Command Suite & Multi-Player Telemetry (BL-VR-003 Finale)
 - **Multi-Player Ticket Telemetry (`BL-VR-003 Step 4`)**: Added live server ticket budget utilization (`X/Y` active tickets across `N` flyers) and per-player allocated quota metrics to `/velocityrender status` (`/vr status`).
 - **Brigadier Command Controls**: Added `server_ticket_budget` and alias `budget` to `/vr get` and `/vr set <rule> <16-256>` with full tab suggestions.

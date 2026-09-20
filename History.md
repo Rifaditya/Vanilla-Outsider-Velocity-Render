@@ -1,5 +1,11 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.4.0+26.3] - Diagnostic Formatter Math & State Engine (BL-VR-004 Step 1)
+- Implemented `DebugMetricsFormatter` with `formatIntegrated` and `formatClientOnly`.
+- Enforced 1-decimal float precision for watchdog load shedding (`0.0%`).
+- Clamped active tickets ($\ge 0$), shed ($[0.0, 100.0]$), cone ($[0, 180]$), budget ($\ge 1$), and lead offset ($[0.0, 512.0]$).
+- Added comprehensive unit tests in `DebugMetricsFormatterTest`.
+
 ## [1.3.3+26.3] - Diagnostic Command Suite & Multi-Player Telemetry (BL-VR-003 Step 4)
 - Exposed `server_ticket_budget` and alias `budget` in `/vr get` and `/vr set`.
 - Added server pool budget utilization and player quota readouts to `/vr status`.
