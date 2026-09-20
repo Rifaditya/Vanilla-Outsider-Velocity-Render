@@ -116,22 +116,35 @@ Gated behind client toggle or GameRule. Zero string concatenation garbage by for
 
 ---
 
-### [BL-VR-005] Nether WorldGen Clamping & Dense Dimension Scaling
+### [BL-VR-005] Nether & Dense Dimension WorldGen Clamping
 - **Category**: `[PERF]`
-- **Priority**: `[MEDIUM]`
-- **Status**: `📌 DEFERRED`
-- **Target Component(s)**: `ForwardTicketManager.java`
+- **Priority**: `[HIGH]`
+- **Status**: `🔄 IN PROGRESS`
+- **Target Component(s)**: `DimensionReachScaler.java`, `DimensionClampManager.java`, `VelocityRenderGameRules.java`, `VelocityTicketManager.java`, `VelocityRenderCommand.java`
 - **Date Added**: 2026-09-18
 
 #### ❓ Problem / Context
-The Nether features a solid ceiling, complex cave carvers, and heavy block density. Full 16-chunk lookahead in the Nether creates substantially higher CPU worldgen load per chunk than Overworld surface terrain.
+The Nether and custom cave/modded dimensions feature solid bedrock ceilings, complex 3D noise carvers, and high block densities. Generating full 16-chunk forward lookahead corridors in these environments incurs dramatically higher CPU worldgen costs per chunk than surface Overworld terrain, causing server MSPT spikes during Elytra flight or high-speed ice-boat highways.
 
 #### 💡 Proposed Solution & Technical Specifications
-Check `world.dimension() == Level.NETHER`. In the Nether, clamp maximum forward lookahead reach to 60% of the normal limit (e.g. max 8–10 chunks instead of 16), while maintaining full anisotropic client meshing priority.
+Implement universal dynamic dimension reach scaling through a unified 3-tier configuration system:
+1. **Dynamic GameRules**:
+   - `velocityrender:reach_clamp_the_nether_pct` (default: 60)
+   - `velocityrender:reach_clamp_default_dense_pct` (default: 80, applied to non-Overworld dimensions without an explicit rule)
+   - Auto-registers dimension-specific GameRules dynamically upon server start for all loaded dimensions.
+2. **Dynamic Sparse Delta Persistence (`config/velocity-render/dimension_clamps.json`)**:
+   - Persists per-dimension overrides set via commands without dumping full boilerplate configs.
+3. **Data-Driven Conventional Tag `#c:dense_dimensions` / `#velocityrender:dense_dimensions`**:
+   - Datapacks and modpacks can tag dimensions as dense for automatic scaling.
+4. **Command Suite Integration**:
+   - `/vr dimclamp <dimension> <percentage>` and `/vr dimclamp reset` with full tab completions.
+   - `/vr status` displays active dimension reach scaling: `• Dimension Scaling: the_nether (Clamped: 60% -> max 10 chunks)`.
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] Nether Elytra flights or blue-ice highways clamp forward tickets to prevent server tick spikes.
-- [ ] Overworld and End dimensions retain full lookahead reach.
+- [ ] Nether forward reach clamps to 60% (max 10 chunks at full speed) while preserving 100% in the Overworld.
+- [ ] Modded/End dimensions default to configured clamp (80%) or custom per-dimension override.
+- [ ] Zero heap allocations on 20 TPS server tick hot paths.
+- [ ] Fully controllable via Dynamic GameRules, Sparse Delta JSON config, Data-driven Tags, and `/vr dimclamp`.
 
 ---
 

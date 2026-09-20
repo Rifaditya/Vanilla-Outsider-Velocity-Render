@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.5.0+26.3] - Dimension Reach Scaling Math Engine
+- **Dimension Reach Scaler Utility**: Introduced pure mathematical calculation engine `DimensionReachScaler` to scale forward lookahead corridors across distinct dimensions.
+- **Nether & Dense Dimension Protection**: Computes scaled corridor reaches for environments with high block densities and cave noise, clamping reach down to 60% in the Nether while preserving full lookahead in the Overworld.
+- **Safety Corridor Floor**: Enforces an inviolable minimum 2-chunk lookahead corridor to guarantee continuous flight visibility even under aggressive clamping.
+- **Zero-Allocation Hot-Path Execution**: Pure stateless implementation with 0 bytes allocated per server tick.
+- **Automated Regression Suite**: Added `DimensionReachScalerTest` validating Nether, dense, and full-reach scaling along with underflow/overflow boundary clamping.
+
+---
+
 ## [1.4.3+26.3] - In-Game Command Suite Controls & Diagnostic Milestone
 - **Brigadier Command Suite Integration**: Added `f3_debug` and short alias `f3` to `/velocityrender get` and `/velocityrender set` with full tab completions.
 - **Real-Time Telemetry Status**: Integrated F3 diagnostic status reporting directly into `/vr status`.

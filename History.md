@@ -1,5 +1,12 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.5.0+26.3] - Pure Scaling Math & Reach Scaler (BL-VR-005 Step 1)
+- Created `DimensionReachScaler` pure stateless algorithmic utility in `net.vanillaoutsider.velocityrender.math`.
+- Formula: `calculateClampedReach(int baseReach, int clampPct)` clamping `clampPct` to `[10, 100]` and returning `Math.max(2, Math.round(baseReach * (clampPct / 100.0)))`.
+- Enforced minimum 2-chunk corridor floor when `baseReach >= 2` and safe `0` return on non-positive reach.
+- Added comprehensive unit test suite in `DimensionReachScalerTest` (7 tests covering standard, moderate, dense, full reach, safety floor, and bounds).
+- Updated `fabric.mod.json` license identifier to `GPL-3.0-or-later`.
+
 ## [1.4.3+26.3] - Command Suite Controls & Backlog Resolution (BL-VR-004 Finale)
 - Added `f3_debug` and alias `f3` to `/vr get` and `/vr set` in `VelocityRenderCommand`.
 - Integrated `F3_DEBUG` into `/vr reset` restoration defaults.

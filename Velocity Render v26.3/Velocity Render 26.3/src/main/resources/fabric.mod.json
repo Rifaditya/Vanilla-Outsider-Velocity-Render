@@ -12,7 +12,7 @@
         "sources": "https://github.com/Rifaditya/Vanilla-Outsider-Velocity-Render",
         "issues": "https://github.com/Rifaditya/Vanilla-Outsider-Velocity-Render/issues"
     },
-    "license": "GPL-3.0-only",
+    "license": "GPL-3.0-or-later",
     "icon": "assets/velocity-render/icon.png",
     "environment": "*",
     "entrypoints": {
