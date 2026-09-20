@@ -1,5 +1,11 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.3.3+26.3] - Diagnostic Command Suite & Multi-Player Telemetry (BL-VR-003 Step 4)
+- Exposed `server_ticket_budget` and alias `budget` in `/vr get` and `/vr set`.
+- Added server pool budget utilization and player quota readouts to `/vr status`.
+- Integrated `SERVER_TICKET_BUDGET = 64` into `/vr reset`.
+- Marked `[BL-VR-003]` as `✅ RESOLVED` in `BACKLOG.md`.
+
 ## [1.3.2+26.3] - Server-Wide Multi-Player Ticket Gating (BL-VR-003 Step 3)
 - Implemented `tickServer` pre-pass to aggregate speeds and active flyer count.
 - Clamped per-player reach with `TicketBudgetAllocator` quota.

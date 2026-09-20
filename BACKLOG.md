@@ -10,7 +10,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `[BL-VR-001]` | `[FEATURE]` | Dynamic Corridor Turn-Widening on Banked Turns | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-002]` | `[FEATURE]` | 3D Pitch-Aware Vertical Lookahead (Dives & Ascents) | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
-| `[BL-VR-003]` | `[PERF]` | Server-Wide Ticket Budget & Fair Multi-Player Allocation | `[HIGH]` | `26.3+` | `📌 DEFERRED` |
+| `[BL-VR-003]` | `[PERF]` | Server-Wide Ticket Budget & Fair Multi-Player Allocation | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-004]` | `[REFINEMENT]` | Right-Side F3 Engine Diagnostic Metric Line | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-006]` | `[INTEGRATION]` | Bobby & Distant Horizons LOD Velocity Trajectory Hooks | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
@@ -72,9 +72,10 @@ Incorporate normalized vertical pitch velocity component ($v_y$) into both:
 ### [BL-VR-003] Server-Wide Ticket Budget & Fair Multi-Player Allocation
 - **Category**: `[PERF]`
 - **Priority**: `[HIGH]`
-- **Status**: `📌 DEFERRED`
-- **Target Component(s)**: `ForwardTicketManager.java`, `VelocityRenderMod.java`
+- **Status**: `✅ RESOLVED`
+- **Target Component(s)**: `VelocityTicketManager.java`, `TicketBudgetAllocator.java`, `VelocityRenderGameRules.java`, `VelocityRenderCommand.java`
 - **Date Added**: 2026-09-18
+- **Date Resolved**: 2026-09-20 (v1.3.0 – v1.3.3+26.3)
 
 #### ❓ Problem / Context
 On multiplayer servers with multiple players flying simultaneously with Elytras, unrestricted forward ticket creation across all players could overwhelm the chunk generation thread pool, even with individual MSPT watchdog load shedding.
@@ -85,8 +86,8 @@ Implement a global server ticket budget (default: 64 active forward tickets serv
 - If total requested tickets exceed the budget, distribute tickets fairly among active high-speed players using weighted round-robin or proportionate scaling based on relative speeds.
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] Total active `PLAYER_LOADING` tickets issued by Velocity Render never exceed the configured server budget.
-- [ ] Server MSPT remains stable even when 4+ players fly concurrently.
+- [x] Total active `PLAYER_LOADING` tickets issued by Velocity Render never exceed the configured server budget.
+- [x] Server MSPT remains stable even when 4+ players fly concurrently.
 
 ---
 

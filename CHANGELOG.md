@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.3.3+26.3] - Diagnostic Command Suite & Multi-Player Telemetry (BL-VR-003 Finale)
+- **Multi-Player Ticket Telemetry (`BL-VR-003 Step 4`)**: Added live server ticket budget utilization (`X/Y` active tickets across `N` flyers) and per-player allocated quota metrics to `/velocityrender status` (`/vr status`).
+- **Brigadier Command Controls**: Added `server_ticket_budget` and alias `budget` to `/vr get` and `/vr set <rule> <16-256>` with full tab suggestions.
+- **Reset Hygiene**: Included `velocityrender:server_ticket_budget = 64` in `/vr reset` restoration defaults.
+- **Milestone Complete**: Formally validated and resolved `[BL-VR-003]` across all 4 release cycles.
+
+---
+
 ## [1.3.2+26.3] - Server-Wide Multi-Player Ticket Gating (BL-VR-003 Step 3)
 - **Two-Phase Server Tick Architecture (`BL-VR-003 Step 3`)**: Integrated `VelocityTicketManager.tickServer` pre-pass to track active flyers and aggregate speeds across all connected players before individual ticks.
 - **Fair Ticket Quota Enforcement**: Bound dynamic forward reach (`maxReachChunks`) to each player's fair quota calculated by `TicketBudgetAllocator`, preventing server chunk worker starvation.
