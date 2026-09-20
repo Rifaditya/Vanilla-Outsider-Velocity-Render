@@ -11,7 +11,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-001]` | `[FEATURE]` | Dynamic Corridor Turn-Widening on Banked Turns | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-002]` | `[FEATURE]` | 3D Pitch-Aware Vertical Lookahead (Dives & Ascents) | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-003]` | `[PERF]` | Server-Wide Ticket Budget & Fair Multi-Player Allocation | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
-| `[BL-VR-004]` | `[REFINEMENT]` | Right-Side F3 Engine Diagnostic Metric Line | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
+| `[BL-VR-004]` | `[REFINEMENT]` | Right-Side F3 Engine Diagnostic Metric Line | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-006]` | `[INTEGRATION]` | Bobby & Distant Horizons LOD Velocity Trajectory Hooks | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-007]` | `[FEATURE]` | Optional YACL Config Screen via ModMenu | `[LOW]` | `26.3+` | `📌 DEFERRED` |
@@ -94,9 +94,10 @@ Implement a global server ticket budget (default: 64 active forward tickets serv
 ### [BL-VR-004] Right-Side F3 Engine Diagnostic Metric Line
 - **Category**: `[REFINEMENT]`
 - **Priority**: `[MEDIUM]`
-- **Status**: `📌 DEFERRED`
+- **Status**: `✅ RESOLVED`
 - **Target Component(s)**: `DebugScreenOverlayMixin.java`, `VelocityRenderClient.java`
 - **Date Added**: 2026-09-18
+- **Date Resolved**: 2026-09-20 (v1.4.0 – v1.4.3+26.3)
 
 #### ❓ Problem / Context
 Minecraft 26.3 and VO Speedometer already provide player movement speed. Users want clean visibility into Velocity Render's actual background engine state (active tickets, watchdog shed percentage, and anisotropic cone angle) without cluttering player speed readouts.
@@ -109,9 +110,9 @@ Inject into the right-side list of `DebugScreenOverlay`:
 Gated behind client toggle or GameRule. Zero string concatenation garbage by formatting into a reusable or cached string buffer.
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] F3 right-side list displays the clean diagnostic line when F3 is open.
-- [ ] Displays actual live ticket count, watchdog load shed state, and turn cone.
-- [ ] Zero impact on FPS or garbage collection when F3 is open.
+- [x] F3 right-side list displays the clean diagnostic line when F3 is open.
+- [x] Displays actual live ticket count, watchdog load shed state, and turn cone.
+- [x] Zero impact on FPS or garbage collection when F3 is open.
 
 ---
 

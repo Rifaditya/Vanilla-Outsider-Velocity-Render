@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.4.3+26.3] - In-Game Command Suite Controls & Diagnostic Milestone
+- **Brigadier Command Suite Integration**: Added `f3_debug` and short alias `f3` to `/velocityrender get` and `/velocityrender set` with full tab completions.
+- **Real-Time Telemetry Status**: Integrated F3 diagnostic status reporting directly into `/vr status`.
+- **Reset Hygiene**: Updated `/vr reset` to restore `velocityrender:f3_debug` to `true`.
+- **Engine Diagnostics Complete**: Concluded the background F3 engine telemetry feature across all targeted releases.
+
+---
+
 ## [1.4.2+26.3] - F3 Debug Screen Overlay & F3+F6 Debug Options Integration
 - **Native F3+F6 Debug Options Integration**: Registered engine diagnostic metrics into Minecraft 26.3's native Debug Options Screen (`F3 + F6`) under the Text Category (`DebugEntryCategory.SCREEN_TEXT`), defaulting to `IN_OVERLAY` status.
 - **Prominent Top-Right Placement**: Injected the real-time flight telemetry readout at index 0 of the right-hand column (above Java and Memory hardware specs) for immediate visibility and zero interference.

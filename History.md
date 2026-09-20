@@ -1,5 +1,11 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.4.3+26.3] - Command Suite Controls & Backlog Resolution (BL-VR-004 Finale)
+- Added `f3_debug` and alias `f3` to `/vr get` and `/vr set` in `VelocityRenderCommand`.
+- Integrated `F3_DEBUG` into `/vr reset` restoration defaults.
+- Added F3 telemetry status line to `/vr status`.
+- Marked `[BL-VR-004]` as `✅ RESOLVED` in `BACKLOG.md`.
+
 ## [1.4.2+26.3] - DebugScreenOverlay & DebugScreenEntries Mixin Integration (BL-VR-004 Step 3)
 - Registered `VelocityRenderDebugEntry` into `DebugScreenEntries` via `DebugScreenEntriesMixin`.
 - Ensured default `IN_OVERLAY` status in `DebugScreenEntryListMixin.rebuildCurrentList`.

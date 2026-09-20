@@ -50,6 +50,8 @@ public final class VelocityRenderCommand {
                                     builder.suggest("server_ticket_budget");
                                     builder.suggest("budget");
                                     builder.suggest("debug_mode");
+                                    builder.suggest("f3_debug");
+                                    builder.suggest("f3");
                                     return builder.buildFuture();
                                 })
                                 .executes(VelocityRenderCommand::executeGet)))
@@ -87,7 +89,13 @@ public final class VelocityRenderCommand {
                                         .executes(ctx -> executeSetInt(ctx, "server_ticket_budget", IntegerArgumentType.getInteger(ctx, "value")))))
                         .then(Commands.literal("debug_mode")
                                 .then(Commands.argument("value", BoolArgumentType.bool())
-                                        .executes(ctx -> executeSetBool(ctx, "debug_mode", BoolArgumentType.getBool(ctx, "value"))))))
+                                        .executes(ctx -> executeSetBool(ctx, "debug_mode", BoolArgumentType.getBool(ctx, "value")))))
+                        .then(Commands.literal("f3_debug")
+                                .then(Commands.argument("value", BoolArgumentType.bool())
+                                        .executes(ctx -> executeSetBool(ctx, "f3_debug", BoolArgumentType.getBool(ctx, "value")))))
+                        .then(Commands.literal("f3")
+                                .then(Commands.argument("value", BoolArgumentType.bool())
+                                        .executes(ctx -> executeSetBool(ctx, "f3_debug", BoolArgumentType.getBool(ctx, "value"))))))
                 .then(Commands.literal("reset")
                         .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                         .executes(VelocityRenderCommand::executeReset))
@@ -121,6 +129,7 @@ public final class VelocityRenderCommand {
         boolean turnWidening = VelocityRenderGameRules.isTurnWideningEnabled(level);
         boolean verticalLookahead = VelocityRenderGameRules.isVerticalLookaheadEnabled(level);
         boolean debug = VelocityRenderGameRules.isDebugMode(level);
+        boolean f3Debug = VelocityRenderGameRules.isF3DebugEnabled(level);
 
         int activeTickets = 0;
         double currentSpeed = 0.0;
@@ -180,6 +189,7 @@ public final class VelocityRenderCommand {
                 " §7• §fYour Angular Turn Rate: §b" + String.format("%.2f", rate) + " deg/tick §7(" + dir + ")§r\n" +
                 " §7• §fVertical Lookahead: " + (verticalLookahead ? "§aON" : "§7OFF") + "§r\n" +
                 " §7• §fPitch & Trajectory: §b" + String.format("%.1f", pitch) + "° §7" + pitchState + " (" + String.format("%+.2f", verticalDelta) + " b/t)§r\n" +
+                " §7• §fF3 Diagnostic Telemetry: " + (f3Debug ? "§aON" : "§7OFF") + "§r\n" +
                 " §7• §fDebug Diagnostics: " + (debug ? "§aON" : "§7OFF")
         ), false);
         return 1;
@@ -199,6 +209,7 @@ public final class VelocityRenderCommand {
             case "vertical_lookahead", "vertical" -> source.sendSuccess(() -> Component.literal("§6velocityrender:vertical_lookahead = §e" + VelocityRenderGameRules.isVerticalLookaheadEnabled(level)), false);
             case "server_ticket_budget", "budget" -> source.sendSuccess(() -> Component.literal("§6velocityrender:server_ticket_budget = §e" + VelocityRenderGameRules.getServerTicketBudget(level)), false);
             case "debug_mode" -> source.sendSuccess(() -> Component.literal("§6velocityrender:debug_mode = §e" + VelocityRenderGameRules.isDebugMode(level)), false);
+            case "f3_debug", "f3" -> source.sendSuccess(() -> Component.literal("§6velocityrender:f3_debug = §e" + VelocityRenderGameRules.isF3DebugEnabled(level)), false);
             default -> source.sendFailure(Component.literal("§cUnknown setting: " + rule));
         }
         return 1;
@@ -214,6 +225,7 @@ public final class VelocityRenderCommand {
             case "turn_widening" -> level.getGameRules().set(VelocityRenderGameRules.TURN_WIDENING, value, source.getServer());
             case "vertical_lookahead" -> level.getGameRules().set(VelocityRenderGameRules.VERTICAL_LOOKAHEAD, value, source.getServer());
             case "debug_mode" -> level.getGameRules().set(VelocityRenderGameRules.DEBUG_MODE, value, source.getServer());
+            case "f3_debug" -> level.getGameRules().set(VelocityRenderGameRules.F3_DEBUG, value, source.getServer());
         }
 
         source.sendSuccess(() -> Component.literal("§aUpdated velocityrender:" + rule + " to " + value), true);
@@ -246,6 +258,7 @@ public final class VelocityRenderCommand {
         level.getGameRules().set(VelocityRenderGameRules.VERTICAL_LOOKAHEAD, true, source.getServer());
         level.getGameRules().set(VelocityRenderGameRules.SERVER_TICKET_BUDGET, 64, source.getServer());
         level.getGameRules().set(VelocityRenderGameRules.DEBUG_MODE, false, source.getServer());
+        level.getGameRules().set(VelocityRenderGameRules.F3_DEBUG, true, source.getServer());
 
         source.sendSuccess(() -> Component.literal("§aReset all Velocity Render settings to defaults."), true);
         return 1;
