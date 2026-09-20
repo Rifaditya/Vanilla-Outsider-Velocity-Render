@@ -1,5 +1,11 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.4.1+26.3] - 10-Tick Telemetry Caching, F3+F6 DebugScreenEntry & GameRule (BL-VR-004 Step 2)
+- Created `VelocityRenderDebugEntry` (`velocity-render:engine_metrics`) under `DebugEntryCategory.SCREEN_TEXT`.
+- Integrated 10-tick throttled telemetry computation in `ClientVelocityTracker`.
+- Derived turning cone angle from client `TurnRateCalculator`.
+- Registered `velocityrender:f3_debug` GameRule with 11-language translations.
+
 ## [1.4.0+26.3] - Diagnostic Formatter Math & State Engine (BL-VR-004 Step 1)
 - Implemented `DebugMetricsFormatter` with `formatIntegrated` and `formatClientOnly`.
 - Enforced 1-decimal float precision for watchdog load shedding (`0.0%`).

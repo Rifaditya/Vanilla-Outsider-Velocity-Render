@@ -11,10 +11,12 @@ public final class ClientVelocityTracker {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientVelocityTracker.class);
 
     private static final VelocityCalculator CALCULATOR = new VelocityCalculator();
+    private static final net.vanillaoutsider.velocityrender.math.TurnRateCalculator TURN_CALCULATOR = new net.vanillaoutsider.velocityrender.math.TurnRateCalculator();
     private static boolean enabled = true;
     private static double leadMultiplier = 1.0;
     private static double minSpeedThreshold = 0.20; // 0.20 b/t = 4.0 m/s
     private static boolean debugMode = false;
+    private static boolean clientF3DebugEnabled = true;
 
     // Precomputed volatile hot-path cache for lock-free render thread polling
     public static volatile boolean activeBias = false;
@@ -22,6 +24,8 @@ public final class ClientVelocityTracker {
     public static volatile double cachedNormDx = 0.0;
     public static volatile double cachedNormDy = 0.0;
     public static volatile double cachedNormDz = 0.0;
+    private static volatile String cachedF3Line = null;
+    private static int f3ThrottleTicks = 0;
 
     private ClientVelocityTracker() {
     }
@@ -60,10 +64,55 @@ public final class ClientVelocityTracker {
             cachedLeadOffset = 0.0;
         }
 
+        // Update client-side turn rate and cone angle
+        TURN_CALCULATOR.update(cameraEntity.getYRot(), cameraEntity.tickCount);
+
+        // 10-tick throttled F3 diagnostic string cache update (0B render allocation)
+        f3ThrottleTicks++;
+        if (f3ThrottleTicks >= 10) {
+            f3ThrottleTicks = 0;
+            updateCachedF3Line(client);
+        }
+
         if (debugMode && client.player != null && (client.player.tickCount % 40 == 0)) {
             LOGGER.info("[VelocityRender-Client] Speed: {:.2f} b/t ({:.1f} m/s), Bias: {}, Lead: {:.1f}",
                     getSpeedBlocksPerTick(), getSpeedMetersPerSecond(),
                     activeBias, cachedLeadOffset);
+        }
+    }
+
+    private static void updateCachedF3Line(Minecraft client) {
+        if (!isF3DebugEnabled(client)) {
+            cachedF3Line = null;
+            return;
+        }
+
+        int coneDeg = Math.min(90, Math.round(TURN_CALCULATOR.getAngularRate() * 10.0f));
+
+        if (client.getSingleplayerServer() != null && client.player != null) {
+            // Integrated singleplayer server context: full server telemetry
+            java.util.UUID uuid = client.player.getUUID();
+            int activeTickets = net.vanillaoutsider.velocityrender.server.VelocityTicketManager.getActiveTicketCount(uuid);
+            
+            // Cleanliness guard: stay hidden during idle standing/walking
+            if (!activeBias && activeTickets == 0) {
+                cachedF3Line = null;
+                return;
+            }
+
+            float mspt = net.vanillaoutsider.velocityrender.server.VelocityTicketManager.getLastServerMspt();
+            double shedPct = mspt > 25.0f ? Math.min(80.0, ((mspt - 25.0) / 25.0) * 100.0) : 0.0;
+            int serverTickets = net.vanillaoutsider.velocityrender.server.VelocityTicketManager.getTotalServerTickets();
+            int serverBudget = client.level != null ? net.vanillaoutsider.velocityrender.registry.VelocityRenderGameRules.getServerTicketBudget(client.level) : 64;
+
+            cachedF3Line = DebugMetricsFormatter.formatIntegrated(activeTickets, shedPct, coneDeg, serverTickets, serverBudget);
+        } else {
+            // Dedicated multiplayer client context: client-side meshing metrics
+            if (!activeBias) {
+                cachedF3Line = null;
+                return;
+            }
+            cachedF3Line = DebugMetricsFormatter.formatClientOnly(activeBias, cachedLeadOffset, coneDeg);
         }
     }
 
@@ -117,5 +166,31 @@ public final class ClientVelocityTracker {
 
     public static double getNormDz() {
         return CALCULATOR.getNormDz();
+    }
+
+    public static String getCachedF3Line() {
+        return cachedF3Line;
+    }
+
+    public static boolean isF3DebugEnabled() {
+        Minecraft mc = Minecraft.getInstance();
+        return isF3DebugEnabled(mc);
+    }
+
+    public static boolean isF3DebugEnabled(Minecraft mc) {
+        if (!clientF3DebugEnabled) {
+            return false;
+        }
+        if (mc != null && mc.level != null) {
+            return net.vanillaoutsider.velocityrender.registry.VelocityRenderGameRules.isF3DebugEnabled(mc.level);
+        }
+        return true;
+    }
+
+    public static void setF3DebugEnabled(boolean value) {
+        clientF3DebugEnabled = value;
+        if (!value) {
+            cachedF3Line = null;
+        }
     }
 }

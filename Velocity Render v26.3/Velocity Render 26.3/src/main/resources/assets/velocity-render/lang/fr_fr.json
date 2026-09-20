@@ -26,6 +26,9 @@
   "velocityrender.gamerule.server_ticket_budget": "Budget de Tickets du Serveur",
   "velocityrender.gamerule.server_ticket_budget.description": "Total maximal de tickets de chargement prédictif alloués à l'échelle du serveur parmi tous les joueurs en vol simultané.",
 
+  "velocityrender.gamerule.f3_debug": "Diagnostics de l'Écran F3",
+  "velocityrender.gamerule.f3_debug.description": "Affiche la télémétrie du moteur Velocity Render sur l'écran de débogage F3 de Minecraft.",
+
   "velocityrender.command.status.header": "=== État de Velocity Render ===",
   "velocityrender.command.status.speed": "Vitesse : %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Portée dynamique : %s tronçons (MSPT : %sms)",

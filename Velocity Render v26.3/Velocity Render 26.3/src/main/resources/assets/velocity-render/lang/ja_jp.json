@@ -26,6 +26,9 @@
   "velocityrender.gamerule.server_ticket_budget": "サーバーチケット上限",
   "velocityrender.gamerule.server_ticket_budget.description": "同時飛行中の全プレイヤーに対してサーバー全体で割り当てられる予測先行読み込みチケットの最大合計数です。",
 
+  "velocityrender.gamerule.f3_debug": "F3画面診断",
+  "velocityrender.gamerule.f3_debug.description": "MinecraftのF3デバッグ画面にVelocity Renderのエンジンテレメトリを表示します。",
+
   "velocityrender.command.status.header": "=== Velocity Render ステータス ===",
   "velocityrender.command.status.speed": "速度: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "動的リーチ: %s チャンク (MSPT: %sms)",

@@ -26,6 +26,9 @@
   "velocityrender.gamerule.server_ticket_budget": "Server-Ticket-Budget",
   "velocityrender.gamerule.server_ticket_budget.description": "Maximales Gesamtkontingent aktiver Vorwärtslade-Tickets über alle gleichzeitigen Flieger serverweit.",
 
+  "velocityrender.gamerule.f3_debug": "F3-Bildschirmdiagnose",
+  "velocityrender.gamerule.f3_debug.description": "Zeigt Telemetriedaten der Velocity-Render-Engine auf dem F3-Debug-Bildschirm an.",
+
   "velocityrender.command.status.header": "=== Velocity Render Status ===",
   "velocityrender.command.status.speed": "Geschwindigkeit: %s B/T (%s m/s)",
   "velocityrender.command.status.reach": "Dynamische Reichweite: %s Chunks (MSPT: %sms)",

@@ -26,6 +26,9 @@
   "velocityrender.gamerule.server_ticket_budget": "伺服器載入票券總預算",
   "velocityrender.gamerule.server_ticket_budget.description": "全伺服器在所有同時處於高速飛行的玩家之間分配的最大前瞻預載入票券總數上限。",
 
+  "velocityrender.gamerule.f3_debug": "F3 偵錯畫面診斷",
+  "velocityrender.gamerule.f3_debug.description": "在 Minecraft F3 偵錯畫面上顯示 Velocity Render 引擎遙測數據。",
+
   "velocityrender.command.status.header": "=== 速度渲染 (Velocity Render) 狀態 ===",
   "velocityrender.command.status.speed": "當前速度: %s 格/刻 (%s 米/秒)",
   "velocityrender.command.status.reach": "動態前瞻範圍: %s 區塊 (MSPT: %sms)",

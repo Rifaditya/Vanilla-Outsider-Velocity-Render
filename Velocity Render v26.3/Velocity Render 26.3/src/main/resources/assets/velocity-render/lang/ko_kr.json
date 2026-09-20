@@ -26,6 +26,9 @@
   "velocityrender.gamerule.server_ticket_budget": "서버 티켓 예산",
   "velocityrender.gamerule.server_ticket_budget.description": "동시 비행 중인 모든 플레이어에게 서버 전체에서 할당되는 최대 활성 예측 로딩 티켓 총합입니다.",
 
+  "velocityrender.gamerule.f3_debug": "F3 화면 진단",
+  "velocityrender.gamerule.f3_debug.description": "Minecraft F3 디버그 화면에 Velocity Render 엔진 원격 측정을 표시합니다.",
+
   "velocityrender.command.status.header": "=== Velocity Render 상태 ===",
   "velocityrender.command.status.speed": "현재 속도: %s 블록/틱 (%s m/s)",
   "velocityrender.command.status.reach": "동적 도달 범위: %s 청크 (MSPT: %sms)",

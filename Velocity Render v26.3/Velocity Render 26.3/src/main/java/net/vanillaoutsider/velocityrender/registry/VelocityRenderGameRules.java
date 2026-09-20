@@ -24,6 +24,7 @@ public final class VelocityRenderGameRules {
     public static GameRule<Boolean> VERTICAL_LOOKAHEAD;
     public static GameRule<Integer> SERVER_TICKET_BUDGET;
     public static GameRule<Boolean> DEBUG_MODE;
+    public static GameRule<Boolean> F3_DEBUG;
 
     private VelocityRenderGameRules() {
     }
@@ -73,6 +74,11 @@ public final class VelocityRenderGameRules {
                 .name("Debug Diagnostics")
                 .description("Print real-time speed and trajectory diagnostics to logs")
                 .register();
+
+        F3_DEBUG = DynamicGameRuleManager.booleanRule("velocityrender:f3_debug", CATEGORY, true)
+                .name("F3 Screen Diagnostics")
+                .description("Display Velocity Render engine telemetry on Minecraft F3 debug screen")
+                .register();
     }
 
     public static boolean isEnabled(Level level) {
@@ -105,5 +111,9 @@ public final class VelocityRenderGameRules {
 
     public static boolean isDebugMode(Level level) {
         return DynamicGameRuleManager.getBoolean(level, DEBUG_MODE);
+    }
+
+    public static boolean isF3DebugEnabled(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, F3_DEBUG);
     }
 }

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.4.1+26.3] - 10-Tick Telemetry Caching, F3+F6 DebugScreenEntry & GameRule (BL-VR-004 Step 2)
+- **Native F3+F6 Debug Screen Entry (`BL-VR-004 Step 2`)**: Created `VelocityRenderDebugEntry` (`velocity-render:engine_metrics`) registered under `DebugEntryCategory.SCREEN_TEXT`, integrating into Minecraft 26.3's native `F3 + F6` Debug Options Screen.
+- **0B Render GC Cache**: Implemented 10-tick throttled telemetry update in `ClientVelocityTracker` refreshing `cachedF3Line` with zero heap allocations on the 60–240+ FPS render thread.
+- **Dynamic Lookahead Turn Cone**: Derived turning cone angle dynamically from client angular turn rate (`coneDeg = min(90, round(angularRate * 10))`).
+- **Dynamic GameRule & 11-Language Parity**: Registered `velocityrender:f3_debug` GameRule (default `true`) and synchronized translations across all 11 supported languages.
+- **Clean Inactive State**: Keeps F3 completely clean during idle standing/walking by setting `cachedF3Line` to `null`.
+
+---
+
 ## [1.4.0+26.3] - Diagnostic Formatter Math & State Engine (BL-VR-004 Step 1)
 - **Diagnostic Formatter Utility (`BL-VR-004 Step 1`)**: Introduced pure stateless formatting engine `DebugMetricsFormatter` to assemble standardized F3 diagnostic telemetry strings.
 - **Dual-Context Formats**: Supports `formatIntegrated` for singleplayer/integrated server (`[VelocityRender] Active Tickets: %d | Shed: %.1f%% | Cone: %d° | Pool: %d/%d`) and `formatClientOnly` for multiplayer dedicated servers (`[VelocityRender] Bias: %s | Lead: %.1fm | Cone: %d°`).

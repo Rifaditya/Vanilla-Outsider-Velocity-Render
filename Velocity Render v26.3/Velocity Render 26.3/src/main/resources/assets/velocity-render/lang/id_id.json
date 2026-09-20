@@ -26,6 +26,9 @@
   "velocityrender.gamerule.server_ticket_budget": "Anggaran Tiket Server",
   "velocityrender.gamerule.server_ticket_budget.description": "Total maksimum tiket pemuatan prediktif aktif di seluruh server untuk semua pemain yang terbang bersamaan.",
 
+  "velocityrender.gamerule.f3_debug": "Diagnostik Layar F3",
+  "velocityrender.gamerule.f3_debug.description": "Menampilkan telemetri mesin Velocity Render pada layar debug F3 Minecraft.",
+
   "velocityrender.command.status.header": "=== Status Velocity Render ===",
   "velocityrender.command.status.speed": "Kecepatan: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Jangkauan Dinamis: %s chunk (MSPT: %sms)",
