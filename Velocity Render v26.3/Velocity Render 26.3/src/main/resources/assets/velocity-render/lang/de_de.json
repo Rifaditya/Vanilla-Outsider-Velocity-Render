@@ -23,6 +23,9 @@
   "velocityrender.gamerule.vertical_lookahead": "Vertikaler Vorgriff",
   "velocityrender.gamerule.vertical_lookahead.description": "Bezieht die vertikale Nickgeschwindigkeit in das Chunk-Meshing und Korridor-Updates bei Sturzflügen und Steigflügen ein.",
 
+  "velocityrender.gamerule.server_ticket_budget": "Server-Ticket-Budget",
+  "velocityrender.gamerule.server_ticket_budget.description": "Maximales Gesamtkontingent aktiver Vorwärtslade-Tickets über alle gleichzeitigen Flieger serverweit.",
+
   "velocityrender.command.status.header": "=== Velocity Render Status ===",
   "velocityrender.command.status.speed": "Geschwindigkeit: %s B/T (%s m/s)",
   "velocityrender.command.status.reach": "Dynamische Reichweite: %s Chunks (MSPT: %sms)",

@@ -23,6 +23,9 @@
   "velocityrender.gamerule.vertical_lookahead": "Вертикальное упреждение",
   "velocityrender.gamerule.vertical_lookahead.description": "Учитывает вертикальную скорость тангажа при мешинге чанков и обновлении коридора при пикировании и взлёте.",
 
+  "velocityrender.gamerule.server_ticket_budget": "Бюджет тикетов сервера",
+  "velocityrender.gamerule.server_ticket_budget.description": "Максимальное общее количество активных тикетов упреждающей загрузки, выделяемых на весь сервер среди всех одновременно летящих игроков.",
+
   "velocityrender.command.status.header": "=== Статус Velocity Render ===",
   "velocityrender.command.status.speed": "Скорость: %s б/т (%s м/с)",
   "velocityrender.command.status.reach": "Динамический охват: %s чанков (MSPT: %sms)",

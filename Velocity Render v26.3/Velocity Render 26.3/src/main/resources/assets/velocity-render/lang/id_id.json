@@ -23,6 +23,9 @@
   "velocityrender.gamerule.vertical_lookahead": "Pandangan Vertikal Prediktif",
   "velocityrender.gamerule.vertical_lookahead.description": "Memasukkan kecepatan kemiringan vertikal ke dalam pemuatan chunk dan pembaruan koridor saat menukik dan menanjak.",
 
+  "velocityrender.gamerule.server_ticket_budget": "Anggaran Tiket Server",
+  "velocityrender.gamerule.server_ticket_budget.description": "Total maksimum tiket pemuatan prediktif aktif di seluruh server untuk semua pemain yang terbang bersamaan.",
+
   "velocityrender.command.status.header": "=== Status Velocity Render ===",
   "velocityrender.command.status.speed": "Kecepatan: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Jangkauan Dinamis: %s chunk (MSPT: %sms)",

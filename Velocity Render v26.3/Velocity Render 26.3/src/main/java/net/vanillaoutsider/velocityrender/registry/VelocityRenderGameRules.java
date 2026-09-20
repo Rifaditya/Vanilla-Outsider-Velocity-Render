@@ -22,6 +22,7 @@ public final class VelocityRenderGameRules {
     public static GameRule<Integer> MIN_SPEED_THRESHOLD_PCT;
     public static GameRule<Boolean> TURN_WIDENING;
     public static GameRule<Boolean> VERTICAL_LOOKAHEAD;
+    public static GameRule<Integer> SERVER_TICKET_BUDGET;
     public static GameRule<Boolean> DEBUG_MODE;
 
     private VelocityRenderGameRules() {
@@ -62,6 +63,12 @@ public final class VelocityRenderGameRules {
                 .description("Incorporate vertical pitch velocity into chunk meshing and altitude corridor updates during dives and climbs")
                 .register();
 
+        SERVER_TICKET_BUDGET = DynamicGameRuleManager.integerRule("velocityrender:server_ticket_budget", CATEGORY, 64)
+                .range(16, 256)
+                .name("Server Ticket Budget")
+                .description("Maximum total active forward loading tickets allocated server-wide across all concurrent flyers")
+                .register();
+
         DEBUG_MODE = DynamicGameRuleManager.booleanRule("velocityrender:debug_mode", CATEGORY, false)
                 .name("Debug Diagnostics")
                 .description("Print real-time speed and trajectory diagnostics to logs")
@@ -90,6 +97,10 @@ public final class VelocityRenderGameRules {
 
     public static boolean isVerticalLookaheadEnabled(Level level) {
         return DynamicGameRuleManager.getBoolean(level, VERTICAL_LOOKAHEAD);
+    }
+
+    public static int getServerTicketBudget(Level level) {
+        return DynamicGameRuleManager.getInt(level, SERVER_TICKET_BUDGET);
     }
 
     public static boolean isDebugMode(Level level) {

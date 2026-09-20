@@ -1,5 +1,10 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.3.1+26.3] - Dynamic Server Ticket Budget GameRule & Localization Parity (BL-VR-003 Step 2)
+- Added `SERVER_TICKET_BUDGET` dynamic GameRule (default 64, range 16-256).
+- Synchronized all 11 language translation dictionaries.
+- Added `getServerTicketBudget(Level)` accessor.
+
 ## [1.3.0+26.3] - Fair Allocation Math & Ticket Quota Engine (BL-VR-003 Step 1)
 - Implemented `TicketBudgetAllocator` with speed-weighted proportional allocation.
 - Enforced dynamic safety floor protecting active flyers from total ticket starvation.

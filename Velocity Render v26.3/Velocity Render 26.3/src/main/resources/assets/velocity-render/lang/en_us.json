@@ -23,6 +23,9 @@
   "velocityrender.gamerule.vertical_lookahead": "Vertical Lookahead",
   "velocityrender.gamerule.vertical_lookahead.description": "Incorporate vertical pitch velocity into chunk meshing and altitude corridor updates during dives and climbs.",
 
+  "velocityrender.gamerule.server_ticket_budget": "Server Ticket Budget",
+  "velocityrender.gamerule.server_ticket_budget.description": "Maximum total active forward loading tickets allocated server-wide across all concurrent flyers.",
+
   "velocityrender.command.status.header": "=== Velocity Render Status ===",
   "velocityrender.command.status.speed": "Speed: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Dynamic Reach: %s chunks (MSPT: %sms)",

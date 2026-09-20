@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.3.1+26.3] - Dynamic Server Ticket Budget GameRule & Localization Parity (BL-VR-003 Step 2)
+- **Dynamic GameRule Integration (`BL-VR-003 Step 2`)**: Registered `velocityrender:server_ticket_budget` integer rule (default `64`, range `[16, 256]`) via DasikLibrary's dynamic registry system.
+- **Server Operator Control**: Enables dynamic live adjustment of total server-wide forward loading tickets allocated across all concurrent high-speed flyers.
+- **11-Language Translation Parity**: Added native translations and detailed descriptions across all supported languages (English, German, Spanish, French, Indonesian, Italian, Japanese, Korean, Portuguese, Russian, Simplified Chinese, Traditional Chinese).
+
+---
+
 ## [1.3.0+26.3] - Fair Allocation Math & Ticket Quota Engine (BL-VR-003 Step 1)
 - **Fair Multi-Player Quota Engine (`BL-VR-003 Step 1`)**: Introduced pure algorithmic utility `TicketBudgetAllocator` computing speed-weighted proportional forward ticket quotas across concurrent flyers.
 - **Dynamic Safety Floor**: Enforced a 4-ticket dynamic floor per active flyer to prevent corridor collapse during server budget saturation.

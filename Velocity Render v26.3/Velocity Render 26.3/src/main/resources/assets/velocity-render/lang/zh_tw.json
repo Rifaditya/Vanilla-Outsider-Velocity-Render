@@ -23,6 +23,9 @@
   "velocityrender.gamerule.vertical_lookahead": "垂直預載渲染",
   "velocityrender.gamerule.vertical_lookahead.description": "在俯衝和攀升期間，將垂直俯仰速度納入區塊網格處理與高度通道更新。",
 
+  "velocityrender.gamerule.server_ticket_budget": "伺服器載入票券總預算",
+  "velocityrender.gamerule.server_ticket_budget.description": "全伺服器在所有同時處於高速飛行的玩家之間分配的最大前瞻預載入票券總數上限。",
+
   "velocityrender.command.status.header": "=== 速度渲染 (Velocity Render) 狀態 ===",
   "velocityrender.command.status.speed": "當前速度: %s 格/刻 (%s 米/秒)",
   "velocityrender.command.status.reach": "動態前瞻範圍: %s 區塊 (MSPT: %sms)",

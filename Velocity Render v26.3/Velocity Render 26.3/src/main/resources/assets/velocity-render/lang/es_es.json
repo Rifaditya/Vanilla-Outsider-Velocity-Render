@@ -23,6 +23,9 @@
   "velocityrender.gamerule.vertical_lookahead": "Anticipación Vertical",
   "velocityrender.gamerule.vertical_lookahead.description": "Incorpora la velocidad de cabeceo vertical en el mallado de chunks y actualizaciones de altitud durante picados y ascensos.",
 
+  "velocityrender.gamerule.server_ticket_budget": "Presupuesto de Tickets del Servidor",
+  "velocityrender.gamerule.server_ticket_budget.description": "Máximo total de tickets de carga predictiva asignados a nivel de servidor entre todos los voladores simultáneos.",
+
   "velocityrender.command.status.header": "=== Estado de Velocity Render ===",
   "velocityrender.command.status.speed": "Velocidad: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Alcance dinámico: %s chunks (MSPT: %sms)",

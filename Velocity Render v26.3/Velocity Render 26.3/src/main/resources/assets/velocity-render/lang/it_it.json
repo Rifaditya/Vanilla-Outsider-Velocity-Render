@@ -23,6 +23,9 @@
   "velocityrender.gamerule.vertical_lookahead": "Anticipazione Verticale",
   "velocityrender.gamerule.vertical_lookahead.description": "Incorpora la velocità di beccheggio verticale nel meshing dei chunk e negli aggiornamenti di quota durante picchiate e risalite.",
 
+  "velocityrender.gamerule.server_ticket_budget": "Budget Ticket del Server",
+  "velocityrender.gamerule.server_ticket_budget.description": "Totale massimo di ticket di caricamento predittivo allocati a livello di server tra tutti i giocatori in volo simultaneo.",
+
   "velocityrender.command.status.header": "=== Stato di Velocity Render ===",
   "velocityrender.command.status.speed": "Velocità: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Portata dinamica: %s chunk (MSPT: %sms)",

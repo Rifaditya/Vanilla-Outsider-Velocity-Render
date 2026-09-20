@@ -23,6 +23,9 @@
   "velocityrender.gamerule.vertical_lookahead": "수직 예측 렌더링",
   "velocityrender.gamerule.vertical_lookahead.description": "급강하 및 급상승 시 수직 피치 속도를 청크 메시 및 고도 업데이트에 반영합니다.",
 
+  "velocityrender.gamerule.server_ticket_budget": "서버 티켓 예산",
+  "velocityrender.gamerule.server_ticket_budget.description": "동시 비행 중인 모든 플레이어에게 서버 전체에서 할당되는 최대 활성 예측 로딩 티켓 총합입니다.",
+
   "velocityrender.command.status.header": "=== Velocity Render 상태 ===",
   "velocityrender.command.status.speed": "현재 속도: %s 블록/틱 (%s m/s)",
   "velocityrender.command.status.reach": "동적 도달 범위: %s 청크 (MSPT: %sms)",

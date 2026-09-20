@@ -23,6 +23,9 @@
   "velocityrender.gamerule.vertical_lookahead": "Anticipation Verticale",
   "velocityrender.gamerule.vertical_lookahead.description": "Incorpore la vitesse de tangage vertical dans le maillage des tronçons et la mise à jour des couloirs lors des piqués et montées.",
 
+  "velocityrender.gamerule.server_ticket_budget": "Budget de Tickets du Serveur",
+  "velocityrender.gamerule.server_ticket_budget.description": "Total maximal de tickets de chargement prédictif alloués à l'échelle du serveur parmi tous les joueurs en vol simultané.",
+
   "velocityrender.command.status.header": "=== État de Velocity Render ===",
   "velocityrender.command.status.speed": "Vitesse : %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Portée dynamique : %s tronçons (MSPT : %sms)",
