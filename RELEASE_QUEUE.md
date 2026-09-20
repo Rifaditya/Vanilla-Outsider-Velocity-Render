@@ -9,3 +9,4 @@
 - [ ] **1.2.1+26.3** — Step 2: Dynamic Vertical Lookahead GameRule & Localization (BL-VR-002).
 - [ ] **1.2.2+26.3** — Step 3: Server Altitude Trigger & Vertical Gating (BL-VR-002).
 - [ ] **1.2.3+26.3** — Step 4: Telemetry Diagnostics & Command Suite (BL-VR-002 Finale).
+- [ ] **1.3.0+26.3** — Step 1: Fair Allocation Math & Ticket Quota Engine (BL-VR-003).

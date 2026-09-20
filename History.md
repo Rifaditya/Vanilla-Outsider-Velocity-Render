@@ -1,5 +1,10 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.3.0+26.3] - Fair Allocation Math & Ticket Quota Engine (BL-VR-003 Step 1)
+- Implemented `TicketBudgetAllocator` with speed-weighted proportional allocation.
+- Enforced dynamic safety floor protecting active flyers from total ticket starvation.
+- Added comprehensive unit test suite in `TicketBudgetAllocatorTest`.
+
 ## [1.2.3+26.3] - Telemetry Diagnostics & Command Suite (BL-VR-002 Step 4)
 - Added `vertical_lookahead` and `vertical` commands in `VelocityRenderCommand`.
 - Integrated colored trajectory indicators into `/vr status`.

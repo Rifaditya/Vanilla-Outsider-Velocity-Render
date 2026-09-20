@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.3.0+26.3] - Fair Allocation Math & Ticket Quota Engine (BL-VR-003 Step 1)
+- **Fair Multi-Player Quota Engine (`BL-VR-003 Step 1`)**: Introduced pure algorithmic utility `TicketBudgetAllocator` computing speed-weighted proportional forward ticket quotas across concurrent flyers.
+- **Dynamic Safety Floor**: Enforced a 4-ticket dynamic floor per active flyer to prevent corridor collapse during server budget saturation.
+- **0B Hot-Path Allocations**: Pure static mathematical formulation running with zero heap allocations on 20 TPS tick paths.
+- **Automated Regression Test Suite**: Added comprehensive unit test coverage in `TicketBudgetAllocatorTest` validating single flyer, symmetrical split, asymmetrical weighting, and extreme 20-flyer saturation clamping.
+
+---
+
 ## [1.2.3+26.3] - Telemetry Diagnostics & Command Suite (BL-VR-002 Finale)
 - **3D Trajectory Telemetry (`BL-VR-002 Step 4`)**: Added real-time pitch angle readout, vertical delta speed ($v_y$ b/t), and color-coded flight state indicators (`[DIVE]`, `[CLIMB]`, `[LEVEL]`) to `/velocityrender status` (`/vr status`).
 - **Brigadier Command Controls**: Added `vertical_lookahead` and `vertical` command parameters to `/vr get` and `/vr set` with full tab completions.
