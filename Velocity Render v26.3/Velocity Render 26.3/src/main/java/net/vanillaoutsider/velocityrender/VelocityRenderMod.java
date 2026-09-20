@@ -31,6 +31,7 @@ public final class VelocityRenderMod implements ModInitializer {
 
         // Register Server Tick Event for predictive forward chunk ticket tracking
         ServerTickEvents.END_SERVER_TICK.register(server -> {
+            VelocityTicketManager.tickServer(server);
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                 VelocityTicketManager.tickPlayer(player);
             }

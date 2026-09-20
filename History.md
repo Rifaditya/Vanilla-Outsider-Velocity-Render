@@ -1,5 +1,10 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.3.2+26.3] - Server-Wide Multi-Player Ticket Gating (BL-VR-003 Step 3)
+- Implemented `tickServer` pre-pass to aggregate speeds and active flyer count.
+- Clamped per-player reach with `TicketBudgetAllocator` quota.
+- Added `getTotalServerTickets`, `getActiveFlyerCount`, and `getPlayerQuota` accessors.
+
 ## [1.3.1+26.3] - Dynamic Server Ticket Budget GameRule & Localization Parity (BL-VR-003 Step 2)
 - Added `SERVER_TICKET_BUDGET` dynamic GameRule (default 64, range 16-256).
 - Synchronized all 11 language translation dictionaries.

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.3.2+26.3] - Server-Wide Multi-Player Ticket Gating (BL-VR-003 Step 3)
+- **Two-Phase Server Tick Architecture (`BL-VR-003 Step 3`)**: Integrated `VelocityTicketManager.tickServer` pre-pass to track active flyers and aggregate speeds across all connected players before individual ticks.
+- **Fair Ticket Quota Enforcement**: Bound dynamic forward reach (`maxReachChunks`) to each player's fair quota calculated by `TicketBudgetAllocator`, preventing server chunk worker starvation.
+- **Server Pool Telemetry Accessors**: Exposed `getTotalServerTickets()`, `getActiveFlyerCount()`, and `getPlayerQuota(UUID)` with zero heap allocation on 20 TPS hot paths.
+- **Automated Regression Suite**: Expanded `VelocityTicketManagerTest` to verify default states for server pool telemetry.
+
+---
+
 ## [1.3.1+26.3] - Dynamic Server Ticket Budget GameRule & Localization Parity (BL-VR-003 Step 2)
 - **Dynamic GameRule Integration (`BL-VR-003 Step 2`)**: Registered `velocityrender:server_ticket_budget` integer rule (default `64`, range `[16, 256]`) via DasikLibrary's dynamic registry system.
 - **Server Operator Control**: Enables dynamic live adjustment of total server-wide forward loading tickets allocated across all concurrent high-speed flyers.

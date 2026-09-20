@@ -34,12 +34,51 @@ public final class VelocityTicketManager {
     private static final Map<UUID, Float> LAST_PLAYER_YAW = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, Integer> LAST_PLAYER_TICK = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, Double> LAST_PLAYER_Y = new Object2ObjectOpenHashMap<>();
+    private static final Map<UUID, Integer> PLAYER_QUOTA = new Object2ObjectOpenHashMap<>();
 
     // Telemetry metrics
     private static volatile int lastDynamicReach = 16;
     private static volatile float lastServerMspt = 20.0f;
+    private static volatile int activeFlyerCount = 0;
+    private static volatile double totalFlyerSpeedSum = 0.0;
+    private static volatile int totalServerTickets = 0;
 
     private VelocityTicketManager() {
+    }
+
+    public static void tickServer(net.minecraft.server.MinecraftServer server) {
+        if (server == null) {
+            return;
+        }
+
+        int flyers = 0;
+        double speedSum = 0.0;
+        int ticketsSum = 0;
+
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            if (player == null || player.isRemoved()) {
+                continue;
+            }
+            UUID uuid = player.getUUID();
+            VelocityCalculator calc = PLAYER_VELOCITY.get(uuid);
+            if (calc != null) {
+                double speed = calc.getSpeedBlocksPerTick();
+                ServerLevel level = player.level() instanceof ServerLevel sl ? sl : null;
+                double minSpeed = level != null ? VelocityRenderGameRules.getMinSpeedThreshold(level) : 0.20;
+                if (speed >= minSpeed) {
+                    flyers++;
+                    speedSum += speed;
+                }
+            }
+            LongOpenHashSet tickets = ACTIVE_TICKETS.get(uuid);
+            if (tickets != null) {
+                ticketsSum += tickets.size();
+            }
+        }
+
+        activeFlyerCount = flyers;
+        totalFlyerSpeedSum = speedSum;
+        totalServerTickets = ticketsSum;
     }
 
     public static void tickPlayer(ServerPlayer player) {
@@ -139,7 +178,15 @@ public final class VelocityTicketManager {
         int multiplierPct = VelocityRenderGameRules.getLeadMultiplierPct(level);
         double leadScale = (double) multiplierPct / 100.0;
         int maxAllowedReach = Math.max(4, (int) Math.round(16.0 * leadScale * msptFactor));
-        int maxReachChunks = Math.min(maxAllowedReach, (int) Math.round(speed * 8.0 * leadScale * msptFactor));
+
+        // Fair multi-player server ticket budget quota calculation
+        int serverBudget = VelocityRenderGameRules.getServerTicketBudget(level);
+        int flyerCount = Math.max(1, activeFlyerCount);
+        double speedSum = Math.max(speed, totalFlyerSpeedSum);
+        int playerQuota = TicketBudgetAllocator.calculatePlayerQuota(speed, speedSum, flyerCount, serverBudget, maxAllowedReach);
+        PLAYER_QUOTA.put(uuid, playerQuota);
+
+        int maxReachChunks = Math.min(playerQuota, (int) Math.round(speed * 8.0 * leadScale * msptFactor));
         lastDynamicReach = maxReachChunks;
 
         // Zero-allocation reusable scratch set
@@ -225,6 +272,7 @@ public final class VelocityTicketManager {
         LAST_PLAYER_YAW.remove(uuid);
         LAST_PLAYER_TICK.remove(uuid);
         LAST_PLAYER_Y.remove(uuid);
+        PLAYER_QUOTA.remove(uuid);
         SCRATCH_TICKETS.remove(uuid);
         LongOpenHashSet tickets = ACTIVE_TICKETS.remove(uuid);
         if (tickets != null && level != null) {
@@ -282,5 +330,18 @@ public final class VelocityTicketManager {
 
     public static float getLastServerMspt() {
         return lastServerMspt;
+    }
+
+    public static int getTotalServerTickets() {
+        return totalServerTickets;
+    }
+
+    public static int getActiveFlyerCount() {
+        return activeFlyerCount;
+    }
+
+    public static int getPlayerQuota(UUID uuid) {
+        Integer q = PLAYER_QUOTA.get(uuid);
+        return q != null ? q : 0;
     }
 }
