@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.2.1+26.3] - Dynamic Vertical Lookahead GameRule & Localization
+- **Dynamic GameRule Integration (`BL-VR-002 Step 2`)**: Registered `velocityrender:vertical_lookahead` in `VelocityRenderGameRules`, allowing server operators to toggle vertical velocity bias.
+- **Complete 11-Language Parity**: Added full native translations for the new GameRule and its tooltip across English, German, Spanish, French, Indonesian, Italian, Japanese, Korean, Portuguese, Russian, and Simplified Chinese.
+
+---
+
 ## [1.2.0+26.3] - Symmetrical 3D Pitch-Aware Lookahead
 - **3D Vertical Section Bias (`BL-VR-002 Step 1`)**: Incorporated vertical pitch velocity ($v_y$) into sub-chunk compile priority sorting, ensuring steep Elytra nose-dives prioritize bedrock terrain sections and rocket ascents prioritize sky sections.
 - **Symmetrical 3D Vector Math**: Balanced lookahead biasing uniformly across positive and negative pitch vectors with zero heap allocation.

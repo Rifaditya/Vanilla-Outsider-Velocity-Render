@@ -20,6 +20,9 @@
   "velocityrender.gamerule.turn_widening": "회전 시 생성 회랑 동적 확장",
   "velocityrender.gamerule.turn_widening.description": "급회전 시 청크 생성 회랑을 동적으로 넓혀 바깥쪽 곡선에서 발생하는 공허 미생성 현상을 방지합니다.",
 
+  "velocityrender.gamerule.vertical_lookahead": "수직 예측 렌더링",
+  "velocityrender.gamerule.vertical_lookahead.description": "급강하 및 급상승 시 수직 피치 속도를 청크 메시 및 고도 업데이트에 반영합니다.",
+
   "velocityrender.command.status.header": "=== Velocity Render 상태 ===",
   "velocityrender.command.status.speed": "현재 속도: %s 블록/틱 (%s m/s)",
   "velocityrender.command.status.reach": "동적 도달 범위: %s 청크 (MSPT: %sms)",

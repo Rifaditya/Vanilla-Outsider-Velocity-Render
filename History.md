@@ -1,5 +1,9 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.2.1+26.3] - Dynamic Vertical Lookahead GameRule & Localization (BL-VR-002 Step 2)
+- Added `VERTICAL_LOOKAHEAD` GameRule definition.
+- Synchronized 11-language localization dictionary.
+
 ## [1.2.0+26.3] - Symmetrical 3D Pitch-Aware Lookahead (BL-VR-002 Step 1)
 - Expanded `VelocityVectorHelper` with pitch bias verification methods.
 - Verified symmetrical section prioritization for vertical dives and rocket climbs.

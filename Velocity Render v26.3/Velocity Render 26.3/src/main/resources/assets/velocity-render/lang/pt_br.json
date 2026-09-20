@@ -20,6 +20,9 @@
   "velocityrender.gamerule.turn_widening": "Alargamento em curvas inclinadas",
   "velocityrender.gamerule.turn_widening.description": "Alarga dinamicamente o corredor de geração durante curvas fechadas para evitar o vazio na curva externa.",
 
+  "velocityrender.gamerule.vertical_lookahead": "Antecipação Vertical",
+  "velocityrender.gamerule.vertical_lookahead.description": "Incorpora a velocidade de inclinação vertical na renderização de chunks e atualizações de altitude durante mergulhos e subidas.",
+
   "velocityrender.command.status.header": "=== Status do Velocity Render ===",
   "velocityrender.command.status.speed": "Velocidade: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Alcance dinâmico: %s chunks (MSPT: %sms)",

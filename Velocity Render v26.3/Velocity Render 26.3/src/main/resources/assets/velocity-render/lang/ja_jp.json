@@ -20,6 +20,9 @@
   "velocityrender.gamerule.turn_widening": "旋回時の動的生成回廊拡大",
   "velocityrender.gamerule.turn_widening.description": "急旋回時にチャンク生成回廊を動的に拡大し、外側カーブでの虚空の未生成を防止します。",
 
+  "velocityrender.gamerule.vertical_lookahead": "垂直先読み",
+  "velocityrender.gamerule.vertical_lookahead.description": "急降下や急上昇時に垂直ピッチ速度をチャンクメッシュと高度更新に組み込みます。",
+
   "velocityrender.command.status.header": "=== Velocity Render ステータス ===",
   "velocityrender.command.status.speed": "速度: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "動的リーチ: %s チャンク (MSPT: %sms)",

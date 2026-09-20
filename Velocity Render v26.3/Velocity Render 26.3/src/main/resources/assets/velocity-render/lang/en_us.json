@@ -20,6 +20,9 @@
   "velocityrender.gamerule.turn_widening": "Banked Turn Widening",
   "velocityrender.gamerule.turn_widening.description": "Dynamically widens chunk generation corridor during sharp turns to prevent outer-curve void pop-in.",
 
+  "velocityrender.gamerule.vertical_lookahead": "Vertical Lookahead",
+  "velocityrender.gamerule.vertical_lookahead.description": "Incorporate vertical pitch velocity into chunk meshing and altitude corridor updates during dives and climbs.",
+
   "velocityrender.command.status.header": "=== Velocity Render Status ===",
   "velocityrender.command.status.speed": "Speed: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Dynamic Reach: %s chunks (MSPT: %sms)",

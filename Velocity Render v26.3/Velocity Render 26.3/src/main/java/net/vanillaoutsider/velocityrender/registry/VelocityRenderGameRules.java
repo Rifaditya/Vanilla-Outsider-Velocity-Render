@@ -21,6 +21,7 @@ public final class VelocityRenderGameRules {
     public static GameRule<Boolean> BUDGET_CONSERVATION;
     public static GameRule<Integer> MIN_SPEED_THRESHOLD_PCT;
     public static GameRule<Boolean> TURN_WIDENING;
+    public static GameRule<Boolean> VERTICAL_LOOKAHEAD;
     public static GameRule<Boolean> DEBUG_MODE;
 
     private VelocityRenderGameRules() {
@@ -56,6 +57,11 @@ public final class VelocityRenderGameRules {
                 .description("Dynamically widens chunk generation corridor during sharp turns to prevent outer-curve void pop-in")
                 .register();
 
+        VERTICAL_LOOKAHEAD = DynamicGameRuleManager.booleanRule("velocityrender:vertical_lookahead", CATEGORY, true)
+                .name("Vertical Lookahead")
+                .description("Incorporate vertical pitch velocity into chunk meshing and altitude corridor updates during dives and climbs")
+                .register();
+
         DEBUG_MODE = DynamicGameRuleManager.booleanRule("velocityrender:debug_mode", CATEGORY, false)
                 .name("Debug Diagnostics")
                 .description("Print real-time speed and trajectory diagnostics to logs")
@@ -80,6 +86,10 @@ public final class VelocityRenderGameRules {
 
     public static boolean isTurnWideningEnabled(Level level) {
         return DynamicGameRuleManager.getBoolean(level, TURN_WIDENING);
+    }
+
+    public static boolean isVerticalLookaheadEnabled(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, VERTICAL_LOOKAHEAD);
     }
 
     public static boolean isDebugMode(Level level) {

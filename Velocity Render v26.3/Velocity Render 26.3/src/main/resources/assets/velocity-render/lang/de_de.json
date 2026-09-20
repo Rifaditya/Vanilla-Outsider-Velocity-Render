@@ -20,6 +20,9 @@
   "velocityrender.gamerule.turn_widening": "Dynamische Kurvenverbreiterung",
   "velocityrender.gamerule.turn_widening.description": "Verbreitert den Chunk-Generierungskorridor bei scharfen Kurven dynamisch, um Ladeleeren an Außenkurven zu verhindern.",
 
+  "velocityrender.gamerule.vertical_lookahead": "Vertikaler Vorgriff",
+  "velocityrender.gamerule.vertical_lookahead.description": "Bezieht die vertikale Nickgeschwindigkeit in das Chunk-Meshing und Korridor-Updates bei Sturzflügen und Steigflügen ein.",
+
   "velocityrender.command.status.header": "=== Velocity Render Status ===",
   "velocityrender.command.status.speed": "Geschwindigkeit: %s B/T (%s m/s)",
   "velocityrender.command.status.reach": "Dynamische Reichweite: %s Chunks (MSPT: %sms)",

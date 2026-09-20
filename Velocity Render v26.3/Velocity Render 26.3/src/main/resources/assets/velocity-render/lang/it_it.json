@@ -1,0 +1,32 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Mesh dei chunk anisotropo orientato alla velocità e generazione predittiva avanzata dei chunk per viaggiatori veloci.",
+
+  "velocityrender.gamerule.enabled": "Interruttore principale Velocity Render",
+  "velocityrender.gamerule.enabled.description": "Interruttore principale per attivare il meshing orientato alla velocità sul client e la generazione predittiva sul server.",
+
+  "velocityrender.gamerule.lead_multiplier": "Moltiplicatore di anticipo",
+  "velocityrender.gamerule.lead_multiplier.description": "Scala l'ampiezza dell'anticipo lungo il vettore di movimento per le richieste di caricamento dei chunk (da 0% a 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Conservazione adattiva delle risorse",
+  "velocityrender.gamerule.budget_conservation.description": "Riduce dinamicamente i ticket laterali e posteriori a velocità elevate per proteggere il TPS del server.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Soglia di velocità minima",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Velocità minima in centesimi di blocco/tick richiesta per attivare l'anticipo (es. 20 = 0.20 b/t).",
+
+  "velocityrender.gamerule.debug_mode": "Diagnostica di debug sviluppatore",
+  "velocityrender.gamerule.debug_mode.description": "Registra diagnostica vettoriale in tempo reale, conteggio dei ticket e regolazioni MSPT nella console del server.",
+
+  "velocityrender.gamerule.turn_widening": "Allargamento in curva",
+  "velocityrender.gamerule.turn_widening.description": "Allarga dinamicamente il corridoio di generazione durante le virate strette per prevenire buchi vuoti sul raggio esterno.",
+
+  "velocityrender.gamerule.vertical_lookahead": "Anticipazione Verticale",
+  "velocityrender.gamerule.vertical_lookahead.description": "Incorpora la velocità di beccheggio verticale nel meshing dei chunk e negli aggiornamenti di quota durante picchiate e risalite.",
+
+  "velocityrender.command.status.header": "=== Stato di Velocity Render ===",
+  "velocityrender.command.status.speed": "Velocità: %s b/t (%s m/s)",
+  "velocityrender.command.status.reach": "Portata dinamica: %s chunk (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "Ticket di traiettoria attivi: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Configurazione e regole di gioco ricaricate con successo.",
+  "velocityrender.command.reset.success": "[Velocity Render] Tutte le impostazioni sono state ripristinate ai valori predefiniti vanilla."
+}

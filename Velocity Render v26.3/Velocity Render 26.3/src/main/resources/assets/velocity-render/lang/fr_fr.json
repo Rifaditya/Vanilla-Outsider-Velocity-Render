@@ -20,6 +20,9 @@
   "velocityrender.gamerule.turn_widening": "Élargissement en virage incliné",
   "velocityrender.gamerule.turn_widening.description": "Élargit dynamiquement le couloir de génération lors des virages serrés pour éviter les vides sur la courbe extérieure.",
 
+  "velocityrender.gamerule.vertical_lookahead": "Anticipation Verticale",
+  "velocityrender.gamerule.vertical_lookahead.description": "Incorpore la vitesse de tangage vertical dans le maillage des tronçons et la mise à jour des couloirs lors des piqués et montées.",
+
   "velocityrender.command.status.header": "=== État de Velocity Render ===",
   "velocityrender.command.status.speed": "Vitesse : %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Portée dynamique : %s tronçons (MSPT : %sms)",

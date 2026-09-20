@@ -20,6 +20,9 @@
   "velocityrender.gamerule.turn_widening": "转向走廊动态加宽",
   "velocityrender.gamerule.turn_widening.description": "在急转弯时动态拓宽区块生成走廊，防止外侧弯道出现虚空与区块未加载盲区。",
 
+  "velocityrender.gamerule.vertical_lookahead": "垂直预载渲染",
+  "velocityrender.gamerule.vertical_lookahead.description": "在俯冲和攀升期间，将垂直俯仰速度纳入区块网格处理与高度通道更新。",
+
   "velocityrender.command.status.header": "=== 速度渲染 (Velocity Render) 状态 ===",
   "velocityrender.command.status.speed": "当前速度: %s 格/刻 (%s 米/秒)",
   "velocityrender.command.status.reach": "动态前瞻范围: %s 区块 (MSPT: %sms)",

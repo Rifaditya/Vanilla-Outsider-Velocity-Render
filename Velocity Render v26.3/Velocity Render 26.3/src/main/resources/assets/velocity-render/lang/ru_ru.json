@@ -20,6 +20,9 @@
   "velocityrender.gamerule.turn_widening": "Расширение коридора на виражах",
   "velocityrender.gamerule.turn_widening.description": "Динамически расширяет коридор генерации чанков при резких поворотах для предотвращения пустот по внешней дуге.",
 
+  "velocityrender.gamerule.vertical_lookahead": "Вертикальное упреждение",
+  "velocityrender.gamerule.vertical_lookahead.description": "Учитывает вертикальную скорость тангажа при мешинге чанков и обновлении коридора при пикировании и взлёте.",
+
   "velocityrender.command.status.header": "=== Статус Velocity Render ===",
   "velocityrender.command.status.speed": "Скорость: %s б/т (%s м/с)",
   "velocityrender.command.status.reach": "Динамический охват: %s чанков (MSPT: %sms)",
