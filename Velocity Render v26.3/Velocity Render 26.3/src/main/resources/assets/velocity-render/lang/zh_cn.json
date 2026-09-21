@@ -35,6 +35,9 @@
   "velocityrender.gamerule.default_dense_reach_clamp_pct": "高密度维度前瞻范围限制",
   "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "非主世界或高密度模组维度中预测前瞻走廊的距离缩放比例 (10% 至 100%)。",
 
+  "velocityrender.gamerule.lod_trajectory_hooks": "LOD 速度轨迹钩子",
+  "velocityrender.gamerule.lod_trajectory_hooks.description": "将前向运动轨迹广播给 Distant Horizons 和 Bobby，以优先加载远景地形。",
+
   "velocityrender.command.status.header": "=== 速度渲染 (Velocity Render) 状态 ===",
   "velocityrender.command.status.speed": "当前速度: %s 格/刻 (%s 米/秒)",
   "velocityrender.command.status.reach": "动态前瞻范围: %s 区块 (MSPT: %sms)",

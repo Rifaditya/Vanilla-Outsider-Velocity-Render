@@ -35,6 +35,9 @@
   "velocityrender.gamerule.default_dense_reach_clamp_pct": "Batas Jangkauan Dimensi Padat",
   "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Persentase jangkauan koridor prediktif ke depan di dimensi selain Overworld atau dimensi mod padat (10% hingga 100%).",
 
+  "velocityrender.gamerule.lod_trajectory_hooks": "Kaitan Lintasan Kecepatan LOD",
+  "velocityrender.gamerule.lod_trajectory_hooks.description": "Menyiarkan lintasan kecepatan ke depan menuju Distant Horizons dan Bobby untuk memprioritaskan pemuatan medan jauh.",
+
   "velocityrender.command.status.header": "=== Status Velocity Render ===",
   "velocityrender.command.status.speed": "Kecepatan: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Jangkauan Dinamis: %s chunk (MSPT: %sms)",

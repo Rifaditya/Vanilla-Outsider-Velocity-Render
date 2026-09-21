@@ -23,3 +23,4 @@
 - [ ] **1.5.3+26.3** — Step 4: Server Predictive Generation Dimension Gating (BL-VR-005).
 - [ ] **1.5.4+26.3** — Step 5: Brigadier Command Controls & Telemetry (BL-VR-005 Finale).
 - [ ] **1.6.0+26.3** — Step 1: Pure LOD Trajectory Math Engine (BL-VR-006).
+- [ ] **1.6.1+26.3** — Step 2: Dynamic GameRule & 12-Language Localization Parity (BL-VR-006).

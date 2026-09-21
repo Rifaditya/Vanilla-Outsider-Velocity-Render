@@ -35,6 +35,9 @@
   "velocityrender.gamerule.default_dense_reach_clamp_pct": "Dense Dimension Reach Clamp",
   "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Forward lookahead corridor reach percentage in non-Overworld or dense modded dimensions (10% to 100%).",
 
+  "velocityrender.gamerule.lod_trajectory_hooks": "LOD Velocity Trajectory Hooks",
+  "velocityrender.gamerule.lod_trajectory_hooks.description": "Broadcasts forward velocity trajectory to Distant Horizons and Bobby to prioritize distant terrain loading.",
+
   "velocityrender.command.status.header": "=== Velocity Render Status ===",
   "velocityrender.command.status.speed": "Speed: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Dynamic Reach: %s chunks (MSPT: %sms)",

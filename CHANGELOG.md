@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.6.1+26.3] - Dynamic LOD Trajectory GameRule & 12-Language Localization
+- **Dynamic LOD Trajectory GameRule**: Registered `velocityrender:lod_trajectory_hooks` (default: `true`), allowing world hosts and server operators to toggle distant terrain lookahead trajectory broadcasting on the fly.
+- **12-Language Universal Localization**: Fully synchronized translations and in-depth descriptions for the new GameRule across all 12 supported languages (English, German, Spanish, French, Indonesian, Italian, Japanese, Korean, Portuguese, Russian, Simplified Chinese, Traditional Chinese).
+- **Null-Safe API Accessor**: Exposed `VelocityRenderGameRules.isLodTrajectoryHooksEnabled(Level)` for safe, zero-allocation runtime rule querying.
+
+---
+
 ## [1.6.0+26.3] - Distant LOD Lookahead Trajectory Math Engine
 - **Distant LOD Trajectory Calculation**: Introduced high-performance mathematical engine designed for distant Level of Detail (LOD) and chunk-caching architectures.
 - **Aggressive Distant Lookahead Scaling**: Computes 3D trajectory focus coordinates scaled linearly up to 1,024 blocks ahead during high-speed travel, aligning with massive view distances in distant rendering mods.

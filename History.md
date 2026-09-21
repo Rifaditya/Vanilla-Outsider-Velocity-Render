@@ -1,5 +1,10 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.6.1+26.3] - Dynamic GameRule & 12-Language Localization Parity (BL-VR-006 Step 2)
+- Declared and registered dynamic boolean GameRule `LOD_TRAJECTORY_HOOKS` (`velocityrender:lod_trajectory_hooks`, default: `true`) in `VelocityRenderGameRules`.
+- Added public static accessor `VelocityRenderGameRules.isLodTrajectoryHooksEnabled(Level)` providing null-safe boolean evaluation.
+- Added comprehensive localized names and detailed descriptions across all 12 supported languages (`en_us`, `de_de`, `es_es`, `fr_fr`, `id_id`, `it_it`, `ja_jp`, `ko_kr`, `pt_br`, `ru_ru`, `zh_cn`, `zh_tw`).
+
 ## [1.6.0+26.3] - Pure LOD Trajectory Math Engine (BL-VR-006 Step 1)
 - Created `LODTrajectoryCalculator` in `net.vanillaoutsider.velocityrender.math`:
   - Implemented `calculateLeadOffset(double speed, double leadMultiplier)` scaling linearly (`speed * 256.0 * leadMultiplier`) and clamping at `MAX_LOD_LEAD_OFFSET = 1024.0` blocks.

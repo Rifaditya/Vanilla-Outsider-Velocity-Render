@@ -35,6 +35,9 @@
   "velocityrender.gamerule.default_dense_reach_clamp_pct": "Limite de Portée pour Dimensions Denses",
   "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Pourcentage de portée du couloir prédictif dans les dimensions denses ou hors Overworld (10% à 100%).",
 
+  "velocityrender.gamerule.lod_trajectory_hooks": "Crochets de trajectoire LOD par vélocité",
+  "velocityrender.gamerule.lod_trajectory_hooks.description": "Transmet la trajectoire de vitesse avant à Distant Horizons et Bobby pour prioriser le chargement du terrain lointain.",
+
   "velocityrender.command.status.header": "=== État de Velocity Render ===",
   "velocityrender.command.status.speed": "Vitesse : %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Portée dynamique : %s tronçons (MSPT : %sms)",

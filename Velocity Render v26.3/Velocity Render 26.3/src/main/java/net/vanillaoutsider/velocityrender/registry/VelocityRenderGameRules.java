@@ -27,6 +27,7 @@ public final class VelocityRenderGameRules {
     public static GameRule<Boolean> F3_DEBUG;
     public static GameRule<Integer> NETHER_REACH_CLAMP_PCT;
     public static GameRule<Integer> DEFAULT_DENSE_REACH_CLAMP_PCT;
+    public static GameRule<Boolean> LOD_TRAJECTORY_HOOKS;
 
     private VelocityRenderGameRules() {
     }
@@ -93,6 +94,11 @@ public final class VelocityRenderGameRules {
                 .name("Dense Dimension Reach Clamp")
                 .description("Forward lookahead corridor reach percentage in non-Overworld or dense modded dimensions (10% - 100%)")
                 .register();
+
+        LOD_TRAJECTORY_HOOKS = DynamicGameRuleManager.booleanRule("velocityrender:lod_trajectory_hooks", CATEGORY, true)
+                .name("LOD Trajectory Hooks")
+                .description("Broadcast forward velocity trajectory to Distant Horizons and Bobby to prioritize distant terrain loading")
+                .register();
     }
 
     public static boolean isEnabled(Level level) {
@@ -137,5 +143,9 @@ public final class VelocityRenderGameRules {
 
     public static int getDefaultDenseReachClampPct(Level level) {
         return DynamicGameRuleManager.getInt(level, DEFAULT_DENSE_REACH_CLAMP_PCT);
+    }
+
+    public static boolean isLodTrajectoryHooksEnabled(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, LOD_TRAJECTORY_HOOKS);
     }
 }

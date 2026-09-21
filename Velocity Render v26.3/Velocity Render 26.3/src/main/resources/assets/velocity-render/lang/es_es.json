@@ -35,6 +35,9 @@
   "velocityrender.gamerule.default_dense_reach_clamp_pct": "Límite de Alcance para Dimensiones Densas",
   "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Porcentaje de alcance del corredor predictivo en dimensiones densas o distintas al Overworld (10% a 100%).",
 
+  "velocityrender.gamerule.lod_trajectory_hooks": "Ganchos de trayectoria LOD por velocidad",
+  "velocityrender.gamerule.lod_trajectory_hooks.description": "Transmite la trayectoria de velocidad frontal a Distant Horizons y Bobby para priorizar la carga de terreno distante.",
+
   "velocityrender.command.status.header": "=== Estado de Velocity Render ===",
   "velocityrender.command.status.speed": "Velocidad: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Alcance dinámico: %s chunks (MSPT: %sms)",
