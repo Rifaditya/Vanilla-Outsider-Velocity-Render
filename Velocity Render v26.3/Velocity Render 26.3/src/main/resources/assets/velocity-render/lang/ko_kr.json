@@ -43,5 +43,43 @@
   "velocityrender.command.status.reach": "동적 도달 범위: %s 청크 (MSPT: %sms)",
   "velocityrender.command.status.tickets": "활성 궤적 티켓: %s",
   "velocityrender.command.reload.success": "[Velocity Render] 설정 및 게임 규칙이 성공적으로 다시 로드되었습니다.",
-  "velocityrender.command.reset.success": "[Velocity Render] 모든 설정이 바닐라 기본값으로 복원되었습니다."
+  "velocityrender.command.reset.success": "[Velocity Render] 모든 설정이 바닐라 기본값으로 복원되었습니다.",
+
+  "config.velocityrender.title": "Velocity Render 설정",
+  "config.velocityrender.category.flight": "비행 편향 및 메시 구축",
+  "config.velocityrender.category.server": "서버 할당량 및 월드 생성",
+  "config.velocityrender.category.telemetry": "원격 측정 및 호환성",
+
+  "config.velocityrender.enabled": "마스터 스위치",
+  "config.velocityrender.enabled.description": "클라이언트의 속도 편향 청크 메시 구축 및 서버의 예측 생성을 활성화하는 마스터 스위치입니다. 기본값: 활성화됨.",
+
+  "config.velocityrender.leadMultiplier": "전방 예측 배율",
+  "config.velocityrender.leadMultiplier.description": "속도 벡터를 따라 청크 로딩 티켓 및 메시 구축이 도달하는 거리를 조정합니다. 기본값: 100%. 값이 높을수록 더 먼 곳을 미리 내다보지만 CPU 부담이 증가합니다.",
+
+  "config.velocityrender.minSpeedThresholdPct": "최소 활성화 속도 임계값",
+  "config.velocityrender.minSpeedThresholdPct.description": "전방 우선순위를 활성화하는 데 필요한 최소 속도 (20 = 0.20 블록/틱 또는 4.0 m/s). 기본값: 20.",
+
+  "config.velocityrender.turnWidening": "회전 시 회랑 확장",
+  "config.velocityrender.turnWidening.description": "겉날개 급회전 시 전방 청크 생성 회랑을 동적으로 넓혀 시야에 공허 구멍이 생기는 것을 방지합니다. 기본값: 활성화됨.",
+
+  "config.velocityrender.verticalLookahead": "수직 예측 렌더링",
+  "config.velocityrender.verticalLookahead.description": "가파른 급강하 및 폭죽 급상승 시 수직 피치 속도를 청크 메시 및 고도 업데이트에 반영합니다. 기본값: 활성화됨.",
+
+  "config.velocityrender.serverTicketBudget": "서버 티켓 예산",
+  "config.velocityrender.serverTicketBudget.description": "동시 비행 중인 모든 플레이어에게 서버 전체에서 할당되는 최대 활성 예측 로딩 티켓 수입니다. 기본값: 64개 티켓.",
+
+  "config.velocityrender.netherReachClampPct": "네더 도달 범위 제한",
+  "config.velocityrender.netherReachClampPct.description": "복잡한 3D 동굴 지형 생성으로 인한 지연 현상을 방지하기 위한 네더 내 전방 예측 도달 비율 (10% ~ 100%). 기본값: 60%.",
+
+  "config.velocityrender.defaultDenseReachClampPct": "고밀도 차원 제한",
+  "config.velocityrender.defaultDenseReachClampPct.description": "오버월드 외의 차원 또는 고밀도 모드 차원에서의 전방 예측 도달 비율 (10% ~ 100%). 기본값: 80%.",
+
+  "config.velocityrender.lodTrajectoryHooks": "LOD 궤적 훅",
+  "config.velocityrender.lodTrajectoryHooks.description": "전방 속도 궤적을 Distant Horizons 및 Bobby로 전달하여 먼 거리 지형 생성을 가속화합니다. 기본값: 활성화됨.",
+
+  "config.velocityrender.f3Debug": "F3 화면 진단",
+  "config.velocityrender.f3Debug.description": "Minecraft F3 디버그 화면에 Velocity Render 엔진 원격 측정을 표시합니다. 기본값: 활성화됨.",
+
+  "config.velocityrender.debugMode": "개발자 디버그 진단",
+  "config.velocityrender.debugMode.description": "상세한 벡터 계산 및 틱 업데이트를 개발자 게임 로그에 출력합니다. 기본값: 비활성화됨."
 }

@@ -1,5 +1,13 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.7.1+26.3] - 12-Language GUI Localization Parity (BL-VR-007 Step 2)
+- Added full suite of 26 translatable GUI keys (`config.velocityrender.*`) to master `en_us.json`:
+  - Screen title: `config.velocityrender.title`
+  - 3 Category headers: `category.flight`, `category.server`, `category.telemetry`
+  - 11 configuration options matching `VelocityRenderConfig` fields with rich player-friendly description tooltips.
+- Synchronized all 11 non-English language files (`de_de.json`, `es_es.json`, `fr_fr.json`, `id_id.json`, `it_it.json`, `ja_jp.json`, `ko_kr.json`, `pt_br.json`, `ru_ru.json`, `zh_cn.json`, `zh_tw.json`) with native translations.
+- Verified 100% key parity: all 12 files possess exactly 58 translation keys with zero missing keys or syntax errors.
+
 ## [1.7.0+26.3] - Optional GUI Dependencies & Config Model (BL-VR-007 Step 1)
 - Added Maven repository `https://maven.isxander.dev/releases` to `build.gradle`.
 - Declared `compileOnly` dependencies for `dev.isxander:yet-another-config-lib:3.9.5+26.2-fabric` and `com.terraformersmc:modmenu:18.0.0-beta.1`, ensuring zero runtime bytecode bundling in the distributed JAR.

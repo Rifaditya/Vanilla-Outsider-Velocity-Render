@@ -43,5 +43,43 @@
   "velocityrender.command.status.reach": "Dynamische Reichweite: %s Chunks (MSPT: %sms)",
   "velocityrender.command.status.tickets": "Aktive Trajektorien-Tickets: %s",
   "velocityrender.command.reload.success": "[Velocity Render] Konfiguration und Spielregeln erfolgreich neu geladen.",
-  "velocityrender.command.reset.success": "[Velocity Render] Alle Einstellungen auf Vanilla-Standardwerte zurückgesetzt."
+  "velocityrender.command.reset.success": "[Velocity Render] Alle Einstellungen auf Vanilla-Standardwerte zurückgesetzt.",
+
+  "config.velocityrender.title": "Velocity Render Einstellungen",
+  "config.velocityrender.category.flight": "Flugausrichtung & Meshing",
+  "config.velocityrender.category.server": "Server-Kontingente & Weltgenerierung",
+  "config.velocityrender.category.telemetry": "Telemetrie & Kompatibilität",
+
+  "config.velocityrender.enabled": "Hauptschalter",
+  "config.velocityrender.enabled.description": "Hauptschalter zur Aktivierung des geschwindigkeitsbasierten Chunk-Meshings auf dem Client und der vorausschauenden Generierung auf dem Server. Standard: Aktiviert.",
+
+  "config.velocityrender.leadMultiplier": "Vorlauf-Multiplikator",
+  "config.velocityrender.leadMultiplier.description": "Skaliert, wie weit im Voraus entlang Ihres Geschwindigkeitsvektors Chunk-Ladetickets und Meshing reichen. Standard: 100%. Höhere Werte blicken bei höheren CPU-Kosten weiter voraus.",
+
+  "config.velocityrender.minSpeedThresholdPct": "Mindestgeschwindigkeitsschwelle",
+  "config.velocityrender.minSpeedThresholdPct.description": "Erforderliche Mindestgeschwindigkeit in Hundertstel Blöcken/Tick zur Aktivierung der Vorwärtspriorisierung (20 = 0.20 B/T oder 4.0 m/s). Standard: 20.",
+
+  "config.velocityrender.turnWidening": "Kurvenverbreiterung",
+  "config.velocityrender.turnWidening.description": "Verbreitert den Vorwärtskorridor bei scharfen Elytren-Kurven dynamisch, um Lücken im Sichtfeld zu vermeiden. Standard: Aktiviert.",
+
+  "config.velocityrender.verticalLookahead": "Vertikale Vorausschau",
+  "config.velocityrender.verticalLookahead.description": "Bezieht die vertikale Neigungsgeschwindigkeit bei steilen Sturzflügen und Raketenaufstiegen in die Chunk-Priorität ein. Standard: Aktiviert.",
+
+  "config.velocityrender.serverTicketBudget": "Server-Ticket-Budget",
+  "config.velocityrender.serverTicketBudget.description": "Maximale Anzahl aktiver Vorwärtslade-Tickets serverweit über alle gleichzeitigen Flieger. Standard: 64 Tickets.",
+
+  "config.velocityrender.netherReachClampPct": "Nether-Reichweitenbegrenzung",
+  "config.velocityrender.netherReachClampPct.description": "Begrenzt die Vorwärtsreichweite im Nether (10% bis 100%), um Weltgenerierungs-Lags durch komplexe 3D-Höhlen zu verhindern. Standard: 60%.",
+
+  "config.velocityrender.defaultDenseReachClampPct": "Dichte-Dimensionsbegrenzung",
+  "config.velocityrender.defaultDenseReachClampPct.description": "Vorwärtsreichweite in Nicht-Oberwelt- oder dichten Mod-Dimensionen (10% bis 100%). Standard: 80%.",
+
+  "config.velocityrender.lodTrajectoryHooks": "LOD-Trajektorien-Hooks",
+  "config.velocityrender.lodTrajectoryHooks.description": "Überträgt die Flugtrajektorie an Distant Horizons und Bobby, um die Generierung entfernter LOD-Terrain-Chunks zu beschleunigen. Standard: Aktiviert.",
+
+  "config.velocityrender.f3Debug": "F3-Bildschirmdiagnose",
+  "config.velocityrender.f3Debug.description": "Zeigt Echtzeit-Ticketanzahl, Watchdog-Lastabwurf und Kegelwinkel auf dem Minecraft-F3-Bildschirm an. Standard: Aktiviert.",
+
+  "config.velocityrender.debugMode": "Entwickler-Debug-Diagnose",
+  "config.velocityrender.debugMode.description": "Gibt detaillierte Vektorberechnungen und Tick-Updates im Spielprotokoll aus. Standard: Deaktiviert."
 }

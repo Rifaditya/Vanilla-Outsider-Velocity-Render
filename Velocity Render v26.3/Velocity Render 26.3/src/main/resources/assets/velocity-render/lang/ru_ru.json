@@ -43,5 +43,43 @@
   "velocityrender.command.status.reach": "Динамический охват: %s чанков (MSPT: %sms)",
   "velocityrender.command.status.tickets": "Активные тикеты траектории: %s",
   "velocityrender.command.reload.success": "[Velocity Render] Конфигурация и игровые правила успешно перезагружены.",
-  "velocityrender.command.reset.success": "[Velocity Render] Все параметры сброшены до стандартных значений."
+  "velocityrender.command.reset.success": "[Velocity Render] Все параметры сброшены до стандартных значений.",
+
+  "config.velocityrender.title": "Настройки Velocity Render",
+  "config.velocityrender.category.flight": "Ориентация в полёте и мешинг",
+  "config.velocityrender.category.server": "Квоты сервера и генерация",
+  "config.velocityrender.category.telemetry": "Телеметрия и совместимость",
+
+  "config.velocityrender.enabled": "Главный переключатель",
+  "config.velocityrender.enabled.description": "Главный переключатель для активации мешинга чанков по вектору скорости на клиенте и упреждающей генерации на сервере. По умолчанию: Включено.",
+
+  "config.velocityrender.leadMultiplier": "Множитель упреждения хода",
+  "config.velocityrender.leadMultiplier.description": "Масштабирует дистанцию запроса тикетов загрузки чанков и охват мешинга вдоль вектора скорости. По умолчанию: 100%. Более высокие значения заглядывают дальше ценой повышенной нагрузки на ЦП.",
+
+  "config.velocityrender.minSpeedThresholdPct": "Минимальный порог скорости",
+  "config.velocityrender.minSpeedThresholdPct.description": "Минимальная скорость в сотых долях блока за такт, необходимая для активации упреждения (20 = 0.20 б/т или 4.0 м/с). По умолчанию: 20.",
+
+  "config.velocityrender.turnWidening": "Расширение коридора на виражах",
+  "config.velocityrender.turnWidening.description": "Динамически расширяет коридор генерации чанков при резких виражах на элитрах для устранения видимых пустот. По умолчанию: Включено.",
+
+  "config.velocityrender.verticalLookahead": "Вертикальное упреждение",
+  "config.velocityrender.verticalLookahead.description": "Учитывает вертикальную скорость тангажа при мешинге чанков и обновлении высотного коридора при крутом пикировании и взлёте на ракетах. По умолчанию: Включено.",
+
+  "config.velocityrender.serverTicketBudget": "Бюджет тикетов сервера",
+  "config.velocityrender.serverTicketBudget.description": "Максимальное общее количество активных тикетов упреждающей загрузки, выделяемых на сервере для всех одновременно летящих игроков. По умолчанию: 64 тикета.",
+
+  "config.velocityrender.netherReachClampPct": "Ограничение охвата в Незере",
+  "config.velocityrender.netherReachClampPct.description": "Процент дальности упреждающего коридора в Незере (от 10% до 100%) для предотвращения лагов при сложной 3D-генерации пещер. По умолчанию: 60%.",
+
+  "config.velocityrender.defaultDenseReachClampPct": "Ограничение плотных измерений",
+  "config.velocityrender.defaultDenseReachClampPct.description": "Процент дальности упреждающего коридора в измерениях вне Верхнего мира или плотных мирах модов (от 10% до 100%). По умолчанию: 80%.",
+
+  "config.velocityrender.lodTrajectoryHooks": "Хуки траектории LOD",
+  "config.velocityrender.lodTrajectoryHooks.description": "Передаёт траекторию скорости в полёте в Distant Horizons и Bobby для ускорения генерации дальнего ландшафта. По умолчанию: Включено.",
+
+  "config.velocityrender.f3Debug": "Диагностика экрана F3",
+  "config.velocityrender.f3Debug.description": "Отображает телеметрию движка Velocity Render на экране отладки F3 Minecraft. По умолчанию: Включено.",
+
+  "config.velocityrender.debugMode": "Диагностика разработчика",
+  "config.velocityrender.debugMode.description": "Записывает подробные расчёты векторов и обновления тактов в игровой журнал отладки. По умолчанию: Отключено."
 }

@@ -43,5 +43,43 @@
   "velocityrender.command.status.reach": "Portée dynamique : %s tronçons (MSPT : %sms)",
   "velocityrender.command.status.tickets": "Tickets de trajectoire actifs : %s",
   "velocityrender.command.reload.success": "[Velocity Render] Configuration et règles de jeu rechargées avec succès.",
-  "velocityrender.command.reset.success": "[Velocity Render] Tous les paramètres ont été réinitialisés aux valeurs par défaut."
+  "velocityrender.command.reset.success": "[Velocity Render] Tous les paramètres ont été réinitialisés aux valeurs par défaut.",
+
+  "config.velocityrender.title": "Paramètres de Velocity Render",
+  "config.velocityrender.category.flight": "Orientation de Vol & Maillage",
+  "config.velocityrender.category.server": "Quotas Serveur & Génération",
+  "config.velocityrender.category.telemetry": "Télémétrie & Compatibilité",
+
+  "config.velocityrender.enabled": "Interrupteur Principal",
+  "config.velocityrender.enabled.description": "Interrupteur principal pour activer le maillage de tronçons orienté par la vitesse côté client et la génération prédictive côté serveur. Par défaut : Activé.",
+
+  "config.velocityrender.leadMultiplier": "Multiplicateur d'Anticipation Avant",
+  "config.velocityrender.leadMultiplier.description": "Ajuste la distance d'anticipation des tickets de chargement et du maillage le long du vecteur de vitesse. Par défaut : 100%. Des valeurs plus élevées voient plus loin au prix d'un coût processeur supérieur.",
+
+  "config.velocityrender.minSpeedThresholdPct": "Seuil de Vitesse Minimale",
+  "config.velocityrender.minSpeedThresholdPct.description": "Vitesse minimale en centièmes de bloc/tick requise pour activer l'orientation avant (20 = 0.20 b/t ou 4.0 m/s). Par défaut : 20.",
+
+  "config.velocityrender.turnWidening": "Élargissement en Virage Incliné",
+  "config.velocityrender.turnWidening.description": "Élargit dynamiquement le couloir de génération des tronçons lors des virages serrés en élytres pour éliminer les trous de vide. Par défaut : Activé.",
+
+  "config.velocityrender.verticalLookahead": "Anticipation Verticale",
+  "config.velocityrender.verticalLookahead.description": "Incorpore la vitesse de tangage vertical dans le maillage des tronçons et la mise à jour de l'altitude lors des piqués et des montées. Par défaut : Activé.",
+
+  "config.velocityrender.serverTicketBudget": "Budget de Tickets du Serveur",
+  "config.velocityrender.serverTicketBudget.description": "Nombre maximal total de tickets de chargement prédictif alloués à l'échelle du serveur pour tous les joueurs en vol. Par défaut : 64 tickets.",
+
+  "config.velocityrender.netherReachClampPct": "Limite de Portée du Nether",
+  "config.velocityrender.netherReachClampPct.description": "Pourcentage de portée du couloir prédictif dans le Nether (10% à 100%) afin d'éviter les ralentissements dus à la génération 3D complexe. Par défaut : 60%.",
+
+  "config.velocityrender.defaultDenseReachClampPct": "Limite en Dimensions Denses",
+  "config.velocityrender.defaultDenseReachClampPct.description": "Pourcentage de portée du couloir prédictif dans les dimensions denses ou personnalisées hors Overworld (10% à 100%). Par défaut : 80%.",
+
+  "config.velocityrender.lodTrajectoryHooks": "Crochets de Trajectoire LOD",
+  "config.velocityrender.lodTrajectoryHooks.description": "Transmet la trajectoire de vitesse en vol à Distant Horizons et Bobby pour accélérer la génération du terrain lointain. Par défaut : Activé.",
+
+  "config.velocityrender.f3Debug": "Diagnostics de l'Écran F3",
+  "config.velocityrender.f3Debug.description": "Affiche la télémétrie du moteur Velocity Render sur l'écran de débogage F3 de Minecraft. Par défaut : Activé.",
+
+  "config.velocityrender.debugMode": "Diagnostics de Débogage Développeur",
+  "config.velocityrender.debugMode.description": "Enregistre les calculs de vecteurs détaillés et les mises à jour de ticks dans le journal de jeu. Par défaut : Désactivé."
 }

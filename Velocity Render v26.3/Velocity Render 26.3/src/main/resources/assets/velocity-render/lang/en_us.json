@@ -43,5 +43,43 @@
   "velocityrender.command.status.reach": "Dynamic Reach: %s chunks (MSPT: %sms)",
   "velocityrender.command.status.tickets": "Active Trajectory Tickets: %s",
   "velocityrender.command.reload.success": "[Velocity Render] Configuration and GameRules reloaded successfully.",
-  "velocityrender.command.reset.success": "[Velocity Render] All settings restored to vanilla defaults."
+  "velocityrender.command.reset.success": "[Velocity Render] All settings restored to vanilla defaults.",
+
+  "config.velocityrender.title": "Velocity Render Settings",
+  "config.velocityrender.category.flight": "Flight Biasing & Meshing",
+  "config.velocityrender.category.server": "Server Quotas & WorldGen",
+  "config.velocityrender.category.telemetry": "Telemetry & Compatibility",
+
+  "config.velocityrender.enabled": "Master Switch",
+  "config.velocityrender.enabled.description": "Master switch to enable velocity-biased chunk meshing on the client and predictive generation on the server. Default: Enabled.",
+
+  "config.velocityrender.leadMultiplier": "Forward Lead Multiplier",
+  "config.velocityrender.leadMultiplier.description": "Scales how far ahead along your velocity vector chunk loading tickets and meshing reach. Default: 100%. Higher values look farther ahead at higher CPU cost.",
+
+  "config.velocityrender.minSpeedThresholdPct": "Minimum Speed Threshold",
+  "config.velocityrender.minSpeedThresholdPct.description": "Minimum velocity in hundredths of a block/tick required before activating forward bias (20 = 0.20 b/t or 4.0 m/s). Default: 20.",
+
+  "config.velocityrender.turnWidening": "Banked Turn Widening",
+  "config.velocityrender.turnWidening.description": "Dynamically widens the forward chunk generation corridor during sharp Elytra banked turns to eliminate void gaps. Default: Enabled.",
+
+  "config.velocityrender.verticalLookahead": "Vertical Lookahead",
+  "config.velocityrender.verticalLookahead.description": "Incorporate vertical pitch velocity into chunk meshing and altitude corridor updates during dives and climbs. Default: Enabled.",
+
+  "config.velocityrender.serverTicketBudget": "Server Ticket Budget",
+  "config.velocityrender.serverTicketBudget.description": "Maximum total active forward loading tickets allocated server-wide across all concurrent flyers. Default: 64 tickets.",
+
+  "config.velocityrender.netherReachClampPct": "Nether Reach Clamp",
+  "config.velocityrender.netherReachClampPct.description": "Forward lookahead corridor reach percentage in the Nether (10% to 100%) to prevent heavy 3D carver worldgen lag. Default: 60%.",
+
+  "config.velocityrender.defaultDenseReachClampPct": "Dense Dimension Clamp",
+  "config.velocityrender.defaultDenseReachClampPct.description": "Forward lookahead corridor reach percentage in non-Overworld or dense modded dimensions (10% to 100%). Default: 80%.",
+
+  "config.velocityrender.lodTrajectoryHooks": "LOD Trajectory Hooks",
+  "config.velocityrender.lodTrajectoryHooks.description": "Broadcasts forward velocity trajectory to Distant Horizons and Bobby to accelerate distant terrain generation. Default: Enabled.",
+
+  "config.velocityrender.f3Debug": "F3 Screen Diagnostics",
+  "config.velocityrender.f3Debug.description": "Display Velocity Render engine telemetry on the Minecraft F3 debug screen. Default: Enabled.",
+
+  "config.velocityrender.debugMode": "Developer Debug Diagnostics",
+  "config.velocityrender.debugMode.description": "Outputs detailed vector calculations and tick updates to the developer game log. Default: Disabled."
 }

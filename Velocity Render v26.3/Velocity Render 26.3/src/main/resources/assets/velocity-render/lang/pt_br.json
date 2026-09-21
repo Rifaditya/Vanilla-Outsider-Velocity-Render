@@ -43,5 +43,43 @@
   "velocityrender.command.status.reach": "Alcance dinâmico: %s chunks (MSPT: %sms)",
   "velocityrender.command.status.tickets": "Tickets de trajetória ativos: %s",
   "velocityrender.command.reload.success": "[Velocity Render] Configurações e regras do jogo recarregadas com sucesso.",
-  "velocityrender.command.reset.success": "[Velocity Render] Todas as configurações foram restauradas para os padrões vanilla."
+  "velocityrender.command.reset.success": "[Velocity Render] Todas as configurações foram restauradas para os padrões vanilla.",
+
+  "config.velocityrender.title": "Configurações do Velocity Render",
+  "config.velocityrender.category.flight": "Prioridade de Voo & Malhagem",
+  "config.velocityrender.category.server": "Cotas do Servidor & Geração",
+  "config.velocityrender.category.telemetry": "Telemetria & Compatibilidade",
+
+  "config.velocityrender.enabled": "Interruptor Principal",
+  "config.velocityrender.enabled.description": "Interruptor mestre para ativar a malhagem de chunks orientada por velocidade no cliente e geração preditiva no servidor. Padrão: Ativado.",
+
+  "config.velocityrender.leadMultiplier": "Multiplicador de Alcance Frontal",
+  "config.velocityrender.leadMultiplier.description": "Escala a distância de alcance para tickets de carregamento e malhagem ao longo do seu vetor de velocidade. Padrão: 100%. Valores maiores enxergam mais longe com maior uso de CPU.",
+
+  "config.velocityrender.minSpeedThresholdPct": "Limite de Velocidade Mínima",
+  "config.velocityrender.minSpeedThresholdPct.description": "Velocidade mínima em centésimos de bloco/tick necessária para ativar a priorização frontal (20 = 0.20 b/t ou 4.0 m/s). Padrão: 20.",
+
+  "config.velocityrender.turnWidening": "Alargamento em Curvas",
+  "config.velocityrender.turnWidening.description": "Alarga dinamicamente o corredor de geração frontal durante curvas fechadas com élitros para eliminar vazios visíveis. Padrão: Ativado.",
+
+  "config.velocityrender.verticalLookahead": "Antecipação Vertical",
+  "config.velocityrender.verticalLookahead.description": "Incorpora a velocidade de inclinação vertical na malhagem e nas atualizações de altitude durante mergulhos ou subidas com foguetes. Padrão: Ativado.",
+
+  "config.velocityrender.serverTicketBudget": "Orçamento de Tickets do Servidor",
+  "config.velocityrender.serverTicketBudget.description": "Total máximo de tickets de carregamento preditivo ativos alocados em todo o servidor entre todos os jogadores voando simultaneamente. Padrão: 64 tickets.",
+
+  "config.velocityrender.netherReachClampPct": "Limite de Alcance do Nether",
+  "config.velocityrender.netherReachClampPct.description": "Porcentagem de alcance do corredor preditivo no Nether (10% a 100%) para evitar lag causado pela geração complexa de cavernas 3D. Padrão: 60%.",
+
+  "config.velocityrender.defaultDenseReachClampPct": "Limite em Dimensões Densas",
+  "config.velocityrender.defaultDenseReachClampPct.description": "Porcentagem de alcance do corredor preditivo em dimensões densas ou fora do Overworld (10% a 100%). Padrão: 80%.",
+
+  "config.velocityrender.lodTrajectoryHooks": "Ganchos de Trajetória LOD",
+  "config.velocityrender.lodTrajectoryHooks.description": "Transmite a trajetória de velocidade em voo para Distant Horizons e Bobby a fim de acelerar a geração de terreno distante. Padrão: Ativado.",
+
+  "config.velocityrender.f3Debug": "Diagnósticos na Tela F3",
+  "config.velocityrender.f3Debug.description": "Exibe a telemetria do motor Velocity Render na tela de depuração F3 do Minecraft. Padrão: Ativado.",
+
+  "config.velocityrender.debugMode": "Diagnósticos do Desenvolvedor",
+  "config.velocityrender.debugMode.description": "Registra cálculos detalhados de vetores e atualizações de ticks no log de jogo do desenvolvedor. Padrão: Desativado."
 }

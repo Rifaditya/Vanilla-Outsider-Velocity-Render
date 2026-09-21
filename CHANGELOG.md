@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.7.1+26.3] - 12-Language GUI Localization Parity
+- **Comprehensive GUI Localization**: Added full translations for all configuration screens, category headers, and settings options across all 12 supported languages (English, German, Spanish, French, Indonesian, Italian, Japanese, Korean, Brazilian Portuguese, Russian, Simplified Chinese, and Traditional Chinese).
+- **Player-Friendly Contextual Tooltips**: Enriched every setting description with clear gameplay context, default baselines, and performance guidance for extreme stress-testing.
+- **100% Key Parity**: Guaranteed identical translation key structures across all locale files with zero missing keys or localization warnings.
+
+---
+
 ## [1.7.0+26.3] - Optional GUI Foundation & Persistent Config Model
 - **Optional GUI Build Foundation**: Integrated compile-time interfaces for YetAnotherConfigLib (YACL v3) and ModMenu, establishing a clean foundation for upcoming in-game visual configuration screens without bundling external dependencies.
 - **Dedicated Configuration Storage**: Introduced persistent JSON configuration storage at `config/velocity-render/config.json`, allowing players and server operators to customize flight sensitivity, server quotas, and diagnostic overlays offline with full pretty-printed readability.

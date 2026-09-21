@@ -43,5 +43,43 @@
   "velocityrender.command.status.reach": "動態前瞻範圍: %s 區塊 (MSPT: %sms)",
   "velocityrender.command.status.tickets": "活動軌跡票券: %s",
   "velocityrender.command.reload.success": "[Velocity Render] 設定與遊戲規則已成功重新載入。",
-  "velocityrender.command.reset.success": "[Velocity Render] 所有設定已恢復至原版預設值。"
+  "velocityrender.command.reset.success": "[Velocity Render] 所有設定已恢復至原版預設值。",
+
+  "config.velocityrender.title": "Velocity Render 設定",
+  "config.velocityrender.category.flight": "飛行偏向與網格構建",
+  "config.velocityrender.category.server": "伺服器配額與世界生成",
+  "config.velocityrender.category.telemetry": "遙測與模組相容性",
+
+  "config.velocityrender.enabled": "主開關",
+  "config.velocityrender.enabled.description": "控制客戶端速度導向區塊網格構建與伺服器端前瞻預測生成的主開關。預設：已啟用。",
+
+  "config.velocityrender.leadMultiplier": "前向預測乘數",
+  "config.velocityrender.leadMultiplier.description": "沿速度向量調整區塊載入票券與網格構建的前瞻距離。預設：100%。數值越高看得越遠，但會佔用更多 CPU 資源。",
+
+  "config.velocityrender.minSpeedThresholdPct": "最小激活速度閾值",
+  "config.velocityrender.minSpeedThresholdPct.description": "激活前向偏置所需的最小速度（20 = 0.20 格/刻 或 4.0 米/秒）。預設：20。",
+
+  "config.velocityrender.turnWidening": "彎道走廊加寬",
+  "config.velocityrender.turnWidening.description": "使用鞘翅急轉彎時動態拓寬前向區塊生成走廊，消除視野中的虛空破洞。預設：已啟用。",
+
+  "config.velocityrender.verticalLookahead": "垂直前瞻預載",
+  "config.velocityrender.verticalLookahead.description": "在急速俯衝或火箭衝刺攀升時，將垂直俯仰速度納入區塊網格處理與高度走廊更新。預設：已啟用。",
+
+  "config.velocityrender.serverTicketBudget": "伺服器票券預算",
+  "config.velocityrender.serverTicketBudget.description": "全伺服器為所有同時飛行的玩家分配的最大活動前向載入票券總數上限。預設：64 張票券。",
+
+  "config.velocityrender.netherReachClampPct": "地獄前瞻範圍限制",
+  "config.velocityrender.netherReachClampPct.description": "限制地獄環境中的前瞻走廊範圍百分比 (10% 至 100%)，以防止複雜 3D 洞穴生成造成延遲。預設：60%。",
+
+  "config.velocityrender.defaultDenseReachClampPct": "高密度維度限制",
+  "config.velocityrender.defaultDenseReachClampPct.description": "非主世界或高密度模組維度中的前瞻走廊範圍百分比 (10% 至 100%)。預設：80%。",
+
+  "config.velocityrender.lodTrajectoryHooks": "LOD 軌跡鉤子",
+  "config.velocityrender.lodTrajectoryHooks.description": "將飛行速度軌跡廣播給 Distant Horizons 和 Bobby，以加速遠景地形生成。預設：已啟用。",
+
+  "config.velocityrender.f3Debug": "F3 畫面診斷",
+  "config.velocityrender.f3Debug.description": "在 Minecraft F3 偵錯畫面上顯示 Velocity Render 引擎遙測數據。預設：已啟用。",
+
+  "config.velocityrender.debugMode": "開發者除錯診斷",
+  "config.velocityrender.debugMode.description": "將詳細的向量計算和 Tick 更新輸出到開發者遊戲日誌中。預設：已停用。"
 }

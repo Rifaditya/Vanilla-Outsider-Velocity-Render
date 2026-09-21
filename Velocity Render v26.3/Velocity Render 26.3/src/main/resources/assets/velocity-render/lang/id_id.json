@@ -43,5 +43,43 @@
   "velocityrender.command.status.reach": "Jangkauan Dinamis: %s chunk (MSPT: %sms)",
   "velocityrender.command.status.tickets": "Tiket Lintasan Aktif: %s",
   "velocityrender.command.reload.success": "[Velocity Render] Konfigurasi dan GameRule berhasil dimuat ulang.",
-  "velocityrender.command.reset.success": "[Velocity Render] Semua pengaturan dikembalikan ke bawaan vanilla."
+  "velocityrender.command.reset.success": "[Velocity Render] Semua pengaturan dikembalikan ke bawaan vanilla.",
+
+  "config.velocityrender.title": "Pengaturan Velocity Render",
+  "config.velocityrender.category.flight": "Bias Terbang & Pembuatan Jala",
+  "config.velocityrender.category.server": "Kuota Server & Pembangkitan Dunia",
+  "config.velocityrender.category.telemetry": "Telemetri & Kompatibilitas",
+
+  "config.velocityrender.enabled": "Sakelar Utama",
+  "config.velocityrender.enabled.description": "Sakelar utama untuk mengaktifkan pembuatan jala chunk berbasis kecepatan di klien dan pemuatan prediktif di server. Bawaan: Aktif.",
+
+  "config.velocityrender.leadMultiplier": "Pengali Jangkauan Depan",
+  "config.velocityrender.leadMultiplier.description": "Skala seberapa jauh tiket pemuatan chunk dan jangkauan jala diminta di sepanjang vektor kecepatan Anda. Bawaan: 100%. Nilai lebih tinggi melihat lebih jauh dengan beban CPU lebih tinggi.",
+
+  "config.velocityrender.minSpeedThresholdPct": "Ambang Kecepatan Minimum",
+  "config.velocityrender.minSpeedThresholdPct.description": "Kecepatan minimum dalam seperseratus blok/tick yang dibutuhkan sebelum mengaktifkan bias ke depan (20 = 0.20 b/t atau 4.0 m/s). Bawaan: 20.",
+
+  "config.velocityrender.turnWidening": "Pelebaran Koridor Belokan",
+  "config.velocityrender.turnWidening.description": "Memperlebar koridor pembentukan chunk ke depan secara dinamis saat berbelok tajam dengan Elytra untuk mencegah celah kosong. Bawaan: Aktif.",
+
+  "config.velocityrender.verticalLookahead": "Pandangan Vertikal Prediktif",
+  "config.velocityrender.verticalLookahead.description": "Memasukkan kecepatan kemiringan vertikal ke dalam pembuatan jala chunk dan pembaruan koridor ketinggian saat menukik dan menanjak. Bawaan: Aktif.",
+
+  "config.velocityrender.serverTicketBudget": "Anggaran Tiket Server",
+  "config.velocityrender.serverTicketBudget.description": "Total maksimum tiket pemuatan prediktif aktif yang dialokasikan di seluruh server untuk semua penerbang bersamaan. Bawaan: 64 tiket.",
+
+  "config.velocityrender.netherReachClampPct": "Batas Jangkauan Nether",
+  "config.velocityrender.netherReachClampPct.description": "Persentase jangkauan koridor prediktif ke depan di Nether (10% hingga 100%) untuk mencegah lag pembentukan gua 3D yang berat. Bawaan: 60%.",
+
+  "config.velocityrender.defaultDenseReachClampPct": "Batas Dimensi Padat",
+  "config.velocityrender.defaultDenseReachClampPct.description": "Persentase jangkauan koridor prediktif ke depan di dimensi non-Overworld atau dimensi mod yang padat (10% hingga 100%). Bawaan: 80%.",
+
+  "config.velocityrender.lodTrajectoryHooks": "Kaitan Lintasan LOD",
+  "config.velocityrender.lodTrajectoryHooks.description": "Menyiarkan lintasan kecepatan ke depan menuju Distant Horizons dan Bobby untuk mempercepat pembentukan medan jauh. Bawaan: Aktif.",
+
+  "config.velocityrender.f3Debug": "Diagnostik Layar F3",
+  "config.velocityrender.f3Debug.description": "Menampilkan telemetri mesin Velocity Render pada layar debug F3 Minecraft. Bawaan: Aktif.",
+
+  "config.velocityrender.debugMode": "Diagnostik Debug Pengembang",
+  "config.velocityrender.debugMode.description": "Mencatat perhitungan vektor terperinci dan pembaruan tick ke log pengembang game. Bawaan: Nonaktif."
 }

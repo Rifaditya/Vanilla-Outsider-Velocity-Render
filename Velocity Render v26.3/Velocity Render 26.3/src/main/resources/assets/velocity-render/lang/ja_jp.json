@@ -43,5 +43,43 @@
   "velocityrender.command.status.reach": "動的リーチ: %s チャンク (MSPT: %sms)",
   "velocityrender.command.status.tickets": "有効な軌跡チケット: %s",
   "velocityrender.command.reload.success": "[Velocity Render] 設定とゲームルールが正常に再読み込みされました。",
-  "velocityrender.command.reset.success": "[Velocity Render] すべての設定がバニラのデフォルトに復元されました。"
+  "velocityrender.command.reset.success": "[Velocity Render] すべての設定がバニラのデフォルトに復元されました。",
+
+  "config.velocityrender.title": "Velocity Render 設定",
+  "config.velocityrender.category.flight": "飛行バイアスとメッシュ構築",
+  "config.velocityrender.category.server": "サーバー割り当てとワールド生成",
+  "config.velocityrender.category.telemetry": "テレメトリと互換性",
+
+  "config.velocityrender.enabled": "マスタースイッチ",
+  "config.velocityrender.enabled.description": "クライアント側での速度偏向チャンクメッシュ構築とサーバー側での予測生成を有効化するマスタースイッチ。デフォルト: 有効。",
+
+  "config.velocityrender.leadMultiplier": "前方先読み倍率",
+  "config.velocityrender.leadMultiplier.description": "速度ベクトルに沿ってチャンク読み込みチケットとメッシュ描画を先行させる距離を調整します。デフォルト: 100%。値を大きくすると先を広く読み込みますがCPU負荷が増加します。",
+
+  "config.velocityrender.minSpeedThresholdPct": "最小有効速度しきい値",
+  "config.velocityrender.minSpeedThresholdPct.description": "前方バイアスを有効にするために必要な1ブロック/tickあたりの最小速度（20 = 0.20 b/t または 4.0 m/s）。デフォルト: 20。",
+
+  "config.velocityrender.turnWidening": "旋回時の回廊拡大",
+  "config.velocityrender.turnWidening.description": "エリトラでの急旋回時に前方チャンク生成回廊を動的に拡大し、外側カーブの虚空抜けを防止します。デフォルト: 有効。",
+
+  "config.velocityrender.verticalLookahead": "垂直先読み",
+  "config.velocityrender.verticalLookahead.description": "急降下やロケット急上昇時に垂直ピッチ速度をチャンクメッシュと高度更新に組み込みます。デフォルト: 有効。",
+
+  "config.velocityrender.serverTicketBudget": "サーバーチケット上限",
+  "config.velocityrender.serverTicketBudget.description": "同時飛行中の全プレイヤーに対してサーバー全体で割り当てられる予測先行読み込みチケットの最大合計数。デフォルト: 64チケット。",
+
+  "config.velocityrender.netherReachClampPct": "ネザーリーチ制限",
+  "config.velocityrender.netherReachClampPct.description": "ネザーでの複雑な3D洞窟生成による負荷を防ぐため、前方回廊の到達割合を制限します (10%〜100%)。デフォルト: 60%。",
+
+  "config.velocityrender.defaultDenseReachClampPct": "高密度ディメンション制限",
+  "config.velocityrender.defaultDenseReachClampPct.description": "通常世界以外または高密度MODディメンションにおける前方予測回廊の到達割合 (10%〜100%)。デフォルト: 80%。",
+
+  "config.velocityrender.lodTrajectoryHooks": "LOD軌道フック",
+  "config.velocityrender.lodTrajectoryHooks.description": "前方への移動軌道をDistant HorizonsおよびBobbyに伝達し、遠方地形の生成を高速化します。デフォルト: 有効。",
+
+  "config.velocityrender.f3Debug": "F3画面診断",
+  "config.velocityrender.f3Debug.description": "MinecraftのF3デバッグ画面にVelocity Renderのエンジンテレメトリを表示します。デフォルト: 有効。",
+
+  "config.velocityrender.debugMode": "開発者デバッグ診断",
+  "config.velocityrender.debugMode.description": "詳細なベクトル計算とTick更新をゲームログに出力します。デフォルト: 無効。"
 }

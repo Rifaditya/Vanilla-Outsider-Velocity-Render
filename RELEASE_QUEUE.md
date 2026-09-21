@@ -28,3 +28,4 @@
 - [ ] **1.6.3+26.3** — Step 4: Client Tick Integration & Broadcasting (BL-VR-006).
 - [ ] **1.6.4+26.3** — Step 5: Brigadier Command Controls & Telemetry (BL-VR-006 Finale).
 - [ ] **1.7.0+26.3** — Step 1: Optional GUI Dependencies & Config Model (BL-VR-007).
+- [ ] **1.7.1+26.3** — Step 2: 12-Language GUI Localization Parity (BL-VR-007).
