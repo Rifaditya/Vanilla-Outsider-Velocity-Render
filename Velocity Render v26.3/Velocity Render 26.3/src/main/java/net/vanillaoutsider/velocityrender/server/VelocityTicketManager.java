@@ -3,6 +3,7 @@ package net.vanillaoutsider.velocityrender.server;
 
 import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import net.minecraft.server.level.TicketType;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.vanillaoutsider.velocityrender.math.DimensionReachScaler;
 import net.vanillaoutsider.velocityrender.math.TurnRateCalculator;
 import net.vanillaoutsider.velocityrender.math.VelocityCalculator;
 import net.vanillaoutsider.velocityrender.registry.VelocityRenderGameRules;
@@ -23,6 +25,7 @@ public final class VelocityTicketManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(VelocityTicketManager.class);
 
     // Reusable per-player data holders (Zero-allocation in hot loops)
+    private static final Object2IntOpenHashMap<UUID> PLAYER_DYNAMIC_REACH = new Object2IntOpenHashMap<>();
     private static final Map<UUID, VelocityCalculator> PLAYER_VELOCITY = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, TurnRateCalculator> PLAYER_TURN_RATES = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, LongOpenHashSet> ACTIVE_TICKETS = new Object2ObjectOpenHashMap<>();
@@ -42,6 +45,10 @@ public final class VelocityTicketManager {
     private static volatile int activeFlyerCount = 0;
     private static volatile double totalFlyerSpeedSum = 0.0;
     private static volatile int totalServerTickets = 0;
+
+    static {
+        PLAYER_DYNAMIC_REACH.defaultReturnValue(0);
+    }
 
     private VelocityTicketManager() {
     }
@@ -186,8 +193,11 @@ public final class VelocityTicketManager {
         int playerQuota = TicketBudgetAllocator.calculatePlayerQuota(speed, speedSum, flyerCount, serverBudget, maxAllowedReach);
         PLAYER_QUOTA.put(uuid, playerQuota);
 
-        int maxReachChunks = Math.min(playerQuota, (int) Math.round(speed * 8.0 * leadScale * msptFactor));
+        int rawReach = Math.min(playerQuota, (int) Math.round(speed * 8.0 * leadScale * msptFactor));
+        int clampPct = DimensionClampManager.getEffectiveClampPct(level);
+        int maxReachChunks = DimensionReachScaler.calculateClampedReach(rawReach, clampPct);
         lastDynamicReach = maxReachChunks;
+        PLAYER_DYNAMIC_REACH.put(uuid, maxReachChunks);
 
         // Zero-allocation reusable scratch set
         LongOpenHashSet targetChunks = SCRATCH_TICKETS.computeIfAbsent(uuid, k -> new LongOpenHashSet());
@@ -273,6 +283,7 @@ public final class VelocityTicketManager {
         LAST_PLAYER_TICK.remove(uuid);
         LAST_PLAYER_Y.remove(uuid);
         PLAYER_QUOTA.remove(uuid);
+        PLAYER_DYNAMIC_REACH.removeInt(uuid);
         SCRATCH_TICKETS.remove(uuid);
         LongOpenHashSet tickets = ACTIVE_TICKETS.remove(uuid);
         if (tickets != null && level != null) {
@@ -343,5 +354,13 @@ public final class VelocityTicketManager {
     public static int getPlayerQuota(UUID uuid) {
         Integer q = PLAYER_QUOTA.get(uuid);
         return q != null ? q : 0;
+    }
+
+    public static int getPlayerDynamicReach(UUID uuid) {
+        return PLAYER_DYNAMIC_REACH.getInt(uuid);
+    }
+
+    public static int getEffectiveDimensionClamp(Level level) {
+        return DimensionClampManager.getEffectiveClampPct(level);
     }
 }

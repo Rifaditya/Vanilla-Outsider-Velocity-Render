@@ -1,5 +1,12 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.5.3+26.3] - Server Predictive Generation Dimension Gating (BL-VR-005 Step 4)
+- Integrated `DimensionClampManager.getEffectiveClampPct(level)` and `DimensionReachScaler.calculateClampedReach` into `VelocityTicketManager.tickPlayer` on the 20 TPS server tick path.
+- Applied post-budget corridor reach clamping: evaluated after `TicketBudgetAllocator.calculatePlayerQuota`, allowing flyers in dense dimensions to consume fewer tickets than their allocated quota, freeing server capacity for other dimensions.
+- Added `PLAYER_DYNAMIC_REACH` tracking map (`Object2IntOpenHashMap<UUID>`) with default return value `0` and cleanup on player disconnect/dimension change.
+- Added public query accessors `VelocityTicketManager.getPlayerDynamicReach(UUID)` and `VelocityTicketManager.getEffectiveDimensionClamp(Level)`.
+- Expanded `VelocityTicketManagerTest` verifying default query return values and end-to-end mathematical pipeline consistency across multiple dimensions and quota constraints.
+
 ## [1.5.2+26.3] - Dynamic Sparse Delta & Conventional Tag Hub (BL-VR-005 Step 3)
 - Implemented `DimensionClampManager` in `net.vanillaoutsider.velocityrender.server` implementing the Omni-Channel Configuration Hierarchy.
 - Evaluates: (1) Active GameRule overrides, (2) Sparse Delta JSON in `config/velocity-render/dimension_clamps.json`, (3) Data-driven `#c:dense_dimensions` & `#velocity-render:dense_dimensions` tags, (4) Nether baseline (60%), and (5) Overworld/End default baseline (100%).

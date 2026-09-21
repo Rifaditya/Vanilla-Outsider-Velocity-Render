@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.5.3+26.3] - Server Dimension-Aware Predictive Chunk Gating
+- **Server Predictive Lookahead Gating**: Injected real-time dimension reach scaling into the server chunk ticket allocation loop, scaling lookahead distances dynamically per dimension.
+- **Nether & Dense WorldGen Protection**: Restricts forward chunk loading corridors in the Nether and dense cave dimensions to protect server performance, while maintaining maximum predictive visibility in the Overworld and End.
+- **Fair Ticket Budget Conservation**: Evaluates dimension clamping after player ticket quota allocation, allowing flyers in dense dimensions to naturally conserve global ticket capacity for players across other dimensions.
+- **Per-Player Dynamic Reach Telemetry**: Exposed live per-player dynamic reach and effective dimension clamp queries for diagnostics and monitoring.
+
+---
+
 ## [1.5.2+26.3] - Dynamic Dimension Clamping Persistence & Conventional Tags
 - **Sparse Delta Dimension Config**: Introduced `config/velocity-render/dimension_clamps.json` providing clean Git/Packwiz compatibility without dumping unmodified defaults (Anti-Config Bombing).
 - **Omni-Channel Configuration Hub**: Unified reach scaling resolution across live GameRules, JSON overrides, and data tags with zero heap allocation on the server tick path.
