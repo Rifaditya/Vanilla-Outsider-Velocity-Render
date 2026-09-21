@@ -1,5 +1,17 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.8.0+26.3] - Dynamic GameRules Uncapping & Safe Saturated Bounds (BL-VR-009 Step 1)
+- Implemented unbounded Dynamic GameRule ranges in `VelocityRenderGameRules.java` adhering to the Freedom Over Anti-Crash standard:
+  - `velocityrender:lead_multiplier`: Replaced `.range(0, 300)` with `.min(0)` allowing configuration up to `Integer.MAX_VALUE`. Default remains `100%`.
+  - `velocityrender:server_ticket_budget`: Replaced `.range(16, 256)` with `.min(1)` allowing ticket pools up to `Integer.MAX_VALUE`. Default remains `64`.
+  - `velocityrender:min_speed_threshold_pct`: Replaced `.range(1, 200)` with `.min(0)`. Setting `0` allows stationary forward lookahead pre-loading. Default remains `20` (0.20 b/t).
+  - `velocityrender:nether_reach_clamp_pct`: Replaced `.range(10, 100)` with `.min(0)`. Setting `0` allows complete suppression of Nether lookahead corridors. Default remains `60%`.
+  - `velocityrender:default_dense_reach_clamp_pct`: Replaced `.range(10, 100)` with `.min(0)`. Default remains `80%`.
+- Updated all registered GameRule descriptions to reflect unbounded stress-test capacities and explicitly document default values.
+- Invariant Preservation: Confirmed zero drift in out-of-the-box defaults or runtime behavior.
+
+---
+
 ## [1.7.4+26.3] - Runtime State Synchronization & ModMenu Verification (BL-VR-007 Finale)
 - Implemented `ClientConfigSyncer` in `net.vanillaoutsider.velocityrender.client.config`:
   - Annotated with `@Environment(EnvType.CLIENT)` to ensure strict dedicated server safety.

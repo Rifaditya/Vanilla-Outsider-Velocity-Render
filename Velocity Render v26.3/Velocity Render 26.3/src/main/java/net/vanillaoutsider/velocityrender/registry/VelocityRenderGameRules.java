@@ -41,9 +41,9 @@ public final class VelocityRenderGameRules {
                 .register();
 
         LEAD_MULTIPLIER = DynamicGameRuleManager.integerRule("velocityrender:lead_multiplier", CATEGORY, 100)
-                .range(0, 300)
+                .min(0)
                 .name("Forward Lead Multiplier")
-                .description("Scaling percentage of forward lookahead reach (0% - 300%)")
+                .description("Scaling percentage of forward lookahead reach (default: 100%)")
                 .register();
 
         BUDGET_CONSERVATION = DynamicGameRuleManager.booleanRule("velocityrender:budget_conservation", CATEGORY, true)
@@ -52,9 +52,9 @@ public final class VelocityRenderGameRules {
                 .register();
 
         MIN_SPEED_THRESHOLD_PCT = DynamicGameRuleManager.integerRule("velocityrender:min_speed_threshold_pct", CATEGORY, 20)
-                .range(1, 200)
+                .min(0)
                 .name("Min Speed Threshold")
-                .description("Minimum speed percentage required to activate forward prioritization (20 = 0.20 b/t)")
+                .description("Minimum speed percentage required to activate forward prioritization (default: 20 = 0.20 b/t, 0 = always active)")
                 .register();
 
         TURN_WIDENING = DynamicGameRuleManager.booleanRule("velocityrender:turn_widening", CATEGORY, true)
@@ -68,9 +68,9 @@ public final class VelocityRenderGameRules {
                 .register();
 
         SERVER_TICKET_BUDGET = DynamicGameRuleManager.integerRule("velocityrender:server_ticket_budget", CATEGORY, 64)
-                .range(16, 256)
+                .min(1)
                 .name("Server Ticket Budget")
-                .description("Maximum total active forward loading tickets allocated server-wide across all concurrent flyers")
+                .description("Maximum total active forward loading tickets allocated server-wide across all concurrent flyers (default: 64)")
                 .register();
 
         DEBUG_MODE = DynamicGameRuleManager.booleanRule("velocityrender:debug_mode", CATEGORY, false)
@@ -84,15 +84,15 @@ public final class VelocityRenderGameRules {
                 .register();
 
         NETHER_REACH_CLAMP_PCT = DynamicGameRuleManager.integerRule("velocityrender:nether_reach_clamp_pct", CATEGORY, 60)
-                .range(10, 100)
+                .min(0)
                 .name("Nether Reach Clamp")
-                .description("Forward lookahead corridor reach percentage in the Nether (10% - 100%)")
+                .description("Forward lookahead corridor reach percentage in the Nether (default: 60%, 0 = disabled)")
                 .register();
 
         DEFAULT_DENSE_REACH_CLAMP_PCT = DynamicGameRuleManager.integerRule("velocityrender:default_dense_reach_clamp_pct", CATEGORY, 80)
-                .range(10, 100)
+                .min(0)
                 .name("Dense Dimension Reach Clamp")
-                .description("Forward lookahead corridor reach percentage in non-Overworld or dense modded dimensions (10% - 100%)")
+                .description("Forward lookahead corridor reach percentage in non-Overworld or dense modded dimensions (default: 80%, 0 = disabled)")
                 .register();
 
         LOD_TRAJECTORY_HOOKS = DynamicGameRuleManager.booleanRule("velocityrender:lod_trajectory_hooks", CATEGORY, true)

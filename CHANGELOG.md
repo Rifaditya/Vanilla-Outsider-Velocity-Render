@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.8.0+26.3] - Dynamic GameRules Uncapping & Safe Saturated Bounds
+- **Uncapped Forward Lookahead Scaling**: Removed artificial ceiling clamps from the forward lead multiplier, allowing server operators and power players to scale lookahead reach freely beyond standard boundaries for extreme stress-testing.
+- **Uncapped Server Ticket Budgets**: Expanded server-wide forward ticket budgets up to maximum engine capacity, giving dedicated servers the freedom to allocate large ticket pools to supersonic flyers.
+- **Configurable Stationary Lookahead**: Enabled 0% minimum speed thresholds, allowing players to pre-load forward corridors even while standing completely still.
+- **Selective Dimension Lookahead Suppression**: Added support for 0% dimension reach clamps, empowering server administrators to selectively mute lookahead ticket generation in dense or custom dimensions.
+- **Preserved Balanced Defaults**: Guaranteed 100% out-of-the-box gameplay stability with default values and the dynamic MSPT watchdog remaining completely untouched.
+
+---
+
 ## [1.7.4+26.3] - Runtime State Synchronization & Bi-directional Command Integration
 - **Real-Time Client State Synchronization**: Connected configuration changes directly to the client flight meshing engine, instantly applying updates to lead multiplier, minimum speed thresholds, F3 diagnostics, and LOD hooks without requiring a game restart.
 - **Bi-directional Command & Config Sync**: Synchronized in-game commands (`/vr reset`, `/vr reload`, and `/vr set`) with the persistent configuration file, ensuring in-game adjustments and disk configurations always stay perfectly aligned.

@@ -32,3 +32,4 @@
 - [ ] **1.7.2+26.3** — Step 3: YACL Screen Factory & Smart Sliders (BL-VR-007).
 - [ ] **1.7.3+26.3** — Step 4: ModMenu Entrypoint & Reflection Loader (BL-VR-007).
 - [ ] **1.7.4+26.3** — Step 5: Runtime State Synchronization & ModMenu Verification (BL-VR-007 Finale).
+- [ ] **1.8.0+26.3** — Step 1: Dynamic GameRules Uncapping & Safe Saturated Bounds (BL-VR-009).
