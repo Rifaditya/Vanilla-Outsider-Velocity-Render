@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.6.4+26.3] - Brigadier LOD Command Controls & Live Diagnostic Telemetry
+- **Dynamic Command Suite Integration**: Added `/vr get lod_hooks` and `/vr set lod_hooks <true|false>` (with short alias `/vr get lod` and `/vr set lod`) to query and toggle distant LOD trajectory hooks in real time.
+- **Unified Settings Reset**: Updated `/vr reset` to automatically restore LOD trajectory hooks to enabled alongside all standard engine parameters.
+- **Enhanced Engine Telemetry (`/vr status`)**: Added a comprehensive multi-line Level of Detail (LOD) diagnostic section displaying hook activation state, detected rendering adapters (Distant Horizons, Bobby, or Vanilla Meshing), and real-time trajectory broadcast status with lookahead lead distance.
+
+---
+
 ## [1.6.3+26.3] - Live Client Tick LOD Trajectory Broadcasting
 - **Client Tick Integration**: Linked LOD compatibility adapters directly into the client movement loop, broadcasting updated velocity trajectories to Distant Horizons and Bobby in real-time.
 - **Edge-Triggered Idle Reset**: Broadcasts an inactive reset state on the exact falling edge when coming to a stop, preventing unnecessary background updates while standing or walking.

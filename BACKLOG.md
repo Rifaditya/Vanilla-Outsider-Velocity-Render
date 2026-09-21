@@ -13,7 +13,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-003]` | `[PERF]` | Server-Wide Ticket Budget & Fair Multi-Player Allocation | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-004]` | `[REFINEMENT]` | Right-Side F3 Engine Diagnostic Metric Line | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
-| `[BL-VR-006]` | `[INTEGRATION]` | Bobby & Distant Horizons LOD Velocity Trajectory Hooks | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
+| `[BL-VR-006]` | `[INTEGRATION]` | Bobby & Distant Horizons LOD Velocity Trajectory Hooks | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-007]` | `[FEATURE]` | Optional YACL Config Screen via ModMenu | `[LOW]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-009]` | `[REFINEMENT]` | Uncap Configuration Limits & Hard Ceilings (Player Freedom / Stress-Testing) | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `🚧 IN_PROGRESS` |
@@ -154,9 +154,10 @@ Implement universal dynamic dimension reach scaling through a unified 3-tier con
 ### [BL-VR-006] Bobby & Distant Horizons LOD Velocity Trajectory Hooks
 - **Category**: `[INTEGRATION]`
 - **Priority**: `[MEDIUM]`
-- **Status**: `📌 DEFERRED`
-- **Target Component(s)**: `LODCompatManager.java` (Optional/Soft reflection)
+- **Status**: `✅ RESOLVED`
+- **Target Component(s)**: `LODTrajectoryCalculator.java`, `VelocityRenderGameRules.java`, `VelocityTrajectoryAPI.java`, `LODCompatManager.java`, `DistantHorizonsAdapter.java`, `BobbyAdapter.java`, `ClientVelocityTracker.java`, `VelocityRenderClient.java`, `VelocityRenderCommand.java`
 - **Date Added**: 2026-09-18
+- **Date Resolved**: 2026-09-21 (v1.6.0 – v1.6.4+26.3)
 
 #### ❓ Problem / Context
 Players who use Distant Horizons or Bobby load fake/LOD chunks far into the distance. By default, LOD worker queues process LOD chunks uniformly in all directions.
@@ -167,8 +168,8 @@ Provide soft-reflection bridges:
 - Strict classloader safety: do not crash if neither mod is installed.
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] Game starts smoothly without errors when Bobby/DH are absent.
-- [ ] When Bobby/DH are present, forward distant terrain generates ahead of rear distant terrain.
+- [x] Game starts smoothly without errors when Bobby/DH are absent.
+- [x] When Bobby/DH are present, forward distant terrain generates ahead of rear distant terrain.
 
 ---
 

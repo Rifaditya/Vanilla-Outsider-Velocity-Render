@@ -1,5 +1,17 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.6.4+26.3] - Brigadier Command Controls & Telemetry (BL-VR-006 Finale)
+- Integrated LOD trajectory hooks into Brigadier command structure in `VelocityRenderCommand`:
+  - Added suggestions for `lod_hooks` and alias `lod` under `/vr get <rule>`.
+  - Added subcommands for `lod_hooks` and `lod` accepting booleans under `/vr set <rule> <val>`, updating `VelocityRenderGameRules.LOD_TRAJECTORY_HOOKS`.
+  - Added query handling in `executeGet` returning current boolean state of `velocityrender:lod_trajectory_hooks`.
+  - Added reset handling in `executeReset`, reverting `LOD_TRAJECTORY_HOOKS` to `true`.
+- Added multi-line LOD telemetry section to `/vr status`:
+  - Displays master hook state (`§aENABLED` / `§7DISABLED`).
+  - Displays detected adapters via `LODCompatManager.getIntegrationSummary()` (Distant Horizons, Bobby, or Vanilla Meshing).
+  - Displays real-time lookahead lead distance broadcast and transmission state (`§a[TRANSMITTING]` / `§7[IDLE]`).
+- Backlog Resolution: Officially closed out `[BL-VR-006]` (Bobby & Distant Horizons LOD Velocity Trajectory Hooks) with all acceptance criteria verified.
+
 ## [1.6.3+26.3] - Client Tick Integration & Broadcasting (BL-VR-006 Step 4)
 - Integrated `LODCompatManager.init()` into `VelocityRenderClient.onInitializeClient()`, executing mod detection on client startup.
 - Updated `ClientVelocityTracker` to broadcast real-time trajectory updates during `clientTick(...)`:

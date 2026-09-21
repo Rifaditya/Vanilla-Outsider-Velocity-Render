@@ -20,7 +20,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.world.level.Level;
 import net.vanillaoutsider.velocityrender.client.ClientVelocityTracker;
+import net.vanillaoutsider.velocityrender.client.compat.LODCompatManager;
 import net.vanillaoutsider.velocityrender.math.DimensionReachScaler;
+import net.vanillaoutsider.velocityrender.math.LODTrajectoryCalculator.LODTrajectoryState;
 import net.vanillaoutsider.velocityrender.registry.VelocityRenderGameRules;
 import net.vanillaoutsider.velocityrender.server.DimensionClampManager;
 import net.vanillaoutsider.velocityrender.server.VelocityTicketManager;
@@ -64,6 +66,8 @@ public final class VelocityRenderCommand {
                                     builder.suggest("nether_clamp");
                                     builder.suggest("default_dense_reach_clamp_pct");
                                     builder.suggest("dense_clamp");
+                                    builder.suggest("lod_hooks");
+                                    builder.suggest("lod");
                                     return builder.buildFuture();
                                 })
                                 .executes(VelocityRenderCommand::executeGet)))
@@ -119,7 +123,13 @@ public final class VelocityRenderCommand {
                                         .executes(ctx -> executeSetInt(ctx, "default_dense_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value")))))
                         .then(Commands.literal("dense_clamp")
                                 .then(Commands.argument("value", IntegerArgumentType.integer(10, 100))
-                                        .executes(ctx -> executeSetInt(ctx, "default_dense_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value"))))))
+                                        .executes(ctx -> executeSetInt(ctx, "default_dense_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value")))))
+                        .then(Commands.literal("lod_hooks")
+                                .then(Commands.argument("value", BoolArgumentType.bool())
+                                        .executes(ctx -> executeSetBool(ctx, "lod_hooks", BoolArgumentType.getBool(ctx, "value")))))
+                        .then(Commands.literal("lod")
+                                .then(Commands.argument("value", BoolArgumentType.bool())
+                                        .executes(ctx -> executeSetBool(ctx, "lod_hooks", BoolArgumentType.getBool(ctx, "value"))))))
                 .then(Commands.literal("dimclamp")
                         .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                         .then(Commands.literal("list")
@@ -222,6 +232,17 @@ public final class VelocityRenderCommand {
         final int currentClampPct = clampPct;
         final int currentMaxReach = maxReachInDim;
 
+        boolean lodHooks = VelocityRenderGameRules.isLodTrajectoryHooksEnabled(level);
+        String lodSummary = LODCompatManager.getIntegrationSummary();
+        LODTrajectoryState traj = LODCompatManager.getActiveTrajectory();
+        double lodLead = (traj != null && traj.active()) ? traj.leadDistance() : 0.0;
+        String lodStateStr = (traj != null && traj.active()) ? "§a[TRANSMITTING]" : "§7[IDLE]";
+
+        final boolean lodEnabled = lodHooks;
+        final String currentLodSummary = lodSummary;
+        final double currentLodLead = lodLead;
+        final String currentLodState = lodStateStr;
+
         source.sendSuccess(() -> Component.literal(
                 "§6[Velocity Render — Engine Telemetry]§r\n" +
                 " §7• §fStatus: " + (enabled ? "§aACTIVE" : "§cDISABLED") + "§r\n" +
@@ -242,6 +263,9 @@ public final class VelocityRenderCommand {
                 " §7• §fVertical Lookahead: " + (verticalLookahead ? "§aON" : "§7OFF") + "§r\n" +
                 " §7• §fPitch & Trajectory: §b" + String.format("%.1f", pitch) + "° §7" + pitchState + " (" + String.format("%+.2f", verticalDelta) + " b/t)§r\n" +
                 " §7• §fF3 Diagnostic Telemetry: " + (f3Debug ? "§aON" : "§7OFF") + "§r\n" +
+                " §7• §fLOD Trajectory Hooks: " + (lodEnabled ? "§aENABLED" : "§7DISABLED") + "§r\n" +
+                "   §7↳ §fDetected Adapters: §b" + currentLodSummary + "§r\n" +
+                "   §7↳ §fLead Broadcast: §e" + String.format("%.1f", currentLodLead) + " blocks " + currentLodState + "§r\n" +
                 " §7• §fDebug Diagnostics: " + (debug ? "§aON" : "§7OFF")
         ), false);
         return 1;
@@ -264,6 +288,7 @@ public final class VelocityRenderCommand {
             case "f3_debug", "f3" -> source.sendSuccess(() -> Component.literal("§6velocityrender:f3_debug = §e" + VelocityRenderGameRules.isF3DebugEnabled(level)), false);
             case "nether_reach_clamp_pct", "nether_clamp" -> source.sendSuccess(() -> Component.literal("§6velocityrender:nether_reach_clamp_pct = §e" + VelocityRenderGameRules.getNetherReachClampPct(level) + "%"), false);
             case "default_dense_reach_clamp_pct", "dense_clamp" -> source.sendSuccess(() -> Component.literal("§6velocityrender:default_dense_reach_clamp_pct = §e" + VelocityRenderGameRules.getDefaultDenseReachClampPct(level) + "%"), false);
+            case "lod_hooks", "lod" -> source.sendSuccess(() -> Component.literal("§6velocityrender:lod_trajectory_hooks = §e" + VelocityRenderGameRules.isLodTrajectoryHooksEnabled(level)), false);
             default -> source.sendFailure(Component.literal("§cUnknown setting: " + rule));
         }
         return 1;
@@ -280,6 +305,7 @@ public final class VelocityRenderCommand {
             case "vertical_lookahead" -> level.getGameRules().set(VelocityRenderGameRules.VERTICAL_LOOKAHEAD, value, source.getServer());
             case "debug_mode" -> level.getGameRules().set(VelocityRenderGameRules.DEBUG_MODE, value, source.getServer());
             case "f3_debug" -> level.getGameRules().set(VelocityRenderGameRules.F3_DEBUG, value, source.getServer());
+            case "lod_hooks", "lod" -> level.getGameRules().set(VelocityRenderGameRules.LOD_TRAJECTORY_HOOKS, value, source.getServer());
         }
 
         source.sendSuccess(() -> Component.literal("§aUpdated velocityrender:" + rule + " to " + value), true);
@@ -317,6 +343,7 @@ public final class VelocityRenderCommand {
         level.getGameRules().set(VelocityRenderGameRules.F3_DEBUG, true, source.getServer());
         level.getGameRules().set(VelocityRenderGameRules.NETHER_REACH_CLAMP_PCT, 60, source.getServer());
         level.getGameRules().set(VelocityRenderGameRules.DEFAULT_DENSE_REACH_CLAMP_PCT, 80, source.getServer());
+        level.getGameRules().set(VelocityRenderGameRules.LOD_TRAJECTORY_HOOKS, true, source.getServer());
 
         source.sendSuccess(() -> Component.literal("§aReset all Velocity Render settings to defaults."), true);
         return 1;
