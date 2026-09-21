@@ -15,7 +15,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[HIGH]` | `26.3+` | `🚧 IN_PROGRESS` |
 | `[BL-VR-006]` | `[INTEGRATION]` | Bobby & Distant Horizons LOD Velocity Trajectory Hooks | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-007]` | `[FEATURE]` | Optional YACL Config Screen via ModMenu | `[LOW]` | `26.3+` | `📌 DEFERRED` |
-| `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
+| `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `🚧 IN_PROGRESS` |
 
 ---
 
@@ -195,26 +195,28 @@ Implement YetAnotherConfigLib (YACL v3) screen integrated with ModMenu:
 ### [BL-VR-008] Architecture Documentation & Visual Velocity Cone Progression
 - **Category**: `[DOCS]`
 - **Priority**: `[MEDIUM]`
-- **Status**: `✅ RESOLVED`
-- **Target Component(s)**: `HOW_IT_WORKS.md`, `README.md`, `Doc/Media/velocity_cone_progression.png`
+- **Status**: `🔄 IN PROGRESS`
+- **Target Component(s)**: `HOW_IT_WORKS.md`, `README.md`, `Doc/Media/velocity_cone_progression.png`, `Doc/Platform Pages/`
 - **Date Added**: 2026-09-21
-- **Date Resolved**: 2026-09-21
 
 #### ❓ Problem / Context
-Players and developers require a clear visual and mathematical explanation of how Velocity Render departs from vanilla Minecraft's circular chunk generation radius and dynamically forms a high-speed forward lookahead V-cone.
+Players, modpack developers, and contributors require comprehensive visual and mathematical explanations of Velocity Render's engine systems (anisotropic meshing queue, server lookahead corridors, multi-player ticket quotas, and dimension scaling).
 
 #### 💡 Proposed Solution & Technical Specifications
-1. Created `HOW_IT_WORKS.md` detailing the 4 progression stages:
-   - **Stage 1 (Vanilla Circle)**: Speed < 0.20 b/t (standing/idling, uniform radius).
-   - **Stage 2 (Wide V)**: Speed 0.20–0.50 b/t (walking, subtle forward bias).
-   - **Stage 3 (Medium V)**: Speed 0.50–1.20 b/t (sprinting, riding, balanced priority).
-   - **Stage 4 (Tight V)**: Speed > 1.20 b/t (Elytra dives, max forward reach up to 16 chunks).
-2. Embedded the canonical draw.io architecture diagram in `Doc/Media/velocity_cone_progression.png`.
-3. Documented mathematical principles: anisotropic distance formula, rear distance penalties, dynamic turn fan-out, and MSPT load shedding.
-4. Linked guide directly from root `README.md`.
+1. **Initial Velocity Cone Progression Guide**:
+   - Created `HOW_IT_WORKS.md` detailing the 4-stage velocity cone progression.
+   - Embedded canonical draw.io architecture diagram in `Doc/Media/velocity_cone_progression.png`.
+   - Documented core mathematical foundations: anisotropic distance formulas, rear distance penalties, banked turn fan-out, and MSPT load shedding.
+   - Linked guide in root `README.md`.
+2. **Upcoming Documentation Expansion**:
+   - Visual diagrams for 3D pitch-aware dives & ascents (`BL-VR-002`).
+   - Server-wide ticket quota distribution diagrams (`BL-VR-003`).
+   - Dimension scaling diagrams and Conventional Tag guides (`BL-VR-005`).
+   - Modrinth and CurseForge platform page visual asset refresh.
 
 #### 🧪 Verification & Acceptance Criteria
-- [x] Canonical diagram asset saved in `Doc/Media/velocity_cone_progression.png`.
-- [x] Exhaustive explanations documented in `HOW_IT_WORKS.md`.
-- [x] Clear navigational entrypoint linked in `README.md`.
-- [x] Committed and pushed to `origin main`.
+- [x] Canonical velocity cone progression diagram saved in `Doc/Media/velocity_cone_progression.png`.
+- [x] Initial 4-stage guide documented in `HOW_IT_WORKS.md`.
+- [x] Navigational link integrated in `README.md`.
+- [ ] 3D vertical flight and multi-player pool diagrams added.
+- [ ] Platform descriptions synchronized with visual explanations.
