@@ -1,5 +1,14 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.6.0+26.3] - Pure LOD Trajectory Math Engine (BL-VR-006 Step 1)
+- Created `LODTrajectoryCalculator` in `net.vanillaoutsider.velocityrender.math`:
+  - Implemented `calculateLeadOffset(double speed, double leadMultiplier)` scaling linearly (`speed * 256.0 * leadMultiplier`) and clamping at `MAX_LOD_LEAD_OFFSET = 1024.0` blocks.
+  - Implemented `calculateLookaheadFocus(...)` extrapolating 3D focus coordinates along the normalized velocity vector.
+  - Implemented `calculateBiasedLODDistanceSqr(...)` calculating anisotropic directional distance squared matching `VelocityVectorHelper` for consistent chunk priority ordering across LOD grids.
+  - Created immutable data carrier `LODTrajectoryState` record with chunk coordinate accessors (`focusChunkX()`, `focusChunkZ()`, `camChunkX()`, `camChunkZ()`) and pre-allocated `INACTIVE` singleton.
+- Implemented defensive zero-crash guards against NaN/infinite values, sub-threshold velocities, and negative multipliers.
+- Added comprehensive unit test suite in `LODTrajectoryCalculatorTest` (8 tests covering stationary, sub-threshold, supersonic speeds, 3D dives, priority distance ordering, negative multipliers, and NaN resistance).
+
 ## [1.5.4+26.3] - Brigadier Command Controls & Telemetry (BL-VR-005 Finale)
 - Implemented dedicated `/vr dimclamp` subcommand suite in `VelocityRenderCommand`:
   - `/vr dimclamp <dimension> <percentage>`: Saves Sparse Delta JSON overrides via `DimensionClampManager.setOverride` and `save()`.

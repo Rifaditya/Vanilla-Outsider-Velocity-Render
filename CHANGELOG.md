@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.6.0+26.3] - Distant LOD Lookahead Trajectory Math Engine
+- **Distant LOD Trajectory Calculation**: Introduced high-performance mathematical engine designed for distant Level of Detail (LOD) and chunk-caching architectures.
+- **Aggressive Distant Lookahead Scaling**: Computes 3D trajectory focus coordinates scaled linearly up to 1,024 blocks ahead during high-speed travel, aligning with massive view distances in distant rendering mods.
+- **Anisotropic LOD Distance Weighting**: Prioritizes chunks along the player's 3D flight vector over rear terrain for responsive distant landscape streaming.
+- **Defensive Math Hardening**: Built with zero-allocation math routines and defensive guards against invalid velocities and coordinate boundaries.
+
+---
+
 ## [1.5.4+26.3] - Dimension Clamping Command Suite & Live Telemetry
 - **Dedicated Dimension Clamping Command Suite**: Introduced `/vr dimclamp <dimension> <percentage>` with intelligent tab completion supporting `"current"` and all dynamically loaded server dimensions.
 - **Sparse Delta Override Management**: Added `/vr dimclamp list` to view active dimension overrides, `/vr dimclamp remove <dimension>` to unbind specific overrides, and `/vr dimclamp reset` to restore default configurations.
