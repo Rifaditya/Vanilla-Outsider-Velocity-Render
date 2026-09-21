@@ -80,13 +80,13 @@ public final class VelocityRenderCommand {
                                 .then(Commands.argument("value", BoolArgumentType.bool())
                                         .executes(ctx -> executeSetBool(ctx, "enabled", BoolArgumentType.getBool(ctx, "value")))))
                         .then(Commands.literal("lead_multiplier")
-                                .then(Commands.argument("value", IntegerArgumentType.integer(0, 300))
+                                .then(Commands.argument("value", IntegerArgumentType.integer(0))
                                         .executes(ctx -> executeSetInt(ctx, "lead_multiplier", IntegerArgumentType.getInteger(ctx, "value")))))
                         .then(Commands.literal("budget_conservation")
                                 .then(Commands.argument("value", BoolArgumentType.bool())
                                         .executes(ctx -> executeSetBool(ctx, "budget_conservation", BoolArgumentType.getBool(ctx, "value")))))
                         .then(Commands.literal("min_speed")
-                                .then(Commands.argument("value", IntegerArgumentType.integer(1, 200))
+                                .then(Commands.argument("value", IntegerArgumentType.integer(0))
                                         .executes(ctx -> executeSetInt(ctx, "min_speed", IntegerArgumentType.getInteger(ctx, "value")))))
                         .then(Commands.literal("turn_widening")
                                 .then(Commands.argument("value", BoolArgumentType.bool())
@@ -101,10 +101,10 @@ public final class VelocityRenderCommand {
                                 .then(Commands.argument("value", BoolArgumentType.bool())
                                         .executes(ctx -> executeSetBool(ctx, "vertical_lookahead", BoolArgumentType.getBool(ctx, "value")))))
                         .then(Commands.literal("server_ticket_budget")
-                                .then(Commands.argument("value", IntegerArgumentType.integer(16, 256))
+                                .then(Commands.argument("value", IntegerArgumentType.integer(1))
                                         .executes(ctx -> executeSetInt(ctx, "server_ticket_budget", IntegerArgumentType.getInteger(ctx, "value")))))
                         .then(Commands.literal("budget")
-                                .then(Commands.argument("value", IntegerArgumentType.integer(16, 256))
+                                .then(Commands.argument("value", IntegerArgumentType.integer(1))
                                         .executes(ctx -> executeSetInt(ctx, "server_ticket_budget", IntegerArgumentType.getInteger(ctx, "value")))))
                         .then(Commands.literal("debug_mode")
                                 .then(Commands.argument("value", BoolArgumentType.bool())
@@ -116,16 +116,16 @@ public final class VelocityRenderCommand {
                                 .then(Commands.argument("value", BoolArgumentType.bool())
                                         .executes(ctx -> executeSetBool(ctx, "f3_debug", BoolArgumentType.getBool(ctx, "value")))))
                         .then(Commands.literal("nether_reach_clamp_pct")
-                                .then(Commands.argument("value", IntegerArgumentType.integer(10, 100))
+                                .then(Commands.argument("value", IntegerArgumentType.integer(0))
                                         .executes(ctx -> executeSetInt(ctx, "nether_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value")))))
                         .then(Commands.literal("nether_clamp")
-                                .then(Commands.argument("value", IntegerArgumentType.integer(10, 100))
+                                .then(Commands.argument("value", IntegerArgumentType.integer(0))
                                         .executes(ctx -> executeSetInt(ctx, "nether_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value")))))
                         .then(Commands.literal("default_dense_reach_clamp_pct")
-                                .then(Commands.argument("value", IntegerArgumentType.integer(10, 100))
+                                .then(Commands.argument("value", IntegerArgumentType.integer(0))
                                         .executes(ctx -> executeSetInt(ctx, "default_dense_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value")))))
                         .then(Commands.literal("dense_clamp")
-                                .then(Commands.argument("value", IntegerArgumentType.integer(10, 100))
+                                .then(Commands.argument("value", IntegerArgumentType.integer(0))
                                         .executes(ctx -> executeSetInt(ctx, "default_dense_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value")))))
                         .then(Commands.literal("lod_hooks")
                                 .then(Commands.argument("value", BoolArgumentType.bool())
@@ -145,7 +145,7 @@ public final class VelocityRenderCommand {
                                         .executes(VelocityRenderCommand::executeDimClampRemove)))
                         .then(Commands.argument("dimension", IdentifierArgument.id())
                                 .suggests(VelocityRenderCommand::suggestDimensions)
-                                .then(Commands.argument("percentage", IntegerArgumentType.integer(10, 100))
+                                .then(Commands.argument("percentage", IntegerArgumentType.integer(0))
                                         .executes(VelocityRenderCommand::executeDimClampSet))))
                 .then(Commands.literal("reset")
                         .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
@@ -344,6 +344,10 @@ public final class VelocityRenderCommand {
             case "lead_multiplier" -> {
                 level.getGameRules().set(VelocityRenderGameRules.LEAD_MULTIPLIER, value, source.getServer());
                 config.leadMultiplier = value;
+                if (value > 300) {
+                    source.sendSuccess(() -> Component.literal("§6[Velocity Render] §eWarning: Extreme lead_multiplier detected (" + value + "%). High lookahead reach may cause server TPS drops under supersonic flight.§r"), false);
+                    LOGGER.warn("[VelocityRender] Extreme lead_multiplier detected ({}%) configured by {}", value, source.getTextName());
+                }
             }
             case "min_speed" -> {
                 level.getGameRules().set(VelocityRenderGameRules.MIN_SPEED_THRESHOLD_PCT, value, source.getServer());
@@ -352,6 +356,10 @@ public final class VelocityRenderCommand {
             case "server_ticket_budget", "budget" -> {
                 level.getGameRules().set(VelocityRenderGameRules.SERVER_TICKET_BUDGET, value, source.getServer());
                 config.serverTicketBudget = value;
+                if (value > 256) {
+                    source.sendSuccess(() -> Component.literal("§6[Velocity Render] §eWarning: Extreme server_ticket_budget detected (" + value + "). Excessive tickets may heavily stress the chunk generation thread pool.§r"), false);
+                    LOGGER.warn("[VelocityRender] Extreme server_ticket_budget detected ({}) configured by {}", value, source.getTextName());
+                }
             }
             case "nether_reach_clamp_pct" -> {
                 level.getGameRules().set(VelocityRenderGameRules.NETHER_REACH_CLAMP_PCT, value, source.getServer());
@@ -427,6 +435,10 @@ public final class VelocityRenderCommand {
         int pct = IntegerArgumentType.getInteger(context, "percentage");
         DimensionClampManager.setOverride(dimStr, pct);
         DimensionClampManager.save();
+        if (pct > 100) {
+            source.sendSuccess(() -> Component.literal("§6[Velocity Render] §eWarning: Extreme dimension reach clamp detected (" + pct + "%) for " + dimStr + ". Values > 100% extend lookahead beyond standard Overworld reach.§r"), false);
+            LOGGER.warn("[VelocityRender] Extreme dimension reach clamp for {} detected ({}%) configured by {}", dimStr, pct, source.getTextName());
+        }
         source.sendSuccess(() -> Component.literal("§aSet dimension reach clamp for §e" + dimStr + " §ato §e" + pct + "%§r"), true);
         return 1;
     }

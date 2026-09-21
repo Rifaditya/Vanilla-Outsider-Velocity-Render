@@ -81,7 +81,7 @@ public final class DimensionClampManager {
 
         // 1. Check explicit Sparse Delta JSON override first
         int jsonOverride = JSON_OVERRIDES.getInt(dimId);
-        if (jsonOverride >= DimensionReachScaler.MIN_CLAMP_PCT && jsonOverride <= DimensionReachScaler.MAX_CLAMP_PCT) {
+        if (jsonOverride >= 0) {
             return jsonOverride;
         }
 
@@ -115,7 +115,7 @@ public final class DimensionClampManager {
         if (dimId == null || dimId.isBlank()) {
             return;
         }
-        int clamped = Math.max(DimensionReachScaler.MIN_CLAMP_PCT, Math.min(DimensionReachScaler.MAX_CLAMP_PCT, pct));
+        int clamped = Math.max(0, pct);
         JSON_OVERRIDES.put(dimId, clamped);
         save();
     }
@@ -180,7 +180,7 @@ public final class DimensionClampManager {
                     for (Map.Entry<String, JsonElement> entry : clampsObj.entrySet()) {
                         if (entry.getValue().isJsonPrimitive()) {
                             int pct = entry.getValue().getAsInt();
-                            int clamped = Math.max(DimensionReachScaler.MIN_CLAMP_PCT, Math.min(DimensionReachScaler.MAX_CLAMP_PCT, pct));
+                            int clamped = Math.max(0, pct);
                             JSON_OVERRIDES.put(entry.getKey(), clamped);
                         }
                     }

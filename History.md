@@ -1,5 +1,24 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.8.1+26.3] - Command Suite Uncapping & Non-Blocking Advisory Warnings (BL-VR-009 Step 2)
+- Relaxed Brigadier argument type ranges in `VelocityRenderCommand.java`:
+  - `lead_multiplier`: `IntegerArgumentType.integer(0)` (was `0..300`).
+  - `min_speed`: `IntegerArgumentType.integer(0)` (was `1..200`).
+  - `server_ticket_budget` & `budget`: `IntegerArgumentType.integer(1)` (was `16..256`).
+  - `nether_reach_clamp_pct` / `nether_clamp`: `IntegerArgumentType.integer(0)` (was `10..100`).
+  - `default_dense_reach_clamp_pct` / `dense_clamp`: `IntegerArgumentType.integer(0)` (was `10..100`).
+  - `dimclamp <dimension> <percentage>`: `IntegerArgumentType.integer(0)` (was `10..100`).
+- Implemented Dual-Sink Non-Blocking Advisory Transparency in `VelocityRenderCommand`:
+  - Triggers advisory chat warning and `LOGGER.warn(...)` when `lead_multiplier > 300%`, `server_ticket_budget > 256`, or `dimclamp > 100%`.
+  - Commands execute completely and persist changes without aborting.
+- Uncapped override persistence in `DimensionClampManager`:
+  - `setOverride()` and `loadFromPath()` allow values $\ge 0$ without capping at 100%.
+- Added comprehensive unit test `testUncappedCommandParsing()` to `VelocityRenderCommandTest`:
+  - Validated parsing of elevated stress parameters (1000% lead, 2048 budget, 150% dimclamp, 0 min speed).
+  - Verified parser rejection of negative values.
+
+---
+
 ## [1.8.0+26.3] - Dynamic GameRules Uncapping & Safe Saturated Bounds (BL-VR-009 Step 1)
 - Implemented unbounded Dynamic GameRule ranges in `VelocityRenderGameRules.java` adhering to the Freedom Over Anti-Crash standard:
   - `velocityrender:lead_multiplier`: Replaced `.range(0, 300)` with `.min(0)` allowing configuration up to `Integer.MAX_VALUE`. Default remains `100%`.

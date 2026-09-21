@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.8.1+26.3] - Command Suite Uncapping & Non-Blocking Advisory Warnings
+- **Uncapped Command Inputs**: Expanded in-game Brigadier command arguments (`/vr set` and `/vr dimclamp`) up to technical capacity (`Integer.MAX_VALUE`), allowing operators to tune lead multipliers, budgets, and dimension clamps without artificial command rejection.
+- **Dual-Sink Advisory Transparency**: Introduced non-blocking advisory warnings when setting extreme stress-test values (`>300%` lead multiplier, `>256` ticket budget, or `>100%` dimension clamps), providing clear heads-up guidance to in-game chat and server console logs while executing commands completely without aborting.
+- **Immediate Dimension Override Persistence**: Enhanced custom dimension reach clamp storage to seamlessly persist overrides beyond 100% directly to disk.
+- **Enforced Non-Negative Boundaries**: Protected all command parameters against negative numbers, guaranteeing mathematical integrity while honoring player freedom.
+
+---
+
 ## [1.8.0+26.3] - Dynamic GameRules Uncapping & Safe Saturated Bounds
 - **Uncapped Forward Lookahead Scaling**: Removed artificial ceiling clamps from the forward lead multiplier, allowing server operators and power players to scale lookahead reach freely beyond standard boundaries for extreme stress-testing.
 - **Uncapped Server Ticket Budgets**: Expanded server-wide forward ticket budgets up to maximum engine capacity, giving dedicated servers the freedom to allocate large ticket pools to supersonic flyers.

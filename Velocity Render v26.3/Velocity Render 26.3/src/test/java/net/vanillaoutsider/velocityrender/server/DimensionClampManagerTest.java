@@ -51,13 +51,13 @@ class DimensionClampManagerTest {
     }
 
     @Test
-    @DisplayName("Clamping bounds [10, 100] should be enforced on overrides")
+    @DisplayName("Clamping bounds >= 0 should be enforced on overrides, allowing stress-testing > 100%")
     void testOverrideClampingBounds() {
-        DimensionClampManager.setOverride("test:too_low", 5);
-        Assertions.assertEquals(10, DimensionClampManager.getOverride("test:too_low"), "Values < 10 must clamp to 10");
+        DimensionClampManager.setOverride("test:too_low", -5);
+        Assertions.assertEquals(0, DimensionClampManager.getOverride("test:too_low"), "Values < 0 must clamp to 0");
 
-        DimensionClampManager.setOverride("test:too_high", 150);
-        Assertions.assertEquals(100, DimensionClampManager.getOverride("test:too_high"), "Values > 100 must clamp to 100");
+        DimensionClampManager.setOverride("test:stress_high", 150);
+        Assertions.assertEquals(150, DimensionClampManager.getOverride("test:stress_high"), "Values > 100 must be preserved");
     }
 
     @Test

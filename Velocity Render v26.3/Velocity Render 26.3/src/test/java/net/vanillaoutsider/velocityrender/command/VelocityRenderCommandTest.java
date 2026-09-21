@@ -187,6 +187,25 @@ class VelocityRenderCommandTest {
         assertParsePermissionDenied("vr dimclamp current 50", unprivilegedSource);
     }
 
+    @Test
+    @DisplayName("Syntax: Uncapped stress-test parameters parse successfully and negative values fail")
+    void testUncappedCommandParsing() {
+        // High stress-test values
+        assertParseSuccess("vr set lead_multiplier 1000", adminSource);
+        assertParseSuccess("vr set server_ticket_budget 2048", adminSource);
+        assertParseSuccess("vr set budget 4096", adminSource);
+        assertParseSuccess("vr set min_speed 0", adminSource);
+        assertParseSuccess("vr set nether_reach_clamp_pct 150", adminSource);
+        assertParseSuccess("vr set default_dense_reach_clamp_pct 200", adminSource);
+        assertParseSuccess("vr dimclamp minecraft:the_nether 150", adminSource);
+
+        // Lower bounds enforced (negative numbers rejected by parser)
+        assertParseFailure("vr set lead_multiplier -1", adminSource);
+        assertParseFailure("vr set server_ticket_budget 0", adminSource);
+        assertParseFailure("vr set budget -5", adminSource);
+        assertParseFailure("vr dimclamp minecraft:the_nether -10", adminSource);
+    }
+
     private void assertParseSuccess(String command, CommandSourceStack source) {
         ParseResults<CommandSourceStack> parse = dispatcher.parse(command, source);
         assertFalse(parse.getReader().canRead(),
@@ -195,6 +214,14 @@ class VelocityRenderCommandTest {
                 "Command parsing generated exceptions for: '" + command + "': " + parse.getExceptions());
         assertNotNull(parse.getContext().getCommand(),
                 "Command node has no executable handler bound for: '" + command + "'");
+    }
+
+    private void assertParseFailure(String command, CommandSourceStack source) {
+        ParseResults<CommandSourceStack> parse = dispatcher.parse(command, source);
+        boolean failed = parse.getContext().getCommand() == null
+                || parse.getReader().canRead()
+                || !parse.getExceptions().isEmpty();
+        assertTrue(failed, "Command expected to fail parsing but succeeded: " + command);
     }
 
     private void assertParsePermissionDenied(String command, CommandSourceStack source) {
