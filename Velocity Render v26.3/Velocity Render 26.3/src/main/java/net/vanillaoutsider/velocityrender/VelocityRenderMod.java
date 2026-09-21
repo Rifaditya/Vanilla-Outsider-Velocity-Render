@@ -24,6 +24,9 @@ public final class VelocityRenderMod implements ModInitializer {
         // Register Dynamic GameRules via DasikLibrary
         VelocityRenderGameRules.register();
 
+        // Load Sparse Delta dimension clamps
+        net.vanillaoutsider.velocityrender.server.DimensionClampManager.load();
+
         // Register Brigadier commands (/velocityrender, /vr)
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             VelocityRenderCommand.register(dispatcher);

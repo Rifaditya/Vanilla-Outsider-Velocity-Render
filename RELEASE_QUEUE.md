@@ -19,3 +19,4 @@
 - [ ] **1.4.3+26.3** - In-Game Command Suite Controls & Diagnostic Milestone
 - [ ] **1.5.0+26.3** — Step 1: Pure Scaling Math & Reach Scaler (BL-VR-005).
 - [ ] **1.5.1+26.3** — Step 2: Dynamic GameRules & 12-Language Parity (BL-VR-005).
+- [ ] **1.5.2+26.3** — Step 3: Dynamic Sparse Delta & Conventional Tag Hub (BL-VR-005).

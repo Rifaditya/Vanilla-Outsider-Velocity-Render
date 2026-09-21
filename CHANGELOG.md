@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.5.2+26.3] - Dynamic Dimension Clamping Persistence & Conventional Tags
+- **Sparse Delta Dimension Config**: Introduced `config/velocity-render/dimension_clamps.json` providing clean Git/Packwiz compatibility without dumping unmodified defaults (Anti-Config Bombing).
+- **Omni-Channel Configuration Hub**: Unified reach scaling resolution across live GameRules, JSON overrides, and data tags with zero heap allocation on the server tick path.
+- **Data-Driven Conventional Tags**: Added support for `#c:dense_dimensions` and `#velocity-render:dense_dimensions` dimension type tags, enabling datapacks and modpacks to mark custom dimensions for lookahead clamping without writing code.
+- **Fail-Safe Self-Healing Storage**: Automatic error recovery and schema versioning that safely falls back to defaults without corrupting existing configuration files.
+
+---
+
 ## [1.5.1+26.3] - Dynamic Dimension Clamping GameRules & Localization Parity
 - **Dynamic Dimension Clamp GameRules**: Registered `velocityrender:nether_reach_clamp_pct` (default: `60%`, range: `10% - 100%`) and `velocityrender:default_dense_reach_clamp_pct` (default: `80%`, range: `10% - 100%`) via DasikLibrary's dynamic registry.
 - **Server Operator Tuning**: Enables server operators and singleplayer hosts to tune forward lookahead reach in the Nether and dense modded dimensions live in-game without server restarts.

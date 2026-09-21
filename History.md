@@ -1,5 +1,13 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.5.2+26.3] - Dynamic Sparse Delta & Conventional Tag Hub (BL-VR-005 Step 3)
+- Implemented `DimensionClampManager` in `net.vanillaoutsider.velocityrender.server` implementing the Omni-Channel Configuration Hierarchy.
+- Evaluates: (1) Active GameRule overrides, (2) Sparse Delta JSON in `config/velocity-render/dimension_clamps.json`, (3) Data-driven `#c:dense_dimensions` & `#velocity-render:dense_dimensions` tags, (4) Nether baseline (60%), and (5) Overworld/End default baseline (100%).
+- Backed by FastUtil `Object2IntOpenHashMap` with `-1` default return value for zero heap allocations and O(1) primitive lookups on server tick paths.
+- Declared conventional dimension type tags `#c:dense_dimensions` and `#velocity-render:dense_dimensions` containing `minecraft:the_nether`.
+- Integrated `DimensionClampManager.load()` into `VelocityRenderMod.onInitialize()`.
+- Created comprehensive unit tests in `DimensionClampManagerTest` verifying persistence, clamping, override removal, and malformed JSON recovery.
+
 ## [1.5.1+26.3] - Dynamic GameRules & 12-Language Localization (BL-VR-005 Step 2)
 - Declared and registered `NETHER_REACH_CLAMP_PCT` (`velocityrender:nether_reach_clamp_pct`, default: 60, range: [10, 100]) and `DEFAULT_DENSE_REACH_CLAMP_PCT` (`velocityrender:default_dense_reach_clamp_pct`, default: 80, range: [10, 100]) in `VelocityRenderGameRules`.
 - Added static accessor methods `getNetherReachClampPct(Level)` and `getDefaultDenseReachClampPct(Level)`.
