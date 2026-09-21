@@ -13,7 +13,9 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.IdentifierArgument;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -137,10 +139,10 @@ public final class VelocityRenderCommand {
                         .then(Commands.literal("reset")
                                 .executes(VelocityRenderCommand::executeDimClampReset))
                         .then(Commands.literal("remove")
-                                .then(Commands.argument("dimension", StringArgumentType.string())
+                                .then(Commands.argument("dimension", IdentifierArgument.id())
                                         .suggests(VelocityRenderCommand::suggestDimensions)
                                         .executes(VelocityRenderCommand::executeDimClampRemove)))
-                        .then(Commands.argument("dimension", StringArgumentType.string())
+                        .then(Commands.argument("dimension", IdentifierArgument.id())
                                 .suggests(VelocityRenderCommand::suggestDimensions)
                                 .then(Commands.argument("percentage", IntegerArgumentType.integer(10, 100))
                                         .executes(VelocityRenderCommand::executeDimClampSet))))
@@ -369,30 +371,30 @@ public final class VelocityRenderCommand {
         return builder.buildFuture();
     }
 
+    private static String resolveDimensionArg(CommandContext<CommandSourceStack> context, CommandSourceStack source) {
+        Identifier id = IdentifierArgument.getId(context, "dimension");
+        if ("minecraft".equals(id.getNamespace()) && "current".equals(id.getPath())) {
+            return (source.getLevel() != null) ? source.getLevel().dimension().identifier().toString() : "minecraft:overworld";
+        }
+        return id.toString();
+    }
+
     private static int executeDimClampSet(CommandContext<CommandSourceStack> context) {
         CommandSourceStack source = context.getSource();
-        String dimStr = StringArgumentType.getString(context, "dimension");
+        String dimStr = resolveDimensionArg(context, source);
         int pct = IntegerArgumentType.getInteger(context, "percentage");
-        if ("current".equalsIgnoreCase(dimStr)) {
-            dimStr = source.getLevel().dimension().identifier().toString();
-        }
         DimensionClampManager.setOverride(dimStr, pct);
         DimensionClampManager.save();
-        String finalDimStr = dimStr;
-        source.sendSuccess(() -> Component.literal("§aSet dimension reach clamp for §e" + finalDimStr + " §ato §e" + pct + "%§r"), true);
+        source.sendSuccess(() -> Component.literal("§aSet dimension reach clamp for §e" + dimStr + " §ato §e" + pct + "%§r"), true);
         return 1;
     }
 
     private static int executeDimClampRemove(CommandContext<CommandSourceStack> context) {
         CommandSourceStack source = context.getSource();
-        String dimStr = StringArgumentType.getString(context, "dimension");
-        if ("current".equalsIgnoreCase(dimStr)) {
-            dimStr = source.getLevel().dimension().identifier().toString();
-        }
+        String dimStr = resolveDimensionArg(context, source);
         DimensionClampManager.removeOverride(dimStr);
         DimensionClampManager.save();
-        String finalDimStr = dimStr;
-        source.sendSuccess(() -> Component.literal("§aRemoved custom reach clamp override for §e" + finalDimStr + "§r"), true);
+        source.sendSuccess(() -> Component.literal("§aRemoved custom reach clamp override for §e" + dimStr + "§r"), true);
         return 1;
     }
 

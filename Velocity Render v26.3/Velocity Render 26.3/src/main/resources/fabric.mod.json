@@ -21,6 +21,9 @@
         ],
         "client": [
             "net.vanillaoutsider.velocityrender.client.VelocityRenderClient"
+        ],
+        "fabric-gametest": [
+            "net.vanillaoutsider.velocityrender.test.VelocityRenderGameTest"
         ]
     },
     "mixins": [

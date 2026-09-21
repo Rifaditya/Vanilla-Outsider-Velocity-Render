@@ -10,6 +10,7 @@ logs/
 .fabric/
 .cache/
 run/
+config/
 
 # IDE & Editor Files
 .idea/

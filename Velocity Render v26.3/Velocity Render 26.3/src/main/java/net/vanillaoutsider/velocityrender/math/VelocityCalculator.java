@@ -37,7 +37,7 @@ public final class VelocityCalculator {
         initialized = true;
 
         double magSqr = effectiveDx * effectiveDx + effectiveDy * effectiveDy + effectiveDz * effectiveDz;
-        if (magSqr < 0.000001) {
+        if (magSqr < 0.000001 || Double.isNaN(magSqr) || Double.isInfinite(magSqr)) {
             speedBlocksPerTick = 0.0;
             normDx = 0.0;
             normDy = 0.0;

@@ -29,6 +29,18 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+loom {
+	runs {
+		gametest {
+			server()
+			name "GameTest"
+			vmArg "-Dfabric-api.gametest"
+			vmArg "-Dfabric-api.gametest.report-file=${project.layout.buildDirectory.get()}/junit.xml"
+			runDir "build/gametest"
+		}
+	}
+}
+
 test {
     useJUnitPlatform()
 }

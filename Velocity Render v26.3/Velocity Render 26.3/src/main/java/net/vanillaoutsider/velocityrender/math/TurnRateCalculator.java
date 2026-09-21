@@ -32,19 +32,17 @@ public final class TurnRateCalculator {
         }
 
         int deltaTicks = tick - lastTick;
-        if (deltaTicks <= 0) {
-            // Same tick or tick clock anomaly: preserve existing smoothed rate
+        if (deltaTicks <= 0 || Float.isNaN(currentYaw) || Float.isInfinite(currentYaw)) {
+            // Same tick, clock anomaly, or invalid floating-point value: preserve existing rate
             return;
         }
 
-        // Calculate shortest angular delta across [-180.0, 180.0] wrap-around
+        // Calculate shortest angular delta across [-180.0, 180.0] wrap-around in O(1)
         float rawDeltaYaw = currentYaw - lastYaw;
-        while (rawDeltaYaw > 180.0f) {
-            rawDeltaYaw -= 360.0f;
+        if (Float.isNaN(rawDeltaYaw) || Float.isInfinite(rawDeltaYaw)) {
+            return;
         }
-        while (rawDeltaYaw < -180.0f) {
-            rawDeltaYaw += 360.0f;
-        }
+        rawDeltaYaw = ((rawDeltaYaw + 180.0f) % 360.0f + 360.0f) % 360.0f - 180.0f;
 
         float instantaneousRate = Math.abs(rawDeltaYaw) / (float) deltaTicks;
 
