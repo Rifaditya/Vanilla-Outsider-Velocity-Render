@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.7.0+26.3] - Optional GUI Foundation & Persistent Config Model
+- **Optional GUI Build Foundation**: Integrated compile-time interfaces for YetAnotherConfigLib (YACL v3) and ModMenu, establishing a clean foundation for upcoming in-game visual configuration screens without bundling external dependencies.
+- **Dedicated Configuration Storage**: Introduced persistent JSON configuration storage at `config/velocity-render/config.json`, allowing players and server operators to customize flight sensitivity, server quotas, and diagnostic overlays offline with full pretty-printed readability.
+- **Safe State Recovery**: Built-in self-healing configuration parser that automatically falls back to balanced vanilla-friendly defaults if custom files contain syntax errors or corruption.
+
+---
+
 ## [1.6.4+26.3] - Brigadier LOD Command Controls & Live Diagnostic Telemetry
 - **Dynamic Command Suite Integration**: Added `/vr get lod_hooks` and `/vr set lod_hooks <true|false>` (with short alias `/vr get lod` and `/vr set lod`) to query and toggle distant LOD trajectory hooks in real time.
 - **Unified Settings Reset**: Updated `/vr reset` to automatically restore LOD trajectory hooks to enabled alongside all standard engine parameters.

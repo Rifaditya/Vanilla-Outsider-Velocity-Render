@@ -1,5 +1,14 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.7.0+26.3] - Optional GUI Dependencies & Config Model (BL-VR-007 Step 1)
+- Added Maven repository `https://maven.isxander.dev/releases` to `build.gradle`.
+- Declared `compileOnly` dependencies for `dev.isxander:yet-another-config-lib:3.9.5+26.2-fabric` and `com.terraformersmc:modmenu:18.0.0-beta.1`, ensuring zero runtime bytecode bundling in the distributed JAR.
+- Created `VelocityRenderConfig` in `net.vanillaoutsider.velocityrender.client.config`:
+  - Enforces persistent JSON storage at `config/velocity-render/config.json`.
+  - Implemented `copyFrom(VelocityRenderConfig)` to preserve singleton object identity across disk reload cycles.
+  - Implemented resilient fallback handling in `loadFromPath(...)` and `saveToPath(...)` with environment-safe `getDefaultConfigPath()` decoupling headless tests from FabricLoader.
+- Established automated test suite `VelocityRenderConfigTest` asserting default parameters, full round-trip GSON serialization, and corrupt file self-healing.
+
 ## [1.6.4+26.3] - Brigadier Command Controls & Telemetry (BL-VR-006 Finale)
 - Integrated LOD trajectory hooks into Brigadier command structure in `VelocityRenderCommand`:
   - Added suggestions for `lod_hooks` and alias `lod` under `/vr get <rule>`.
