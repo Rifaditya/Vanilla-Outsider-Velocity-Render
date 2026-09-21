@@ -12,9 +12,10 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-002]` | `[FEATURE]` | 3D Pitch-Aware Vertical Lookahead (Dives & Ascents) | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-003]` | `[PERF]` | Server-Wide Ticket Budget & Fair Multi-Player Allocation | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-004]` | `[REFINEMENT]` | Right-Side F3 Engine Diagnostic Metric Line | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
-| `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
+| `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[HIGH]` | `26.3+` | `🚧 IN_PROGRESS` |
 | `[BL-VR-006]` | `[INTEGRATION]` | Bobby & Distant Horizons LOD Velocity Trajectory Hooks | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-007]` | `[FEATURE]` | Optional YACL Config Screen via ModMenu | `[LOW]` | `26.3+` | `📌 DEFERRED` |
+| `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 
 ---
 
@@ -188,3 +189,32 @@ Implement YetAnotherConfigLib (YACL v3) screen integrated with ModMenu:
 #### 🧪 Verification & Acceptance Criteria
 - [ ] ModMenu shows "Configure" button when YACL is loaded.
 - [ ] Dedicated server and client without YACL run without any class not found crashes.
+
+---
+
+### [BL-VR-008] Architecture Documentation & Visual Velocity Cone Progression
+- **Category**: `[DOCS]`
+- **Priority**: `[MEDIUM]`
+- **Status**: `✅ RESOLVED`
+- **Target Component(s)**: `HOW_IT_WORKS.md`, `README.md`, `Doc/Media/velocity_cone_progression.png`
+- **Date Added**: 2026-09-21
+- **Date Resolved**: 2026-09-21
+
+#### ❓ Problem / Context
+Players and developers require a clear visual and mathematical explanation of how Velocity Render departs from vanilla Minecraft's circular chunk generation radius and dynamically forms a high-speed forward lookahead V-cone.
+
+#### 💡 Proposed Solution & Technical Specifications
+1. Created `HOW_IT_WORKS.md` detailing the 4 progression stages:
+   - **Stage 1 (Vanilla Circle)**: Speed < 0.20 b/t (standing/idling, uniform radius).
+   - **Stage 2 (Wide V)**: Speed 0.20–0.50 b/t (walking, subtle forward bias).
+   - **Stage 3 (Medium V)**: Speed 0.50–1.20 b/t (sprinting, riding, balanced priority).
+   - **Stage 4 (Tight V)**: Speed > 1.20 b/t (Elytra dives, max forward reach up to 16 chunks).
+2. Embedded the canonical draw.io architecture diagram in `Doc/Media/velocity_cone_progression.png`.
+3. Documented mathematical principles: anisotropic distance formula, rear distance penalties, dynamic turn fan-out, and MSPT load shedding.
+4. Linked guide directly from root `README.md`.
+
+#### 🧪 Verification & Acceptance Criteria
+- [x] Canonical diagram asset saved in `Doc/Media/velocity_cone_progression.png`.
+- [x] Exhaustive explanations documented in `HOW_IT_WORKS.md`.
+- [x] Clear navigational entrypoint linked in `README.md`.
+- [x] Committed and pushed to `origin main`.
