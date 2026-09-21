@@ -29,6 +29,12 @@
   "velocityrender.gamerule.f3_debug": "F3-Bildschirmdiagnose",
   "velocityrender.gamerule.f3_debug.description": "Zeigt Telemetriedaten der Velocity-Render-Engine auf dem F3-Debug-Bildschirm an.",
 
+  "velocityrender.gamerule.nether_reach_clamp_pct": "Nether-Reichweitenbegrenzung",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "Prozentsatz der Vorwärtskorridor-Reichweite im Nether (10% bis 100%).",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "Dichte-Dimensionsbegrenzung",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Prozentsatz der Vorwärtskorridor-Reichweite in Nicht-Oberwelt- oder dichten Mod-Dimensionen (10% bis 100%).",
+
   "velocityrender.command.status.header": "=== Velocity Render Status ===",
   "velocityrender.command.status.speed": "Geschwindigkeit: %s B/T (%s m/s)",
   "velocityrender.command.status.reach": "Dynamische Reichweite: %s Chunks (MSPT: %sms)",

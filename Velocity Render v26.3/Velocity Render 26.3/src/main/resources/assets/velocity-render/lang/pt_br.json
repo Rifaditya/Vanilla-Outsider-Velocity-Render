@@ -29,6 +29,12 @@
   "velocityrender.gamerule.f3_debug": "Diagnósticos de Tela F3",
   "velocityrender.gamerule.f3_debug.description": "Exibe a telemetria do motor Velocity Render na tela de depuração F3 do Minecraft.",
 
+  "velocityrender.gamerule.nether_reach_clamp_pct": "Limite de Alcance do Nether",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "Porcentagem de alcance do corredor preditivo no Nether (10% a 100%).",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "Limite de Alcance para Dimensões Densas",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Porcentagem de alcance do corredor preditivo em dimensões densas ou fora do Overworld (10% a 100%).",
+
   "velocityrender.command.status.header": "=== Status do Velocity Render ===",
   "velocityrender.command.status.speed": "Velocidade: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Alcance dinâmico: %s chunks (MSPT: %sms)",

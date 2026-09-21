@@ -29,6 +29,12 @@
   "velocityrender.gamerule.f3_debug": "F3 화면 진단",
   "velocityrender.gamerule.f3_debug.description": "Minecraft F3 디버그 화면에 Velocity Render 엔진 원격 측정을 표시합니다.",
 
+  "velocityrender.gamerule.nether_reach_clamp_pct": "네더 도달 범위 제한",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "네더에서의 예측 전방 생성 통로 도달 비율 (10% ~ 100%).",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "고밀도 차원 도달 범위 제한",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "오버월드 외의 차원 또는 고밀도 모드 차원에서의 예측 전방 통로 도달 비율 (10% ~ 100%).",
+
   "velocityrender.command.status.header": "=== Velocity Render 상태 ===",
   "velocityrender.command.status.speed": "현재 속도: %s 블록/틱 (%s m/s)",
   "velocityrender.command.status.reach": "동적 도달 범위: %s 청크 (MSPT: %sms)",

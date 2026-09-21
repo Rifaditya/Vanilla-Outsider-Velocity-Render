@@ -29,6 +29,12 @@
   "velocityrender.gamerule.f3_debug": "F3 Screen Diagnostics",
   "velocityrender.gamerule.f3_debug.description": "Display Velocity Render engine telemetry on Minecraft F3 debug screen.",
 
+  "velocityrender.gamerule.nether_reach_clamp_pct": "Nether Reach Clamp",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "Forward lookahead corridor reach percentage in the Nether (10% to 100%).",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "Dense Dimension Reach Clamp",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Forward lookahead corridor reach percentage in non-Overworld or dense modded dimensions (10% to 100%).",
+
   "velocityrender.command.status.header": "=== Velocity Render Status ===",
   "velocityrender.command.status.speed": "Speed: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Dynamic Reach: %s chunks (MSPT: %sms)",

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.5.1+26.3] - Dynamic Dimension Clamping GameRules & Localization Parity
+- **Dynamic Dimension Clamp GameRules**: Registered `velocityrender:nether_reach_clamp_pct` (default: `60%`, range: `10% - 100%`) and `velocityrender:default_dense_reach_clamp_pct` (default: `80%`, range: `10% - 100%`) via DasikLibrary's dynamic registry.
+- **Server Operator Tuning**: Enables server operators and singleplayer hosts to tune forward lookahead reach in the Nether and dense modded dimensions live in-game without server restarts.
+- **12-Language Universal Localization**: Fully synchronized translations and descriptions across all 12 supported languages (English, German, Spanish, French, Indonesian, Italian, Japanese, Korean, Portuguese, Russian, Simplified Chinese, Traditional Chinese).
+- **Safe Null-Gated Accessors**: Exposed zero-allocation static helper methods `getNetherReachClampPct(Level)` and `getDefaultDenseReachClampPct(Level)`.
+
+---
+
 ## [1.5.0+26.3] - Dimension Reach Scaling Math Engine
 - **Dimension Reach Scaler Utility**: Introduced pure mathematical calculation engine `DimensionReachScaler` to scale forward lookahead corridors across distinct dimensions.
 - **Nether & Dense Dimension Protection**: Computes scaled corridor reaches for environments with high block densities and cave noise, clamping reach down to 60% in the Nether while preserving full lookahead in the Overworld.

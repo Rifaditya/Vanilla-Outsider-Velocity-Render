@@ -1,5 +1,10 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.5.1+26.3] - Dynamic GameRules & 12-Language Localization (BL-VR-005 Step 2)
+- Declared and registered `NETHER_REACH_CLAMP_PCT` (`velocityrender:nether_reach_clamp_pct`, default: 60, range: [10, 100]) and `DEFAULT_DENSE_REACH_CLAMP_PCT` (`velocityrender:default_dense_reach_clamp_pct`, default: 80, range: [10, 100]) in `VelocityRenderGameRules`.
+- Added static accessor methods `getNetherReachClampPct(Level)` and `getDefaultDenseReachClampPct(Level)`.
+- Synchronized translation dictionaries across all 12 supported languages (`en_us`, `de_de`, `es_es`, `fr_fr`, `id_id`, `it_it`, `ja_jp`, `ko_kr`, `pt_br`, `ru_ru`, `zh_cn`, `zh_tw`).
+
 ## [1.5.0+26.3] - Pure Scaling Math & Reach Scaler (BL-VR-005 Step 1)
 - Created `DimensionReachScaler` pure stateless algorithmic utility in `net.vanillaoutsider.velocityrender.math`.
 - Formula: `calculateClampedReach(int baseReach, int clampPct)` clamping `clampPct` to `[10, 100]` and returning `Math.max(2, Math.round(baseReach * (clampPct / 100.0)))`.

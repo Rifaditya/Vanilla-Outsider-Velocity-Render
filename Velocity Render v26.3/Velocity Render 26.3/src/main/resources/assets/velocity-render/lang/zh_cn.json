@@ -29,6 +29,12 @@
   "velocityrender.gamerule.f3_debug": "F3 调试屏幕诊断",
   "velocityrender.gamerule.f3_debug.description": "在 Minecraft F3 调试屏幕上显示 Velocity Render 引擎遥测数据。",
 
+  "velocityrender.gamerule.nether_reach_clamp_pct": "下界前瞻范围限制",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "下界环境中预测前瞻区块加载走廊的距离缩放比例 (10% 至 100%)。",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "高密度维度前瞻范围限制",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "非主世界或高密度模组维度中预测前瞻走廊的距离缩放比例 (10% 至 100%)。",
+
   "velocityrender.command.status.header": "=== 速度渲染 (Velocity Render) 状态 ===",
   "velocityrender.command.status.speed": "当前速度: %s 格/刻 (%s 米/秒)",
   "velocityrender.command.status.reach": "动态前瞻范围: %s 区块 (MSPT: %sms)",

@@ -29,6 +29,12 @@
   "velocityrender.gamerule.f3_debug": "F3画面診断",
   "velocityrender.gamerule.f3_debug.description": "MinecraftのF3デバッグ画面にVelocity Renderのエンジンテレメトリを表示します。",
 
+  "velocityrender.gamerule.nether_reach_clamp_pct": "ネザーリーチ制限",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "ネザーにおける予測前方生成コリドーのリーチ割合 (10%〜100%)。",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "高密度ディメンションリーチ制限",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "通常世界以外または高密度MODディメンションにおける予測前方コリドーのリーチ割合 (10%〜100%)。",
+
   "velocityrender.command.status.header": "=== Velocity Render ステータス ===",
   "velocityrender.command.status.speed": "速度: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "動的リーチ: %s チャンク (MSPT: %sms)",

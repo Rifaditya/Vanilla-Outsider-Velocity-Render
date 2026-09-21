@@ -29,6 +29,12 @@
   "velocityrender.gamerule.f3_debug": "Diagnostica Schermo F3",
   "velocityrender.gamerule.f3_debug.description": "Mostra la telemetria del motore Velocity Render sulla schermata di debug F3 di Minecraft.",
 
+  "velocityrender.gamerule.nether_reach_clamp_pct": "Limite di Portata del Nether",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "Percentuale di portata del corridoio predittivo nel Nether (dal 10% al 100%).",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "Limite di Portata per Dimensioni Dense",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Percentuale di portata del corridoio predittivo in dimensioni dense o diverse dall'Overworld (dal 10% al 100%).",
+
   "velocityrender.command.status.header": "=== Stato di Velocity Render ===",
   "velocityrender.command.status.speed": "Velocità: %s b/t (%s m/s)",
   "velocityrender.command.status.reach": "Portata dinamica: %s chunk (MSPT: %sms)",

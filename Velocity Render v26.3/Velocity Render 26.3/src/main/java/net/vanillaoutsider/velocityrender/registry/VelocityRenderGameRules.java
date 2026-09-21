@@ -25,6 +25,8 @@ public final class VelocityRenderGameRules {
     public static GameRule<Integer> SERVER_TICKET_BUDGET;
     public static GameRule<Boolean> DEBUG_MODE;
     public static GameRule<Boolean> F3_DEBUG;
+    public static GameRule<Integer> NETHER_REACH_CLAMP_PCT;
+    public static GameRule<Integer> DEFAULT_DENSE_REACH_CLAMP_PCT;
 
     private VelocityRenderGameRules() {
     }
@@ -79,6 +81,18 @@ public final class VelocityRenderGameRules {
                 .name("F3 Screen Diagnostics")
                 .description("Display Velocity Render engine telemetry on Minecraft F3 debug screen")
                 .register();
+
+        NETHER_REACH_CLAMP_PCT = DynamicGameRuleManager.integerRule("velocityrender:nether_reach_clamp_pct", CATEGORY, 60)
+                .range(10, 100)
+                .name("Nether Reach Clamp")
+                .description("Forward lookahead corridor reach percentage in the Nether (10% - 100%)")
+                .register();
+
+        DEFAULT_DENSE_REACH_CLAMP_PCT = DynamicGameRuleManager.integerRule("velocityrender:default_dense_reach_clamp_pct", CATEGORY, 80)
+                .range(10, 100)
+                .name("Dense Dimension Reach Clamp")
+                .description("Forward lookahead corridor reach percentage in non-Overworld or dense modded dimensions (10% - 100%)")
+                .register();
     }
 
     public static boolean isEnabled(Level level) {
@@ -115,5 +129,13 @@ public final class VelocityRenderGameRules {
 
     public static boolean isF3DebugEnabled(Level level) {
         return DynamicGameRuleManager.getBoolean(level, F3_DEBUG);
+    }
+
+    public static int getNetherReachClampPct(Level level) {
+        return DynamicGameRuleManager.getInt(level, NETHER_REACH_CLAMP_PCT);
+    }
+
+    public static int getDefaultDenseReachClampPct(Level level) {
+        return DynamicGameRuleManager.getInt(level, DEFAULT_DENSE_REACH_CLAMP_PCT);
     }
 }

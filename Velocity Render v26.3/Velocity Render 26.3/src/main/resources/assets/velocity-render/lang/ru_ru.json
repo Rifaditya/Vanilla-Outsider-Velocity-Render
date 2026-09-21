@@ -29,6 +29,12 @@
   "velocityrender.gamerule.f3_debug": "Диагностика экрана F3",
   "velocityrender.gamerule.f3_debug.description": "Отображать телеметрию движка Velocity Render на экране отладки F3 Minecraft.",
 
+  "velocityrender.gamerule.nether_reach_clamp_pct": "Ограничение охвата в Незере",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "Процент дальности упреждающего коридора загрузки в Незере (от 10% до 100%).",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "Ограничение охвата плотных измерений",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Процент дальности упреждающего коридора в измерениях вне Верхнего мира или плотных модовых мирах (от 10% до 100%).",
+
   "velocityrender.command.status.header": "=== Статус Velocity Render ===",
   "velocityrender.command.status.speed": "Скорость: %s б/т (%s м/с)",
   "velocityrender.command.status.reach": "Динамический охват: %s чанков (MSPT: %sms)",
