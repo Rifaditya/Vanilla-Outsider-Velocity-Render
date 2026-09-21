@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.6.2+26.3] - Distant Horizons & Bobby Compatibility Hub & Public Trajectory API
+- **Soft-Reflection LOD Bridges**: Introduced isolated compatibility adapters for Distant Horizons and Bobby, providing zero-crash classloader safety that activates only when either mod is present.
+- **Active Distant Horizons Lookahead Bridge**: Feeds 3D lookahead focus points and forward velocity trajectory vectors into distant terrain rendering systems to prioritize terrain generation along the player's flight path.
+- **Bobby Cache Prioritization**: Directs forward velocity vectors to Bobby's chunk manager to accelerate cached chunk restoration along high-speed corridors.
+- **Public Velocity Trajectory API**: Exposed `VelocityTrajectoryAPI`, offering a zero-overhead, reflection-free interface for third-party mods, shaders, and dev tools to query live player trajectories and evaluate biased LOD distances.
+
+---
+
 ## [1.6.1+26.3] - Dynamic LOD Trajectory GameRule & 12-Language Localization
 - **Dynamic LOD Trajectory GameRule**: Registered `velocityrender:lod_trajectory_hooks` (default: `true`), allowing world hosts and server operators to toggle distant terrain lookahead trajectory broadcasting on the fly.
 - **12-Language Universal Localization**: Fully synchronized translations and in-depth descriptions for the new GameRule across all 12 supported languages (English, German, Spanish, French, Indonesian, Italian, Japanese, Korean, Portuguese, Russian, Simplified Chinese, Traditional Chinese).

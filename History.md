@@ -1,5 +1,19 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.6.2+26.3] - Soft-Reflection LOD Compatibility Hub & Public API (BL-VR-006 Step 3)
+- Implemented `LODCompatManager` in `net.vanillaoutsider.velocityrender.client.compat`:
+  - Enforces strict classloader isolation by verifying `FabricLoader.getInstance().isModLoaded(...)` before loading any adapter classes.
+  - Instantiates isolated adapter instances `DistantHorizonsAdapter` and `BobbyAdapter` from `compat.adapter` only when the respective mod is present.
+  - Maintains lock-free volatile snapshot `currentTrajectory` with zero heap allocation on updates.
+  - Formats live diagnostic summaries for F3 and in-game commands via `getIntegrationSummary()`.
+- Created `DistantHorizonsAdapter` in `net.vanillaoutsider.velocityrender.client.compat.adapter`:
+  - Reflectively connects to `DhApi` and injects forward lookahead focus coordinates and trajectory cones.
+- Created `BobbyAdapter` in `net.vanillaoutsider.velocityrender.client.compat.adapter`:
+  - Reflectively inspects Bobby and supplies forward trajectory vectors for cache reading prioritization.
+- Created `VelocityTrajectoryAPI` in `net.vanillaoutsider.velocityrender.client.compat`:
+  - Exposes public static query methods `getActiveTrajectory()`, `isTrajectoryActive()`, `getLookaheadFocus()`, `calculateBiasedDistanceSqr(...)`, and `getIntegrationSummary()`.
+- Added comprehensive unit test suite in `LODCompatManagerTest` (5 tests verifying default inactive states, absence handling, mock integration summaries, null safety, and distance ordering).
+
 ## [1.6.1+26.3] - Dynamic GameRule & 12-Language Localization Parity (BL-VR-006 Step 2)
 - Declared and registered dynamic boolean GameRule `LOD_TRAJECTORY_HOOKS` (`velocityrender:lod_trajectory_hooks`, default: `true`) in `VelocityRenderGameRules`.
 - Added public static accessor `VelocityRenderGameRules.isLodTrajectoryHooksEnabled(Level)` providing null-safe boolean evaluation.
