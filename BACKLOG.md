@@ -12,9 +12,10 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-002]` | `[FEATURE]` | 3D Pitch-Aware Vertical Lookahead (Dives & Ascents) | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-003]` | `[PERF]` | Server-Wide Ticket Budget & Fair Multi-Player Allocation | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-004]` | `[REFINEMENT]` | Right-Side F3 Engine Diagnostic Metric Line | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
-| `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[HIGH]` | `26.3+` | `🚧 IN_PROGRESS` |
+| `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-006]` | `[INTEGRATION]` | Bobby & Distant Horizons LOD Velocity Trajectory Hooks | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-007]` | `[FEATURE]` | Optional YACL Config Screen via ModMenu | `[LOW]` | `26.3+` | `📌 DEFERRED` |
+| `[BL-VR-009]` | `[REFINEMENT]` | Uncap Configuration Limits & Hard Ceilings (Player Freedom / Stress-Testing) | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `🚧 IN_PROGRESS` |
 
 ---
@@ -120,9 +121,10 @@ Gated behind client toggle or GameRule. Zero string concatenation garbage by for
 ### [BL-VR-005] Nether & Dense Dimension WorldGen Clamping
 - **Category**: `[PERF]`
 - **Priority**: `[HIGH]`
-- **Status**: `🔄 IN PROGRESS`
+- **Status**: `✅ RESOLVED`
 - **Target Component(s)**: `DimensionReachScaler.java`, `DimensionClampManager.java`, `VelocityRenderGameRules.java`, `VelocityTicketManager.java`, `VelocityRenderCommand.java`
 - **Date Added**: 2026-09-18
+- **Date Resolved**: 2026-09-21 (v1.5.0 – v1.5.4+26.3)
 
 #### ❓ Problem / Context
 The Nether and custom cave/modded dimensions feature solid bedrock ceilings, complex 3D noise carvers, and high block densities. Generating full 16-chunk forward lookahead corridors in these environments incurs dramatically higher CPU worldgen costs per chunk than surface Overworld terrain, causing server MSPT spikes during Elytra flight or high-speed ice-boat highways.
@@ -142,10 +144,10 @@ Implement universal dynamic dimension reach scaling through a unified 3-tier con
    - `/vr status` displays active dimension reach scaling: `• Dimension Scaling: the_nether (Clamped: 60% -> max 10 chunks)`.
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] Nether forward reach clamps to 60% (max 10 chunks at full speed) while preserving 100% in the Overworld.
-- [ ] Modded/End dimensions default to configured clamp (80%) or custom per-dimension override.
-- [ ] Zero heap allocations on 20 TPS server tick hot paths.
-- [ ] Fully controllable via Dynamic GameRules, Sparse Delta JSON config, Data-driven Tags, and `/vr dimclamp`.
+- [x] Nether forward reach clamps to 60% (max 10 chunks at full speed) while preserving 100% in the Overworld.
+- [x] Modded/End dimensions default to configured clamp (80%) or custom per-dimension override.
+- [x] Zero heap allocations on 20 TPS server tick hot paths.
+- [x] Fully controllable via Dynamic GameRules, Sparse Delta JSON config, Data-driven Tags, and `/vr dimclamp`.
 
 ---
 
@@ -189,6 +191,49 @@ Implement YetAnotherConfigLib (YACL v3) screen integrated with ModMenu:
 #### 🧪 Verification & Acceptance Criteria
 - [ ] ModMenu shows "Configure" button when YACL is loaded.
 - [ ] Dedicated server and client without YACL run without any class not found crashes.
+
+---
+
+### [BL-VR-009] Uncap Configuration Limits & Hard Ceilings (Player Freedom / Stress-Testing)
+- **Category**: `[REFINEMENT]`
+- **Priority**: `[MEDIUM]`
+- **Status**: `📌 DEFERRED`
+- **Target Component(s)**: `VelocityRenderGameRules.java`, `VelocityRenderCommand.java`, `VelocityTicketManager.java`, `ClientVelocityTracker.java`, `VelocityVectorHelper.java`, `TicketBudgetAllocator.java`
+- **Date Added**: 2026-09-21
+
+#### ❓ Problem / Context
+Velocity Render currently enforces restrictive artificial hard limits and upper clamping bounds across its configuration:
+- `velocityrender:lead_multiplier`: Capped at `300%` in GameRule and `/vr set lead_multiplier` (`0..300`).
+- `velocityrender:server_ticket_budget`: Capped at `256` tickets in GameRule and `/vr set budget` (`16..256`).
+- `VelocityVectorHelper.MAX_LEAD_OFFSET`: Hardcoded client compile bias cap at `256.0` blocks (16 chunks).
+- `ClientVelocityTracker`: Clamps lead multiplier strictly to `[0.0, 3.0]`.
+- `VelocityTicketManager`: Base forward reach clamped around `16.0 * leadScale * msptFactor`.
+
+Power users, high-performance dedicated servers (e.g. modern multi-core / 64GB+ setups), modpack developers, and players testing extreme supersonic travel (custom Elytras, high-speed rail, explosive cannon launchers) are artificially prevented from pushing the engine to its limits. If a player or server operator wants to crank values to extreme tiers (e.g. 1000%+ lead multiplier, 2048+ tickets) to stress-test their hardware or achieve unlimited forward lookahead—even at the risk of lagging their server or "breaking their own game"—the mod should provide complete freedom rather than imposing arbitrary ceilings.
+
+**Key Invariant**: Safe defaults must remain strictly identical (`lead_multiplier: 100`, `server_ticket_budget: 64`, `min_speed_threshold_pct: 20`, `nether_reach_clamp_pct: 60`), guaranteeing out-of-the-box stability for standard gameplay.
+
+#### 💡 Proposed Solution & Technical Specifications
+1. **Uncap Dynamic GameRules & Command Ranges**:
+   - `lead_multiplier`: Expand range from `(0, 300)` to `(0, 10000)` (or open/Integer.MAX_VALUE).
+   - `server_ticket_budget`: Expand range from `(16, 256)` to `(1, 65536)` (or Integer.MAX_VALUE).
+   - `min_speed_threshold_pct`: Expand range from `(1, 200)` to `(0, 10000)`.
+   - Relax corresponding Brigadier argument clamps in `VelocityRenderCommand.java`.
+2. **Elevate / Parameterize Client Biasing & Offset Caps**:
+   - Relax `ClientVelocityTracker.setLeadMultiplier` upper clamp from `3.0` to support arbitrary user multipliers.
+   - Scale `VelocityVectorHelper.MAX_LEAD_OFFSET` dynamically or raise the ceiling so client chunk compile prioritizing can bias beyond 256 blocks when extreme lead multipliers are configured.
+3. **Dynamic Forward Reach Scaling**:
+   - Ensure `VelocityTicketManager` does not impose an arbitrary 16-chunk base cap if a server operator configures high lead multipliers or large budgets.
+4. **Preserve Defaults & Watchdog Safeguards**:
+   - Baseline defaults remain unchanged (`lead_multiplier = 100`, `server_ticket_budget = 64`, `min_speed = 20`).
+   - The MSPT Watchdog remains active as an automatic performance shock absorber unless explicitly disabled or overridden.
+
+#### 🧪 Verification & Acceptance Criteria
+- [ ] Setting `velocityrender:lead_multiplier` to values $> 300$ (e.g. `1000`) succeeds in commands and GameRules without syntax errors or clamp truncation.
+- [ ] Setting `velocityrender:server_ticket_budget` to high values (e.g. `2048`) allows server to allocate forward tickets beyond 256.
+- [ ] Client chunk meshing bias scales beyond 256 blocks with elevated lead multipliers.
+- [ ] Default values remain 100% identical to previous releases (`lead_multiplier: 100`, `server_ticket_budget: 64`, `min_speed_threshold_pct: 20`).
+- [ ] `/vr reset` restores default safe values without regression.
 
 ---
 

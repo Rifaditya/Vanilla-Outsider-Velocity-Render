@@ -7,14 +7,22 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.suggestion.Suggestions;
+import com.mojang.brigadier.suggestion.SuggestionsBuilder;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.TimeUtil;
+import net.minecraft.world.level.Level;
 import net.vanillaoutsider.velocityrender.client.ClientVelocityTracker;
+import net.vanillaoutsider.velocityrender.math.DimensionReachScaler;
 import net.vanillaoutsider.velocityrender.registry.VelocityRenderGameRules;
+import net.vanillaoutsider.velocityrender.server.DimensionClampManager;
 import net.vanillaoutsider.velocityrender.server.VelocityTicketManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +60,10 @@ public final class VelocityRenderCommand {
                                     builder.suggest("debug_mode");
                                     builder.suggest("f3_debug");
                                     builder.suggest("f3");
+                                    builder.suggest("nether_reach_clamp_pct");
+                                    builder.suggest("nether_clamp");
+                                    builder.suggest("default_dense_reach_clamp_pct");
+                                    builder.suggest("dense_clamp");
                                     return builder.buildFuture();
                                 })
                                 .executes(VelocityRenderCommand::executeGet)))
@@ -95,7 +107,33 @@ public final class VelocityRenderCommand {
                                         .executes(ctx -> executeSetBool(ctx, "f3_debug", BoolArgumentType.getBool(ctx, "value")))))
                         .then(Commands.literal("f3")
                                 .then(Commands.argument("value", BoolArgumentType.bool())
-                                        .executes(ctx -> executeSetBool(ctx, "f3_debug", BoolArgumentType.getBool(ctx, "value"))))))
+                                        .executes(ctx -> executeSetBool(ctx, "f3_debug", BoolArgumentType.getBool(ctx, "value")))))
+                        .then(Commands.literal("nether_reach_clamp_pct")
+                                .then(Commands.argument("value", IntegerArgumentType.integer(10, 100))
+                                        .executes(ctx -> executeSetInt(ctx, "nether_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value")))))
+                        .then(Commands.literal("nether_clamp")
+                                .then(Commands.argument("value", IntegerArgumentType.integer(10, 100))
+                                        .executes(ctx -> executeSetInt(ctx, "nether_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value")))))
+                        .then(Commands.literal("default_dense_reach_clamp_pct")
+                                .then(Commands.argument("value", IntegerArgumentType.integer(10, 100))
+                                        .executes(ctx -> executeSetInt(ctx, "default_dense_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value")))))
+                        .then(Commands.literal("dense_clamp")
+                                .then(Commands.argument("value", IntegerArgumentType.integer(10, 100))
+                                        .executes(ctx -> executeSetInt(ctx, "default_dense_reach_clamp_pct", IntegerArgumentType.getInteger(ctx, "value"))))))
+                .then(Commands.literal("dimclamp")
+                        .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                        .then(Commands.literal("list")
+                                .executes(VelocityRenderCommand::executeDimClampList))
+                        .then(Commands.literal("reset")
+                                .executes(VelocityRenderCommand::executeDimClampReset))
+                        .then(Commands.literal("remove")
+                                .then(Commands.argument("dimension", StringArgumentType.string())
+                                        .suggests(VelocityRenderCommand::suggestDimensions)
+                                        .executes(VelocityRenderCommand::executeDimClampRemove)))
+                        .then(Commands.argument("dimension", StringArgumentType.string())
+                                .suggests(VelocityRenderCommand::suggestDimensions)
+                                .then(Commands.argument("percentage", IntegerArgumentType.integer(10, 100))
+                                        .executes(VelocityRenderCommand::executeDimClampSet))))
                 .then(Commands.literal("reset")
                         .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                         .executes(VelocityRenderCommand::executeReset))
@@ -112,8 +150,12 @@ public final class VelocityRenderCommand {
                 "§e/vr status§r - View real-time velocity, forward reach, MSPT, and active tickets.\n" +
                 "§e/vr get <rule>§r - Query current configuration value.\n" +
                 "§e/vr set <rule> <value>§r - Update settings in real time.\n" +
+                "§e/vr dimclamp <dim> <pct>§r - Set custom lookahead reach clamp for a dimension.\n" +
+                "§e/vr dimclamp list§r - List custom dimension clamp overrides.\n" +
+                "§e/vr dimclamp remove <dim>§r - Remove custom dimension clamp override.\n" +
+                "§e/vr dimclamp reset§r - Reset all custom dimension clamp overrides.\n" +
                 "§e/vr reset§r - Restore default settings.\n" +
-                "§e/vr reload§r - Reload configuration."
+                "§e/vr reload§r - Reload configuration and dimension clamps."
         ), false);
         return 1;
     }
@@ -162,6 +204,11 @@ public final class VelocityRenderCommand {
         int dynamicReach = VelocityTicketManager.getLastDynamicReach();
         boolean clientBias = ClientVelocityTracker.activeBias;
 
+        ResourceKey<Level> dimKey = level.dimension();
+        String dimName = dimKey.identifier().toString();
+        int clampPct = DimensionClampManager.getEffectiveClampPct(level);
+        int maxReachInDim = DimensionReachScaler.calculateClampedReach(16, clampPct);
+
         final int tickets = activeTickets;
         final double speed = currentSpeed;
         final float mspt = serverMspt;
@@ -171,12 +218,17 @@ public final class VelocityRenderCommand {
         final boolean widening = turnWidening;
         final float rate = turnRate;
         final String dir = direction;
+        final String currentDimName = dimName;
+        final int currentClampPct = clampPct;
+        final int currentMaxReach = maxReachInDim;
 
         source.sendSuccess(() -> Component.literal(
                 "§6[Velocity Render — Engine Telemetry]§r\n" +
                 " §7• §fStatus: " + (enabled ? "§aACTIVE" : "§cDISABLED") + "§r\n" +
+                " §7• §fDimension Lookahead: §e" + currentDimName + " §7(Clamp: " + currentClampPct + "% -> max " + currentMaxReach + " chunks)§r\n" +
                 " §7• §fYour Velocity: §a" + String.format("%.2f", speed) + " b/t (" + String.format("%.1f", speed * 20.0) + " m/s)§r\n" +
                 " §7• §fDynamic Forward Reach: §e" + reach + " Chunks§r\n" +
+                (source.getEntity() instanceof ServerPlayer player ? " §7• §fYour Active Lookahead: §e" + VelocityTicketManager.getPlayerDynamicReach(player.getUUID()) + " chunks§r\n" : "") +
                 " §7• §fActive Trajectory Tickets: §b" + tickets + " (Zero-Alloc Reusable Scratch)§r\n" +
                 (source.getEntity() instanceof ServerPlayer ? " §7• §fYour Allocated Quota: §e" + quota + " tickets§r\n" : "") +
                 " §7• §fServer Ticket Budget: §e" + totalServerTickets + "/" + serverBudget + " §7(§b" + activeFlyers + "§7 active flyers)§r\n" +
@@ -210,6 +262,8 @@ public final class VelocityRenderCommand {
             case "server_ticket_budget", "budget" -> source.sendSuccess(() -> Component.literal("§6velocityrender:server_ticket_budget = §e" + VelocityRenderGameRules.getServerTicketBudget(level)), false);
             case "debug_mode" -> source.sendSuccess(() -> Component.literal("§6velocityrender:debug_mode = §e" + VelocityRenderGameRules.isDebugMode(level)), false);
             case "f3_debug", "f3" -> source.sendSuccess(() -> Component.literal("§6velocityrender:f3_debug = §e" + VelocityRenderGameRules.isF3DebugEnabled(level)), false);
+            case "nether_reach_clamp_pct", "nether_clamp" -> source.sendSuccess(() -> Component.literal("§6velocityrender:nether_reach_clamp_pct = §e" + VelocityRenderGameRules.getNetherReachClampPct(level) + "%"), false);
+            case "default_dense_reach_clamp_pct", "dense_clamp" -> source.sendSuccess(() -> Component.literal("§6velocityrender:default_dense_reach_clamp_pct = §e" + VelocityRenderGameRules.getDefaultDenseReachClampPct(level) + "%"), false);
             default -> source.sendFailure(Component.literal("§cUnknown setting: " + rule));
         }
         return 1;
@@ -240,6 +294,8 @@ public final class VelocityRenderCommand {
             case "lead_multiplier" -> level.getGameRules().set(VelocityRenderGameRules.LEAD_MULTIPLIER, value, source.getServer());
             case "min_speed" -> level.getGameRules().set(VelocityRenderGameRules.MIN_SPEED_THRESHOLD_PCT, value, source.getServer());
             case "server_ticket_budget", "budget" -> level.getGameRules().set(VelocityRenderGameRules.SERVER_TICKET_BUDGET, value, source.getServer());
+            case "nether_reach_clamp_pct" -> level.getGameRules().set(VelocityRenderGameRules.NETHER_REACH_CLAMP_PCT, value, source.getServer());
+            case "default_dense_reach_clamp_pct" -> level.getGameRules().set(VelocityRenderGameRules.DEFAULT_DENSE_REACH_CLAMP_PCT, value, source.getServer());
         }
 
         source.sendSuccess(() -> Component.literal("§aUpdated velocityrender:" + rule + " to " + value), true);
@@ -259,6 +315,8 @@ public final class VelocityRenderCommand {
         level.getGameRules().set(VelocityRenderGameRules.SERVER_TICKET_BUDGET, 64, source.getServer());
         level.getGameRules().set(VelocityRenderGameRules.DEBUG_MODE, false, source.getServer());
         level.getGameRules().set(VelocityRenderGameRules.F3_DEBUG, true, source.getServer());
+        level.getGameRules().set(VelocityRenderGameRules.NETHER_REACH_CLAMP_PCT, 60, source.getServer());
+        level.getGameRules().set(VelocityRenderGameRules.DEFAULT_DENSE_REACH_CLAMP_PCT, 80, source.getServer());
 
         source.sendSuccess(() -> Component.literal("§aReset all Velocity Render settings to defaults."), true);
         return 1;
@@ -266,7 +324,72 @@ public final class VelocityRenderCommand {
 
     private static int executeReload(CommandContext<CommandSourceStack> context) {
         CommandSourceStack source = context.getSource();
-        source.sendSuccess(() -> Component.literal("§aReloaded Velocity Render configuration successfully."), true);
+        DimensionClampManager.load();
+        source.sendSuccess(() -> Component.literal("§aReloaded Velocity Render configuration and dimension clamps successfully."), true);
+        return 1;
+    }
+
+    private static CompletableFuture<Suggestions> suggestDimensions(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder) {
+        builder.suggest("current");
+        builder.suggest("minecraft:overworld");
+        builder.suggest("minecraft:the_nether");
+        builder.suggest("minecraft:the_end");
+        if (context.getSource().getServer() != null) {
+            for (ResourceKey<Level> key : context.getSource().getServer().levelKeys()) {
+                builder.suggest(key.identifier().toString());
+            }
+        }
+        return builder.buildFuture();
+    }
+
+    private static int executeDimClampSet(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        String dimStr = StringArgumentType.getString(context, "dimension");
+        int pct = IntegerArgumentType.getInteger(context, "percentage");
+        if ("current".equalsIgnoreCase(dimStr)) {
+            dimStr = source.getLevel().dimension().identifier().toString();
+        }
+        DimensionClampManager.setOverride(dimStr, pct);
+        DimensionClampManager.save();
+        String finalDimStr = dimStr;
+        source.sendSuccess(() -> Component.literal("§aSet dimension reach clamp for §e" + finalDimStr + " §ato §e" + pct + "%§r"), true);
+        return 1;
+    }
+
+    private static int executeDimClampRemove(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        String dimStr = StringArgumentType.getString(context, "dimension");
+        if ("current".equalsIgnoreCase(dimStr)) {
+            dimStr = source.getLevel().dimension().identifier().toString();
+        }
+        DimensionClampManager.removeOverride(dimStr);
+        DimensionClampManager.save();
+        String finalDimStr = dimStr;
+        source.sendSuccess(() -> Component.literal("§aRemoved custom reach clamp override for §e" + finalDimStr + "§r"), true);
+        return 1;
+    }
+
+    private static int executeDimClampReset(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        DimensionClampManager.clearOverrides();
+        DimensionClampManager.save();
+        source.sendSuccess(() -> Component.literal("§aCleared all custom dimension clamp overrides. Reverted to GameRules and data tags."), true);
+        return 1;
+    }
+
+    private static int executeDimClampList(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        Map<String, Integer> overrides = DimensionClampManager.getAllOverrides();
+        if (overrides.isEmpty()) {
+            source.sendSuccess(() -> Component.literal("§6[Velocity Render]§r §7No custom dimension clamp overrides configured. All dimensions evaluate standard GameRules and data tags."), false);
+            return 1;
+        }
+        StringBuilder sb = new StringBuilder("§6=== Velocity Render: Custom Dimension Clamps ===§r\n");
+        for (Map.Entry<String, Integer> entry : overrides.entrySet()) {
+            sb.append(" §7• §f").append(entry.getKey()).append(": §e").append(entry.getValue()).append("%§r\n");
+        }
+        String output = sb.toString().trim();
+        source.sendSuccess(() -> Component.literal(output), false);
         return 1;
     }
 }

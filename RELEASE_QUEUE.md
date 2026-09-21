@@ -21,3 +21,4 @@
 - [ ] **1.5.1+26.3** — Step 2: Dynamic GameRules & 12-Language Parity (BL-VR-005).
 - [ ] **1.5.2+26.3** — Step 3: Dynamic Sparse Delta & Conventional Tag Hub (BL-VR-005).
 - [ ] **1.5.3+26.3** — Step 4: Server Predictive Generation Dimension Gating (BL-VR-005).
+- [ ] **1.5.4+26.3** — Step 5: Brigadier Command Controls & Telemetry (BL-VR-005 Finale).

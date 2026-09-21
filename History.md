@@ -1,5 +1,17 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.5.4+26.3] - Brigadier Command Controls & Telemetry (BL-VR-005 Finale)
+- Implemented dedicated `/vr dimclamp` subcommand suite in `VelocityRenderCommand`:
+  - `/vr dimclamp <dimension> <percentage>`: Saves Sparse Delta JSON overrides via `DimensionClampManager.setOverride` and `save()`.
+  - `/vr dimclamp remove <dimension>`: Deletes specific override via `DimensionClampManager.removeOverride` and `save()`.
+  - `/vr dimclamp reset`: Clears all overrides via `DimensionClampManager.clearOverrides` and `save()`.
+  - `/vr dimclamp list`: Pretty-prints active custom overrides or shows informative message when none are configured.
+- Added dynamic dimension suggestions providing `"current"` and querying all registered level keys from `server.levelKeys()`.
+- Bound `nether_reach_clamp_pct` (alias `nether_clamp`) and `default_dense_reach_clamp_pct` (alias `dense_clamp`) to `/vr get`, `/vr set`, and `/vr reset`.
+- Enhanced `/vr status` with dedicated Dimension Lookahead readout showing active dimension ID, resolved clamp %, maximum corridor reach, and active player dynamic lookahead reach.
+- Updated `/vr reload` to hot-reload `DimensionClampManager.load()`.
+- Marked `[BL-VR-005]` as `✅ RESOLVED` in `BACKLOG.md` (preserving `[BL-VR-008]` as `🚧 IN_PROGRESS`).
+
 ## [1.5.3+26.3] - Server Predictive Generation Dimension Gating (BL-VR-005 Step 4)
 - Integrated `DimensionClampManager.getEffectiveClampPct(level)` and `DimensionReachScaler.calculateClampedReach` into `VelocityTicketManager.tickPlayer` on the 20 TPS server tick path.
 - Applied post-budget corridor reach clamping: evaluated after `TicketBudgetAllocator.calculatePlayerQuota`, allowing flyers in dense dimensions to consume fewer tickets than their allocated quota, freeing server capacity for other dimensions.

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.5.4+26.3] - Dimension Clamping Command Suite & Live Telemetry
+- **Dedicated Dimension Clamping Command Suite**: Introduced `/vr dimclamp <dimension> <percentage>` with intelligent tab completion supporting `"current"` and all dynamically loaded server dimensions.
+- **Sparse Delta Override Management**: Added `/vr dimclamp list` to view active dimension overrides, `/vr dimclamp remove <dimension>` to unbind specific overrides, and `/vr dimclamp reset` to restore default configurations.
+- **Dynamic GameRule Integration**: Integrated `nether_reach_clamp_pct` and `default_dense_reach_clamp_pct` into `/vr get`, `/vr set`, and `/vr reset`.
+- **Live Dimension Lookahead Telemetry**: Enhanced `/vr status` with real-time dimension lookahead metrics, active clamp percentages, calculated reach ceilings, and individual player dynamic lookahead reach.
+- **Hot-Reload Support**: Updated `/vr reload` to seamlessly refresh dimension clamp overrides from disk without requiring server restarts.
+
+---
+
 ## [1.5.3+26.3] - Server Dimension-Aware Predictive Chunk Gating
 - **Server Predictive Lookahead Gating**: Injected real-time dimension reach scaling into the server chunk ticket allocation loop, scaling lookahead distances dynamically per dimension.
 - **Nether & Dense WorldGen Protection**: Restricts forward chunk loading corridors in the Nether and dense cave dimensions to protect server performance, while maintaining maximum predictive visibility in the Overworld and End.
