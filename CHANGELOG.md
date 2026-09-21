@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.6.3+26.3] - Live Client Tick LOD Trajectory Broadcasting
+- **Client Tick Integration**: Linked LOD compatibility adapters directly into the client movement loop, broadcasting updated velocity trajectories to Distant Horizons and Bobby in real-time.
+- **Edge-Triggered Idle Reset**: Broadcasts an inactive reset state on the exact falling edge when coming to a stop, preventing unnecessary background updates while standing or walking.
+- **Dual-Layer Execution Guards**: Synchronizes client-side settings with server GameRules, providing seamless control across singleplayer worlds and multiplayer servers.
+- **Zero-Allocation Hot Path**: Optimized state updates to minimize garbage collector churn, preserving smooth frame pacing during high-speed Elytra flights.
+
+---
+
 ## [1.6.2+26.3] - Distant Horizons & Bobby Compatibility Hub & Public Trajectory API
 - **Soft-Reflection LOD Bridges**: Introduced isolated compatibility adapters for Distant Horizons and Bobby, providing zero-crash classloader safety that activates only when either mod is present.
 - **Active Distant Horizons Lookahead Bridge**: Feeds 3D lookahead focus points and forward velocity trajectory vectors into distant terrain rendering systems to prioritize terrain generation along the player's flight path.

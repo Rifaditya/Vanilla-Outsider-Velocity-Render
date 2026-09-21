@@ -16,6 +16,9 @@ public final class VelocityRenderClient implements ClientModInitializer {
         // Register client tick handler for velocity caching
         ClientTickEvents.END_CLIENT_TICK.register(ClientVelocityTracker::clientTick);
 
+        // Initialize Level-of-Detail & chunk-caching compatibility hub
+        net.vanillaoutsider.velocityrender.client.compat.LODCompatManager.init();
+
         LOGGER.info("[VelocityRender] Client initialization complete.");
     }
 }

@@ -1,5 +1,13 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.6.3+26.3] - Client Tick Integration & Broadcasting (BL-VR-006 Step 4)
+- Integrated `LODCompatManager.init()` into `VelocityRenderClient.onInitializeClient()`, executing mod detection on client startup.
+- Updated `ClientVelocityTracker` to broadcast real-time trajectory updates during `clientTick(...)`:
+  - Added dual-layer gating: verifies client toggle `clientLodHooksEnabled` and `VelocityRenderGameRules.isLodTrajectoryHooksEnabled(mc.level)`.
+  - Implemented edge-triggered state update: while moving (`speed >= minSpeedThreshold`), generates `LODTrajectoryState` and broadcasts to `LODCompatManager.updateTrajectory(state)`.
+  - Implemented falling-edge idle reset: when transitioning from moving to idle, dispatches `LODTrajectoryState.INACTIVE` once and sleeps, eliminating redundant tick execution.
+  - Added public accessors `isClientLodHooksEnabled()`, `setClientLodHooksEnabled(boolean)`, and `isLodHooksEnabled()`.
+
 ## [1.6.2+26.3] - Soft-Reflection LOD Compatibility Hub & Public API (BL-VR-006 Step 3)
 - Implemented `LODCompatManager` in `net.vanillaoutsider.velocityrender.client.compat`:
   - Enforces strict classloader isolation by verifying `FabricLoader.getInstance().isModLoaded(...)` before loading any adapter classes.

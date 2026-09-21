@@ -17,6 +17,8 @@ public final class ClientVelocityTracker {
     private static double minSpeedThreshold = 0.20; // 0.20 b/t = 4.0 m/s
     private static boolean debugMode = false;
     private static boolean clientF3DebugEnabled = true;
+    private static boolean clientLodHooksEnabled = true;
+    private static boolean lodWasActive = false;
 
     // Precomputed volatile hot-path cache for lock-free render thread polling
     public static volatile boolean activeBias = false;
@@ -40,6 +42,12 @@ public final class ClientVelocityTracker {
             CALCULATOR.reset();
             activeBias = false;
             cachedLeadOffset = 0.0;
+            if (lodWasActive) {
+                net.vanillaoutsider.velocityrender.client.compat.LODCompatManager.updateTrajectory(
+                        net.vanillaoutsider.velocityrender.math.LODTrajectoryCalculator.LODTrajectoryState.INACTIVE
+                );
+                lodWasActive = false;
+            }
             return;
         }
 
@@ -62,6 +70,28 @@ public final class ClientVelocityTracker {
         } else {
             activeBias = false;
             cachedLeadOffset = 0.0;
+        }
+
+        // Level-of-Detail & chunk-caching trajectory broadcasting
+        if (activeBias && isLodHooksEnabled(client)) {
+            var lodState = net.vanillaoutsider.velocityrender.math.LODTrajectoryCalculator.createState(
+                    cameraEntity.getX(),
+                    cameraEntity.getY(),
+                    cameraEntity.getZ(),
+                    cachedNormDx,
+                    cachedNormDy,
+                    cachedNormDz,
+                    speed,
+                    leadMultiplier,
+                    minSpeedThreshold
+            );
+            net.vanillaoutsider.velocityrender.client.compat.LODCompatManager.updateTrajectory(lodState);
+            lodWasActive = true;
+        } else if (lodWasActive) {
+            net.vanillaoutsider.velocityrender.client.compat.LODCompatManager.updateTrajectory(
+                    net.vanillaoutsider.velocityrender.math.LODTrajectoryCalculator.LODTrajectoryState.INACTIVE
+            );
+            lodWasActive = false;
         }
 
         // Update client-side turn rate and cone angle
@@ -192,5 +222,34 @@ public final class ClientVelocityTracker {
         if (!value) {
             cachedF3Line = null;
         }
+    }
+
+    public static boolean isClientLodHooksEnabled() {
+        return clientLodHooksEnabled;
+    }
+
+    public static void setClientLodHooksEnabled(boolean value) {
+        clientLodHooksEnabled = value;
+        if (!value && lodWasActive) {
+            net.vanillaoutsider.velocityrender.client.compat.LODCompatManager.updateTrajectory(
+                    net.vanillaoutsider.velocityrender.math.LODTrajectoryCalculator.LODTrajectoryState.INACTIVE
+            );
+            lodWasActive = false;
+        }
+    }
+
+    public static boolean isLodHooksEnabled() {
+        Minecraft mc = Minecraft.getInstance();
+        return isLodHooksEnabled(mc);
+    }
+
+    public static boolean isLodHooksEnabled(Minecraft mc) {
+        if (!clientLodHooksEnabled) {
+            return false;
+        }
+        if (mc != null && mc.level != null) {
+            return net.vanillaoutsider.velocityrender.registry.VelocityRenderGameRules.isLodTrajectoryHooksEnabled(mc.level);
+        }
+        return true;
     }
 }
