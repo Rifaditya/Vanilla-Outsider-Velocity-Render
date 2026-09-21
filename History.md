@@ -1,5 +1,24 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.7.4+26.3] - Runtime State Synchronization & ModMenu Verification (BL-VR-007 Finale)
+- Implemented `ClientConfigSyncer` in `net.vanillaoutsider.velocityrender.client.config`:
+  - Annotated with `@Environment(EnvType.CLIENT)` to ensure strict dedicated server safety.
+  - Synchronizes all configuration fields to `ClientVelocityTracker` (speed threshold, lead multiplier, F3 debug, LOD hooks, debug mode).
+  - Automatically queries `Minecraft.getInstance().getSingleplayerServer()` and asynchronously updates active `VelocityRenderGameRules` on the integrated server thread across all active levels.
+- Wired bi-directional synchronization in `VelocityRenderConfig` and `VelocityRenderCommand`:
+  - `VelocityRenderConfig.saveToPath()` and `loadFromPath()` trigger `syncRuntimeState()` when running on client environments.
+  - `/vr reset` resets `VelocityRenderConfig.get().resetDefaults()` and saves.
+  - `/vr reload` reloads `VelocityRenderConfig.load()` and `DimensionClampManager.load()`.
+  - `/vr set` synchronizes matching values directly into `VelocityRenderConfig` and saves to disk.
+- Initialized `VelocityRenderConfig.load()` in `VelocityRenderClient.onInitializeClient()`.
+- Created comprehensive test suite `VelocityRenderModMenuTest` asserting:
+  - ModMenu factory returns null safely without throwing when YACL is absent on runtime classpath.
+  - `YaclScreenHelper` factory methods maintain reflection parity.
+  - `ClientConfigSyncer` updates tracker values and handles null configuration safely.
+- Backlog Resolution: Officially closed out `[BL-VR-007]` (Optional YACL Config Screen via ModMenu) with all acceptance criteria and roadmap steps verified.
+
+---
+
 ## [1.7.3+26.3] - ModMenu Entrypoint & Reflection Loader (BL-VR-007 Step 4)
 - Implemented `ModMenuIntegration` in `net.vanillaoutsider.velocityrender.client.config`:
   - Decorated with `@Environment(EnvType.CLIENT)` to ensure strict sided safety.

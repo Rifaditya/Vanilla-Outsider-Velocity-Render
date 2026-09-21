@@ -23,6 +23,7 @@ import net.minecraft.util.TimeUtil;
 import net.minecraft.world.level.Level;
 import net.vanillaoutsider.velocityrender.client.ClientVelocityTracker;
 import net.vanillaoutsider.velocityrender.client.compat.LODCompatManager;
+import net.vanillaoutsider.velocityrender.client.config.VelocityRenderConfig;
 import net.vanillaoutsider.velocityrender.math.DimensionReachScaler;
 import net.vanillaoutsider.velocityrender.math.LODTrajectoryCalculator.LODTrajectoryState;
 import net.vanillaoutsider.velocityrender.registry.VelocityRenderGameRules;
@@ -299,16 +300,36 @@ public final class VelocityRenderCommand {
     private static int executeSetBool(CommandContext<CommandSourceStack> context, String rule, boolean value) {
         CommandSourceStack source = context.getSource();
         ServerLevel level = source.getLevel();
+        VelocityRenderConfig config = VelocityRenderConfig.get();
 
         switch (rule) {
-            case "enabled" -> level.getGameRules().set(VelocityRenderGameRules.ENABLED, value, source.getServer());
+            case "enabled" -> {
+                level.getGameRules().set(VelocityRenderGameRules.ENABLED, value, source.getServer());
+                config.enabled = value;
+            }
             case "budget_conservation" -> level.getGameRules().set(VelocityRenderGameRules.BUDGET_CONSERVATION, value, source.getServer());
-            case "turn_widening" -> level.getGameRules().set(VelocityRenderGameRules.TURN_WIDENING, value, source.getServer());
-            case "vertical_lookahead" -> level.getGameRules().set(VelocityRenderGameRules.VERTICAL_LOOKAHEAD, value, source.getServer());
-            case "debug_mode" -> level.getGameRules().set(VelocityRenderGameRules.DEBUG_MODE, value, source.getServer());
-            case "f3_debug" -> level.getGameRules().set(VelocityRenderGameRules.F3_DEBUG, value, source.getServer());
-            case "lod_hooks", "lod" -> level.getGameRules().set(VelocityRenderGameRules.LOD_TRAJECTORY_HOOKS, value, source.getServer());
+            case "turn_widening" -> {
+                level.getGameRules().set(VelocityRenderGameRules.TURN_WIDENING, value, source.getServer());
+                config.turnWidening = value;
+            }
+            case "vertical_lookahead" -> {
+                level.getGameRules().set(VelocityRenderGameRules.VERTICAL_LOOKAHEAD, value, source.getServer());
+                config.verticalLookahead = value;
+            }
+            case "debug_mode" -> {
+                level.getGameRules().set(VelocityRenderGameRules.DEBUG_MODE, value, source.getServer());
+                config.debugMode = value;
+            }
+            case "f3_debug" -> {
+                level.getGameRules().set(VelocityRenderGameRules.F3_DEBUG, value, source.getServer());
+                config.f3Debug = value;
+            }
+            case "lod_hooks", "lod" -> {
+                level.getGameRules().set(VelocityRenderGameRules.LOD_TRAJECTORY_HOOKS, value, source.getServer());
+                config.lodTrajectoryHooks = value;
+            }
         }
+        VelocityRenderConfig.save();
 
         source.sendSuccess(() -> Component.literal("§aUpdated velocityrender:" + rule + " to " + value), true);
         return 1;
@@ -317,14 +338,31 @@ public final class VelocityRenderCommand {
     private static int executeSetInt(CommandContext<CommandSourceStack> context, String rule, int value) {
         CommandSourceStack source = context.getSource();
         ServerLevel level = source.getLevel();
+        VelocityRenderConfig config = VelocityRenderConfig.get();
 
         switch (rule) {
-            case "lead_multiplier" -> level.getGameRules().set(VelocityRenderGameRules.LEAD_MULTIPLIER, value, source.getServer());
-            case "min_speed" -> level.getGameRules().set(VelocityRenderGameRules.MIN_SPEED_THRESHOLD_PCT, value, source.getServer());
-            case "server_ticket_budget", "budget" -> level.getGameRules().set(VelocityRenderGameRules.SERVER_TICKET_BUDGET, value, source.getServer());
-            case "nether_reach_clamp_pct" -> level.getGameRules().set(VelocityRenderGameRules.NETHER_REACH_CLAMP_PCT, value, source.getServer());
-            case "default_dense_reach_clamp_pct" -> level.getGameRules().set(VelocityRenderGameRules.DEFAULT_DENSE_REACH_CLAMP_PCT, value, source.getServer());
+            case "lead_multiplier" -> {
+                level.getGameRules().set(VelocityRenderGameRules.LEAD_MULTIPLIER, value, source.getServer());
+                config.leadMultiplier = value;
+            }
+            case "min_speed" -> {
+                level.getGameRules().set(VelocityRenderGameRules.MIN_SPEED_THRESHOLD_PCT, value, source.getServer());
+                config.minSpeedThresholdPct = value;
+            }
+            case "server_ticket_budget", "budget" -> {
+                level.getGameRules().set(VelocityRenderGameRules.SERVER_TICKET_BUDGET, value, source.getServer());
+                config.serverTicketBudget = value;
+            }
+            case "nether_reach_clamp_pct" -> {
+                level.getGameRules().set(VelocityRenderGameRules.NETHER_REACH_CLAMP_PCT, value, source.getServer());
+                config.netherReachClampPct = value;
+            }
+            case "default_dense_reach_clamp_pct" -> {
+                level.getGameRules().set(VelocityRenderGameRules.DEFAULT_DENSE_REACH_CLAMP_PCT, value, source.getServer());
+                config.defaultDenseReachClampPct = value;
+            }
         }
+        VelocityRenderConfig.save();
 
         source.sendSuccess(() -> Component.literal("§aUpdated velocityrender:" + rule + " to " + value), true);
         return 1;
@@ -347,12 +385,16 @@ public final class VelocityRenderCommand {
         level.getGameRules().set(VelocityRenderGameRules.DEFAULT_DENSE_REACH_CLAMP_PCT, 80, source.getServer());
         level.getGameRules().set(VelocityRenderGameRules.LOD_TRAJECTORY_HOOKS, true, source.getServer());
 
+        VelocityRenderConfig.get().resetDefaults();
+        VelocityRenderConfig.save();
+
         source.sendSuccess(() -> Component.literal("§aReset all Velocity Render settings to defaults."), true);
         return 1;
     }
 
     private static int executeReload(CommandContext<CommandSourceStack> context) {
         CommandSourceStack source = context.getSource();
+        VelocityRenderConfig.load();
         DimensionClampManager.load();
         source.sendSuccess(() -> Component.literal("§aReloaded Velocity Render configuration and dimension clamps successfully."), true);
         return 1;

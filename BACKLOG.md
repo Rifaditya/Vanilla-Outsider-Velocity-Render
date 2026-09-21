@@ -14,7 +14,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-004]` | `[REFINEMENT]` | Right-Side F3 Engine Diagnostic Metric Line | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-006]` | `[INTEGRATION]` | Bobby & Distant Horizons LOD Velocity Trajectory Hooks | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
-| `[BL-VR-007]` | `[FEATURE]` | Optional YACL Config Screen via ModMenu | `[LOW]` | `26.3+` | `📌 DEFERRED` |
+| `[BL-VR-007]` | `[FEATURE]` | Optional YACL Config Screen via ModMenu | `[LOW]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-009]` | `[REFINEMENT]` | Uncap Configuration Limits & Hard Ceilings (Player Freedom / Stress-Testing) | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
 | `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `🚧 IN_PROGRESS` |
 
@@ -176,9 +176,10 @@ Provide soft-reflection bridges:
 ### [BL-VR-007] Optional YACL Config Screen via ModMenu
 - **Category**: `[FEATURE]`
 - **Priority**: `[LOW]`
-- **Status**: `📌 DEFERRED`
-- **Target Component(s)**: `ModMenuIntegration.java`, `VelocityRenderConfig.java`
+- **Status**: `✅ RESOLVED`
+- **Target Component(s)**: `ModMenuIntegration.java`, `VelocityRenderConfig.java`, `YaclScreenHelper.java`, `ClientConfigSyncer.java`
 - **Date Added**: 2026-09-18
+- **Date Resolved**: 2026-09-22 (v1.7.0 – v1.7.4+26.3)
 
 #### ❓ Problem / Context
 Currently, settings are adjusted via GameRules and `/velocityrender` commands. A clean in-game visual GUI makes tuning accessible to casual players.
@@ -190,8 +191,9 @@ Implement YetAnotherConfigLib (YACL v3) screen integrated with ModMenu:
 - Strict optional gating: if YACL is absent, fallback gracefully to `null` screen without classloader crashes.
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] ModMenu shows "Configure" button when YACL is loaded.
-- [ ] Dedicated server and client without YACL run without any class not found crashes.
+- [x] ModMenu shows "Configure" button when YACL is loaded.
+- [x] Dedicated server and client without YACL run without any class not found crashes.
+- [x] Bi-directional synchronization between GUI, commands (`/vr reset`, `/vr reload`, `/vr set`), and runtime tracker.
 
 ---
 

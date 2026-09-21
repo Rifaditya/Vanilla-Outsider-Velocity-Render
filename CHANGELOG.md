@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.7.4+26.3] - Runtime State Synchronization & Bi-directional Command Integration
+- **Real-Time Client State Synchronization**: Connected configuration changes directly to the client flight meshing engine, instantly applying updates to lead multiplier, minimum speed thresholds, F3 diagnostics, and LOD hooks without requiring a game restart.
+- **Bi-directional Command & Config Sync**: Synchronized in-game commands (`/vr reset`, `/vr reload`, and `/vr set`) with the persistent configuration file, ensuring in-game adjustments and disk configurations always stay perfectly aligned.
+- **Singleplayer Integrated Server Synchronization**: Automatically dispatches graphical settings adjustments to active singleplayer GameRules on the internal server thread, seamlessly updating world defaults in real-time.
+- **Comprehensive Reflection & ModMenu Verification**: Verified zero-crash optional classloading and ModMenu screen factory behavior across headless and graphical environments.
+
+---
+
 ## [1.7.3+26.3] - ModMenu Entrypoint & Reflection Loader
 - **Native ModMenu Integration**: Registered the client-side ModMenu entrypoint, enabling the in-game "Configure" gear button directly from the ModMenu mod list.
 - **Zero-Crash Deferred Classloading**: Integrated reflection-based screen creation that only loads YetAnotherConfigLib classes when requested by the player, ensuring dedicated servers and clients without YACL run smoothly with zero crashes.

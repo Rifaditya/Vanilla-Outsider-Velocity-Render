@@ -19,6 +19,9 @@ public final class VelocityRenderClient implements ClientModInitializer {
         // Initialize Level-of-Detail & chunk-caching compatibility hub
         net.vanillaoutsider.velocityrender.client.compat.LODCompatManager.init();
 
+        // Load and synchronize persistent client configuration
+        net.vanillaoutsider.velocityrender.client.config.VelocityRenderConfig.load();
+
         LOGGER.info("[VelocityRender] Client initialization complete.");
     }
 }

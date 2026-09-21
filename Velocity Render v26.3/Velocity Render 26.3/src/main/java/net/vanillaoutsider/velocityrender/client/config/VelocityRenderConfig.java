@@ -102,6 +102,7 @@ public final class VelocityRenderConfig {
             LOGGER.warn("[VelocityRender] Failed to parse {}: {}. Restoring defaults.", path.getFileName(), e.getMessage());
             INSTANCE.resetDefaults();
         }
+        syncRuntimeState();
     }
 
     public static void saveToPath(Path path) {
@@ -118,8 +119,18 @@ public final class VelocityRenderConfig {
                 GSON.toJson(INSTANCE, writer);
             }
             LOGGER.info("[VelocityRender] Saved configuration to {}", path.getFileName());
+            syncRuntimeState();
         } catch (IOException e) {
             LOGGER.error("[VelocityRender] Failed to save {}: {}", path.getFileName(), e.getMessage());
+        }
+    }
+
+    private static void syncRuntimeState() {
+        try {
+            if (FabricLoader.getInstance().getEnvironmentType() == net.fabricmc.api.EnvType.CLIENT) {
+                ClientConfigSyncer.sync(INSTANCE);
+            }
+        } catch (Throwable ignored) {
         }
     }
 
