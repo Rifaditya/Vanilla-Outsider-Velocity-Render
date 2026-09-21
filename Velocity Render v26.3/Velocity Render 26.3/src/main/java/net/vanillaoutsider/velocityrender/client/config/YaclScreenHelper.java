@@ -30,6 +30,10 @@ public final class YaclScreenHelper {
         return YaclScreenHelper::createScreen;
     }
 
+    public static ConfigScreenFactory<?> createScreen() {
+        return YaclScreenHelper::createScreen;
+    }
+
     public static Screen createScreen(Screen parent) {
         VelocityRenderConfig config = VelocityRenderConfig.get();
 

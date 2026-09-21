@@ -1,5 +1,13 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.7.3+26.3] - ModMenu Entrypoint & Reflection Loader (BL-VR-007 Step 4)
+- Implemented `ModMenuIntegration` in `net.vanillaoutsider.velocityrender.client.config`:
+  - Decorated with `@Environment(EnvType.CLIENT)` to ensure strict sided safety.
+  - Resolved `getModConfigScreenFactory()` via `GuiHelper.getOptionalYaclFactory(...)`, isolating all YACL classloading behind deferred reflection.
+  - Gracefully returns `null` when YACL is absent, adhering to the standard ModMenu disabled-button contract.
+- Registered `"modmenu"` entrypoint and declared `"suggests"` block (`yet_another_config_lib_v3`, `modmenu`) in `fabric.mod.json`.
+- Added `createScreen()` alias in `YaclScreenHelper` returning `ConfigScreenFactory<?>` for dual factory reflection parity.
+
 ## [1.7.2+26.3] - YACL Screen Factory & Smart Sliders (BL-VR-007 Step 3)
 - Created `YaclScreenHelper` in `net.vanillaoutsider.velocityrender.client.config`:
   - Structured 3 semantic categories: `Flight Biasing & Meshing`, `Server Quotas & WorldGen`, and `Telemetry & Compatibility`.

@@ -24,6 +24,9 @@
         ],
         "fabric-gametest": [
             "net.vanillaoutsider.velocityrender.test.VelocityRenderGameTest"
+        ],
+        "modmenu": [
+            "net.vanillaoutsider.velocityrender.client.config.ModMenuIntegration"
         ]
     },
     "mixins": [
@@ -34,6 +37,10 @@
         "minecraft": ">=26.3-",
         "fabric-api": "*",
         "dasik-library": ">=1.8.0"
+    },
+    "suggests": {
+        "yet_another_config_lib_v3": "*",
+        "modmenu": "*"
     },
     "custom": {
         "modmenu": {

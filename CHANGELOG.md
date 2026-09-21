@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.7.3+26.3] - ModMenu Entrypoint & Reflection Loader
+- **Native ModMenu Integration**: Registered the client-side ModMenu entrypoint, enabling the in-game "Configure" gear button directly from the ModMenu mod list.
+- **Zero-Crash Deferred Classloading**: Integrated reflection-based screen creation that only loads YetAnotherConfigLib classes when requested by the player, ensuring dedicated servers and clients without YACL run smoothly with zero crashes.
+- **Graceful UI Fallback**: Automatically disables the Configure button with standard tooltips when YACL is not installed, maintaining clean immersion.
+
+---
+
 ## [1.7.2+26.3] - YACL In-Game Screen Builder & Smart Sliders
 - **3-Category Visual Screen**: Built an intuitive graphical settings interface organized into Flight Biasing & Meshing, Server Quotas & WorldGen, and Telemetry & Compatibility.
 - **Smart Sliders with Precise Steps**: Added smooth interactive sliders for Forward Lead Multiplier (`0%–300%`), Minimum Speed Threshold (`1–200`), Server Ticket Budget (`16–256`), and Dimension Reach Clamps (`10%–100%`).

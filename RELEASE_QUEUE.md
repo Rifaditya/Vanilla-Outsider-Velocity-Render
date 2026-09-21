@@ -30,3 +30,4 @@
 - [ ] **1.7.0+26.3** — Step 1: Optional GUI Dependencies & Config Model (BL-VR-007).
 - [ ] **1.7.1+26.3** — Step 2: 12-Language GUI Localization Parity (BL-VR-007).
 - [ ] **1.7.2+26.3** — Step 3: YACL Screen Factory & Smart Sliders (BL-VR-007).
+- [ ] **1.7.3+26.3** — Step 4: ModMenu Entrypoint & Reflection Loader (BL-VR-007).
