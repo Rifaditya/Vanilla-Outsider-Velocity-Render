@@ -47,6 +47,6 @@ class DebugMetricsFormatterTest {
         Assertions.assertEquals("[VelocityRender] Bias: Active | Lead: 0.0m | Cone: 0°", underflow);
 
         String overflow = DebugMetricsFormatter.formatClientOnly(true, 999.9, 360);
-        Assertions.assertEquals("[VelocityRender] Bias: Active | Lead: 512.0m | Cone: 180°", overflow);
+        Assertions.assertEquals("[VelocityRender] Bias: Active | Lead: 999.9m | Cone: 180°", overflow);
     }
 }

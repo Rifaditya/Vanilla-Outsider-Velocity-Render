@@ -61,7 +61,8 @@ public final class VelocityVectorHelper {
         }
 
         double dotProduct = dirX * deltaX + dirY * deltaY + dirZ * deltaZ;
-        double leadOffset = Math.min(MAX_LEAD_OFFSET, speed * 16.0 * leadMultiplier);
+        double rawLead = speed * 16.0 * leadMultiplier;
+        double leadOffset = (Double.isNaN(rawLead) || Double.isInfinite(rawLead) || rawLead < 0.0) ? 0.0 : rawLead;
         double biasedDistSqr = euclideanDistSqr - 2.0 * dotProduct * leadOffset;
         return Math.max(0.0, biasedDistSqr);
     }

@@ -48,7 +48,7 @@ public final class DebugMetricsFormatter {
      * @return formatted diagnostic string
      */
     public static String formatClientOnly(boolean activeBias, double leadOffset, int coneDeg) {
-        double clampedLead = Math.max(0.0, Math.min(512.0, leadOffset));
+        double clampedLead = (Double.isNaN(leadOffset) || Double.isInfinite(leadOffset) || leadOffset < 0.0) ? 0.0 : leadOffset;
         int clampedCone = Math.max(0, Math.min(180, coneDeg));
 
         StringBuilder sb = new StringBuilder(64);

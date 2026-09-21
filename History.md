@@ -1,5 +1,20 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.8.2+26.3] - Fully Uncapped Client Lead Offset & Telemetry (BL-VR-009 Step 3)
+- Uncapped lead offset calculation in `VelocityVectorHelper.calculateLeadOffset()`:
+  - Formulated as `speed * 16.0 * leadMultiplier` bounded strictly by `Double` limits and guarded against `Double.isNaN` or `Double.isInfinite`.
+  - Preserved `Math.max(0.0, biasedDistSqr)` in `calculateBiasedDistanceSq()` to safeguard `SectionTaskDynamicQueue` sorting stability against negative numbers.
+- Uncapped `ClientVelocityTracker`:
+  - Removed `3.0x` clamp in `setLeadMultiplier` and `2.0` clamp in `setMinSpeedThreshold`.
+  - Updated `tick()` to calculate unconstrained `cachedLeadOffset`.
+- Uncapped F3 telemetry formatting in `DebugMetricsFormatter`:
+  - Removed artificial 512m clamp in `formatClientOnly()`.
+- Updated test suites:
+  - Added `testUncappedLeadOffsetScaling()` in `VelocityVectorHelperTest.java`.
+  - Updated `DebugMetricsFormatterTest.java` to verify accurate `999.9m` formatting.
+
+---
+
 ## [1.8.1+26.3] - Command Suite Uncapping & Non-Blocking Advisory Warnings (BL-VR-009 Step 2)
 - Relaxed Brigadier argument type ranges in `VelocityRenderCommand.java`:
   - `lead_multiplier`: `IntegerArgumentType.integer(0)` (was `0..300`).

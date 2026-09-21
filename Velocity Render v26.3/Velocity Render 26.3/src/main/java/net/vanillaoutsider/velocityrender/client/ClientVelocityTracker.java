@@ -66,7 +66,8 @@ public final class ClientVelocityTracker {
             cachedNormDx = CALCULATOR.getNormDx();
             cachedNormDy = CALCULATOR.getNormDy();
             cachedNormDz = CALCULATOR.getNormDz();
-            cachedLeadOffset = Math.min(256.0, speed * 16.0 * leadMultiplier);
+            double rawLead = speed * 16.0 * leadMultiplier;
+            cachedLeadOffset = (Double.isNaN(rawLead) || Double.isInfinite(rawLead) || rawLead < 0.0) ? 0.0 : rawLead;
         } else {
             activeBias = false;
             cachedLeadOffset = 0.0;
@@ -159,7 +160,7 @@ public final class ClientVelocityTracker {
     }
 
     public static void setLeadMultiplier(double value) {
-        leadMultiplier = Math.max(0.0, Math.min(3.0, value));
+        leadMultiplier = (Double.isNaN(value) || value < 0.0) ? 0.0 : value;
     }
 
     public static double getMinSpeedThreshold() {
@@ -167,7 +168,7 @@ public final class ClientVelocityTracker {
     }
 
     public static void setMinSpeedThreshold(double value) {
-        minSpeedThreshold = Math.max(0.01, Math.min(2.0, value));
+        minSpeedThreshold = (Double.isNaN(value) || value < 0.0) ? 0.0 : value;
     }
 
     public static boolean isDebugMode() {

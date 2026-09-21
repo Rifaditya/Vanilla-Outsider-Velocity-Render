@@ -176,4 +176,43 @@ class VelocityVectorHelperTest {
 
         Assertions.assertTrue(frontDownBiased < rearUpBiased, "45-degree dive must prioritize forward-down quadrant over opposing quadrant");
     }
+
+    @Test
+    @DisplayName("Elevated lead multiplier scales lead offset beyond 256 blocks and preserves forward priority")
+    void testUncappedLeadOffsetScaling() {
+        double camX = 0.0, camY = 64.0, camZ = 0.0;
+        double dirX = 0.0, dirY = 0.0, dirZ = 1.0;
+        double speed = 2.0; // 2.0 b/t
+        double leadMultiplier = 10.0; // 1000% lead multiplier -> raw lead = 2.0 * 16.0 * 10.0 = 320.0 blocks
+        double minSpeed = 0.20;
+
+        // Front chunk at 400 blocks ahead
+        double frontBiased = VelocityVectorHelper.computeRawBiasedDistanceSqr(
+                0.0, 64.0, 400.0,
+                camX, camY, camZ,
+                dirX, dirY, dirZ,
+                speed, leadMultiplier, minSpeed
+        );
+
+        // Rear chunk at 400 blocks behind
+        double rearBiased = VelocityVectorHelper.computeRawBiasedDistanceSqr(
+                0.0, 64.0, -400.0,
+                camX, camY, camZ,
+                dirX, dirY, dirZ,
+                speed, leadMultiplier, minSpeed
+        );
+
+        Assertions.assertEquals(0.0, frontBiased, "Deep forward chunk should clamp cleanly to 0.0 priority floor");
+        Assertions.assertEquals(416000.0, rearBiased, 0.001, "Rear chunk should receive full 320-block penalty: 400^2 + 2*400*320 = 416000");
+        Assertions.assertTrue(frontBiased < rearBiased);
+
+        // NaN and Infinite safety guards
+        double nanResult = VelocityVectorHelper.computeRawBiasedDistanceSqr(
+                0.0, 64.0, 100.0,
+                camX, camY, camZ,
+                dirX, dirY, dirZ,
+                Double.NaN, 1.0, 0.20
+        );
+        Assertions.assertFalse(Double.isNaN(nanResult));
+    }
 }

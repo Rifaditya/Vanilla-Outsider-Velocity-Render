@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.8.2+26.3] - Fully Uncapped Client Lead Offset & Telemetry
+- **Uncapped Client Lookahead Reach**: Unbound the forward lead offset calculation (`speed * 16.0 * leadMultiplier`), empowering high-speed flyers to project chunk meshing priority hundreds of blocks ahead without artificial 48-block ceilings.
+- **Accurate Live F3 Telemetry**: Updated the in-game debug overlay to display true, unconstrained lead distances (e.g. `999.9m`) without artificial 512m clamps.
+- **Robust Queue Stability & Saturated Math**: Protected chunk queue comparator sorting with non-negative lower bounds (`Math.max(0.0, biasedDistSqr)`) and non-finite number guards, ensuring completely crash-free rendering under supersonic flight speeds.
+
+---
+
 ## [1.8.1+26.3] - Command Suite Uncapping & Non-Blocking Advisory Warnings
 - **Uncapped Command Inputs**: Expanded in-game Brigadier command arguments (`/vr set` and `/vr dimclamp`) up to technical capacity (`Integer.MAX_VALUE`), allowing operators to tune lead multipliers, budgets, and dimension clamps without artificial command rejection.
 - **Dual-Sink Advisory Transparency**: Introduced non-blocking advisory warnings when setting extreme stress-test values (`>300%` lead multiplier, `>256` ticket budget, or `>100%` dimension clamps), providing clear heads-up guidance to in-game chat and server console logs while executing commands completely without aborting.
