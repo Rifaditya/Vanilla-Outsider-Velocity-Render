@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.7.2+26.3] - YACL In-Game Screen Builder & Smart Sliders
+- **3-Category Visual Screen**: Built an intuitive graphical settings interface organized into Flight Biasing & Meshing, Server Quotas & WorldGen, and Telemetry & Compatibility.
+- **Smart Sliders with Precise Steps**: Added smooth interactive sliders for Forward Lead Multiplier (`0%–300%`), Minimum Speed Threshold (`1–200`), Server Ticket Budget (`16–256`), and Dimension Reach Clamps (`10%–100%`).
+- **Creator Support Button**: Integrated a top-pinned Ko-fi button in the flight settings category linking directly to creator support with confirmation dialogs.
+- **Immediate Disk Persistence**: Configured real-time saving to `config/velocity-render/config.json` upon pressing Done in the configuration menu.
+
+---
+
 ## [1.7.1+26.3] - 12-Language GUI Localization Parity
 - **Comprehensive GUI Localization**: Added full translations for all configuration screens, category headers, and settings options across all 12 supported languages (English, German, Spanish, French, Indonesian, Italian, Japanese, Korean, Brazilian Portuguese, Russian, Simplified Chinese, and Traditional Chinese).
 - **Player-Friendly Contextual Tooltips**: Enriched every setting description with clear gameplay context, default baselines, and performance guidance for extreme stress-testing.

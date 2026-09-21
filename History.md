@@ -1,5 +1,13 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.7.2+26.3] - YACL Screen Factory & Smart Sliders (BL-VR-007 Step 3)
+- Created `YaclScreenHelper` in `net.vanillaoutsider.velocityrender.client.config`:
+  - Structured 3 semantic categories: `Flight Biasing & Meshing`, `Server Quotas & WorldGen`, and `Telemetry & Compatibility`.
+  - Implemented interactive `IntegerSliderControllerBuilder` with tailored ranges and step increments (Lead Multiplier `0..300` step 5, Min Speed `1..200` step 1, Ticket Budget `16..256` step 4, Dimension Clamps `10..100` step 5).
+  - Implemented boolean `TickBoxControllerBuilder` toggles for turn widening, vertical lookahead, LOD hooks, F3 telemetry, and debug diagnostics.
+  - Added safe `createSupportButton()` with reflection fallbacks linking directly to solo developer Ko-fi page via `ConfirmLinkScreen`.
+  - Bound save lifecycle callback to `VelocityRenderConfig::save`.
+
 ## [1.7.1+26.3] - 12-Language GUI Localization Parity (BL-VR-007 Step 2)
 - Added full suite of 26 translatable GUI keys (`config.velocityrender.*`) to master `en_us.json`:
   - Screen title: `config.velocityrender.title`
