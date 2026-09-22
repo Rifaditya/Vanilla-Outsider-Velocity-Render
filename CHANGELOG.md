@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.8.4+26.3] - Ergonomic YACL Sliders & Project Ledger Parity
+- **Ergonomic In-Game Sliders**: Broadened YetAnotherConfigLib (YACL) configuration sliders to high-tier stress-testing ranges:
+  - Forward Lead Multiplier slider expanded to `0% – 1000%` (step 10).
+  - Server Ticket Budget slider expanded to `16 – 1024` (step 16).
+  - Minimum Speed Threshold slider expanded to `0 – 200` (step 1), enabling stationary lookahead pre-loading.
+  - Nether and Dense Dimension Reach Clamp sliders expanded to `0% – 200%` (step 5), supporting 0% suppression and uncapped lookahead.
+- **Preserved Default Baselines**: Guaranteed 100% out-of-the-box gameplay stability with default slider positions strictly preserved (`100%` lead, `64` budget, `20` min speed, `60%` Nether clamp, `80%` dense clamp).
+- **Comprehensive Architectural Guide**: Documented uncapped lookahead mechanics, dual-sink advisory warnings, and mathematical saturation safeguards in `HOW_IT_WORKS.md`.
+- **Project Ledger Milestone**: Formally marked `[BL-VR-009]` as fully resolved across all project backlog specifications.
+
+---
+
 ## [1.8.3+26.3] - Dynamic Forward Reach & Dimension Scaling
 - **Dynamic Forward Reach Scaling**: Scaled server forward lookahead corridor reach with the configured server ticket budget (`Math.max(16, serverBudget)`), enabling powerful servers to allocate deep lookahead corridors for supersonic flight.
 - **Uncapped Dimension Reach Scaling**: Unlocked dimension reach clamps beyond 100%, allowing Nether and custom dimension lookahead corridors to scale upwards freely under generous operator configurations.

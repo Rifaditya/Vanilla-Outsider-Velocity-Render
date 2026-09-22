@@ -1,5 +1,18 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.8.4+26.3] - Ergonomic YACL Sliders & Project Ledger Parity (BL-VR-009 Finale)
+- Expanded YACL GUI sliders in `YaclScreenHelper.java`:
+  - `leadMultiplier`: Expanded from `0..300` (step 5) to `0..1000` (step 10).
+  - `serverTicketBudget`: Expanded from `16..256` (step 4) to `16..1024` (step 16).
+  - `minSpeedThresholdPct`: Expanded from `1..200` (step 1) to `0..200` (step 1), supporting stationary lookahead pre-loading.
+  - `netherReachClampPct` & `defaultDenseReachClampPct`: Expanded from `10..100` (step 5) to `0..200` (step 5).
+  - Preserved all safe default bindings unchanged (`100%`, `64`, `20`, `60%`, `80%`).
+- Updated project documentation:
+  - Added comprehensive Freedom Over Anti-Crash architecture section in `HOW_IT_WORKS.md`.
+  - Formally resolved `[BL-VR-009]` across `BACKLOG.md` summary table and acceptance criteria.
+
+---
+
 ## [1.8.3+26.3] - Dynamic Forward Reach & Dimension Scaling (BL-VR-009 Step 4)
 - Dynamic reach scaling in `VelocityTicketManager`:
   - Replaced hardcoded 16-chunk base cap with `int baseReachCap = Math.max(16, serverBudget)`.

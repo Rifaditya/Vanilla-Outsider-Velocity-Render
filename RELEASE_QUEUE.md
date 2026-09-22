@@ -36,3 +36,4 @@
 - [ ] **1.8.1+26.3** — Step 2: Brigadier Command Suite Uncapping & Non-Blocking Advisory Warnings (BL-VR-009).
 - [ ] **1.8.2+26.3** — Step 3: Fully Uncapped Client Lead Offset & Telemetry (BL-VR-009).
 - [ ] **1.8.3+26.3** — Step 4: Dynamic Forward Reach & Dimension Scaling (BL-VR-009).
+- [ ] **1.8.4+26.3** — Step 5: Ergonomic YACL Sliders & Project Ledger Parity (BL-VR-009 Finale).

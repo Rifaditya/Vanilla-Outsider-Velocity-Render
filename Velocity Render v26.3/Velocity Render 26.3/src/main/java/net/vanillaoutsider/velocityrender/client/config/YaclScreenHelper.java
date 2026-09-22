@@ -56,20 +56,20 @@ public final class YaclScreenHelper {
                         .controller(TickBoxControllerBuilder::create)
                         .build())
 
-                // Forward Lead Multiplier (0% - 300%)
+                // Forward Lead Multiplier (0% - 1000%)
                 .option(Option.<Integer>createBuilder()
                         .name(Component.translatable("config.velocityrender.leadMultiplier"))
                         .description(OptionDescription.of(Component.translatable("config.velocityrender.leadMultiplier.description")))
                         .binding(100, () -> config.leadMultiplier, val -> config.leadMultiplier = val)
-                        .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(0, 300).step(5))
+                        .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(0, 1000).step(10))
                         .build())
 
-                // Minimum Speed Threshold (1 - 200, representing 0.01 - 2.00 b/t)
+                // Minimum Speed Threshold (0 - 200, representing 0.00 - 2.00 b/t)
                 .option(Option.<Integer>createBuilder()
                         .name(Component.translatable("config.velocityrender.minSpeedThresholdPct"))
                         .description(OptionDescription.of(Component.translatable("config.velocityrender.minSpeedThresholdPct.description")))
                         .binding(20, () -> config.minSpeedThresholdPct, val -> config.minSpeedThresholdPct = val)
-                        .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(1, 200).step(1))
+                        .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(0, 200).step(1))
                         .build())
 
                 // Banked Turn Widening
@@ -92,28 +92,28 @@ public final class YaclScreenHelper {
         ConfigCategory.Builder serverCategory = ConfigCategory.createBuilder()
                 .name(Component.translatable("config.velocityrender.category.server"))
 
-                // Server Ticket Budget (16 - 256)
+                // Server Ticket Budget (16 - 1024)
                 .option(Option.<Integer>createBuilder()
                         .name(Component.translatable("config.velocityrender.serverTicketBudget"))
                         .description(OptionDescription.of(Component.translatable("config.velocityrender.serverTicketBudget.description")))
                         .binding(64, () -> config.serverTicketBudget, val -> config.serverTicketBudget = val)
-                        .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(16, 256).step(4))
+                        .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(16, 1024).step(16))
                         .build())
 
-                // Nether Reach Clamp (10% - 100%)
+                // Nether Reach Clamp (0% - 200%)
                 .option(Option.<Integer>createBuilder()
                         .name(Component.translatable("config.velocityrender.netherReachClampPct"))
                         .description(OptionDescription.of(Component.translatable("config.velocityrender.netherReachClampPct.description")))
                         .binding(60, () -> config.netherReachClampPct, val -> config.netherReachClampPct = val)
-                        .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(10, 100).step(5))
+                        .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(0, 200).step(5))
                         .build())
 
-                // Dense Dimension Reach Clamp (10% - 100%)
+                // Dense Dimension Reach Clamp (0% - 200%)
                 .option(Option.<Integer>createBuilder()
                         .name(Component.translatable("config.velocityrender.defaultDenseReachClampPct"))
                         .description(OptionDescription.of(Component.translatable("config.velocityrender.defaultDenseReachClampPct.description")))
                         .binding(80, () -> config.defaultDenseReachClampPct, val -> config.defaultDenseReachClampPct = val)
-                        .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(10, 100).step(5))
+                        .controller(opt -> IntegerSliderControllerBuilder.create(opt).range(0, 200).step(5))
                         .build());
 
         // 3. Telemetry & Compatibility Category

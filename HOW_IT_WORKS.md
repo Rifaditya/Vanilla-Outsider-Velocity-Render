@@ -73,3 +73,29 @@ When a player banks sharply into a turn (e.g. whipping their camera 90° or 180�
 - **MSPT Watchdog**: If server tick duration exceeds $25\text{ms}$ (dropping below 20 TPS), the lookahead reach automatically sheds distance and cuts outer fan-out chunks.
 - **Zero-Allocation Hot Path**: Primitive sets (`LongOpenHashSet`), vector pooling, and cached references guarantee **0 bytes of GC heap allocation per frame and per tick**.
 - **Fair Ticket Budget**: Multi-player servers distribute a global ticket budget fairly based on speed share, preventing any single player from starving chunk generation workers.
+
+---
+
+## 🔓 Freedom Over Anti-Crash: Uncapped Lookahead Scaling
+
+Adhering to the **Freedom Over Anti-Crash Principle**, Velocity Render rejects artificial software ceilings and nanny clamps:
+
+### 1. Uncapped Power-User Parameters
+- **Forward Lead Multiplier**: Operates up to JVM capacity (`Integer.MAX_VALUE`). Power players and high-speed modpack testers (supersonic Elytras, rail cannons, ice highway racers) can push client compile prioritization hundreds of blocks ahead without artificial 48-block caps.
+- **Server Ticket Budget**: Server operators can allocate large ticket pools (e.g. `256`, `1024`, `2048+`) matching their dedicated multi-core hardware, allowing active flyers to utilize 100% of the configured ticket pool.
+- **Stationary Lookahead Pre-Loading**: Setting `min_speed_threshold_pct` to `0` allows forward corridors to pre-load even while standing completely still.
+- **Selective Dimension Suppression**: Setting dimension clamps to `0%` allows server administrators to completely mute lookahead ticket generation in heavy or dense custom dimensions.
+
+### 2. Dual-Sink Non-Blocking Advisory Transparency ("Warn Clearly, Never Stop")
+When an operator sets extreme stress-test parameters (`> 300%` lead multiplier, `> 256` ticket budget, or `> 100%` dimension clamp):
+- **Never Blocks Execution**: Commands and configuration updates execute and persist immediately to disk without aborting.
+- **Dual-Sink Alerts**: Non-blocking advisory warnings are delivered directly to the player's in-game chat interface and logged as warnings in the server console (`[VelocityRender-Server] Warning: Extreme ...`).
+- **Throttled Loop Tracing**: If dynamic forward reach exceeds `500` chunks during flight, a throttled diagnostic warning is emitted to the server console every 100 ticks (5 seconds).
+
+### 3. Saturated Arithmetic & Mathematical Integrity
+- **Zero NaN/Infinite Poisoning**: All vector calculations and distance biases guard against non-finite values (`Double.isNaN` / `Double.isInfinite`).
+- **Dynamic Queue Sorting Stability**: The client render queue comparator protects distance delta squaring with non-negative lower bounds (`Math.max(0.0, biasedDistSqr)`), eliminating sorting crashes in `SectionTaskDynamicQueue`.
+- **Overflow-Proof Ticket Quotas**: Multi-player ticket distribution uses `long` arithmetic for floor calculations and saturates quotas at physical limits (`Integer.MAX_VALUE`).
+
+### 4. Guaranteed 100% Default Stability
+Out-of-the-box defaults remain strictly identical across all environments (`lead_multiplier = 100%`, `server_ticket_budget = 64`, `min_speed_threshold = 20`, `nether_clamp = 60%`, `dense_clamp = 80%`). Standard gameplay experiences zero behavior drift.

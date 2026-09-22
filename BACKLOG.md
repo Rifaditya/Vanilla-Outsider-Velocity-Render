@@ -15,7 +15,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-005]` | `[PERF]` | Nether WorldGen Clamping & Dense Dimension Scaling | `[HIGH]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-006]` | `[INTEGRATION]` | Bobby & Distant Horizons LOD Velocity Trajectory Hooks | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-007]` | `[FEATURE]` | Optional YACL Config Screen via ModMenu | `[LOW]` | `26.3+` | `✅ RESOLVED` |
-| `[BL-VR-009]` | `[REFINEMENT]` | Uncap Configuration Limits & Hard Ceilings (Player Freedom / Stress-Testing) | `[MEDIUM]` | `26.3+` | `📌 DEFERRED` |
+| `[BL-VR-009]` | `[REFINEMENT]` | Uncap Configuration Limits & Hard Ceilings (Player Freedom / Stress-Testing) | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `🚧 IN_PROGRESS` |
 
 ---
@@ -200,9 +200,10 @@ Implement YetAnotherConfigLib (YACL v3) screen integrated with ModMenu:
 ### [BL-VR-009] Uncap Configuration Limits & Hard Ceilings (Player Freedom / Stress-Testing)
 - **Category**: `[REFINEMENT]`
 - **Priority**: `[MEDIUM]`
-- **Status**: `📌 DEFERRED`
+- **Status**: `✅ RESOLVED`
 - **Target Component(s)**: `VelocityRenderGameRules.java`, `VelocityRenderCommand.java`, `VelocityTicketManager.java`, `ClientVelocityTracker.java`, `VelocityVectorHelper.java`, `TicketBudgetAllocator.java`
 - **Date Added**: 2026-09-21
+- **Date Resolved**: 2026-09-22 (v1.8.0 – v1.8.4+26.3)
 
 #### ❓ Problem / Context
 Velocity Render currently enforces restrictive artificial hard limits and upper clamping bounds across its configuration:
@@ -232,11 +233,11 @@ Power users, high-performance dedicated servers (e.g. modern multi-core / 64GB+ 
    - The MSPT Watchdog remains active as an automatic performance shock absorber unless explicitly disabled or overridden.
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] Setting `velocityrender:lead_multiplier` to values $> 300$ (e.g. `1000`) succeeds in commands and GameRules without syntax errors or clamp truncation.
-- [ ] Setting `velocityrender:server_ticket_budget` to high values (e.g. `2048`) allows server to allocate forward tickets beyond 256.
-- [ ] Client chunk meshing bias scales beyond 256 blocks with elevated lead multipliers.
-- [ ] Default values remain 100% identical to previous releases (`lead_multiplier: 100`, `server_ticket_budget: 64`, `min_speed_threshold_pct: 20`).
-- [ ] `/vr reset` restores default safe values without regression.
+- [x] Setting `velocityrender:lead_multiplier` to values $> 300$ (e.g. `1000`) succeeds in commands and GameRules without syntax errors or clamp truncation.
+- [x] Setting `velocityrender:server_ticket_budget` to high values (e.g. `2048`) allows server to allocate forward tickets beyond 256.
+- [x] Client chunk meshing bias scales beyond 256 blocks with elevated lead multipliers.
+- [x] Default values remain 100% identical to previous releases (`lead_multiplier: 100`, `server_ticket_budget: 64`, `min_speed_threshold_pct: 20`).
+- [x] `/vr reset` restores default safe values without regression.
 
 ---
 
