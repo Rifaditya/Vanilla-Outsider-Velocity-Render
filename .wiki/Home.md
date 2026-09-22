@@ -10,17 +10,17 @@ Choose your language below to view translated documentation:
 
 | Language | Home Page | Technical Overview |
 | :--- | :--- | :--- |
-| **English** | [[English Home|Home]] | [[Overview (26.3)|26.3-Home]] |
-| 🇨🇳 **简体中文 (Simplified Chinese)** | [[主页|zh_cn-Home]] | [[技术概览|zh_cn-Overview]] |
-| 🇭🇰 **繁體中文 (Traditional Chinese)** | [[主頁|zh_tw-Home]] | [[技術概覽|zh_tw-Overview]] |
-| 🇷🇺 **Русский (Russian)** | [[Главная страница|ru_ru-Home]] | [[Технический обзор|ru_ru-Overview]] |
-| 🇪🇸 **Español (Spanish)** | [[Inicio|es_es-Home]] | [[Descripción general|es_es-Overview]] |
-| 🇩🇪 **Deutsch (German)** | [[Startseite|de_de-Home]] | [[Technische Übersicht|de_de-Overview]] |
-| 🇫🇷 **Français (French)** | [[Accueil|fr_fr-Home]] | [[Vue d'ensemble|fr_fr-Overview]] |
-| 🇧🇷 **Português (Portuguese)** | [[Início|pt_br-Home]] | [[Visão Geral|pt_br-Overview]] |
-| 🇯🇵 **日本語 (Japanese)** | [[ホーム|ja_jp-Home]] | [[技術概要|ja_jp-Overview]] |
-| 🇮🇩 **Bahasa Indonesia (Indonesian)** | [[Beranda|id_id-Home]] | [[Ikhtisar Teknis|id_id-Overview]] |
-| 🇰🇷 **한국어 (Korean)** | [[홈|ko_kr-Home]] | [[기술 개요|ko_kr-Overview]] |
+| **English** | [[English Home&#124;Home]] | [[Overview (26.3)&#124;26.3-Home]] |
+| 🇨🇳 **简体中文 (Simplified Chinese)** | [[主页&#124;zh_cn-Home]] | [[技术概览&#124;zh_cn-Overview]] |
+| 🇭🇰 **繁體中文 (Traditional Chinese)** | [[主頁&#124;zh_tw-Home]] | [[技術概覽&#124;zh_tw-Overview]] |
+| 🇷🇺 **Русский (Russian)** | [[Главная страница&#124;ru_ru-Home]] | [[Технический обзор&#124;ru_ru-Overview]] |
+| 🇪🇸 **Español (Spanish)** | [[Inicio&#124;es_es-Home]] | [[Descripción general&#124;es_es-Overview]] |
+| 🇩🇪 **Deutsch (German)** | [[Startseite&#124;de_de-Home]] | [[Technische Übersicht&#124;de_de-Overview]] |
+| 🇫🇷 **Français (French)** | [[Accueil&#124;fr_fr-Home]] | [[Vue d'ensemble&#124;fr_fr-Overview]] |
+| 🇧🇷 **Português (Portuguese)** | [[Início&#124;pt_br-Home]] | [[Visão Geral&#124;pt_br-Overview]] |
+| 🇯🇵 **日本語 (Japanese)** | [[ホーム&#124;ja_jp-Home]] | [[技術概要&#124;ja_jp-Overview]] |
+| 🇮🇩 **Bahasa Indonesia (Indonesian)** | [[Beranda&#124;id_id-Home]] | [[Ikhtisar Teknis&#124;id_id-Overview]] |
+| 🇰🇷 **한국어 (Korean)** | [[홈&#124;ko_kr-Home]] | [[기술 개요&#124;ko_kr-Overview]] |
 
 ---
 
@@ -63,9 +63,9 @@ Select your Minecraft version below to enter its dedicated, isolated documentati
 
 | Minecraft Version | Version Tree Link | Engine Lifecycle | Client Queue Mixin | Minimum Java |
 | :--- | :--- | :--- | :--- | :--- |
-| **Minecraft 26.3** | [[👉 Enter MC 26.3 Wiki|26.3-Home]] | **Modern Lead** | `SectionTaskDynamicQueue` | Java 25+ |
-| **Minecraft 26.2** | [[👉 Enter MC 26.2 Wiki|26.2-Home]] | **Modern Predecessor** | `SectionTaskDynamicQueue` | Java 25+ |
-| **Minecraft 26.1** | [[👉 Enter MC 26.1 Wiki|26.1-Home]] | **Modern Anchor (26.1.2)** | `CompileTaskDynamicQueue` | Java 25+ |
+| **Minecraft 26.3** | [[👉 Enter MC 26.3 Wiki&#124;26.3-Home]] | **Modern Lead** | `SectionTaskDynamicQueue` | Java 25+ |
+| **Minecraft 26.2** | [[👉 Enter MC 26.2 Wiki&#124;26.2-Home]] | **Modern Predecessor** | `SectionTaskDynamicQueue` | Java 25+ |
+| **Minecraft 26.1** | [[👉 Enter MC 26.1 Wiki&#124;26.1-Home]] | **Modern Anchor (26.1.2)** | `CompileTaskDynamicQueue` | Java 25+ |
 
 ---
 
