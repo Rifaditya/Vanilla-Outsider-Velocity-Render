@@ -91,7 +91,7 @@ Every supported version features four dedicated subsystem engineering domains:
 
 - **Full Version Matrix**: [[Version Compatibility Matrix|Version-Compatibility]]
 - **Compiling & Building**: [[Developer Setup and Building Guide|Developer-Setup-and-Building]]
-- **Source Code Repository**: [[GitHub Repository|https://github.com/Rifaditya/Vanilla-Outsider-Velocity-Render]]
-- **Official Mod Distribution**: [[Modrinth Project|https://modrinth.com/mod/velocity-render]]
+- **Source Code Repository**: [GitHub Repository](https://github.com/Rifaditya/Vanilla-Outsider-Velocity-Render)
+- **Official Mod Distribution**: [Modrinth Project](https://modrinth.com/mod/velocity-render)
 - **Author Attribution**: Developed and maintained by **Dasik (Rifaditya)**
-- **License**: [[GNU General Public License v3.0 (GPLv3)|_Footer]]
+- **License**: [GNU General Public License v3.0 (GPLv3)](https://github.com/Rifaditya/Vanilla-Outsider-Velocity-Render/blob/main/LICENSE)
