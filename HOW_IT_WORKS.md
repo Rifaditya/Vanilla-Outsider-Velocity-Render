@@ -68,6 +68,68 @@ When a player banks sharply into a turn (e.g. whipping their camera 90° or 180�
 
 ---
 
+## 🏔️ 3D Pitch-Aware Vertical Lookahead (Dives & Ascents)
+
+![3D Pitch-Aware Lookahead](Doc/Media/vertical_lookahead.png)
+
+High-speed flight rarely happens in a flat 2D plane. Steep Elytra dives, firework rocket climbs, and bubble elevator ascents traverse vertical sub-chunks ($16\times 16\times 16$ sections) at speeds exceeding vanilla's standard radial meshing:
+
+1. **Normalized Pitch Component ($v_y$) Integration**:
+   - `ClientVelocityTracker` computes normalized 3D velocity unit vector $(\hat{v}_x, \hat{v}_y, \hat{v}_z)$ every client tick.
+   - When pitch angle is neutral ($|v_y| < 0.20\text{ b/t}$), compilation bias remains balanced across horizontal terrain.
+2. **Steep Elytra Dives ($v_y < -0.50\text{ b/t}$)**:
+   - When plunging toward the ground from build height, the 3D dot-product prioritizes sub-chunks $Y - 4$ ahead of the player's descent vector.
+   - Terrain and cave roofs directly below compile and mesh before impact, eliminating terrifying bedrock void drops.
+3. **Rocket Climbs & Rapid Ascents ($v_y > +0.50\text{ b/t}$)**:
+   - During rocket ascents, sub-chunks $Y + 4$ above the player receive compile prioritization.
+   - High mountain peaks, floating islands, and cloud layer geometry render immediately ahead of your arrival.
+4. **Zero-Allocation Hot Path**:
+   - `volatile double cachedNormDy` provides thread-safe, lock-free access to render threads during `SectionTaskDynamicQueue.poll()` with 0 bytes of GC heap churn.
+
+---
+
+## 👥 Server-Wide Multi-Player Ticket Quota Allocation
+
+![Server-Wide Multi-Player Ticket Quotas](Doc/Media/multiplayer_quota_pool.png)
+
+On active multiplayer servers with dozens of simultaneous explorers, unrestricted chunk ticket allocation could overwhelm worldgen worker threads:
+
+1. **Global Server Ticket Pool (`server_ticket_budget`)**:
+   - Default pool: `64` total active forward tickets server-wide.
+   - Fully configurable up to `Integer.MAX_VALUE` via `/vr set budget <val>` or `velocityrender:server_ticket_budget`.
+2. **Dynamic Speed-Share Proportional Partitioning**:
+   - Ticket allocation evaluates active players moving $\ge 0.20\text{ b/t}$.
+   - Faster players (e.g., supersonic Elytra flyers moving at $48\text{ m/s}$) receive a larger proportional share of tickets (up to 32 tickets + banked fan-out) to sustain uninterrupted flight corridors.
+   - Moderate flyers receive balanced allocations (8–16 tickets).
+   - Idle or walking players ($< 0.20\text{ b/t}$) draw `0` forward tickets, seamlessly falling back to vanilla radial chunk loading.
+3. **Anti-Starvation Guarantees**:
+   - Every active flyer is guaranteed a minimum floor of $\min(4, \text{budget} / N)$ tickets regardless of how fast other players are traveling.
+4. **Overflow-Proof Saturated Math**:
+   - Floor calculations utilize `long` arithmetic saturated at physical data type bounds, preventing integer wraparound or allocation freezes.
+
+---
+
+## 🌌 Dimension Reach Scaling & Conventional Tags
+
+![Dimension Reach Scaling](Doc/Media/dimension_scaling.png)
+
+Different dimensions impose drastically different CPU generation costs. Generating 16 chunks of open Overworld sky is computationally light; generating 16 chunks of Nether terrain (with solid bedrock ceilings, complex 3D noise carvers, and dense lava oceans) is computationally demanding:
+
+1. **Overworld (`minecraft:overworld`)**:
+   - Operates at **100% reach** (up to 16 chunks / 256 meters forward lookahead).
+2. **The Nether (`minecraft:the_nether`)**:
+   - Clamped to **60% reach** (`velocityrender:reach_clamp_the_nether_pct = 60`).
+   - Limits forward reach to 10 chunks (160 meters), saving over **40% worldgen CPU time** while providing ample reaction distance for high-speed ice-boat highways and Elytras.
+3. **Dense & Modded Dimensions (`#c:dense_dimensions` / `#velocityrender:dense_dimensions`)**:
+   - Automatically scaled to **80% reach** (`velocityrender:reach_clamp_default_dense_pct = 80`), yielding 13 chunks (208 meters) lookahead.
+   - Datapacks and modpacks can tag heavy cave worlds, custom subterranean dimensions, or dense mining dimensions using Conventional Tags for automatic protection.
+4. **Multi-Channel Control & Sparse Persistence**:
+   - Dynamic GameRules: `velocityrender:reach_clamp_<dimension>_pct` auto-registered dynamically on server startup.
+   - In-game tuning: `/vr dimclamp <dimension> <pct>` and `/vr dimclamp reset`.
+   - Sparse Delta JSON: `config/velocity-render/dimension_clamps.json` stores only customized dimension overrides without bloated boilerplate.
+
+---
+
 ## 🛡️ MSPT Watchdog & Performance Safeguards
 
 - **MSPT Watchdog**: If server tick duration exceeds $25\text{ms}$ (dropping below 20 TPS), the lookahead reach automatically sheds distance and cuts outer fan-out chunks.

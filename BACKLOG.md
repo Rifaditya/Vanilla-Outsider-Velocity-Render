@@ -16,7 +16,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-006]` | `[INTEGRATION]` | Bobby & Distant Horizons LOD Velocity Trajectory Hooks | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-007]` | `[FEATURE]` | Optional YACL Config Screen via ModMenu | `[LOW]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-009]` | `[REFINEMENT]` | Uncap Configuration Limits & Hard Ceilings (Player Freedom / Stress-Testing) | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
-| `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `🚧 IN_PROGRESS` |
+| `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 
 ---
 
@@ -44,8 +44,8 @@ Currently, high-speed travel produces a linear corridor along the blended veloci
 Calculate the player's instantaneous angular yaw rate $\omega = |\Delta \text{yaw}| / \Delta t$. When $\omega > \text{threshold}$ and speed $\ge 0.50$ b/t, expand the corridor generation into a fan-out arc proportional to $\omega$, requesting chunks across the turn radius before the player enters the apex.
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] Sharp 90-degree and 180-degree Elytra turns generate the inner and outer curve chunks without void gaps.
-- [ ] Straight flight preserves narrow corridor generation to conserve server resources.
+- [x] Sharp 90-degree and 180-degree Elytra turns generate the inner and outer curve chunks without void gaps.
+- [x] Straight flight preserves narrow corridor generation to conserve server resources.
 
 ---
 
@@ -244,9 +244,10 @@ Power users, high-performance dedicated servers (e.g. modern multi-core / 64GB+ 
 ### [BL-VR-008] Architecture Documentation & Visual Velocity Cone Progression
 - **Category**: `[DOCS]`
 - **Priority**: `[MEDIUM]`
-- **Status**: `🔄 IN PROGRESS`
-- **Target Component(s)**: `HOW_IT_WORKS.md`, `README.md`, `Doc/Media/velocity_cone_progression.png`, `Doc/Platform Pages/`
+- **Status**: `✅ RESOLVED`
+- **Target Component(s)**: `HOW_IT_WORKS.md`, `README.md`, `Doc/Media/`, `Doc/Platform Pages/`, `Wiki/`
 - **Date Added**: 2026-09-21
+- **Date Resolved**: 2026-09-22
 
 #### ❓ Problem / Context
 Players, modpack developers, and contributors require comprehensive visual and mathematical explanations of Velocity Render's engine systems (anisotropic meshing queue, server lookahead corridors, multi-player ticket quotas, and dimension scaling).
@@ -267,5 +268,5 @@ Players, modpack developers, and contributors require comprehensive visual and m
 - [x] Canonical velocity cone progression diagram saved in `Doc/Media/velocity_cone_progression.png`.
 - [x] Initial 4-stage guide documented in `HOW_IT_WORKS.md`.
 - [x] Navigational link integrated in `README.md`.
-- [ ] 3D vertical flight and multi-player pool diagrams added.
-- [ ] Platform descriptions synchronized with visual explanations.
+- [x] 3D vertical flight and multi-player pool diagrams added (`Doc/Media/vertical_lookahead.png`, `multiplayer_quota_pool.png`, `dimension_scaling.png`).
+- [x] Platform descriptions synchronized with visual explanations (staged in `Doc/Platform Pages/upcoming_v1.8_description.md` pending platform catch-up).
