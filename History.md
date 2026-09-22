@@ -1,5 +1,26 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.8.3+26.3] - Dynamic Forward Reach & Dimension Scaling (BL-VR-009 Step 4)
+- Dynamic reach scaling in `VelocityTicketManager`:
+  - Replaced hardcoded 16-chunk base cap with `int baseReachCap = Math.max(16, serverBudget)`.
+  - Scaled `maxAllowedReach = Math.max(4, (int) Math.min((long) Integer.MAX_VALUE, Math.round((double) baseReachCap * leadScale * msptFactor)))`.
+  - Added non-blocking throttled console warning (every 100 ticks / 5 seconds) when `maxReachChunks > 500`.
+  - Added clean state eviction for `LAST_EXTREME_REACH_WARN_TICK` on player disconnect or dimension swap.
+- Uncapped dimension scaling in `DimensionReachScaler`:
+  - Set `MIN_CLAMP_PCT = 0` and `MAX_CLAMP_PCT = Integer.MAX_VALUE`.
+  - When `clampPct <= 0` or `baseReach <= 0`, immediately returns `0` (full selective lookahead muting).
+  - Scaled reach unbounded: `Math.min((long) Integer.MAX_VALUE, Math.round((double) baseReach * ((double) clampPct / 100.0)))` with `Math.max(MIN_REACH_FLOOR, scaled)` when `clampPct > 0`.
+- Protected arithmetic in `TicketBudgetAllocator`:
+  - Enforced `long totalFloorRequired = (long) activeFlyerCount * 4L` preventing int overflow.
+  - Clamped player speed ratio to `[0.0, 1.0]` before multiplying by `serverBudget`.
+  - Saturated `rawQuota` at `Integer.MAX_VALUE`.
+- Test suite enhancements:
+  - Updated `DimensionReachScalerTest` for 0% suppression and 150%/200% uncapped scaling.
+  - Added `testLargeBudgetAllocation` in `TicketBudgetAllocatorTest`.
+  - Added 0% and 150% clamp end-to-end assertions in `VelocityTicketManagerTest`.
+
+---
+
 ## [1.8.2+26.3] - Fully Uncapped Client Lead Offset & Telemetry (BL-VR-009 Step 3)
 - Uncapped lead offset calculation in `VelocityVectorHelper.calculateLeadOffset()`:
   - Formulated as `speed * 16.0 * leadMultiplier` bounded strictly by `Double` limits and guarded against `Double.isNaN` or `Double.isInfinite`.

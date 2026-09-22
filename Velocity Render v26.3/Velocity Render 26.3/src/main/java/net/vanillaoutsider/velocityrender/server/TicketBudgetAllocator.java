@@ -35,12 +35,15 @@ public final class TicketBudgetAllocator {
         }
 
         // Dynamic safety floor: 4 tickets per flyer if budget permits, otherwise split budget evenly down to 1
-        int floor = (serverBudget >= activeFlyerCount * 4)
+        long totalFloorRequired = (long) activeFlyerCount * 4L;
+        int floor = (serverBudget >= totalFloorRequired)
                 ? 4
                 : Math.max(1, serverBudget / activeFlyerCount);
 
-        // Proportional speed-weighted raw share
-        int rawQuota = (int) Math.round((playerSpeed / totalSpeedSum) * serverBudget);
+        // Proportional speed-weighted raw share with overflow safety
+        double ratio = Math.max(0.0, Math.min(1.0, playerSpeed / totalSpeedSum));
+        long rawCalculated = Math.round(ratio * (double) serverBudget);
+        int rawQuota = (int) Math.min((long) Integer.MAX_VALUE, rawCalculated);
 
         // Clamped quota: guaranteed floor, capped by max allowed reach
         return Math.max(floor, Math.min(rawQuota, maxAllowedReach));

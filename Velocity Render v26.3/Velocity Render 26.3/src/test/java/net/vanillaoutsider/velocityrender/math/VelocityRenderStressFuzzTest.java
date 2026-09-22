@@ -203,8 +203,8 @@ class VelocityRenderStressFuzzTest {
 
             int clamped = DimensionReachScaler.calculateClampedReach(baseReach, clampPct);
 
-            if (baseReach <= 0) {
-                assertEquals(0, clamped, "Reach <= 0 must always yield 0");
+            if (baseReach <= 0 || clampPct <= 0) {
+                assertEquals(0, clamped, "Reach <= 0 or clampPct <= 0 must always yield 0");
             } else {
                 assertTrue(clamped >= DimensionReachScaler.MIN_REACH_FLOOR,
                         "Positive reach must satisfy floor of >= 2; got: " + clamped + " at iter " + i);

@@ -45,5 +45,9 @@ class VelocityTicketManagerTest {
         // Safety floor protection on small base reach
         Assertions.assertEquals(2, net.vanillaoutsider.velocityrender.math.DimensionReachScaler.calculateClampedReach(2, 60));
         Assertions.assertEquals(0, net.vanillaoutsider.velocityrender.math.DimensionReachScaler.calculateClampedReach(0, 60));
+
+        // Uncapped dimension reach (> 100%) and selective mute (0%)
+        Assertions.assertEquals(24, net.vanillaoutsider.velocityrender.math.DimensionReachScaler.calculateClampedReach(16, 150));
+        Assertions.assertEquals(0, net.vanillaoutsider.velocityrender.math.DimensionReachScaler.calculateClampedReach(16, 0));
     }
 }

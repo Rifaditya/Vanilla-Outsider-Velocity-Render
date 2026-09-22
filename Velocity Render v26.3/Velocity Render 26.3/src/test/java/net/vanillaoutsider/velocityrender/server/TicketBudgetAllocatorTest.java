@@ -72,4 +72,19 @@ class TicketBudgetAllocatorTest {
         assertEquals(0, TicketBudgetAllocator.calculatePlayerQuota(1.0, 10.0, 2, 0, 16));
         assertEquals(0, TicketBudgetAllocator.calculatePlayerQuota(1.0, 10.0, 2, 64, 0));
     }
+
+    @Test
+    @DisplayName("Large budget stress-testing allocates high quotas up to reach cap without overflow")
+    void testLargeBudgetAllocation() {
+        // Single flyer with budget 2048 and reach cap 1024
+        int quotaSingle = TicketBudgetAllocator.calculatePlayerQuota(5.0, 5.0, 1, 2048, 1024);
+        assertEquals(1024, quotaSingle, "Single flyer should utilize full allowed reach cap under massive budget");
+
+        // Two flyers with budget 1024 and reach cap 1024
+        int quotaA = TicketBudgetAllocator.calculatePlayerQuota(3.0, 6.0, 2, 1024, 1024);
+        int quotaB = TicketBudgetAllocator.calculatePlayerQuota(3.0, 6.0, 2, 1024, 1024);
+        assertEquals(512, quotaA);
+        assertEquals(512, quotaB);
+        assertEquals(1024, quotaA + quotaB);
+    }
 }

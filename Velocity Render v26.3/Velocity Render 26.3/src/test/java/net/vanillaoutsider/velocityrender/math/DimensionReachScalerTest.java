@@ -54,20 +54,26 @@ class DimensionReachScalerTest {
     }
 
     @Test
-    @DisplayName("Clamp percentage below 10% should be clamped to 10%")
+    @DisplayName("Clamp percentage of 0% or negative should safely return 0 (full lookahead suppression)")
     void testUnderflowClampPercentage() {
-        // Clamp of 0% or negative should be treated as 10%
         int scaledZero = DimensionReachScaler.calculateClampedReach(16, 0);
-        Assertions.assertEquals(2, scaledZero, "0% clamp clamped to 10%: round(1.6) -> 2");
+        Assertions.assertEquals(0, scaledZero, "0% clamp must return 0 to fully mute lookahead");
 
         int scaledNegative = DimensionReachScaler.calculateClampedReach(16, -50);
-        Assertions.assertEquals(2, scaledNegative, "Negative clamp clamped to 10%: round(1.6) -> 2");
+        Assertions.assertEquals(0, scaledNegative, "Negative clamp must safely return 0");
+
+        // Small positive percentage enforces MIN_REACH_FLOOR (2) if base reach >= 2
+        int scaledSmall = DimensionReachScaler.calculateClampedReach(4, 5);
+        Assertions.assertEquals(2, scaledSmall, "Small positive clamp preserves safety floor of 2");
     }
 
     @Test
-    @DisplayName("Clamp percentage exceeding 100% should be clamped to 100%")
+    @DisplayName("Clamp percentage exceeding 100% should scale reach upward without artificial ceilings")
     void testOverflowClampPercentage() {
-        int scaled = DimensionReachScaler.calculateClampedReach(16, 150);
-        Assertions.assertEquals(16, scaled, "Clamp > 100% should clamp to 100%");
+        int scaled150 = DimensionReachScaler.calculateClampedReach(16, 150);
+        Assertions.assertEquals(24, scaled150, "150% clamp on 16 chunks should scale to 24 chunks");
+
+        int scaled200 = DimensionReachScaler.calculateClampedReach(16, 200);
+        Assertions.assertEquals(32, scaled200, "200% clamp on 16 chunks should scale to 32 chunks");
     }
 }

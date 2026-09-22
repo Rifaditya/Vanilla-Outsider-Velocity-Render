@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.8.3+26.3] - Dynamic Forward Reach & Dimension Scaling
+- **Dynamic Forward Reach Scaling**: Scaled server forward lookahead corridor reach with the configured server ticket budget (`Math.max(16, serverBudget)`), enabling powerful servers to allocate deep lookahead corridors for supersonic flight.
+- **Uncapped Dimension Reach Scaling**: Unlocked dimension reach clamps beyond 100%, allowing Nether and custom dimension lookahead corridors to scale upwards freely under generous operator configurations.
+- **Selective Lookahead Muting**: Added full lookahead suppression when setting dimension clamps to 0%, cleanly skipping corridor ticket generation in targeted dimensions.
+- **Extreme Reach Loop Diagnostics**: Introduced non-blocking throttled server console diagnostics (every 100 ticks) when active flight corridor reach exceeds 500 chunks.
+- **Saturated Ticket Allocation Math**: Protected all multiplayer ticket quota calculations and floor checks against arithmetic overflow under massive flyer saturation and ticket budgets.
+
+---
+
 ## [1.8.2+26.3] - Fully Uncapped Client Lead Offset & Telemetry
 - **Uncapped Client Lookahead Reach**: Unbound the forward lead offset calculation (`speed * 16.0 * leadMultiplier`), empowering high-speed flyers to project chunk meshing priority hundreds of blocks ahead without artificial 48-block ceilings.
 - **Accurate Live F3 Telemetry**: Updated the in-game debug overlay to display true, unconstrained lead distances (e.g. `999.9m`) without artificial 512m clamps.

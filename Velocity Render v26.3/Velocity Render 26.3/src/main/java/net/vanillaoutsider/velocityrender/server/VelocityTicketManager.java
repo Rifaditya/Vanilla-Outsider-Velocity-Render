@@ -38,6 +38,7 @@ public final class VelocityTicketManager {
     private static final Map<UUID, Integer> LAST_PLAYER_TICK = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, Double> LAST_PLAYER_Y = new Object2ObjectOpenHashMap<>();
     private static final Map<UUID, Integer> PLAYER_QUOTA = new Object2ObjectOpenHashMap<>();
+    private static final Map<UUID, Integer> LAST_EXTREME_REACH_WARN_TICK = new Object2ObjectOpenHashMap<>();
 
     // Telemetry metrics
     private static volatile int lastDynamicReach = 16;
@@ -184,20 +185,30 @@ public final class VelocityTicketManager {
 
         int multiplierPct = VelocityRenderGameRules.getLeadMultiplierPct(level);
         double leadScale = (double) multiplierPct / 100.0;
-        int maxAllowedReach = Math.max(4, (int) Math.round(16.0 * leadScale * msptFactor));
+        int serverBudget = VelocityRenderGameRules.getServerTicketBudget(level);
+        int baseReachCap = Math.max(16, serverBudget);
+        int maxAllowedReach = Math.max(4, (int) Math.min((long) Integer.MAX_VALUE, Math.round((double) baseReachCap * leadScale * msptFactor)));
 
         // Fair multi-player server ticket budget quota calculation
-        int serverBudget = VelocityRenderGameRules.getServerTicketBudget(level);
         int flyerCount = Math.max(1, activeFlyerCount);
         double speedSum = Math.max(speed, totalFlyerSpeedSum);
         int playerQuota = TicketBudgetAllocator.calculatePlayerQuota(speed, speedSum, flyerCount, serverBudget, maxAllowedReach);
         PLAYER_QUOTA.put(uuid, playerQuota);
 
-        int rawReach = Math.min(playerQuota, (int) Math.round(speed * 8.0 * leadScale * msptFactor));
+        int rawReach = Math.min(playerQuota, (int) Math.min((long) Integer.MAX_VALUE, Math.round(speed * 8.0 * leadScale * msptFactor)));
         int clampPct = DimensionClampManager.getEffectiveClampPct(level);
         int maxReachChunks = DimensionReachScaler.calculateClampedReach(rawReach, clampPct);
         lastDynamicReach = maxReachChunks;
         PLAYER_DYNAMIC_REACH.put(uuid, maxReachChunks);
+
+        if (maxReachChunks > 500) {
+            Integer lastWarnTick = LAST_EXTREME_REACH_WARN_TICK.get(uuid);
+            if (lastWarnTick == null || (currentTick - lastWarnTick) >= 100) {
+                LAST_EXTREME_REACH_WARN_TICK.put(uuid, currentTick);
+                LOGGER.warn("[VelocityRender-Server] Player {} reached extreme lookahead reach: {} chunks (speed: {:.2f} b/t, budget: {}). Heavy chunk generation active.",
+                        player.getScoreboardName(), maxReachChunks, speed, serverBudget);
+            }
+        }
 
         // Zero-allocation reusable scratch set
         LongOpenHashSet targetChunks = SCRATCH_TICKETS.computeIfAbsent(uuid, k -> new LongOpenHashSet());
@@ -284,6 +295,7 @@ public final class VelocityTicketManager {
         LAST_PLAYER_Y.remove(uuid);
         PLAYER_QUOTA.remove(uuid);
         PLAYER_DYNAMIC_REACH.removeInt(uuid);
+        LAST_EXTREME_REACH_WARN_TICK.remove(uuid);
         SCRATCH_TICKETS.remove(uuid);
         LongOpenHashSet tickets = ACTIVE_TICKETS.remove(uuid);
         if (tickets != null && level != null) {
