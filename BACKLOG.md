@@ -17,6 +17,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-007]` | `[FEATURE]` | Optional YACL Config Screen via ModMenu | `[LOW]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-009]` | `[REFINEMENT]` | Uncap Configuration Limits & Hard Ceilings (Player Freedom / Stress-Testing) | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
+| `[BL-VR-010]` | `[FEATURE]` | Multi-Era Anchor Porting: Velocity Render | `[HIGH]` | `Multi-Era` | `📌 DEFERRED` |
 
 ---
 
@@ -270,3 +271,68 @@ Players, modpack developers, and contributors require comprehensive visual and m
 - [x] Navigational link integrated in `README.md`.
 - [x] 3D vertical flight and multi-player pool diagrams added (`Doc/Media/vertical_lookahead.png`, `multiplayer_quota_pool.png`, `dimension_scaling.png`).
 - [x] Platform descriptions synchronized with visual explanations (staged in `Doc/Platform Pages/upcoming_v1.8_description.md` pending platform catch-up).
+
+---
+
+### [BL-VR-010] Multi-Era Anchor Porting: Velocity Render
+- **Category**: `[FEATURE]`
+- **Priority**: `[HIGH]`
+- **Status**: `📌 DEFERRED`
+- **Target Component(s)**: Multi-subproject directories, `VelocityTicketManager.java`, `ClientVelocityTracker.java`, `VelocityVectorHelper.java`, `TicketBudgetAllocator.java`, `VelocityRenderGameRules.java`, `build.gradle`, `fabric.mod.json`, `RELEASE_QUEUE.md`
+- **Date Added**: 2026-09-25
+
+#### ❓ Problem / Context
+Existing versions: `26.3` (established baseline in `Velocity Render v26.3`). Missing anchors: Modern `26.1 / 26.1.2`, `26.2`; Older `1.21.11`, `1.21.1`, `1.20.1`.
+Per Multi-Era Version Matrix and 1 Jar 1 Version Policy, port mod across all missing anchors (Modern first, Older second).
+
+#### 💡 Architectural Specifications & Toolchain Anchors
+- **Phase 1: Modern Sovereign Anchors (Java 25+, Loom 1.15+, No Mappings Block)**:
+  - `MC 26.1 / 26.1.2`: Java 25, Fabric Loom 1.15+, `Identifier.fromNamespaceAndPath`, `EntityTypes`, `dasik-library` 26.1.
+  - `MC 26.2`: Java 25, Fabric Loom 1.15+, `Identifier.fromNamespaceAndPath`, `DynamicGameRuleManager`.
+  - `MC 26.3`: Java 25, Fabric Loom 1.15+, `minecraft_version=26.3-snapshot-6`, `fabric_version=0.156.1+26.3` (already active baseline).
+- **Phase 2: Older Anchors (Mojang Mappings, Java 21 / 17)**:
+  - `MC 1.21.11`: Java 21, Loom 1.15-SNAPSHOT (`fabric-loom-remap`), Mojang mappings, `Identifier.of`, `Optional<T>` CompoundTag, relocated entity packages.
+  - `MC 1.21.1`: Java 21, Loom 1.10+, Mojang mappings, `Identifier.of`, `DataComponents`, native `Attributes.SCALE`.
+  - `MC 1.20.1`: Java 17, Loom 1.4–1.10, Mojang mappings, `new Identifier`, primitive NBT CompoundTag, `FabricItemSettings`, `GameRules.Category` enum.
+
+#### 🧪 Verification & Acceptance Criteria
+
+##### Phase 1: Modern Sovereign Anchors (Priority 1)
+- [ ] **Anchor: MC 26.1 / 26.1.2**
+  - [ ] Subproject directory & build script scaffolding (`build.gradle`, `gradle.properties`, `settings.gradle`)
+  - [ ] Source adaptation, API/mixin relocation, and dasik-library wiring for target version
+  - [ ] Headless unit & integration test suite pass (`./gradlew test --no-daemon`)
+  - [ ] Clean binary compilation (`./gradlew build --no-daemon`)
+  - [ ] Mandatory Universal 4-Point Distribution (Local Archive, Hub Archive, External Vault `D:\`, Launcher Test Profile)
+  - [ ] Release queue registration in `RELEASE_QUEUE.md` (`- [ ]`) and `CHANGELOG.md` entry
+- [ ] **Anchor: MC 26.2**
+  - [ ] Subproject directory & build script scaffolding (`build.gradle`, `gradle.properties`, `settings.gradle`)
+  - [ ] Source adaptation, API/mixin relocation, and dasik-library wiring for target version
+  - [ ] Headless unit & integration test suite pass (`./gradlew test --no-daemon`)
+  - [ ] Clean binary compilation (`./gradlew build --no-daemon`)
+  - [ ] Mandatory Universal 4-Point Distribution (Local Archive, Hub Archive, External Vault `D:\`, Launcher Test Profile)
+  - [ ] Release queue registration in `RELEASE_QUEUE.md` (`- [ ]`) and `CHANGELOG.md` entry
+- [x] **Anchor: MC 26.3 - Already established baseline** (Subproject: `Velocity Render v26.3`)
+
+##### Phase 2: Older Anchors (Priority 2)
+- [ ] **Anchor: MC 1.21.11 (Java 21, Loom 1.15-SNAPSHOT `fabric-loom-remap`, Mojang mappings, `Identifier.of`, `Optional<T>` CompoundTag, relocated entity packages)**
+  - [ ] Subproject directory & build script scaffolding (`build.gradle`, `gradle.properties`, `settings.gradle`)
+  - [ ] Source adaptation, API/mixin relocation, and dasik-library wiring for target version
+  - [ ] Headless unit & integration test suite pass (`./gradlew test --no-daemon`)
+  - [ ] Clean binary compilation (`./gradlew build --no-daemon`)
+  - [ ] Mandatory Universal 4-Point Distribution (Local Archive, Hub Archive, External Vault `D:\`, Launcher Test Profile)
+  - [ ] Release queue registration in `RELEASE_QUEUE.md` (`- [ ]`) and `CHANGELOG.md` entry
+- [ ] **Anchor: MC 1.21.1 (Java 21, Loom 1.10+, Mojang mappings, `Identifier.of`, `DataComponents`, native `Attributes.SCALE`)**
+  - [ ] Subproject directory & build script scaffolding (`build.gradle`, `gradle.properties`, `settings.gradle`)
+  - [ ] Source adaptation, API/mixin relocation, and dasik-library wiring for target version
+  - [ ] Headless unit & integration test suite pass (`./gradlew test --no-daemon`)
+  - [ ] Clean binary compilation (`./gradlew build --no-daemon`)
+  - [ ] Mandatory Universal 4-Point Distribution (Local Archive, Hub Archive, External Vault `D:\`, Launcher Test Profile)
+  - [ ] Release queue registration in `RELEASE_QUEUE.md` (`- [ ]`) and `CHANGELOG.md` entry
+- [ ] **Anchor: MC 1.20.1 (Java 17, Loom 1.4-1.10, Mojang mappings, `new Identifier`, primitive NBT CompoundTag, `FabricItemSettings`, `GameRules.Category` enum)**
+  - [ ] Subproject directory & build script scaffolding (`build.gradle`, `gradle.properties`, `settings.gradle`)
+  - [ ] Source adaptation, API/mixin relocation, and dasik-library wiring for target version
+  - [ ] Headless unit & integration test suite pass (`./gradlew test --no-daemon`)
+  - [ ] Clean binary compilation (`./gradlew build --no-daemon`)
+  - [ ] Mandatory Universal 4-Point Distribution (Local Archive, Hub Archive, External Vault `D:\`, Launcher Test Profile)
+  - [ ] Release queue registration in `RELEASE_QUEUE.md` (`- [ ]`) and `CHANGELOG.md` entry
