@@ -1,0 +1,39 @@
+# Release Queue: Velocity Render
+
+- [ ] **1.0.0+26.3** — Genesis production release: velocity-biased chunk meshing and server predictive generation.
+- [ ] **1.1.0+26.3** — Step 1: Turn-Arc Math Engine and directional fan-out algorithms (BL-VR-001).
+- [ ] **1.1.1+26.3** — Step 2: Dynamic GameRule & 11-Language Localization Parity (BL-VR-001).
+- [ ] **1.1.2+26.3** — Step 3: Server Predictive Arc Corridor Integration (BL-VR-001).
+- [ ] **1.1.3+26.3** — Step 4: Brigadier Command Suite & Diagnostics (BL-VR-001).
+- [ ] **1.2.0+26.3** — Step 1: Symmetrical Vertical Pitch Bias Math (BL-VR-002).
+- [ ] **1.2.1+26.3** — Step 2: Dynamic Vertical Lookahead GameRule & Localization (BL-VR-002).
+- [ ] **1.2.2+26.3** — Step 3: Server Altitude Trigger & Vertical Gating (BL-VR-002).
+- [ ] **1.2.3+26.3** — Step 4: Telemetry Diagnostics & Command Suite (BL-VR-002 Finale).
+- [ ] **1.3.0+26.3** — Step 1: Fair Allocation Math & Ticket Quota Engine (BL-VR-003).
+- [ ] **1.3.1+26.3** — Step 2: Dynamic GameRule & 11-Language Localization Parity (BL-VR-003).
+- [ ] **1.3.2+26.3** — Step 3: Server-Wide Multi-Player Ticket Gating (BL-VR-003).
+- [ ] **1.3.3+26.3** — Step 4: Diagnostic Command Suite & Multi-Player Telemetry (BL-VR-003 Finale).
+- [ ] **1.4.0+26.3** — Step 1: Diagnostic Formatter Math & State Engine (BL-VR-004).
+- [ ] **1.4.1+26.3** — Step 2: 10-Tick Telemetry Caching, F3+F6 DebugScreenEntry & GameRule (BL-VR-004).
+- [ ] **1.4.2+26.3** - F3 Debug Screen Overlay & F3+F6 Debug Options Integration
+- [ ] **1.4.3+26.3** - In-Game Command Suite Controls & Diagnostic Milestone
+- [ ] **1.5.0+26.3** — Step 1: Pure Scaling Math & Reach Scaler (BL-VR-005).
+- [ ] **1.5.1+26.3** — Step 2: Dynamic GameRules & 12-Language Parity (BL-VR-005).
+- [ ] **1.5.2+26.3** — Step 3: Dynamic Sparse Delta & Conventional Tag Hub (BL-VR-005).
+- [ ] **1.5.3+26.3** — Step 4: Server Predictive Generation Dimension Gating (BL-VR-005).
+- [ ] **1.5.4+26.3** — Step 5: Brigadier Command Controls & Telemetry (BL-VR-005 Finale).
+- [ ] **1.6.0+26.3** — Step 1: Pure LOD Trajectory Math Engine (BL-VR-006).
+- [ ] **1.6.1+26.3** — Step 2: Dynamic GameRule & 12-Language Localization Parity (BL-VR-006).
+- [ ] **1.6.2+26.3** — Step 3: Soft-Reflection LOD Compatibility Hub & Public API (BL-VR-006).
+- [ ] **1.6.3+26.3** — Step 4: Client Tick Integration & Broadcasting (BL-VR-006).
+- [ ] **1.6.4+26.3** — Step 5: Brigadier Command Controls & Telemetry (BL-VR-006 Finale).
+- [ ] **1.7.0+26.3** — Step 1: Optional GUI Dependencies & Config Model (BL-VR-007).
+- [ ] **1.7.1+26.3** — Step 2: 12-Language GUI Localization Parity (BL-VR-007).
+- [ ] **1.7.2+26.3** — Step 3: YACL Screen Factory & Smart Sliders (BL-VR-007).
+- [ ] **1.7.3+26.3** — Step 4: ModMenu Entrypoint & Reflection Loader (BL-VR-007).
+- [ ] **1.7.4+26.3** — Step 5: Runtime State Synchronization & ModMenu Verification (BL-VR-007 Finale).
+- [ ] **1.8.0+26.3** — Step 1: Dynamic GameRules Uncapping & Safe Saturated Bounds (BL-VR-009).
+- [ ] **1.8.1+26.3** — Step 2: Brigadier Command Suite Uncapping & Non-Blocking Advisory Warnings (BL-VR-009).
+- [ ] **1.8.2+26.3** — Step 3: Fully Uncapped Client Lead Offset & Telemetry (BL-VR-009).
+- [ ] **1.8.3+26.3** — Step 4: Dynamic Forward Reach & Dimension Scaling (BL-VR-009).
+- [ ] **1.8.4+26.3** — Step 5: Ergonomic YACL Sliders & Project Ledger Parity (BL-VR-009 Finale).
