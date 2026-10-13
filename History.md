@@ -1,5 +1,34 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.0.0+1.20.1] - 2026-10-13
+- **Governance**: Executed repository Clean Sweep on `BACKLOG.md` per Studio Constitution. Historical specifications for `[BL-VR-010]` and `[BL-VR-013]` through `[BL-VR-017]` preserved in this ledger. Established monotonic ID ceiling (`BL-VR-017`). Velocity Render achieves **100% Full Anchor Parity (6/6 Anchors: 1.20.1, 1.21.1, 1.21.11, 26.1.2, 26.2, 26.3)** across all studio anchors!
+- **Port**: Legacy ground-zero anchor port for Minecraft 1.20.1 under the 1 Jar 1 Version Policy (`Velocity Render v1.20.1`).
+- **Ticket**: `[BL-VR-017]` Multi-Era Anchor Port: MC 1.20.1 & `[BL-VR-010]` Multi-Era Anchor Porting (Master Parity Initiative Finale)
+- **Hook Adaptation**: Injected into `ChunkRenderDispatcher.RenderChunk.getDistToPlayerSqr()` returning anisotropic velocity-biased distance via `VelocityVectorHelper`.
+- **API Shifts & Compatibility**: Enforced `"compatibilityLevel": "JAVA_17"` across mixins JSON, adapted `getAverageTickTime()` in server ticket manager, adapted `new ResourceLocation(...)` constructors, and adjusted YACL `ConfirmLinkScreen.confirmLinkNow(url, screen, true)`.
+- **Test Results**: 15 test classes, 81 test cases passing cleanly on `./gradlew test` under Java 17.
+- **Artifact**: `velocity-render-1.0.0+1.20.1.jar` deployed to 4-point archive locations.
+
+---
+
+## [1.8.5+26.2] - 2026-10-13
+- **Port**: Modern sovereign anchor port for Minecraft 26.2 under the 1 Jar 1 Version Policy (`Velocity Render v26.2`).
+- **Ticket**: `[BL-VR-013]` Multi-Era Anchor Port: MC 26.2
+- **Architecture**: Direct intra-era parity with 26.3 sovereign lead using `SectionTaskDynamicQueueMixin`, Java 25, Fabric Loom 1.15+, and `dasik-library` 1.9.2.
+- **Test Results**: 15 test classes, 78 test cases passing cleanly on `./gradlew test`.
+- **Artifact**: `velocity-render-1.8.5+26.2.jar` deployed to 4-point archive locations.
+
+---
+
+## [1.8.5+26.1.2] - 2026-10-13
+- **Port**: Modern sovereign anchor port for Minecraft 26.1.2 under the 1 Jar 1 Version Policy (`Velocity Render v26.1`).
+- **Ticket**: `[BL-VR-014]` Multi-Era Anchor Port: MC 26.1.2
+- **Hook Adaptation**: Adapted chunk dynamic compilation queue from `SectionTaskDynamicQueueMixin` to `CompileTaskDynamicQueueMixin` targeting `CompileTaskDynamicQueue.poll()`. Adapted `VelocityRenderGameTest` to `EntityType.PIG`.
+- **Test Results**: 15 test classes, 78 test cases passing cleanly on `./gradlew test`.
+- **Artifact**: `velocity-render-1.8.5+26.1.2.jar` deployed to 4-point archive locations.
+
+---
+
 ## [1.0.0+1.21.1] - 2026-10-13
 - **Port**: Generational anchor port for Minecraft 1.21.1 under the 1 Jar 1 Version Policy (`Velocity Render v1.21.1`).
 - **Ticket**: `[BL-VR-016]` Multi-Era Anchor Port: MC 1.21.1
