@@ -19,6 +19,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-010]` | `[FEATURE]` | Multi-Era Anchor Porting: Velocity Render | `[HIGH]` | `Multi-Era` | `📌 DEFERRED` |
 | `[BL-VR-011]` | `[TECH_DEBT]` | Downstream Ecosystem & Toolchain Alignment | `[HIGH]` | All Anchors | `✅ RESOLVED` |
+| `[BL-VR-012]` | `[TECH_DEBT]` | Adopt 5-Pillar Testing & Sidedness Verification Harness | `[MEDIUM]` | All Anchors | 📌 DEFERRED |
 
 ---
 
@@ -363,3 +364,26 @@ Per Multi-Era Version Matrix and 1 Jar 1 Version Policy, port mod across all mis
   - [x] Subproject `RELEASE_QUEUE.md` files contain strictly target-anchor release entries.
   - [x] Root `Archive Jar of all versions/` exists and contains release JARs discoverable by `sync_archives.py`.
 
+
+---
+
+### [BL-VR-012] Adopt 5-Pillar Testing & Sidedness Verification Harness
+- **Category**: `[TECH_DEBT]`
+- **Priority**: `[MEDIUM]`
+- **Status**: `📌 DEFERRED`
+- **Target Version**: `All Anchors`
+
+#### ❓ Problem / Context
+Citing `Testing & Runtime Verification Policy.md` and `gradle-tester/SKILL.md`, existing tests do not fully guard against the 5 Core Failure Modes (Headless Sidedness, Dynamic Mixin Transformation Drift, Emergent State, Concurrency, and Test Oracle limitations).
+
+#### 💡 Proposed Solution
+1. **Pillar 1**: Implement `VelocityRenderStressFuzzTest.java` (chaos property fuzzing with 10k-50k iterations, NaN/Infinity bounds).
+2. **Pillar 2**: Implement `VelocityRenderConcurrencyLoadTest.java` (50+ worker threads, atomic quotas).
+3. **Pillar 3**: Implement `VelocityRenderCommandTest.java` (Brigadier command tree syntax and permission checks).
+4. **Pillar 4**: Implement `VelocityRenderGameTest.java` (Mojang headless in-engine world ticking).
+5. **Pillar 5**: Implement `VelocityRenderSidednessContractTest.java` (bytecode scan verifying zero `net.minecraft.client.*` imports in common packages).
+
+#### 🧪 Verification & Acceptance Criteria
+- [ ] 5-Pillar test suite passes on `./gradlew test --no-daemon`.
+- [ ] Zero client class references in common code.
+- [ ] Clean build and deploy across all targeted anchors.

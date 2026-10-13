@@ -1,56 +1,56 @@
 <p align="center">
-    <a href="https://modrinth.com/mod/fabric-api"><img src="https://img.shields.io/badge/Requires-Fabric_API-blue?style=for-the-badge&amp;logo=fabric" alt="Requires Fabric API"></a>
+    <a href="https://modrinth.com/mod/fabric-api"><img src="https://img.shields.io/badge/Requires-Fabric_API-blue?style=for-the-badge&logo=fabric" alt="Requires Fabric API"></a>
     <a href="https://modrinth.com/mod/dasik-library"><img src="https://img.shields.io/badge/Requires-Dasik_Library-purple?style=for-the-badge" alt="Requires Dasik Library"></a>
-    <img src="https://img.shields.io/badge/Language-Java_25-orange?style=for-the-badge&amp;logo=java" alt="Java 25">
+    <img src="https://img.shields.io/badge/Language-Java_25-orange?style=for-the-badge&logo=java" alt="Java 25">
     <img src="https://img.shields.io/badge/License-GPLv3-green?style=for-the-badge" alt="License">
     <img src="https://img.shields.io/badge/Minecraft-26.3-brightgreen?style=for-the-badge" alt="Minecraft 26.3">
 </p>
 
-<h2>&amp;#9889; Velocity Render</h2>
+<h2>⚡ Velocity Render</h2>
 
 <blockquote>
-  <p><strong>&quot;Render what&#39;s ahead, not what&#39;s behind.&quot;</strong></p>
+  <p><strong>"Render what's ahead, not what's behind."</strong></p>
 </blockquote>
 
-<p>Have you ever soared across the skies with an Elytra, raced boats across blue ice highways, or sprinted under Speed II&mdash;only to crash directly into an invisible chunk barrier or fall through a terrifying blue void hole while the terrain desperately tries to catch up?</p>
+<p>Have you ever soared across the skies with an Elytra, raced boats across blue ice highways, or sprinted under Speed II—only to crash directly into an invisible chunk barrier or fall through a terrifying blue void hole while the terrain desperately tries to catch up?</p>
 
-<p>Vanilla Minecraft&#39;s chunk builder treats all directions equally: it wastes precious CPU rendering power meshing chunks behind your back that you cannot even see, while the landscape directly in your flight path remains unbuilt.</p>
+<p>Vanilla Minecraft's chunk builder treats all directions equally: it wastes precious CPU rendering power meshing chunks behind your back that you cannot even see, while the landscape directly in your flight path remains unbuilt.</p>
 
-<p><strong>Velocity Render</strong> completely rewires this balance. By dynamically synchronizing Minecraft&#39;s chunk world generation and client meshing pipeline with your instantaneous velocity vector, the game actively prioritizes the terrain ahead of your travel trajectory&mdash;eliminating high-speed void pop-in, preventing Elytra wall stalls, and keeping your journey butter-smooth.</p>
+<p><strong>Velocity Render</strong> completely rewires this balance. By dynamically synchronizing Minecraft's chunk world generation and client meshing pipeline with your instantaneous velocity vector, the game actively prioritizes the terrain ahead of your travel trajectory—eliminating high-speed void pop-in, preventing Elytra wall stalls, and keeping your journey butter-smooth.</p>
 
-<p>Part of the <strong>Vanilla Outsider Collection</strong> &mdash; mods that refine the vanilla experience with modern standards.</p>
+<p>Part of the <strong>Vanilla Outsider Collection</strong> — mods that refine the vanilla experience with modern standards.</p>
 
 <hr>
 
-<h2>&amp;#10024; Features (Version 1.0.0)</h2>
+<h2>✨ Features (Version 1.0.0)</h2>
 
-<h3>&amp;#127950; Client-Side Anisotropic Meshing Prioritization</h3>
+<h3>🏎 Client-Side Anisotropic Meshing Prioritization</h3>
 <p>Stop waiting for forward chunks to appear while your computer renders terrain behind you:</p>
 <ul>
-  <li><strong>Vanilla Limitation:</strong> Vanilla&#39;s chunk compile queue (<code>SectionTaskDynamicQueue</code>) evaluates chunk tasks using purely spherical Euclidean distance from the camera. A chunk 50 blocks behind your back gets the exact same compile priority as a chunk 50 blocks in front of your face.</li>
+  <li><strong>Vanilla Limitation:</strong> Vanilla's chunk compile queue (<code>SectionTaskDynamicQueue</code>) evaluates chunk tasks using purely spherical Euclidean distance from the camera. A chunk 50 blocks behind your back gets the exact same compile priority as a chunk 50 blocks in front of your face.</li>
   <li><strong>Directional Velocity Bias:</strong> Calculates your instantaneous movement vector and applies an anisotropic dot-product distance bias. Sections inside your forward flight cone compile first, while rear sections are seamlessly deferred without visual glitches.</li>
   <li><strong>Zero-Allocation Hot Path:</strong> Precomputed volatile caching ensures 0B heap memory allocation per frame on the client render thread.</li>
 </ul>
 
-<h3>&amp;#127760; Server-Side Predictive Chunk Generation</h3>
+<h3>🌐 Server-Side Predictive Chunk Generation</h3>
 <p>Smooth exploration across uncharted lands on dedicated servers and singleplayer worlds:</p>
 <ul>
   <li><strong>Kinematic Look-Ahead Vector Blending:</strong> Blends player delta-movement momentum (70%) with camera look direction (30%). When you bank into a turn, chunks in the direction you are steering begin streaming immediately <em>before</em> momentum catches up.</li>
-  <li><strong>Continuous Corridor Marching:</strong> Uses continuous step-by-step corridor ray marching (with banked turn fan-out at speeds &ge; 0.75 b/t), preventing diagonal chunk gaps.</li>
+  <li><strong>Continuous Corridor Marching:</strong> Uses continuous step-by-step corridor ray marching (with banked turn fan-out at speeds ≥ 0.75 b/t), preventing diagonal chunk gaps.</li>
   <li><strong>Leak-Free Lifecycle:</strong> Tickets are immediately released when slowing down, changing dimensions, or disconnecting.</li>
 </ul>
 
-<h3>&amp;#9878;&#65039; Adaptive MSPT Load Watchdog</h3>
+<h3>⚖️ Adaptive MSPT Load Watchdog</h3>
 <p>High speed without sacrificing server performance:</p>
 <ul>
   <li><strong>Continuous Server Monitoring:</strong> Continuously tracks server tick duration via <code>getAverageTickTimeNanos()</code>.</li>
   <li><strong>Automatic Load Shedding:</strong> If server MSPT exceeds 25ms, forward reach dynamically scales down to protect server tick rate, guaranteeing rock-solid 20 TPS.</li>
 </ul>
 
-<h3>&amp;#128268; Dedicated Compatibility &amp; HUD Integration</h3>
+<h3>🔌 Dedicated Compatibility & HUD Integration</h3>
 <ul>
-  <li><strong>Universal Shaders &amp; Performance Engines:</strong> Because this mod purely optimizes CPU task ordering without altering graphical shaders or vertex formats, it is 100% compatible with <strong>Iris</strong>, <strong>Sodium</strong>, <strong>ImmediatelyFast</strong>, <strong>Lithium</strong>, <strong>Nvidium</strong>, <strong>Distant Horizons</strong>, and <strong>Bobby</strong>.</li>
-  <li><strong>Server &amp; Client Sidedness:</strong>
+  <li><strong>Universal Shaders & Performance Engines:</strong> Because this mod purely optimizes CPU task ordering without altering graphical shaders or vertex formats, it is 100% compatible with <strong>Iris</strong>, <strong>Sodium</strong>, <strong>ImmediatelyFast</strong>, <strong>Lithium</strong>, <strong>Nvidium</strong>, <strong>Distant Horizons</strong>, and <strong>Bobby</strong>.</li>
+  <li><strong>Server & Client Sidedness:</strong>
     <ul>
       <li><em>Client-Only on Vanilla Servers:</em> Prioritizes meshing of received chunks in your forward velocity cone.</li>
       <li><em>Server-Only with Vanilla Clients:</em> Predictively generates and loads terrain ahead of fast players on the server, eliminating void walls for all connecting players.</li>
@@ -61,7 +61,7 @@
 
 <hr>
 
-<h2>&amp;#128202; Quick Reference &amp; Mechanics Matrix</h2>
+<h2>📊 Quick Reference & Mechanics Matrix</h2>
 
 <table>
   <thead>
@@ -90,7 +90,7 @@
     <tr>
       <td><strong>Server Load Protection</strong></td>
       <td>Unchecked generation can cause server tick spikes</td>
-      <td>Adaptive MSPT watchdog throttles reach if MSPT &gt; 25ms</td>
+      <td>Adaptive MSPT watchdog throttles reach if MSPT > 25ms</td>
     </tr>
     <tr>
       <td><strong>Client Hot-Path Memory</strong></td>
@@ -102,7 +102,7 @@
 
 <hr>
 
-<h2>&amp;#128736;&#65039; In-Game Commands (<code>/velocityrender</code>, <code>/vr</code>)</h2>
+<h2>🛠️ In-Game Commands (<code>/velocityrender</code>, <code>/vr</code>)</h2>
 
 <p>Full in-game Brigadier command suite accessible under <code>/velocityrender</code> or the short alias <code>/vr</code>:</p>
 
@@ -118,15 +118,15 @@
     <tr>
       <td><code>/vr status</code></td>
       <td>All Players</td>
-      <td>Displays real-time speed (m/s &amp; b/t), forward lead distance, active tickets, and server MSPT.</td>
+      <td>Displays real-time speed (m/s & b/t), forward lead distance, active tickets, and server MSPT.</td>
     </tr>
     <tr>
-      <td><code>/vr get &lt;rule&gt;</code></td>
+      <td><code>/vr get <rule></code></td>
       <td>All Players</td>
       <td>Queries the current value of a configuration GameRule.</td>
     </tr>
     <tr>
-      <td><code>/vr set &lt;rule&gt; &lt;value&gt;</code></td>
+      <td><code>/vr set <rule> <value></code></td>
       <td>Gamemasters (Level 2)</td>
       <td>Updates settings in real time.</td>
     </tr>
@@ -145,10 +145,10 @@
 
 <hr>
 
-<h2>&amp;#9881;&#65039; Native GameRules &amp; Configuration</h2>
+<h2>⚙️ Native GameRules & Configuration</h2>
 
 <blockquote>
-  <p><strong>&amp;#128161; Config vs. In-Game GameRules:</strong><br>
+  <p><strong>💡 Config vs. In-Game GameRules:</strong><br>
   The global configuration file only defines default values for newly created worlds. In existing worlds, change settings in-game via the <strong>Edit Game Rules</strong> UI screen or the <code>/gamerule</code> / <code>/vr</code> command.</p>
 </blockquote>
 
@@ -163,11 +163,11 @@
 
 <hr>
 
-<h2>&amp;#128214; In-Depth How-To &amp; Operational Playbook</h2>
+<h2>📖 In-Depth How-To & Operational Playbook</h2>
 
-<h3>1. Installation &amp; Dependency Verification</h3>
+<h3>1. Installation & Dependency Verification</h3>
 <ul>
-  <li>Ensure you have installed <strong>Fabric Loader</strong> (&ge;0.18.4), <strong>Fabric API</strong>, and <strong>Dasik Library</strong> (&ge;1.8.0).</li>
+  <li>Ensure you have installed <strong>Fabric Loader</strong> (≥0.18.4), <strong>Fabric API</strong>, and <strong>Dasik Library</strong> (≥1.8.0).</li>
   <li>Drop <code>velocity-render-1.0.0+26.3.jar</code> into your <code>mods</code> folder.</li>
 </ul>
 
@@ -187,23 +187,23 @@
 
 <hr>
 
-<h2>&amp;#9749; Support</h2>
+<h2>☕ Support</h2>
 
 <p>If you enjoy the <strong>Vanilla Outsider</strong> collection and want to support ongoing development, consider supporting me!</p>
 
 <p align="center">
-    <a href="https://ko-fi.com/dasikigaijin"><img src="https://img.shields.io/badge/Ko--fi-Support%20Me-FF5E5B?style=for-the-badge&amp;logo=ko-fi&amp;logoColor=white" alt="Ko-fi"></a>
+    <a href="https://ko-fi.com/dasikigaijin"><img src="https://img.shields.io/badge/Ko--fi-Support%20Me-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
     <a href="https://sociabuzz.com/dasikigaijin/tribe"><img src="https://img.shields.io/badge/SocioBuzz-Local_Support-7BB32E?style=for-the-badge" alt="SocioBuzz"></a>
     <a href="https://saweria.co/DasikIgaijinn"><img src="https://img.shields.io/badge/Saweria-Local_Support-FFA500?style=for-the-badge" alt="Saweria"></a>
 </p>
 
 <blockquote>
-  <p><strong>&amp;#127470;&amp;#127465; Indonesian Users:</strong> SocioBuzz and Saweria support local payment methods (Gopay, OVO, Dana, etc.) if you want to support me without using PayPal/Ko-fi!</p>
+  <p><strong>🇮🇩 Indonesian Users:</strong> SocioBuzz and Saweria support local payment methods (Gopay, OVO, Dana, etc.) if you want to support me without using PayPal/Ko-fi!</p>
 </blockquote>
 
 <hr>
 
-<h2>&amp;#128220; Credits &amp; Modpack Permissions</h2>
+<h2>📜 Credits & Modpack Permissions</h2>
 
 <table>
   <thead>
@@ -233,16 +233,16 @@
 </table>
 
 <blockquote>
-  <p><strong>&amp;#128230; Modpack Permissions &amp; Distribution:</strong><br>
+  <p><strong>📦 Modpack Permissions & Distribution:</strong><br>
   You are fully welcome to include this mod in any modpack on any platform! However, the mod file must be downloaded directly through official distribution channels (<strong>CurseForge</strong> or <strong>Modrinth</strong>). Re-uploading, mirroring, or redistributing the original mod JAR to third-party mirror sites, scraper portals, or unauthorized launchers is strictly prohibited.</p>
-  <p><strong>&amp;#9878;&#65039; License &amp; Fork Guidelines (No Zero-Change Re-uploads):</strong><br>
-  This project is open-source under the <strong>GNU GPLv3</strong>. You are fully encouraged to inspect the code, learn from it, and fork the repository to create genuine modifications, substantial feature expansions, or community ports&mdash;provided your project remains open-source under GPLv3 with proper attribution.<br>
+  <p><strong>⚖️ License & Fork Guidelines (No Zero-Change Re-uploads):</strong><br>
+  This project is open-source under the <strong>GNU GPLv3</strong>. You are fully encouraged to inspect the code, learn from it, and fork the repository to create genuine modifications, substantial feature expansions, or community ports—provided your project remains open-source under GPLv3 with proper attribution.<br>
   <strong>However, straight 1:1 re-uploads, clone forks with no meaningful functional changes, or re-publishing identical builds under different project names (e.g. to farm downloads or rewards) are strictly forbidden.</strong></p>
 </blockquote>
 
 <hr>
 
 <p align="center">
-  <strong>Made with &amp;#10084;&#65039; for the Minecraft community</strong><br>
+  <strong>Made with ❤️ for the Minecraft community</strong><br>
   <em>Part of the Vanilla Outsider Collection</em>
 </p>
