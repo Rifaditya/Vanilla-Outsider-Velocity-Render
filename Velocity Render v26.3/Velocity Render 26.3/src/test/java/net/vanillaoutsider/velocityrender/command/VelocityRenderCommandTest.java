@@ -54,9 +54,7 @@ class VelocityRenderCommandTest {
                 Vec2.ZERO,
                 null,
                 PermissionSet.ALL_PERMISSIONS,
-                "AdminTester",
                 Component.literal("AdminTester"),
-                null,
                 null
         );
 
@@ -66,9 +64,7 @@ class VelocityRenderCommandTest {
                 Vec2.ZERO,
                 null,
                 PermissionSet.NO_PERMISSIONS,
-                "GuestTester",
                 Component.literal("GuestTester"),
-                null,
                 null
         );
     }

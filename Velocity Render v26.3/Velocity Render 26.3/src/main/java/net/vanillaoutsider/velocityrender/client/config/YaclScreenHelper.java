@@ -1,6 +1,8 @@
 // Copyright (C) 2026 Dasik (Rifaditya) | GNU GPLv3
 package net.vanillaoutsider.velocityrender.client.config;
 
+import java.net.URI;
+
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import dev.isxander.yacl3.api.ButtonOption;
 import dev.isxander.yacl3.api.ConfigCategory;
@@ -168,7 +170,7 @@ public final class YaclScreenHelper {
             return ButtonOption.createBuilder()
                     .name(Component.translatable("dasiklibrary.support.kofi.button"))
                     .description(OptionDescription.of(Component.translatable("dasiklibrary.support.kofi.tooltip")))
-                    .action((screen, opt) -> ConfirmLinkScreen.confirmLinkNow(screen, "https://ko-fi.com/dasikigaijin"))
+                    .action((screen, opt) -> ConfirmLinkScreen.confirmLinkNow(screen, URI.create("https://ko-fi.com/dasikigaijin")))
                     .build();
         } catch (Throwable ignored) {
             return null;

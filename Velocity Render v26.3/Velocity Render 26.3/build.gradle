@@ -23,7 +23,7 @@ dependencies {
 
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	implementation("net.dasik.social:dasik-library:1.8.22") { transitive = false }
+	implementation("net.dasik.social:dasik-library:${project.dasik_library_version}") { transitive = false }
 
 	compileOnly "dev.isxander:yet-another-config-lib:3.9.5+26.2-fabric"
 	compileOnly "com.terraformersmc:modmenu:18.0.0-beta.1"
