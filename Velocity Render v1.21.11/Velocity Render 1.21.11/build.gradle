@@ -1,0 +1,168 @@
+plugins {
+    id 'net.fabricmc.fabric-loom-remap' version '1.15-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://maven.fabricmc.net/" }
+    maven { url "https://maven.terraformersmc.com/releases/" }
+    maven { url "https://maven.isxander.dev/releases" }
+    maven { url "https://maven.isxander.dev/snapshots" }
+    maven { url = "https://api.modrinth.com/maven" }
+    flatDir {
+        dirs 'e:/Minecraft Project/Dasik Library v1.21.11/Archive Jar of all versions/MC 1.21.11',
+             'e:/Minecraft Project/minecraft-mod-release-hub/archives/Dasik Library'
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    modImplementation "net.dasik.social:dasik-library:${project.dasik_library_version}"
+
+    modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+    modCompileOnly("dev.isxander:yet-another-config-lib:${project.yacl_version}") {
+        transitive = false
+    }
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.0"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.10.0"
+    testImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    it.options.release = 21
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+    archiveBaseName = project.archives_base_name
+    from("LICENSE") {
+        rename "LICENSE_${project.archives_base_name}", "LICENSE"
+    }
+}
+
+remapJar {
+    archiveBaseName = project.archives_base_name
+}
+
+afterEvaluate {
+    def targetJarTask = tasks.findByName('remapJar') ?: tasks.findByName('jar')
+    if (targetJarTask != null) {
+        def archiveTask = tasks.register('archiveReleaseJar') {
+            group = 'build'
+            description = 'Automatically copies built release JAR to central Archive Jar of all versions/MC 1.21.11, Hub, External Vault, and launcher profile'
+            dependsOn targetJarTask
+            doLast {
+                def jarFile = targetJarTask.archiveFile.get().asFile
+                if (!jarFile.exists()) {
+                    jarFile = file("build/libs/${project.archives_base_name}-${project.mod_version}.jar")
+                }
+                if (jarFile.exists()) {
+                    // 1. Central Outer Archive (MC 1.21.11)
+                    def archiveDir = file("../../Archive Jar of all versions/MC 1.21.11")
+                    if (!archiveDir.exists()) {
+                        archiveDir.mkdirs()
+                    }
+                    copy {
+                        from jarFile
+                        into archiveDir
+                    }
+                    println "[AUTO-ARCHIVE] Successfully copied ${jarFile.name} to central Archive directory: ${archiveDir.canonicalPath}"
+
+                    // 2. Release Hub Archive Sync
+                    File hubCandidate = projectDir
+                    File hubDir = null
+                    while (hubCandidate != null) {
+                        File checkDir = new File(hubCandidate, "minecraft-mod-release-hub")
+                        if (checkDir.exists()) {
+                            hubDir = checkDir
+                            break
+                        }
+                        hubCandidate = hubCandidate.parentFile
+                    }
+                    if (hubDir == null) {
+                        File fallback = new File("E:/Minecraft Project/minecraft-mod-release-hub")
+                        if (fallback.exists()) hubDir = fallback
+                    }
+                    if (hubDir != null && hubDir.exists()) {
+                        File targetArchiveDir = new File(hubDir, "archives/Velocity Render")
+                        if (!targetArchiveDir.exists()) {
+                            targetArchiveDir.mkdirs()
+                        }
+                        copy {
+                            from jarFile
+                            into targetArchiveDir
+                        }
+                        println "[HUB-ARCHIVE] Successfully copied ${jarFile.name} to release hub archives: ${targetArchiveDir.canonicalPath}"
+                    }
+
+                    // 3. External Vault D:\ Sync
+                    File vaultDir = new File("D:/Minecraft Mod Archive Jars/Velocity Render")
+                    if (vaultDir.exists() || new File("D:/").exists()) {
+                        if (!vaultDir.exists()) {
+                            vaultDir.mkdirs()
+                        }
+                        copy {
+                            from jarFile
+                            into vaultDir
+                        }
+                        println "[VAULT-ARCHIVE] Deployed ${jarFile.name} to D:/ vault"
+                    }
+
+                    // 4. Modrinth & Launcher Profile Sync
+                    def profilePaths = [
+                        "C:/Users/fmrif/AppData/Roaming/ModrinthApp/profiles/Fabric 1.21.11/mods",
+                        "C:/Users/fmrif/AppData/Roaming/.minecraft/versions/Fabric 1.21.11/mods"
+                    ]
+                    profilePaths.each { p ->
+                        def profileMods = file(p)
+                        if (profileMods.exists()) {
+                            profileMods.listFiles().each { f ->
+                                if (f.name.startsWith(project.archives_base_name) && f.name.endsWith(".jar") && f.name != jarFile.name) {
+                                    f.delete()
+                                    println "[MODRINTH-SYNC] Purged old version from launcher profile: ${f.name}"
+                                }
+                            }
+                            copy {
+                                from jarFile
+                                into profileMods
+                            }
+                            println "[MODRINTH-SYNC] Deployed ${jarFile.name} to ${p}"
+                        }
+                    }
+                }
+            }
+        }
+        build.finalizedBy(archiveTask)
+    }
+}

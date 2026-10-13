@@ -1,5 +1,15 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.0.0+1.21.11] - 2026-10-13
+- **Port**: Generational anchor port for Minecraft 1.21.11 under the 1 Jar 1 Version Policy (`Velocity Render v1.21.11`).
+- **Ticket**: `[BL-VR-015]` Multi-Era Anchor Port: MC 1.21.11
+- **Hook Adaptation**: Adapted `CompileTaskDynamicQueueMixin` targeting `CompileTaskDynamicQueue.poll()` redirecting `BlockPos.distToCenterSqr`. Adapted `DebugScreenOverlayMixin` to hook `renderLines` with `GuiGraphics`.
+- **API Shifts**: Adapted `ChunkPos.asLong(x, z)` and `new ChunkPos(packedPos)` unpacking, `chunkPosition().x` / `chunkPosition().z` direct field access for MC 1.21.11.
+- **Test Results**: 15 test classes, 81 test cases passing cleanly on `./gradlew test`.
+- **Artifact**: `velocity-render-1.0.0+1.21.11.jar` deployed to 4-point archive locations.
+
+---
+
 ## [1.8.5+26.3] - 2026-10-13
 - **Governance**: Executed repository Clean Sweep on `BACKLOG.md` per Studio Constitution. Historical specifications for `[BL-VR-001]` through `[BL-VR-012]` preserved in this ledger. Established monotonic ID ceiling (`BL-VR-012`). Multi-era anchor porting (`[BL-VR-010]`) tracked on `MASTER_ANCHOR_BOARD.md`.
 - **Ticket**: `[BL-VR-012]` Adopt 5-Pillar Testing & Sidedness Verification Harness

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.0.0+1.21.11] - 2026-10-13
+- **Generational Anchor Port**: Established dedicated support for Minecraft 1.21.11 under the 1 Jar 1 Version Policy.
+- **Chunk Compilation Biasing Hook**: Adapted chunk dynamic queue prioritization targeting `CompileTaskDynamicQueue.poll()` to bias distance calculations based on player velocity and 3D lookahead direction.
+- **Full Feature Parity**: Velocity-biased chunk meshing, 3D pitch-aware vertical lookahead, server-wide multi-player ticket quota allocation, dimension reach scaling, and 5-pillar test harness.
+
+---
+
 ## [1.8.5+26.3] - 2026-10-13
 - **Pillar 5 Sidedness & Mixin Contract Verification Suite**: Adopted comprehensive headless tests validating strict client/server code isolation, zero forbidden `net.minecraft.client.*` references in common sources and bytecode, and clean Mixin configuration separation.
 - **MC 26.3 Toolchain & API Shift Resilience**: Parameterized `dasik_library_version` dependency in `build.gradle` and resolved the MC 26.3 `URI.create` API shift in `YaclScreenHelper`.
