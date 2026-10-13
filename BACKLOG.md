@@ -19,7 +19,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | `[BL-VR-008]` | `[DOCS]` | Architecture Documentation & Visual Velocity Cone Progression | `[MEDIUM]` | `26.3+` | `✅ RESOLVED` |
 | `[BL-VR-010]` | `[FEATURE]` | Multi-Era Anchor Porting: Velocity Render | `[HIGH]` | `Multi-Era` | `📌 DEFERRED` |
 | `[BL-VR-011]` | `[TECH_DEBT]` | Downstream Ecosystem & Toolchain Alignment | `[HIGH]` | All Anchors | `✅ RESOLVED` |
-| `[BL-VR-012]` | `[TECH_DEBT]` | Adopt 5-Pillar Testing & Sidedness Verification Harness | `[MEDIUM]` | All Anchors | 📌 DEFERRED |
+| `[BL-VR-012]` | `[TECH_DEBT]` | Adopt 5-Pillar Testing & Sidedness Verification Harness | `[MEDIUM]` | All Anchors | `✅ RESOLVED` |
 
 ---
 
@@ -370,8 +370,9 @@ Per Multi-Era Version Matrix and 1 Jar 1 Version Policy, port mod across all mis
 ### [BL-VR-012] Adopt 5-Pillar Testing & Sidedness Verification Harness
 - **Category**: `[TECH_DEBT]`
 - **Priority**: `[MEDIUM]`
-- **Status**: `📌 DEFERRED`
+- **Status**: `✅ RESOLVED`
 - **Target Version**: `All Anchors`
+- **Date Resolved**: 2026-10-13 (v1.8.5+26.3)
 
 #### ❓ Problem / Context
 Citing `Testing & Runtime Verification Policy.md` and `gradle-tester/SKILL.md`, existing tests do not fully guard against the 5 Core Failure Modes (Headless Sidedness, Dynamic Mixin Transformation Drift, Emergent State, Concurrency, and Test Oracle limitations).
@@ -384,6 +385,6 @@ Citing `Testing & Runtime Verification Policy.md` and `gradle-tester/SKILL.md`, 
 5. **Pillar 5**: Implement `VelocityRenderSidednessContractTest.java` (bytecode scan verifying zero `net.minecraft.client.*` imports in common packages).
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] 5-Pillar test suite passes on `./gradlew test --no-daemon`.
-- [ ] Zero client class references in common code.
-- [ ] Clean build and deploy across all targeted anchors.
+- [x] 5-Pillar test suite passes on `./gradlew test --no-daemon`.
+- [x] Zero client class references in common code.
+- [x] Clean build and deploy across all targeted anchors.

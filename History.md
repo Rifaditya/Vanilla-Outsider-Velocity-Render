@@ -1,5 +1,13 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.8.5+26.3] - 2026-10-13
+- **Ticket**: `[BL-VR-012]` Adopt 5-Pillar Testing & Sidedness Verification Harness
+- **Fixes**: Resolved MC 26.3 API shift in `YaclScreenHelper.java` (`ConfirmLinkScreen.confirmLinkNow` with URI), parameterized `dasik-library` dependency via `${project.dasik_library_version}` (1.9.2), and authored `VelocityRenderSidednessContractTest.java` (Pillar 5).
+- **Test Results**: 15 test classes, 78 test cases passing cleanly on `./gradlew test`.
+- **Artifact**: `velocity-render-1.8.5+26.3.jar` deployed to 4-point archive locations.
+
+---
+
 ## Visual Architecture Diagrams, Wiki Parity & 100% Backlog Completion (BL-VR-008 Finale)
 - Visual Architecture Diagrams (`Doc/Media/`):
   - Generated 3 clean, high-resolution dark-mode diagrams adhering to the theme and dark background (`#121316` / `#181a1f`) of `velocity_cone_progression.png`:

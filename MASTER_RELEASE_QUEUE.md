@@ -1,8 +1,8 @@
 # 🎛️ Master Release Queue: Vanilla Outsider — Velocity Render
 
 > **Mod Project Master Ground-Truth Document**  
-> *Last Synchronized: 2026-09-18*  
-> **Mod ID**: `velocity-render` | **Lead SemVer**: `1.0.0`
+> *Last Synchronized: 2026-10-13*  
+> **Modrinth ID**: `bfvgClpI` (`velocity-render`) | **CurseForge ID**: `1742373` (`vo-velocity-render`) | **Lead SemVer**: `1.8.5`
 
 ---
 
@@ -10,7 +10,7 @@
 
 | Target MC | Generational Era | Live on Platforms | Next Queued Version | Status & Cadence Action | Feature Highlights / Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **MC 26.3** | Modern Lead | Modrinth: *(Under Review)*<br>CurseForge: *(Under Review)* | * ⏸️ **26.3** (On-Hold) | ⏸️ **Dual-Platform Moderation Lock** | Initial release 1.0.0+26.3 submitted. Auto-publisher strictly locked until both Modrinth and CurseForge approvals are granted. |
+| **MC 26.3** | Modern Lead | Modrinth: *(Under Review)*<br>CurseForge: *(Under Review)* | `1.8.5+26.3` | ⏸️ **Dual-Platform Moderation Lock** | Queued builds through 1.8.5+26.3 (5-Pillar testing harness & sidedness contract suite). Auto-publisher locked until initial platform moderation approvals are granted. |
 
 ---
 
