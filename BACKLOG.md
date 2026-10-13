@@ -12,7 +12,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `[BL-VR-010]` | `[FEATURE]` | Multi-Era Anchor Porting: Velocity Render (Master Parity Initiative) | `[HIGH]` | `All Anchors` | `📌 DEFERRED` |
 | `[BL-VR-013]` | `[FEATURE]` | Multi-Era Anchor Port: MC 26.2 (`Velocity Render v26.2`) | `[HIGH]` | `MC 26.2` | `✅ RESOLVED` |
-| `[BL-VR-014]` | `[FEATURE]` | Multi-Era Anchor Port: MC 26.1.2 (`Velocity Render v26.1.2`) | `[HIGH]` | `MC 26.1.2` | `📌 DEFERRED` |
+| `[BL-VR-014]` | `[FEATURE]` | Multi-Era Anchor Port: MC 26.1.2 (`Velocity Render v26.1`) | `[HIGH]` | `MC 26.1.2` | `✅ RESOLVED` |
 | `[BL-VR-015]` | `[FEATURE]` | Multi-Era Anchor Port: MC 1.21.11 (`Velocity Render v1.21.11`) | `[HIGH]` | `MC 1.21.11` | `📌 DEFERRED` |
 | `[BL-VR-016]` | `[FEATURE]` | Multi-Era Anchor Port: MC 1.21.1 (`Velocity Render v1.21.1`) | `[HIGH]` | `MC 1.21.1` | `📌 DEFERRED` |
 | `[BL-VR-017]` | `[FEATURE]` | Multi-Era Anchor Port: MC 1.20.1 (`Velocity Render v1.20.1`) | `[HIGH]` | `MC 1.20.1` | `📌 DEFERRED` |
@@ -78,19 +78,20 @@ Anchor MC 26.2 requires dedicated subproject scaffolding under the 1 Jar 1 Versi
 
 ---
 
-### [BL-VR-014] Multi-Era Anchor Port: MC 26.1.2 (`Velocity Render v26.1.2`)
+### [BL-VR-014] Multi-Era Anchor Port: MC 26.1.2 (`Velocity Render v26.1`)
 - **Category**: `[FEATURE]`
 - **Priority**: `[HIGH]`
 - **Target Version**: `MC 26.1.2`
-- **Status**: `📌 DEFERRED`
+- **Status**: `✅ RESOLVED`
 - **Date Added**: 2026-10-13
-- **Target Component(s)**: `Velocity Render v26.1.2/Velocity Render 26.1.2/`
+- **Date Resolved**: 2026-10-13 (v1.8.5+26.1.2)
+- **Target Component(s)**: `Velocity Render v26.1/Velocity Render 26.1/`
 
 #### ❓ Problem / Context
 Anchor MC 26.1.2 requires subproject scaffolding and chunk compilation hook adaptation: in MC 26.1, `SectionTaskDynamicQueue` is named `CompileTaskDynamicQueue`.
 
 #### 💡 Proposed Solution & Technical Specifications
-1. Scaffold `Velocity Render v26.1.2/Velocity Render 26.1.2/` subproject directory.
+1. Scaffold `Velocity Render v26.1/Velocity Render 26.1/` subproject directory.
 2. Adapt chunk dynamic queue Mixin from `SectionTaskDynamicQueue` to `CompileTaskDynamicQueue` targeting `poll()`.
 3. Configure `dasik-library` 26.1 bindings and DynamicGameRule registrations.
 4. Execute test suite on `./gradlew test`.
@@ -98,10 +99,10 @@ Anchor MC 26.1.2 requires subproject scaffolding and chunk compilation hook adap
 6. Initialize subproject `RELEASE_QUEUE.md` and `CHANGELOG.md`.
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] Headless test suite passes cleanly on `./gradlew test`.
-- [ ] Clean binary compilation (`./gradlew build`).
-- [ ] Mandatory 4-point distribution.
-- [ ] Queue registered in subproject `RELEASE_QUEUE.md` (`- [ ] **1.8.5+26.1.2**`).
+- [x] Headless test suite passes cleanly on `./gradlew test` (78/78 tests pass).
+- [x] Clean binary compilation (`./gradlew build`).
+- [x] Mandatory 4-point distribution (Local Archive, Hub Archive, External Vault `D:\`, Launcher Profile).
+- [x] Queue registered in subproject `RELEASE_QUEUE.md` (`- [ ] **1.8.5+26.1.2**`).
 
 ---
 

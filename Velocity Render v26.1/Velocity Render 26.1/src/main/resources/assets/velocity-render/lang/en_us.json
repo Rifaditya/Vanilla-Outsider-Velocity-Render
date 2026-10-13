@@ -1,0 +1,85 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Velocity-biased anisotropic chunk meshing and predictive forward chunk generation for fast travelers.",
+
+  "velocityrender.gamerule.enabled": "Velocity Render Master Toggle",
+  "velocityrender.gamerule.enabled.description": "Master switch to enable velocity-biased chunk meshing on client and predictive generation on server.",
+
+  "velocityrender.gamerule.lead_multiplier": "Forward Lead Multiplier",
+  "velocityrender.gamerule.lead_multiplier.description": "Scales how far ahead along travel vector chunk loading tickets are requested (0% to 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Adaptive Budget Conservation",
+  "velocityrender.gamerule.budget_conservation.description": "Dynamically trims lateral/rear non-simulation tickets during high speeds to protect server TPS.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Minimum Speed Threshold",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Minimum velocity in hundredths of a block/tick required before activating forward bias (e.g. 20 = 0.20 b/t).",
+
+  "velocityrender.gamerule.debug_mode": "Developer Debug Diagnostics",
+  "velocityrender.gamerule.debug_mode.description": "Logs real-time vector diagnostics, ticket counts, and MSPT adjustments to server console.",
+
+  "velocityrender.gamerule.turn_widening": "Banked Turn Widening",
+  "velocityrender.gamerule.turn_widening.description": "Dynamically widens chunk generation corridor during sharp turns to prevent outer-curve void pop-in.",
+
+  "velocityrender.gamerule.vertical_lookahead": "Vertical Lookahead",
+  "velocityrender.gamerule.vertical_lookahead.description": "Incorporate vertical pitch velocity into chunk meshing and altitude corridor updates during dives and climbs.",
+
+  "velocityrender.gamerule.server_ticket_budget": "Server Ticket Budget",
+  "velocityrender.gamerule.server_ticket_budget.description": "Maximum total active forward loading tickets allocated server-wide across all concurrent flyers.",
+
+  "velocityrender.gamerule.f3_debug": "F3 Screen Diagnostics",
+  "velocityrender.gamerule.f3_debug.description": "Display Velocity Render engine telemetry on Minecraft F3 debug screen.",
+
+  "velocityrender.gamerule.nether_reach_clamp_pct": "Nether Reach Clamp",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "Forward lookahead corridor reach percentage in the Nether (10% to 100%).",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "Dense Dimension Reach Clamp",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Forward lookahead corridor reach percentage in non-Overworld or dense modded dimensions (10% to 100%).",
+
+  "velocityrender.gamerule.lod_trajectory_hooks": "LOD Velocity Trajectory Hooks",
+  "velocityrender.gamerule.lod_trajectory_hooks.description": "Broadcasts forward velocity trajectory to Distant Horizons and Bobby to prioritize distant terrain loading.",
+
+  "velocityrender.command.status.header": "=== Velocity Render Status ===",
+  "velocityrender.command.status.speed": "Speed: %s b/t (%s m/s)",
+  "velocityrender.command.status.reach": "Dynamic Reach: %s chunks (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "Active Trajectory Tickets: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Configuration and GameRules reloaded successfully.",
+  "velocityrender.command.reset.success": "[Velocity Render] All settings restored to vanilla defaults.",
+
+  "config.velocityrender.title": "Velocity Render Settings",
+  "config.velocityrender.category.flight": "Flight Biasing & Meshing",
+  "config.velocityrender.category.server": "Server Quotas & WorldGen",
+  "config.velocityrender.category.telemetry": "Telemetry & Compatibility",
+
+  "config.velocityrender.enabled": "Master Switch",
+  "config.velocityrender.enabled.description": "Master switch to enable velocity-biased chunk meshing on the client and predictive generation on the server. Default: Enabled.",
+
+  "config.velocityrender.leadMultiplier": "Forward Lead Multiplier",
+  "config.velocityrender.leadMultiplier.description": "Scales how far ahead along your velocity vector chunk loading tickets and meshing reach. Default: 100%. Higher values look farther ahead at higher CPU cost.",
+
+  "config.velocityrender.minSpeedThresholdPct": "Minimum Speed Threshold",
+  "config.velocityrender.minSpeedThresholdPct.description": "Minimum velocity in hundredths of a block/tick required before activating forward bias (20 = 0.20 b/t or 4.0 m/s). Default: 20.",
+
+  "config.velocityrender.turnWidening": "Banked Turn Widening",
+  "config.velocityrender.turnWidening.description": "Dynamically widens the forward chunk generation corridor during sharp Elytra banked turns to eliminate void gaps. Default: Enabled.",
+
+  "config.velocityrender.verticalLookahead": "Vertical Lookahead",
+  "config.velocityrender.verticalLookahead.description": "Incorporate vertical pitch velocity into chunk meshing and altitude corridor updates during dives and climbs. Default: Enabled.",
+
+  "config.velocityrender.serverTicketBudget": "Server Ticket Budget",
+  "config.velocityrender.serverTicketBudget.description": "Maximum total active forward loading tickets allocated server-wide across all concurrent flyers. Default: 64 tickets.",
+
+  "config.velocityrender.netherReachClampPct": "Nether Reach Clamp",
+  "config.velocityrender.netherReachClampPct.description": "Forward lookahead corridor reach percentage in the Nether (10% to 100%) to prevent heavy 3D carver worldgen lag. Default: 60%.",
+
+  "config.velocityrender.defaultDenseReachClampPct": "Dense Dimension Clamp",
+  "config.velocityrender.defaultDenseReachClampPct.description": "Forward lookahead corridor reach percentage in non-Overworld or dense modded dimensions (10% to 100%). Default: 80%.",
+
+  "config.velocityrender.lodTrajectoryHooks": "LOD Trajectory Hooks",
+  "config.velocityrender.lodTrajectoryHooks.description": "Broadcasts forward velocity trajectory to Distant Horizons and Bobby to accelerate distant terrain generation. Default: Enabled.",
+
+  "config.velocityrender.f3Debug": "F3 Screen Diagnostics",
+  "config.velocityrender.f3Debug.description": "Display Velocity Render engine telemetry on the Minecraft F3 debug screen. Default: Enabled.",
+
+  "config.velocityrender.debugMode": "Developer Debug Diagnostics",
+  "config.velocityrender.debugMode.description": "Outputs detailed vector calculations and tick updates to the developer game log. Default: Disabled."
+}

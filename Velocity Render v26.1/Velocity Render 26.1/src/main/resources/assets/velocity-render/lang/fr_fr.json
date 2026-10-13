@@ -1,0 +1,85 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Maillage anisotrope des tronçons orienté par la vitesse et génération prédictive des tronçons pour les voyageurs rapides.",
+
+  "velocityrender.gamerule.enabled": "Interrupteur général Velocity Render",
+  "velocityrender.gamerule.enabled.description": "Interrupteur principal pour activer le maillage orienté par la vitesse côté client et la génération prédictive côté serveur.",
+
+  "velocityrender.gamerule.lead_multiplier": "Multiplicateur d'anticipation avant",
+  "velocityrender.gamerule.lead_multiplier.description": "Ajuste la distance d'anticipation des tickets de chargement de tronçons le long du vecteur de déplacement (0% à 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Conservation adaptative du budget",
+  "velocityrender.gamerule.budget_conservation.description": "Réduit dynamiquement les tickets latéraux et arrière à haute vitesse afin de préserver les TPS du serveur.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Seuil de vitesse minimale",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Vitesse minimale en centièmes de bloc/tick requise pour activer l'orientation avant (ex. 20 = 0.20 b/t).",
+
+  "velocityrender.gamerule.debug_mode": "Diagnostics de débogage",
+  "velocityrender.gamerule.debug_mode.description": "Enregistre les diagnostics de vecteurs, le nombre de tickets et les ajustements MSPT dans la console du serveur.",
+
+  "velocityrender.gamerule.turn_widening": "Élargissement en virage incliné",
+  "velocityrender.gamerule.turn_widening.description": "Élargit dynamiquement le couloir de génération lors des virages serrés pour éviter les vides sur la courbe extérieure.",
+
+  "velocityrender.gamerule.vertical_lookahead": "Anticipation Verticale",
+  "velocityrender.gamerule.vertical_lookahead.description": "Incorpore la vitesse de tangage vertical dans le maillage des tronçons et la mise à jour des couloirs lors des piqués et montées.",
+
+  "velocityrender.gamerule.server_ticket_budget": "Budget de Tickets du Serveur",
+  "velocityrender.gamerule.server_ticket_budget.description": "Total maximal de tickets de chargement prédictif alloués à l'échelle du serveur parmi tous les joueurs en vol simultané.",
+
+  "velocityrender.gamerule.f3_debug": "Diagnostics de l'Écran F3",
+  "velocityrender.gamerule.f3_debug.description": "Affiche la télémétrie du moteur Velocity Render sur l'écran de débogage F3 de Minecraft.",
+
+  "velocityrender.gamerule.nether_reach_clamp_pct": "Limite de Portée du Nether",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "Pourcentage de portée du couloir prédictif dans le Nether (10% à 100%).",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "Limite de Portée pour Dimensions Denses",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Pourcentage de portée du couloir prédictif dans les dimensions denses ou hors Overworld (10% à 100%).",
+
+  "velocityrender.gamerule.lod_trajectory_hooks": "Crochets de trajectoire LOD par vélocité",
+  "velocityrender.gamerule.lod_trajectory_hooks.description": "Transmet la trajectoire de vitesse avant à Distant Horizons et Bobby pour prioriser le chargement du terrain lointain.",
+
+  "velocityrender.command.status.header": "=== État de Velocity Render ===",
+  "velocityrender.command.status.speed": "Vitesse : %s b/t (%s m/s)",
+  "velocityrender.command.status.reach": "Portée dynamique : %s tronçons (MSPT : %sms)",
+  "velocityrender.command.status.tickets": "Tickets de trajectoire actifs : %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Configuration et règles de jeu rechargées avec succès.",
+  "velocityrender.command.reset.success": "[Velocity Render] Tous les paramètres ont été réinitialisés aux valeurs par défaut.",
+
+  "config.velocityrender.title": "Paramètres de Velocity Render",
+  "config.velocityrender.category.flight": "Orientation de Vol & Maillage",
+  "config.velocityrender.category.server": "Quotas Serveur & Génération",
+  "config.velocityrender.category.telemetry": "Télémétrie & Compatibilité",
+
+  "config.velocityrender.enabled": "Interrupteur Principal",
+  "config.velocityrender.enabled.description": "Interrupteur principal pour activer le maillage de tronçons orienté par la vitesse côté client et la génération prédictive côté serveur. Par défaut : Activé.",
+
+  "config.velocityrender.leadMultiplier": "Multiplicateur d'Anticipation Avant",
+  "config.velocityrender.leadMultiplier.description": "Ajuste la distance d'anticipation des tickets de chargement et du maillage le long du vecteur de vitesse. Par défaut : 100%. Des valeurs plus élevées voient plus loin au prix d'un coût processeur supérieur.",
+
+  "config.velocityrender.minSpeedThresholdPct": "Seuil de Vitesse Minimale",
+  "config.velocityrender.minSpeedThresholdPct.description": "Vitesse minimale en centièmes de bloc/tick requise pour activer l'orientation avant (20 = 0.20 b/t ou 4.0 m/s). Par défaut : 20.",
+
+  "config.velocityrender.turnWidening": "Élargissement en Virage Incliné",
+  "config.velocityrender.turnWidening.description": "Élargit dynamiquement le couloir de génération des tronçons lors des virages serrés en élytres pour éliminer les trous de vide. Par défaut : Activé.",
+
+  "config.velocityrender.verticalLookahead": "Anticipation Verticale",
+  "config.velocityrender.verticalLookahead.description": "Incorpore la vitesse de tangage vertical dans le maillage des tronçons et la mise à jour de l'altitude lors des piqués et des montées. Par défaut : Activé.",
+
+  "config.velocityrender.serverTicketBudget": "Budget de Tickets du Serveur",
+  "config.velocityrender.serverTicketBudget.description": "Nombre maximal total de tickets de chargement prédictif alloués à l'échelle du serveur pour tous les joueurs en vol. Par défaut : 64 tickets.",
+
+  "config.velocityrender.netherReachClampPct": "Limite de Portée du Nether",
+  "config.velocityrender.netherReachClampPct.description": "Pourcentage de portée du couloir prédictif dans le Nether (10% à 100%) afin d'éviter les ralentissements dus à la génération 3D complexe. Par défaut : 60%.",
+
+  "config.velocityrender.defaultDenseReachClampPct": "Limite en Dimensions Denses",
+  "config.velocityrender.defaultDenseReachClampPct.description": "Pourcentage de portée du couloir prédictif dans les dimensions denses ou personnalisées hors Overworld (10% à 100%). Par défaut : 80%.",
+
+  "config.velocityrender.lodTrajectoryHooks": "Crochets de Trajectoire LOD",
+  "config.velocityrender.lodTrajectoryHooks.description": "Transmet la trajectoire de vitesse en vol à Distant Horizons et Bobby pour accélérer la génération du terrain lointain. Par défaut : Activé.",
+
+  "config.velocityrender.f3Debug": "Diagnostics de l'Écran F3",
+  "config.velocityrender.f3Debug.description": "Affiche la télémétrie du moteur Velocity Render sur l'écran de débogage F3 de Minecraft. Par défaut : Activé.",
+
+  "config.velocityrender.debugMode": "Diagnostics de Débogage Développeur",
+  "config.velocityrender.debugMode.description": "Enregistre les calculs de vecteurs détaillés et les mises à jour de ticks dans le journal de jeu. Par défaut : Désactivé."
+}
