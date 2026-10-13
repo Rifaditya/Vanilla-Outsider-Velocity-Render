@@ -10,7 +10,7 @@
 
 | Target MC | Generational Era | Live on Platforms | Next Queued Version | Status & Cadence Action | Feature Highlights / Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **MC 26.3** | Modern Lead | Modrinth: `1.0.0+26.3`<br>CurseForge: *(Pending)* | `1.0.0+26.3` (CF Catch-up) | 🟡 **Pending CurseForge Parity** | Genesis build live on Modrinth. Awaiting CurseForge project approval for dual parity. |
+| **MC 26.3** | Modern Lead | Modrinth: *(Under Review)*<br>CurseForge: *(Under Review)* | * ⏸️ **26.3** (On-Hold) | ⏸️ **Dual-Platform Moderation Lock** | Initial release 1.0.0+26.3 submitted. Auto-publisher strictly locked until both Modrinth and CurseForge approvals are granted. |
 
 ---
 
