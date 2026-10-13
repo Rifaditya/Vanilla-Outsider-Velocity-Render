@@ -1,5 +1,15 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.0.0+1.21.1] - 2026-10-13
+- **Port**: Generational anchor port for Minecraft 1.21.1 under the 1 Jar 1 Version Policy (`Velocity Render v1.21.1`).
+- **Ticket**: `[BL-VR-016]` Multi-Era Anchor Port: MC 1.21.1
+- **Hook Adaptation**: Adapted chunk meshing prioritization via `SectionRenderDispatcher.RenderSection.getDistToPlayerSqr()` redirecting to `VelocityVectorHelper.calculateBiasedDistanceSqr`. Adapted `DebugScreenOverlayMixin` injecting telemetry lines into `renderLines`.
+- **API Shifts**: Adapted GameRules to 1.21.1 `GameRules.BooleanValue` / `IntegerValue`, Brigadier permission level `source.hasPermission(2)`, `ResourceLocationArgument`, and `level.getChunkSource().addRegionTicket(...)`.
+- **Test Results**: 15 test classes, 81 test cases passing cleanly on `./gradlew test`.
+- **Artifact**: `velocity-render-1.0.0+1.21.1.jar` deployed to 4-point archive locations.
+
+---
+
 ## [1.0.0+1.21.11] - 2026-10-13
 - **Port**: Generational anchor port for Minecraft 1.21.11 under the 1 Jar 1 Version Policy (`Velocity Render v1.21.11`).
 - **Ticket**: `[BL-VR-015]` Multi-Era Anchor Port: MC 1.21.11

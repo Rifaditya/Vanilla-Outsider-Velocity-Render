@@ -1,0 +1,153 @@
+// Copyright (C) 2026 Dasik (Rifaditya) | GNU GPLv3
+package net.vanillaoutsider.velocityrender.registry;
+
+import net.dasik.social.api.gamerule.DynamicGameRuleManager;
+import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public final class VelocityRenderGameRules {
+    private static final Logger LOGGER = LoggerFactory.getLogger(VelocityRenderGameRules.class);
+
+    public static final CustomGameRuleCategory CATEGORY = DynamicGameRuleManager.registerCategory(
+            ResourceLocation.fromNamespaceAndPath("velocity-render", "main"),
+            Component.literal("Velocity Render")
+    );
+
+    public static GameRules.Key<GameRules.BooleanValue> ENABLED;
+    public static GameRules.Key<GameRules.IntegerValue> LEAD_MULTIPLIER;
+    public static GameRules.Key<GameRules.BooleanValue> BUDGET_CONSERVATION;
+    public static GameRules.Key<GameRules.IntegerValue> MIN_SPEED_THRESHOLD_PCT;
+    public static GameRules.Key<GameRules.BooleanValue> TURN_WIDENING;
+    public static GameRules.Key<GameRules.BooleanValue> VERTICAL_LOOKAHEAD;
+    public static GameRules.Key<GameRules.IntegerValue> SERVER_TICKET_BUDGET;
+    public static GameRules.Key<GameRules.BooleanValue> DEBUG_MODE;
+    public static GameRules.Key<GameRules.BooleanValue> F3_DEBUG;
+    public static GameRules.Key<GameRules.IntegerValue> NETHER_REACH_CLAMP_PCT;
+    public static GameRules.Key<GameRules.IntegerValue> DEFAULT_DENSE_REACH_CLAMP_PCT;
+    public static GameRules.Key<GameRules.BooleanValue> LOD_TRAJECTORY_HOOKS;
+
+    private VelocityRenderGameRules() {
+    }
+
+    public static void register() {
+        LOGGER.info("[VelocityRender] Registering dynamic namespaced GameRules via DasikLibrary");
+
+        ENABLED = DynamicGameRuleManager.booleanRule("velocityrender:enabled", CATEGORY, true)
+                .name("Enabled")
+                .description("Toggle anisotropic forward chunk loading and meshing priority")
+                .register();
+
+        LEAD_MULTIPLIER = DynamicGameRuleManager.integerRule("velocityrender:lead_multiplier", CATEGORY, 100)
+                .min(0)
+                .name("Forward Lead Multiplier")
+                .description("Scaling percentage of forward lookahead reach (default: 100%)")
+                .register();
+
+        BUDGET_CONSERVATION = DynamicGameRuleManager.booleanRule("velocityrender:budget_conservation", CATEGORY, true)
+                .name("Budget Conservation")
+                .description("Trim rear and lateral non-simulation tickets at high speed")
+                .register();
+
+        MIN_SPEED_THRESHOLD_PCT = DynamicGameRuleManager.integerRule("velocityrender:min_speed_threshold_pct", CATEGORY, 20)
+                .min(0)
+                .name("Min Speed Threshold")
+                .description("Minimum speed percentage required to activate forward prioritization (default: 20 = 0.20 b/t, 0 = always active)")
+                .register();
+
+        TURN_WIDENING = DynamicGameRuleManager.booleanRule("velocityrender:turn_widening", CATEGORY, true)
+                .name("Banked Turn Widening")
+                .description("Dynamically widens chunk generation corridor during sharp turns to prevent outer-curve void pop-in")
+                .register();
+
+        VERTICAL_LOOKAHEAD = DynamicGameRuleManager.booleanRule("velocityrender:vertical_lookahead", CATEGORY, true)
+                .name("Vertical Lookahead")
+                .description("Incorporate vertical pitch velocity into chunk meshing and altitude corridor updates during dives and climbs")
+                .register();
+
+        SERVER_TICKET_BUDGET = DynamicGameRuleManager.integerRule("velocityrender:server_ticket_budget", CATEGORY, 64)
+                .min(1)
+                .name("Server Ticket Budget")
+                .description("Maximum total active forward loading tickets allocated server-wide across all concurrent flyers (default: 64)")
+                .register();
+
+        DEBUG_MODE = DynamicGameRuleManager.booleanRule("velocityrender:debug_mode", CATEGORY, false)
+                .name("Debug Diagnostics")
+                .description("Print real-time speed and trajectory diagnostics to logs")
+                .register();
+
+        F3_DEBUG = DynamicGameRuleManager.booleanRule("velocityrender:f3_debug", CATEGORY, true)
+                .name("F3 Screen Diagnostics")
+                .description("Display Velocity Render engine telemetry on Minecraft F3 debug screen")
+                .register();
+
+        NETHER_REACH_CLAMP_PCT = DynamicGameRuleManager.integerRule("velocityrender:nether_reach_clamp_pct", CATEGORY, 60)
+                .min(0)
+                .name("Nether Reach Clamp")
+                .description("Forward lookahead corridor reach percentage in the Nether (default: 60%, 0 = disabled)")
+                .register();
+
+        DEFAULT_DENSE_REACH_CLAMP_PCT = DynamicGameRuleManager.integerRule("velocityrender:default_dense_reach_clamp_pct", CATEGORY, 80)
+                .min(0)
+                .name("Dense Dimension Reach Clamp")
+                .description("Forward lookahead corridor reach percentage in non-Overworld or dense modded dimensions (default: 80%, 0 = disabled)")
+                .register();
+
+        LOD_TRAJECTORY_HOOKS = DynamicGameRuleManager.booleanRule("velocityrender:lod_trajectory_hooks", CATEGORY, true)
+                .name("LOD Trajectory Hooks")
+                .description("Broadcast forward velocity trajectory to Distant Horizons and Bobby to prioritize distant terrain loading")
+                .register();
+    }
+
+    public static boolean isEnabled(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, ENABLED);
+    }
+
+    public static int getLeadMultiplierPct(Level level) {
+        return DynamicGameRuleManager.getInt(level, LEAD_MULTIPLIER);
+    }
+
+    public static boolean isBudgetConservation(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, BUDGET_CONSERVATION);
+    }
+
+    public static double getMinSpeedThreshold(Level level) {
+        return DynamicGameRuleManager.getPct(level, MIN_SPEED_THRESHOLD_PCT);
+    }
+
+    public static boolean isTurnWideningEnabled(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, TURN_WIDENING);
+    }
+
+    public static boolean isVerticalLookaheadEnabled(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, VERTICAL_LOOKAHEAD);
+    }
+
+    public static int getServerTicketBudget(Level level) {
+        return DynamicGameRuleManager.getInt(level, SERVER_TICKET_BUDGET);
+    }
+
+    public static boolean isDebugMode(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, DEBUG_MODE);
+    }
+
+    public static boolean isF3DebugEnabled(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, F3_DEBUG);
+    }
+
+    public static int getNetherReachClampPct(Level level) {
+        return DynamicGameRuleManager.getInt(level, NETHER_REACH_CLAMP_PCT);
+    }
+
+    public static int getDefaultDenseReachClampPct(Level level) {
+        return DynamicGameRuleManager.getInt(level, DEFAULT_DENSE_REACH_CLAMP_PCT);
+    }
+
+    public static boolean isLodTrajectoryHooksEnabled(Level level) {
+        return DynamicGameRuleManager.getBoolean(level, LOD_TRAJECTORY_HOOKS);
+    }
+}
