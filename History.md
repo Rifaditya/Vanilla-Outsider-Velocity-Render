@@ -1,6 +1,7 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
 ## [1.8.5+26.3] - 2026-10-13
+- **Governance**: Executed repository Clean Sweep on `BACKLOG.md` per Studio Constitution. Historical specifications for `[BL-VR-001]` through `[BL-VR-012]` preserved in this ledger. Established monotonic ID ceiling (`BL-VR-012`). Multi-era anchor porting (`[BL-VR-010]`) tracked on `MASTER_ANCHOR_BOARD.md`.
 - **Ticket**: `[BL-VR-012]` Adopt 5-Pillar Testing & Sidedness Verification Harness
 - **Fixes**: Resolved MC 26.3 API shift in `YaclScreenHelper.java` (`ConfirmLinkScreen.confirmLinkNow` with URI), parameterized `dasik-library` dependency via `${project.dasik_library_version}` (1.9.2), and authored `VelocityRenderSidednessContractTest.java` (Pillar 5).
 - **Test Results**: 15 test classes, 78 test cases passing cleanly on `./gradlew test`.
