@@ -1,0 +1,85 @@
+{
+  "modmenu.nameTranslation.velocity-render": "Velocity Render",
+  "modmenu.descriptionTranslation.velocity-render": "Mallado de chunks anisotrópico según la velocidad y generación predictiva de chunks para viajeros rápidos.",
+
+  "velocityrender.gamerule.enabled": "Interruptor maestro de Velocity Render",
+  "velocityrender.gamerule.enabled.description": "Interruptor maestro para activar el mallado orientado por velocidad en cliente y la generación predictiva en servidor.",
+
+  "velocityrender.gamerule.lead_multiplier": "Multiplicador de alcance frontal",
+  "velocityrender.gamerule.lead_multiplier.description": "Escala qué tan adelante en el vector de movimiento se solicitan tickets de carga de chunks (0% a 300%).",
+
+  "velocityrender.gamerule.budget_conservation": "Conservación adaptativa de presupuesto",
+  "velocityrender.gamerule.budget_conservation.description": "Recorta dinámicamente tickets laterales y traseros a alta velocidad para proteger el TPS del servidor.",
+
+  "velocityrender.gamerule.min_speed_threshold_pct": "Umbral de velocidad mínima",
+  "velocityrender.gamerule.min_speed_threshold_pct.description": "Velocidad mínima en centésimas de bloque/tick requerida para activar la orientación frontal (ej. 20 = 0.20 b/t).",
+
+  "velocityrender.gamerule.debug_mode": "Diagnósticos de depuración",
+  "velocityrender.gamerule.debug_mode.description": "Registra diagnósticos de vectores, recuento de tickets y ajustes de MSPT en la consola del servidor.",
+
+  "velocityrender.gamerule.turn_widening": "Ensanchamiento en curvas inclinadas",
+  "velocityrender.gamerule.turn_widening.description": "Ensancha dinámicamente el corredor de generación durante giros bruscos para evitar vacíos en la curva exterior.",
+
+  "velocityrender.gamerule.vertical_lookahead": "Anticipación Vertical",
+  "velocityrender.gamerule.vertical_lookahead.description": "Incorpora la velocidad de cabeceo vertical en el mallado de chunks y actualizaciones de altitud durante picados y ascensos.",
+
+  "velocityrender.gamerule.server_ticket_budget": "Presupuesto de Tickets del Servidor",
+  "velocityrender.gamerule.server_ticket_budget.description": "Máximo total de tickets de carga predictiva asignados a nivel de servidor entre todos los voladores simultáneos.",
+
+  "velocityrender.gamerule.f3_debug": "Diagnósticos de Pantalla F3",
+  "velocityrender.gamerule.f3_debug.description": "Muestra la telemetría del motor Velocity Render en la pantalla de depuración F3 de Minecraft.",
+
+  "velocityrender.gamerule.nether_reach_clamp_pct": "Límite de Alcance del Nether",
+  "velocityrender.gamerule.nether_reach_clamp_pct.description": "Porcentaje de alcance del corredor predictivo en el Nether (10% a 100%).",
+
+  "velocityrender.gamerule.default_dense_reach_clamp_pct": "Límite de Alcance para Dimensiones Densas",
+  "velocityrender.gamerule.default_dense_reach_clamp_pct.description": "Porcentaje de alcance del corredor predictivo en dimensiones densas o distintas al Overworld (10% a 100%).",
+
+  "velocityrender.gamerule.lod_trajectory_hooks": "Ganchos de trayectoria LOD por velocidad",
+  "velocityrender.gamerule.lod_trajectory_hooks.description": "Transmite la trayectoria de velocidad frontal a Distant Horizons y Bobby para priorizar la carga de terreno distante.",
+
+  "velocityrender.command.status.header": "=== Estado de Velocity Render ===",
+  "velocityrender.command.status.speed": "Velocidad: %s b/t (%s m/s)",
+  "velocityrender.command.status.reach": "Alcance dinámico: %s chunks (MSPT: %sms)",
+  "velocityrender.command.status.tickets": "Tickets de trayectoria activos: %s",
+  "velocityrender.command.reload.success": "[Velocity Render] Configuración y reglas del juego recargadas con éxito.",
+  "velocityrender.command.reset.success": "[Velocity Render] Todos los ajustes se han restaurado a los valores predeterminados de Vanilla.",
+
+  "config.velocityrender.title": "Ajustes de Velocity Render",
+  "config.velocityrender.category.flight": "Sesgo de Vuelo y Mallado",
+  "config.velocityrender.category.server": "Cuotas de Servidor y Generación",
+  "config.velocityrender.category.telemetry": "Telemetría y Compatibilidad",
+
+  "config.velocityrender.enabled": "Interruptor Principal",
+  "config.velocityrender.enabled.description": "Interruptor principal para activar el mallado de chunks por velocidad en cliente y generación predictiva en servidor. Por defecto: Activado.",
+
+  "config.velocityrender.leadMultiplier": "Multiplicador de Anticipación",
+  "config.velocityrender.leadMultiplier.description": "Escala qué tan adelante en el vector de velocidad se solicitan los tickets y el mallado. Por defecto: 100%. Valores más altos ven más lejos con mayor costo de CPU.",
+
+  "config.velocityrender.minSpeedThresholdPct": "Umbral de Velocidad Mínima",
+  "config.velocityrender.minSpeedThresholdPct.description": "Velocidad mínima en centésimas de bloque/tick requerida para activar la anticipación (20 = 0.20 b/t o 4.0 m/s). Por defecto: 20.",
+
+  "config.velocityrender.turnWidening": "Ampliación en Curvas",
+  "config.velocityrender.turnWidening.description": "Ensancha dinámicamente el corredor durante giros cerrados con élitros para eliminar vacíos visibles. Por defecto: Activado.",
+
+  "config.velocityrender.verticalLookahead": "Anticipación Vertical",
+  "config.velocityrender.verticalLookahead.description": "Incorpora la velocidad de cabeceo vertical al mallado durante picados pronunciados o ascensos con cohetes. Por defecto: Activado.",
+
+  "config.velocityrender.serverTicketBudget": "Presupuesto de Tickets del Servidor",
+  "config.velocityrender.serverTicketBudget.description": "Máximo de tickets de carga simultáneos asignados en todo el servidor entre todos los jugadores volando. Por defecto: 64 tickets.",
+
+  "config.velocityrender.netherReachClampPct": "Límite de Alcance en el Nether",
+  "config.velocityrender.netherReachClampPct.description": "Porcentaje de alcance en el Nether (10% a 100%) para evitar lag por generación 3D compleja. Por defecto: 60%.",
+
+  "config.velocityrender.defaultDenseReachClampPct": "Límite en Dimensiones Densas",
+  "config.velocityrender.defaultDenseReachClampPct.description": "Porcentaje de alcance en dimensiones densas o de mods que no sean el Overworld (10% a 100%). Por defecto: 80%.",
+
+  "config.velocityrender.lodTrajectoryHooks": "Ganchos de Trayectoria LOD",
+  "config.velocityrender.lodTrajectoryHooks.description": "Transmite la trayectoria de vuelo a Distant Horizons y Bobby para acelerar la generación de chunks lejanos. Por defecto: Activado.",
+
+  "config.velocityrender.f3Debug": "Diagnósticos en Pantalla F3",
+  "config.velocityrender.f3Debug.description": "Muestra tickets activos, reducción de carga del watchdog y ángulo del cono en la pantalla F3. Por defecto: Activado.",
+
+  "config.velocityrender.debugMode": "Diagnóstico para Desarrolladores",
+  "config.velocityrender.debugMode.description": "Escribe cálculos detallados de vectores y actualizaciones de ticks en el registro del juego. Por defecto: Desactivado."
+}

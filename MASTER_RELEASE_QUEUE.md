@@ -15,6 +15,7 @@
 | **MC 26.1.2** | Modern Sovereign | None | `1.8.5+26.1.2` | ⏸️ **Pending Release** | Modern sovereign anchor port; CompileTaskDynamicQueue hook adaptation, 5-pillar test harness. |
 | **MC 1.21.11** | Generational Anchor | None | `1.0.0+1.21.11` | ⏸️ **Pending Release** | Generational anchor port; CompileTaskDynamicQueue hook adaptation, 5-pillar test harness. |
 | **MC 1.21.1** | Generational Anchor | None | `1.0.0+1.21.1` | ⏸️ **Pending Release** | Generational anchor port; SectionRenderDispatcher distance bias hook adaptation, 5-pillar test harness. |
+| **MC 1.20.1** | Legacy Anchor | None | `1.0.0+1.20.1` | ⏸️ **Pending Release** | Legacy anchor port; ChunkRenderDispatcher distance bias hook adaptation, Java 17, 5-pillar test harness. |
 
 ---
 

@@ -10,12 +10,12 @@ This file tracks planned features, technical refinements, performance optimizati
 
 | ID | Category | Title | Priority | Target Version | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `[BL-VR-010]` | `[FEATURE]` | Multi-Era Anchor Porting: Velocity Render (Master Parity Initiative) | `[HIGH]` | `All Anchors` | `📌 DEFERRED` |
+| `[BL-VR-010]` | `[FEATURE]` | Multi-Era Anchor Porting: Velocity Render (Master Parity Initiative) | `[HIGH]` | `All Anchors` | `✅ RESOLVED` |
 | `[BL-VR-013]` | `[FEATURE]` | Multi-Era Anchor Port: MC 26.2 (`Velocity Render v26.2`) | `[HIGH]` | `MC 26.2` | `✅ RESOLVED` |
 | `[BL-VR-014]` | `[FEATURE]` | Multi-Era Anchor Port: MC 26.1.2 (`Velocity Render v26.1`) | `[HIGH]` | `MC 26.1.2` | `✅ RESOLVED` |
 | `[BL-VR-015]` | `[FEATURE]` | Multi-Era Anchor Port: MC 1.21.11 (`Velocity Render v1.21.11`) | `[HIGH]` | `MC 1.21.11` | `✅ RESOLVED` |
 | `[BL-VR-016]` | `[FEATURE]` | Multi-Era Anchor Port: MC 1.21.1 (`Velocity Render v1.21.1`) | `[HIGH]` | `MC 1.21.1` | `✅ RESOLVED` |
-| `[BL-VR-017]` | `[FEATURE]` | Multi-Era Anchor Port: MC 1.20.1 (`Velocity Render v1.20.1`) | `[HIGH]` | `MC 1.20.1` | `📌 DEFERRED` |
+| `[BL-VR-017]` | `[FEATURE]` | Multi-Era Anchor Port: MC 1.20.1 (`Velocity Render v1.20.1`) | `[HIGH]` | `MC 1.20.1` | `✅ RESOLVED` |
 
 ---
 
@@ -32,8 +32,9 @@ This file tracks planned features, technical refinements, performance optimizati
 - **Category**: `[FEATURE]`
 - **Priority**: `[HIGH]`
 - **Target Version**: `All Anchors`
-- **Status**: `📌 DEFERRED`
+- **Status**: `✅ RESOLVED`
 - **Date Added**: 2026-10-01
+- **Date Resolved**: 2026-10-13
 - **Target Component(s)**: Multi-subproject directories, `build.gradle`, `fabric.mod.json`, `RELEASE_QUEUE.md`
 
 #### ❓ Problem / Context
@@ -44,9 +45,9 @@ Per the **Whole-Backlog Pipelining & Ticket Splitting Audit Law**, this master i
 - **Phase 2 (Older Anchors)**: `[BL-VR-015]` (MC 1.21.11), `[BL-VR-016]` (MC 1.21.1), and `[BL-VR-017]` (MC 1.20.1).
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] All 5 companion port tickets (`[BL-VR-013]` through `[BL-VR-017]`) successfully compiled, tested, and deployed to 4-point archives.
-- [ ] Subproject queues and changelogs registered.
-- [ ] `MASTER_ANCHOR_BOARD.md` synchronized to 6/6 anchors (100% parity).
+- [x] All 5 companion port tickets (`[BL-VR-013]` through `[BL-VR-017]`) successfully compiled, tested, and deployed to 4-point archives.
+- [x] Subproject queues and changelogs registered.
+- [x] `MASTER_ANCHOR_BOARD.md` synchronized to 6/6 anchors (100% parity).
 
 ---
 
@@ -166,8 +167,9 @@ Anchor MC 1.21.1 requires Java 21, Loom 1.10+, Mojang mappings, `Identifier.of`,
 - **Category**: `[FEATURE]`
 - **Priority**: `[HIGH]`
 - **Target Version**: `MC 1.20.1`
-- **Status**: `📌 DEFERRED`
+- **Status**: `✅ RESOLVED`
 - **Date Added**: 2026-10-13
+- **Date Resolved**: 2026-10-13 (v1.0.0+1.20.1)
 - **Target Component(s)**: `Velocity Render v1.20.1/Velocity Render 1.20.1/`
 
 #### ❓ Problem / Context
@@ -183,7 +185,7 @@ Anchor MC 1.20.1 requires Java 17, `compatibilityLevel = "JAVA_17"` in mixins, L
 7. Initialize subproject `RELEASE_QUEUE.md` and `CHANGELOG.md`.
 
 #### 🧪 Verification & Acceptance Criteria
-- [ ] Headless test suite passes cleanly on `./gradlew test`.
-- [ ] Clean binary compilation (`./gradlew build`).
-- [ ] Mandatory 4-point distribution.
-- [ ] Queue registered in subproject `RELEASE_QUEUE.md`.
+- [x] Headless test suite passes cleanly on `./gradlew test` (79/79 tests pass).
+- [x] Clean binary compilation (`./gradlew build`).
+- [x] Mandatory 4-point distribution.
+- [x] Queue registered in subproject `RELEASE_QUEUE.md` (`- [ ] **1.0.0+1.20.1**`).
