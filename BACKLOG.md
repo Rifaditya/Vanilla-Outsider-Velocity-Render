@@ -1,6 +1,7 @@
 # 📌 Velocity Render Backlog
 
-<!-- Highest Historical ID: BL-VR-017 (Next Ticket Must Start at BL-VR-018) -->
+<!-- Highest Historical ID: BL-VR-018 (Next Ticket Must Start at BL-VR-019) -->
+> **Next Available Ticket ID**: `[BL-VR-019]`
 
 This file tracks planned features, technical refinements, performance optimizations, and deferred improvements for **Velocity Render**.
 
@@ -8,9 +9,9 @@ This file tracks planned features, technical refinements, performance optimizati
 
 ## 📊 Backlog Summary
 
-| ID | Category | Title | Priority | Target Version | Status |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| *No active backlog items* | — | — | — | — | — |
+| ID | Category | Title | Priority | Target Version | Status | Specification |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| [`BL-VR-018`](tickets/BL-VR-018.md) | `[TECH_DEBT]` | Migrate Command Suite to Universal Brigadier Command Framework | `[MEDIUM]` | All Anchors | `📌 DEFERRED` | [View Ticket](tickets/BL-VR-018.md) |
 
 ---
 
