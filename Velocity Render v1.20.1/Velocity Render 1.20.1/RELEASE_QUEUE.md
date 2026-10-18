@@ -1,3 +1,3 @@
 # Release Queue: Velocity Render
 
-- [x] **1.0.0+1.20.1** — Legacy anchor MC 1.20.1 release.
+- [ ] **1.0.0+1.20.1** — Legacy anchor MC 1.20.1 release.
