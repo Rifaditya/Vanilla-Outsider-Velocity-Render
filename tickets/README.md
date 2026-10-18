@@ -14,3 +14,4 @@ This directory contains dedicated atomic ticket files for **Velocity Render** un
 
 > [!NOTE]
 > Worker subagents should be directed to individual ticket files to minimize prompt token overhead.
+| `[BL-VR-019]` | `[TECH_DEBT]` | Migrate Client Configuration GUI to UniversalConfigScreen | `📌 DEFERRED` | [BL-VR-019.md](BL-VR-019.md) |

@@ -22,7 +22,7 @@ public abstract class DebugScreenOverlayMixin {
     private Minecraft minecraft;
 
     @Inject(method = "extractLines", at = @At("HEAD"))
-    private void velocityrender$injectRightDebugMetricLine(GuiGraphicsExtractor graphics, List<String> lines, boolean alignLeft, int scaledScreenWidth, CallbackInfo ci) {
+    private void velocityrender$injectRightDebugMetricLine(GuiGraphicsExtractor graphics, List<String> lines, boolean alignLeft, CallbackInfo ci) {
         if (!alignLeft) {
             if (!ClientVelocityTracker.isF3DebugEnabled()) {
                 return;
