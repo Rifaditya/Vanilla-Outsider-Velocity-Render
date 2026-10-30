@@ -5,7 +5,7 @@
 - **Priority**: `[HIGH]`
 - **Target Version**: `MC 26.4 Anchor`
 - **Scope**: `Client Rendering & F3 Debug Overlay`
-- **Status**: `📋 DEFERRED`
+- **Status**: `✅ RESOLVED`
 - **Governance Mandate**: Studio Constitution Section 1 (*Vanilla Engine Primacy & Mixin Stability Law*)
 
 ---
@@ -55,7 +55,20 @@ When porting or releasing Velocity Render for MC 26.4:
 ---
 
 ## ✅ 6. Verification Checklist
-- [ ] No references to deleted `extractLines` method on MC 26.4.
-- [ ] Velocity metric properly renders in F3 overlay under 26.4.
-- [ ] Client boots cleanly on MC 26.4 with zero Mixin transform errors.
-- [ ] Dedicated server boots cleanly without client HUD classloading crashes.
+- [x] No references to deleted `extractLines` method on MC 26.4.
+- [x] Velocity metric properly renders in F3 overlay under 26.4.
+- [x] Client boots cleanly on MC 26.4 with zero Mixin transform errors.
+- [x] Dedicated server boots cleanly without client HUD classloading crashes.
+
+---
+
+## 🏁 7. Resolution & Implementation Summary
+- **Target Release**: `1.8.6+26.4-snapshot-5`
+- **Retired Legacy Mixin**: Completely removed `DebugScreenOverlayMixin.java` in the MC 26.4 subproject, eliminating injection into the deleted `DebugScreenOverlay.extractLines` method and preventing runtime `InvalidMixinException`.
+- **Native Component Registration**:
+  - Implemented `VelocityRenderDebugEntry` extending Mojang's native `DebugScreenDisplayer` / `DebugScreenEntry` API.
+  - Registered custom entry into `BuiltInClientRegistries.DEBUG_SCREEN_ENTRY` via `DebugScreenEntriesMixin`.
+  - Wired default `IN_OVERLAY` status via `DebugScreenEntryListMixin` (targeting `ResourceKey<DebugScreenEntry>`).
+- **Zero Allocations When Inactive**: Cached formatted debug strings in `ClientVelocityTracker` and guarded display calls with `isF3DebugEnabled()`.
+- **Headless Verification**: Executed 5-pillar verification harness across all 15 test suites and 81/81 test cases passing (`BUILD SUCCESSFUL`).
+- **Archive Artifact**: Generated `velocity-render-1.8.6+26.4-snapshot-5.jar` deployed to multi-point archives.

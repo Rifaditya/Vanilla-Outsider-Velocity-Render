@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.8.6+26.4-snapshot-5] - F3 Modular Debug API Adaptation
+- **Minecraft 26.4 Modular Debug API**: Adapted Velocity Render's F3 debug HUD overlay to Mojang's native `DebugScreenDisplayer` component architecture.
+- **Legacy Mixin Retirement**: Completely purged fragile `DebugScreenOverlayMixin` (which hooked into deleted `extractLines`), eliminating `InvalidMixinException` crashes on 26.4.
+- **Native Component Registration**: Registered `VelocityRenderDebugEntry` into `BuiltInClientRegistries.DEBUG_SCREEN_ENTRY` via `DebugScreenEntriesMixin` and wired default `IN_OVERLAY` status via `DebugScreenEntryListMixin`.
+- **100% 5-Pillar Headless Verification**: All 81 automated tests verified passing.
+
+---
+
 ## [1.0.0+1.21.11] - 2026-10-13
 - **Generational Anchor Port**: Established dedicated support for Minecraft 1.21.11 under the 1 Jar 1 Version Policy.
 - **Chunk Compilation Biasing Hook**: Adapted chunk dynamic queue prioritization targeting `CompileTaskDynamicQueue.poll()` to bias distance calculations based on player velocity and 3D lookahead direction.

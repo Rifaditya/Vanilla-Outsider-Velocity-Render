@@ -13,7 +13,7 @@ This file tracks planned features, technical refinements, performance optimizati
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | [`BL-VR-018`](tickets/BL-VR-018.md) | `[TECH_DEBT]` | Migrate Command Suite to Universal Brigadier Command Framework | `[MEDIUM]` | All Anchors | `📌 DEFERRED` | [View Ticket](tickets/BL-VR-018.md) |
 | [`BL-VR-019`](tickets/BL-VR-019.md) | `[TECH_DEBT]` | Migrate Client Configuration GUI to UniversalConfigScreen | `[MEDIUM]` | All Anchors | `📌 DEFERRED` | [View Ticket](tickets/BL-VR-019.md) |
-| [`BL-VR-020`](tickets/BL-VR-020.md) | `[TECH_DEBT]` | Adapt F3 Debug Screen Overlay to Minecraft 26.4 Modular Debug API | `[HIGH]` | MC 26.4 Anchor | `📌 DEFERRED` | [View Ticket](tickets/BL-VR-020.md) |
+| [`BL-VR-020`](tickets/BL-VR-020.md) | `[TECH_DEBT]` | Adapt F3 Debug Screen Overlay to Minecraft 26.4 Modular Debug API | `[HIGH]` | MC 26.4 Anchor | `✅ RESOLVED` | [View Ticket](tickets/BL-VR-020.md) |
 | [`BL-VR-021`](tickets/BL-VR-021.md) | `[GOVERNANCE]` | Storefront Reconciliation: Align Mod Pages with Current Public Release | `[HIGH]` | `Platform Pages` | `📌 DEFERRED` | [View Ticket](tickets/BL-VR-021.md) |
 
 ---

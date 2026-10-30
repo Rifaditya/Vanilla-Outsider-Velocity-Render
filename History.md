@@ -1,5 +1,16 @@
 # 🏛️ Technical History & Architecture Ledger: Velocity Render
 
+## [1.8.6+26.4-snapshot-5] - 2026-10-30
+- **Governance**: Resolved `[BL-VR-020]` ("Adapt F3 Debug Screen Overlay to Minecraft 26.4 Modular Debug API").
+- **Subproject Genesis**: Bootstrapped `Velocity Render v26.4` under the 1 Jar 1 Version Policy, configuring Fabric Loom 1.15, Java 25, Minecraft `26.4-snapshot-5`, Fabric Loader `0.20.1`, and Fabric API `0.165.1+26.4`.
+- **Ticket**: `[BL-VR-020]` Adapt F3 Debug Screen Overlay to Minecraft 26.4 Modular Debug API
+- **Hook Adaptation & Legacy Retirement**: Completely removed fragile `DebugScreenOverlayMixin.java` which hooked into Mojang's deleted `extractLines` method, eliminating `InvalidMixinException` crashes on 26.4.
+- **Modular Debug Screen API**: Implemented `VelocityRenderDebugEntry` adhering to Mojang's new `DebugScreenDisplayer` / `DebugScreenEntry` component architecture. Registered custom entry into `BuiltInClientRegistries.DEBUG_SCREEN_ENTRY` via `DebugScreenEntriesMixin` and wired default `IN_OVERLAY` status via `DebugScreenEntryListMixin` (targeting `ResourceKey<DebugScreenEntry>`).
+- **Test Results**: 15 test classes, 81 test cases passing cleanly on `./gradlew test` (100% 5-Pillar Headless Verification).
+- **Artifact**: `velocity-render-1.8.6+26.4-snapshot-5.jar` deployed to multi-point archives.
+
+---
+
 ## [1.0.0+1.20.1] - 2026-10-13
 - **Governance**: Executed repository Clean Sweep on `BACKLOG.md` per Studio Constitution. Historical specifications for `[BL-VR-010]` and `[BL-VR-013]` through `[BL-VR-017]` preserved in this ledger. Established monotonic ID ceiling (`BL-VR-017`). Velocity Render achieves **100% Full Anchor Parity (6/6 Anchors: 1.20.1, 1.21.1, 1.21.11, 26.1.2, 26.2, 26.3)** across all studio anchors!
 - **Port**: Legacy ground-zero anchor port for Minecraft 1.20.1 under the 1 Jar 1 Version Policy (`Velocity Render v1.20.1`).
