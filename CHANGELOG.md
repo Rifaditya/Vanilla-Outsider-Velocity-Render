@@ -102,7 +102,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## [1.6.4+26.3] - Brigadier LOD Command Controls & Live Diagnostic Telemetry
 - **Dynamic Command Suite Integration**: Added `/vr get lod_hooks` and `/vr set lod_hooks <true|false>` (with short alias `/vr get lod` and `/vr set lod`) to query and toggle distant LOD trajectory hooks in real time.
 - **Unified Settings Reset**: Updated `/vr reset` to automatically restore LOD trajectory hooks to enabled alongside all standard engine parameters.
-- **Enhanced Engine Telemetry (`/vr status`)**: Added a comprehensive multi-line Level of Detail (LOD) diagnostic section displaying hook activation state, detected rendering adapters (Distant Horizons, Bobby, or Vanilla Meshing), and real-time trajectory broadcast status with lookahead lead distance.
+- **Enhanced Engine Telemetry** (`/vr status`): Added a comprehensive multi-line Level of Detail (LOD) diagnostic section displaying hook activation state, detected rendering adapters (Distant Horizons, Bobby, or Vanilla Meshing), and real-time trajectory broadcast status with lookahead lead distance.
 
 ---
 
@@ -206,7 +206,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## [1.4.0+26.3] - Diagnostic Formatter Math & State Engine
 - **Diagnostic Formatter Utility**: Introduced pure stateless formatting engine `DebugMetricsFormatter` to assemble standardized F3 diagnostic telemetry strings.
 - **Dual-Context Formats**: Supports `formatIntegrated` for singleplayer/integrated server (`[VelocityRender] Active Tickets: %d | Shed: %.1f%% | Cone: %d° | Pool: %d/%d`) and `formatClientOnly` for multiplayer dedicated servers (`[VelocityRender] Bias: %s | Lead: %.1fm | Cone: %d°`).
-- **Precision & Clamping Protection**: Uses 1-decimal float precision for watchdog shedding, clamping tickets, cone angle ($[0, 180^\circ]$), budget ($\ge 1$), and lead offset ($[0.0, 512.0\text{m}]$).
+- **Precision & Clamping Protection**: Uses 1-decimal float precision for watchdog shedding, clamping tickets, cone angle ([0, 180°]), budget (≥ 1), and lead offset ([0.0, 512.0m]).
 - **Zero-Dependency High-Speed Assembly**: Built with lightweight `StringBuilder(64)` assembly for deterministic zero-garbage execution.
 - **Automated Regression Test Suite**: Added `DebugMetricsFormatterTest` validating standard rendering, decimal shed formatting, boundary clamping, and negative input recovery.
 
@@ -244,7 +244,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ---
 
 ## [1.2.3+26.3] - Telemetry Diagnostics & Command Suite
-- **3D Trajectory Telemetry**: Added real-time pitch angle readout, vertical delta speed ($v_y$ b/t), and color-coded flight state indicators (`[DIVE]`, `[CLIMB]`, `[LEVEL]`) to `/velocityrender status` (`/vr status`).
+- **3D Trajectory Telemetry**: Added real-time pitch angle readout, vertical delta speed (v_y b/t), and color-coded flight state indicators (`[DIVE]`, `[CLIMB]`, `[LEVEL]`) to `/velocityrender status` (`/vr status`).
 - **Brigadier Command Controls**: Added `vertical_lookahead` and `vertical` command parameters to `/vr get` and `/vr set` with full tab completions.
 - **Reset Hygiene**: Included `velocityrender:vertical_lookahead` in `/vr reset` defaults.
 - **45-Degree Angled Dive Verification**: Expanded `VelocityVectorHelperTest` with diagonal 3D trajectory prioritization tests.
@@ -253,7 +253,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ---
 
 ## [1.2.2+26.3] - Server Altitude Trigger & Vertical Gating
-- **Vertical Altitude Recalculation Trigger**: Enabled rapid corridor recalculation when altitude changes by 8+ blocks ($|\Delta Y| \ge 8.0$), preventing chunk pop-in during steep Elytra dives from build height.
+- **Vertical Altitude Recalculation Trigger**: Enabled rapid corridor recalculation when altitude changes by 8+ blocks (|ΔY| ≥ 8.0), preventing chunk pop-in during steep Elytra dives from build height.
 - **Dynamic GameRule Gating**: Bound vertical recalculation directly to `velocityrender:vertical_lookahead`.
 - **Pitch & Vertical Delta Telemetry Accessors**: Added `getPlayerVerticalDelta` and `getPlayerPitch` query methods to `VelocityTicketManager`.
 
@@ -266,7 +266,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ---
 
 ## [1.2.0+26.3] - Symmetrical 3D Pitch-Aware Lookahead
-- **3D Vertical Section Bias**: Incorporated vertical pitch velocity ($v_y$) into sub-chunk compile priority sorting, ensuring steep Elytra nose-dives prioritize bedrock terrain sections and rocket ascents prioritize sky sections.
+- **3D Vertical Section Bias**: Incorporated vertical pitch velocity (v_y) into sub-chunk compile priority sorting, ensuring steep Elytra nose-dives prioritize bedrock terrain sections and rocket ascents prioritize sky sections.
 - **Symmetrical 3D Vector Math**: Balanced lookahead biasing uniformly across positive and negative pitch vectors with zero heap allocation.
 - **Automated 3D Regression Suite**: Added comprehensive vertical dive, rocket ascent, and horizontal symmetry assertions to `VelocityVectorHelperTest`.
 
@@ -298,7 +298,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [1.1.0+26.3] - The Banked Turn-Arc Engine Update
 
-- **Turn-Arc Math Engine**: Implemented standalone `TurnRateCalculator` with Exponential Moving Average (EMA, $\alpha = 0.60$) angular yaw rate tracking.
+- **Turn-Arc Math Engine**: Implemented standalone `TurnRateCalculator` with Exponential Moving Average (EMA, = 0.60) angular yaw rate tracking.
 - **Directional Arc Fan-Out**: Added 2-tier lateral step scaling algorithms for moderate and sharp turn detection.
 - **Headless Unit Verification**: Added comprehensive test suite covering wrap-around boundary crossings, direction signs, and threshold gates.
 
