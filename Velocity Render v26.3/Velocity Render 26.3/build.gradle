@@ -105,6 +105,30 @@ afterEvaluate {
                         }
                     }
                     
+                    println "[AUTO-ARCHIVE] Successfully copied ${jarFile.name} to central Archive directory: ${archiveDir.canonicalPath}"
+                    
+                    // 2. Modrinth Profile Sync
+                    def profilePaths = [
+                        "C:/Users/fmrif/AppData/Roaming/ModrinthApp/profiles/Fabric 26.3ish/mods",
+                        "C:/Users/fmrif/AppData/Roaming/ModrinthApp/profiles/26.3/mods"
+                    ]
+                    profilePaths.each { p ->
+                        def modrinthProfileMods = file(p)
+                        if (modrinthProfileMods.exists()) {
+                            modrinthProfileMods.listFiles().each { f ->
+                                if (f.name.startsWith(project.archives_base_name) && f.name.endsWith(".jar") && f.name != jarFile.name) {
+                                    f.delete()
+                                    println "[MODRINTH-SYNC] Purged old version from launcher profile: ${f.name}"
+                                }
+                            }
+                            copy {
+                                from jarFile
+                                into modrinthProfileMods
+                            }
+                            println "[MODRINTH-SYNC] Deployed ${jarFile.name} to ${p}"
+                        }
+                    }
+
                     // Central Release Hub Archives Sync
                     File hubCandidate = projectDir
                     File hubDir = null
@@ -146,27 +170,18 @@ afterEvaluate {
                             }
                         }
                     }
-                    println "[AUTO-ARCHIVE] Successfully copied ${jarFile.name} to central Archive directory: ${archiveDir.canonicalPath}"
-                    
-                    // 2. Modrinth Profile Sync
-                    def profilePaths = [
-                        "C:/Users/fmrif/AppData/Roaming/ModrinthApp/profiles/Fabric 26.3ish/mods",
-                        "C:/Users/fmrif/AppData/Roaming/ModrinthApp/profiles/26.3/mods"
-                    ]
-                    profilePaths.each { p ->
-                        def modrinthProfileMods = file(p)
-                        if (modrinthProfileMods.exists()) {
-                            modrinthProfileMods.listFiles().each { f ->
-                                if (f.name.startsWith(project.archives_base_name) && f.name.endsWith(".jar") && f.name != jarFile.name) {
-                                    f.delete()
-                                    println "[MODRINTH-SYNC] Purged old version from launcher profile: ${f.name}"
-                                }
-                            }
+
+                    // External Vault Archive (OS-guarded for headless CI)
+                    if (file("D:/Minecraft Mod Archive Jars").exists()) {
+                        def fnLower = jarFile.name.toLowerCase()
+                        if (!fnLower.endsWith("-dev.jar") && !fnLower.endsWith("-sources.jar") && !fnLower.endsWith("-common.jar") && !fnLower.endsWith("-all.jar") && !fnLower.endsWith("-javadoc.jar")) {
+                            def vaultDir = file("D:/Minecraft Mod Archive Jars/Velocity Render")
+                            vaultDir.mkdirs()
                             copy {
                                 from jarFile
-                                into modrinthProfileMods
+                                into vaultDir
                             }
-                            println "[MODRINTH-SYNC] Deployed ${jarFile.name} to ${p}"
+                            println "[DEPLOY-POINT-3] Copied ${jarFile.name} to external vault: ${vaultDir.canonicalPath}"
                         }
                     }
                 }
